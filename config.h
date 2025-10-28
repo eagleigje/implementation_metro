@@ -12,7 +12,7 @@ typedef struct _une_config {
 
 // Prototypes des fonctions
 Une_config *lire_config(const char *nom_fichier);
-void afficher_config(Une_config *config);
+void afficher_config(const Une_config *config);
 void detruire_config(Une_config *config);
 
 #endif

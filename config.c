@@ -11,14 +11,13 @@
 static char *trim(char *str)
 // Fonction utilitaire pour enlever les espaces au debut et à la fin d'une chaîne.
 {
-    char *end;
     // Enlever les espaces au debut
     while (isspace((unsigned char)*str)) str++;
     if (*str == 0) {
         return str;
     }
-    // Enlever les espaces a la fin
-    end = str + strlen(str) - 1;
+    // Enlever les espaces à la fin
+    char *end = str + strlen(str) - 1;
     while (end > str && isspace((unsigned char)*end)) end--;
     // Et on termine la chaîne correctement.
     *(end + 1) = '\0';
@@ -83,12 +82,12 @@ Une_config *lire_config(const char *nom_fichier)
         }
         // Separer la cle et la valeur
         *egal = '\0';
-        char *cle = trim(ligne_trim);
+        const char *cle = trim(ligne_trim);
         char *valeur = trim(egal + 1);
         // Enlever les guillemets eventuels autour de la valeur
         if (valeur[0] == '"' || valeur[0] == '\'') {
             valeur++;
-            size_t len = strlen(valeur);
+            const size_t len = strlen(valeur);
             if (len > 0 && (valeur[len-1] == '"' || valeur[len-1] == '\'')) {
                 valeur[len-1] = '\0';
             }
@@ -128,7 +127,7 @@ Une_config *lire_config(const char *nom_fichier)
     return config;
 }
 
-void afficher_config(Une_config *config) {
+void afficher_config(const Une_config *config) {
     if (config == NULL) {
         printf("Configuration NULL\n");
         return;
