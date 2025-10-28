@@ -10,11 +10,11 @@ TARGET = metro
 
 all: $(TARGET)
 
-# Regle pour compiler les fichiers .c en .o
+# Règle pour compiler les fichiers .c en .o
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
-# Regle pour creer l'executable
+# Règle pour créer l'exécutable
 $(TARGET): $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) -o $(TARGET) $(LDFLAGS)
 
@@ -22,7 +22,7 @@ $(TARGET): $(OBJ)
 clean:
 	rm -f *.o $(TARGET)
 
-# Dependances
+# Dépendances
 config.o: config.c config.h
 main.o: main.c config.h
 

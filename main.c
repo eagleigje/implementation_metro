@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "config.h"
 
-int main(int argc, char *argv[]) {
+int main(const int argc, char *argv[]) {
     // Nous utilisons un fichier de configuration par défaut.
     const char *fichier_config = "config.ini";
 
