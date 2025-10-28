@@ -54,5 +54,8 @@ dkms.conf
 # debug information files
 *.dwo
 
+# Configurations CLion
+**/.idea
+
 # Ne prend pas le ou les programmes compilés
 metro
