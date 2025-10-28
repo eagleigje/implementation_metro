@@ -27,7 +27,12 @@ Le projet est organisé en plusieurs modules :
    - aqrtopo.h               : Arbres quaternaires (pour représentation topologique)
    - ligne.h/ligne.c         : Gestion des lignes de métro
 
-3. Fichiers de données :
+3. Configuration :
+   - config.h/config.c       : Système de configuration .ini
+   - config.ini              : Fichier de configuration principal
+   - config_alt.ini          : Exemple de configuration alternative
+
+4. Fichiers de données :
    - stations.csv : Fichier contenant les stations (longitude;latitude;nom), allégé pour les tests
    - stations_paris.csv : Fichier contenant toutes les stations parisiennes (cf LOCALISATION DES DONNEES)
    - lignes.csv   : Fichier contenant les lignes (code;vitesse;intervalle;couleur)
@@ -45,6 +50,10 @@ EXECUTION
 ---------
 Pour lancer l'application :
     ./metro
+
+Pour utiliser un fichier de configuration différent :
+    ./metro config_alt.ini
+    ./metro /chemin/vers/ma_config.ini
 
 Le programme de test actuel charge les stations et lignes depuis les fichiers CSV
 et affiche des informations de base.
@@ -67,7 +76,7 @@ LOCALISATION DES DONNEES
 ------------------------
 * Stations parisiennes : https://explore.data.gouv.fr/fr/datasets/6405b01aa7f6f0f5523c8653/?Commune%20nom__contains=Paris#/resources/5b645234-e6fd-4de8-889c-574a80531aca
 * Le répertoire "data" inclus une extraction de tous les métros Français (metro-france.csv), et une extraction des métros parisiens à partir de ce fichier (metro-paris.csv).
-* L'extraction "parisienne" a été réalisée en bash : 
+* L'extraction "parisienne" a été réalisée en bash :
 (head -1 metro-france.csv && grep \"Paris metro-france.csv) > metro-paris.csv
 
 * On peut maintenant, extraire les données des métros parisien dans le format demandé dans le sujet :
