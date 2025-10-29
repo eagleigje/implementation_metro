@@ -126,11 +126,9 @@ Un_elem *lire_stations(char *nom_fichier) {
     
     while (fgets(ligne, sizeof(ligne), fichier) != NULL) {
         float lon, lat;
-        char nom[128];
         
         // Remplacer les ';' par des '\0' pour delimiter les champs
         char *ptr = ligne;
-        int champ = 0;
         char *debut_nom = NULL;
         
         // Parser longitude

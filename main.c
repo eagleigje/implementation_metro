@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "config.h"
+#include "liste.h"
 
 int main(const int argc, char *argv[]) {
     // Nous utilisons un fichier de configuration par défaut.
@@ -21,6 +22,16 @@ int main(const int argc, char *argv[]) {
         return 1;
     }
     afficher_config(config);
+
+    // Test 1 : Lecture des stations
+    printf("1. Lecture des stations depuis %s...\n", config->fichier_stations);
+    Un_elem *liste_stations = lire_stations(config->fichier_stations);
+    if (liste_stations == NULL) {
+        fprintf(stderr, "Erreur lors de la lecture des stations\n");
+        detruire_config(config);
+        return 1;
+    }
+    printf("Stations chargees avec succes!\n\n");
 
     printf("=== FIN DES TESTS ===\n");
 
