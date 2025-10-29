@@ -1,11 +1,12 @@
-# ========================================
+# =========================================================================
 # Makefile pour le Projet Metro 2025
-# ========================================
+# =========================================================================
 # Commandes disponibles :
-#   make all    - Nettoie et recompile tout depuis zero (rebuild complet)
-#   make build  - Compile uniquement les fichiers modifies (incremental)
-#   make clean  - Supprime tous les fichiers objets et l'executable
-# ========================================
+#   make        - Compile uniquement les fichiers modifiés (incrémental)
+#   make build  - Compile uniquement les fichiers modifiés (incrémental)
+#   make all    - Nettoie et recompile tout depuis zéro (rebuild complet)
+#   make clean  - Supprime tous les fichiers objets et l'exécutable
+# =========================================================================
 CC = gcc
 CFLAGS = -Wall -Wextra -g
 LDFLAGS = -lm
@@ -16,12 +17,16 @@ OBJ = truc.o liste.o config.o main.o
 # Executable principal
 TARGET = metro
 
+# Compilation normale incrémentable. Compilation par défaut.
+build: $(TARGET)
+
 # Rebuild complet : nettoie et recompile tout
 all: clean $(TARGET)
-	@echo "Rebuild complet termine avec succes!"
+	@echo "Rebuild complet terminé avec succès!"
 
-# Compilation normale sans nettoyage
-build: $(TARGET)
+# Nettoyage
+clean:
+	rm -f *.o $(TARGET)
 
 # Règle pour compiler les fichiers .c en .o
 %.o: %.c
@@ -30,10 +35,6 @@ build: $(TARGET)
 # Règle pour créer l'exécutable
 $(TARGET): $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) -o $(TARGET) $(LDFLAGS)
-
-# Nettoyage
-clean:
-	rm -f *.o $(TARGET)
 
 # Dépendances
 truc.o: truc.c truc.h coord.h station.h connexion.h
