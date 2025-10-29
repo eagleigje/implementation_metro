@@ -33,18 +33,21 @@ Le projet est organisé en plusieurs modules :
    - config_alt.ini          : Exemple de configuration alternative
 
 4. Fichiers de données :
-   - stations.csv : Fichier contenant les stations (longitude;latitude;nom), allégé pour les tests
-   - stations_paris.csv : Fichier contenant toutes les stations parisiennes (cf LOCALISATION DES DONNEES)
-   - lignes.csv   : Fichier contenant les lignes (code;vitesse;intervalle;couleur)
-   - connexions.csv : Fichier contenant les connexions (à créer)
+   - stations.csv : Fichier contenant les stations (longitude;latitude;nom), allégé pour les tests.
+   - stations_paris.csv : Fichier contenant toutes les stations parisiennes (cf. LOCALISATION DES DONNEES).
+   - lignes.csv : Fichier contenant les lignes (code;vitesse;intervalle;couleur).
+   - connexions.csv : Fichier contenant les connexions (à créer).
 
 COMPILATION
 -----------
 Pour compiler le projet, utilisez la commande :
-    make
+    make ou make all
 
 Pour nettoyer les fichiers objets et l'exécutable :
     make clean
+
+Pour nettoyer et tout recompiler :
+    make rebuild
 
 EXECUTION
 ---------
