@@ -115,6 +115,8 @@ void limites_zone(Un_elem *liste, Une_coord *limite_no, Une_coord *limite_se) {
 }
 
 Un_elem *lire_stations(char *nom_fichier) {
+    // Fonction qui lit le fichier en paramètre et créé une liste chaînée triée en fonction
+    // de la latitude de la station.
     FILE *fichier = fopen(nom_fichier, "r");
     if (fichier == NULL) {
         fprintf(stderr, "Erreur: impossible d'ouvrir le fichier %s\n", nom_fichier);
@@ -165,8 +167,11 @@ Un_elem *lire_stations(char *nom_fichier) {
         data.sta.tab_con = NULL;
         data.sta.nb_con = 0;
         data.sta.con_pcc = NULL;
-        
+
+        // Création de la nouvelle station avec :
+        // ses coordonnées, ses données et user_value qui vaut la latitude pour trier sur le champ.
         Un_truc *truc = creer_truc(coord, STA, data, lat);
+        // On Insère la nouvelle station, directement triée grâce au champ user_value
         liste = inserer_liste_trie(liste, truc);
     }
     
