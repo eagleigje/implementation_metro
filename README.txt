@@ -41,13 +41,13 @@ Le projet est organisé en plusieurs modules :
 COMPILATION
 -----------
 Pour compiler le projet, utilisez la commande :
-    make ou make all
+    make ou make build
 
 Pour nettoyer les fichiers objets et l'exécutable :
     make clean
 
-Pour nettoyer et tout recompiler :
-    make rebuild
+Pour tout nettoyer et tout recompiler :
+    make all
 
 EXECUTION
 ---------
