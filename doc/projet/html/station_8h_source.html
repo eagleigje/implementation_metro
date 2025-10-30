@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.15.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>MAIN3 Info Générale Projet Métro:  Fichier source de station.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">MAIN3 Info Générale Projet Métro
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.15.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Recherche',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('station_8h_source.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Chargement...</div>
+<div class="SRStatus" id="Searching">Recherche...</div>
+<div class="SRStatus" id="NoMatches">Aucune correspondance</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">station.h</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="station_8h.html">Aller à la documentation de ce fichier.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef STATION_H</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define STATION_H</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
+<div class="foldopen" id="foldopen00004" data-start="{" data-end="};">
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno"><a class="line" href="struct__une__station.html">    4</a></span><span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code hl_struct" href="struct__une__station.html">_une_station</a> {</div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno"><a class="line" href="struct__une__station.html#afe851fc3194cc7939e1f35d95755ca92">    5</a></span>    <span class="keywordtype">char</span> *<a class="code hl_variable" href="struct__une__station.html#afe851fc3194cc7939e1f35d95755ca92">nom</a>; <span class="comment">// Le nom</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno"><a class="line" href="struct__une__station.html#aef06ec611a05f806ed0a4a0bdb10058f">    6</a></span>    <span class="keyword">struct </span><a class="code hl_struct" href="struct__un__truc.html">_un_truc</a> **<a class="code hl_variable" href="struct__une__station.html#aef06ec611a05f806ed0a4a0bdb10058f">tab_con</a>; <span class="comment">// Tableau des connexions</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno"><a class="line" href="struct__une__station.html#ab005fda3f82901444529291d0dfbfbbf">    7</a></span>    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code hl_variable" href="struct__une__station.html#ab005fda3f82901444529291d0dfbfbbf">nb_con</a>; <span class="comment">// Nombre de connexions</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno"><a class="line" href="struct__une__station.html#a1f792ab2dca71100d9c382e9b6f945b8">    8</a></span>    <span class="keyword">struct </span><a class="code hl_struct" href="struct__un__truc.html">_un_truc</a> *<a class="code hl_variable" href="struct__une__station.html#a1f792ab2dca71100d9c382e9b6f945b8">con_pcc</a>; <span class="comment">// Connexion du plus court chemin</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno"><a class="line" href="station_8h.html#a41ba3b1667752e3ed5dd2e914914c4f0">    9</a></span>} <a class="code hl_typedef" href="station_8h.html#a41ba3b1667752e3ed5dd2e914914c4f0">Une_station</a>;</div>
+</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="astation_8h_html_a41ba3b1667752e3ed5dd2e914914c4f0"><div class="ttname"><a href="station_8h.html#a41ba3b1667752e3ed5dd2e914914c4f0">Une_station</a></div><div class="ttdeci">struct _une_station Une_station</div></div>
+<div class="ttc" id="astruct__un__truc_html"><div class="ttname"><a href="struct__un__truc.html">_un_truc</a></div><div class="ttdef"><b>Definition</b> truc.h:15</div></div>
+<div class="ttc" id="astruct__une__station_html"><div class="ttname"><a href="struct__une__station.html">_une_station</a></div><div class="ttdef"><b>Definition</b> station.h:4</div></div>
+<div class="ttc" id="astruct__une__station_html_a1f792ab2dca71100d9c382e9b6f945b8"><div class="ttname"><a href="struct__une__station.html#a1f792ab2dca71100d9c382e9b6f945b8">_une_station::con_pcc</a></div><div class="ttdeci">struct _un_truc * con_pcc</div><div class="ttdef"><b>Definition</b> station.h:8</div></div>
+<div class="ttc" id="astruct__une__station_html_ab005fda3f82901444529291d0dfbfbbf"><div class="ttname"><a href="struct__une__station.html#ab005fda3f82901444529291d0dfbfbbf">_une_station::nb_con</a></div><div class="ttdeci">unsigned int nb_con</div><div class="ttdef"><b>Definition</b> station.h:7</div></div>
+<div class="ttc" id="astruct__une__station_html_aef06ec611a05f806ed0a4a0bdb10058f"><div class="ttname"><a href="struct__une__station.html#aef06ec611a05f806ed0a4a0bdb10058f">_une_station::tab_con</a></div><div class="ttdeci">struct _un_truc ** tab_con</div><div class="ttdef"><b>Definition</b> station.h:6</div></div>
+<div class="ttc" id="astruct__une__station_html_afe851fc3194cc7939e1f35d95755ca92"><div class="ttname"><a href="struct__une__station.html#afe851fc3194cc7939e1f35d95755ca92">_une_station::nom</a></div><div class="ttdeci">char * nom</div><div class="ttdef"><b>Definition</b> station.h:5</div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="station_8h.html">station.h</a></li>
+    <li class="footer">Généré par <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.15.0 </li>
+  </ul>
+</div>
+</body>
+</html>

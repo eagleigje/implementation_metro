@@ -2,10 +2,12 @@
 # Makefile pour le Projet Metro 2025
 # =========================================================================
 # Commandes disponibles :
-#   make        - Compile uniquement les fichiers modifiés (incrémental)
-#   make build  - Compile uniquement les fichiers modifiés (incrémental)
-#   make all    - Nettoie et recompile tout depuis zéro (rebuild complet)
-#   make clean  - Supprime tous les fichiers objets et l'exécutable
+#   make        - Compile uniquement les fichiers modifiés (incrémental).
+#   make build  - Compile uniquement les fichiers modifiés (incrémental).
+#   make all    - Nettoie et recompile tout depuis zéro (rebuild complet).
+#   make clean  - Supprime tous les fichiers objets et l'exécutable.
+#   make docs   - Génère la documentation Doxygen.
+#   make clean-docs - Supprime la documentation générée.
 # =========================================================================
 CC = gcc
 # On peut forcer la version de C ci-dessous en ajoutant -std=cXX où XX peut valoir 99, 17, 23, etc.
@@ -29,6 +31,24 @@ all: clean $(TARGET)
 # Nettoyage
 clean:
 	rm -f *.o $(TARGET)
+
+# Dossier de documentation
+DOCS_DIR = doc/projet
+# Nettoyage de la documentation
+clean-docs:
+	rm -rf $(DOCS_DIR)
+	@echo "Documentation supprimée!"
+
+# Génération de la documentation Doxygen
+docs:
+	@echo "Génération de la documentation Doxygen..."
+	@if [ ! -f Doxyfile ]; then \
+		echo "Création du fichier Doxyfile..."; \
+		doxygen -g; \
+	fi
+	doxygen Doxyfile
+	@echo "Documentation générée dans $(DOCS_DIR)/html/"
+	@echo "Ouvrez $(DOCS_DIR)/html/index.html dans un navigateur"
 
 # Règle pour compiler les fichiers .c en .o
 %.o: %.c
