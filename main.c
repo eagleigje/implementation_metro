@@ -31,7 +31,7 @@ int main(const int argc, char *argv[]) {
         detruire_config(config);
         return 1;
     }
-    printf("Stations chargées avec succés!\n\n");
+    printf("Stations chargées avec succès!\n\n");
 
     // Affichage des stations
     printf("2. Affichage des stations (triées par latitude):\n");
