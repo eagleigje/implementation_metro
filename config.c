@@ -134,6 +134,10 @@ Une_config *lire_config(const char *nom_fichier) {
     return config;
 }
 
+/**
+ * Fonction qui imprime simplement la configuration chargée, à l'écran.
+ * @param config : La configuration à afficher.
+ */
 void afficher_config(const Une_config *config) {
     if (config == NULL) {
         printf("Configuration NULL\n");
