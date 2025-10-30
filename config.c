@@ -25,9 +25,12 @@ static char *trim(char *str)
     return str;
 }
 
-static char *strdup_custom(const char *s)
-// Fonction utilitaire pour dupliquer une chaîne
-{
+/**
+ * Fonction utilitaire pour dupliquer une chaîne de caractères.
+ * @param s : La chaîne qui doit être dupliquée.
+ * @return : La chaîne dupliquée ou NULL en cas d'erreur.
+ */
+static char *strdup_custom(const char *s) {
     size_t len = strlen(s) + 1;
     char *new_str = (char *)malloc(len);
     if (new_str != NULL) {
