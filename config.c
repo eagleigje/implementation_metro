@@ -36,9 +36,13 @@ static char *strdup_custom(const char *s)
     return new_str;
 }
 
-Une_config *lire_config(const char *nom_fichier)
-// Fonction qui permet de lire un fichier de configuration pour le programme.
-{
+/**
+ * Fonction qui permet de lire un fichier de configuration afin de pouvoir faire varier les différents paramètres.
+ * Le format du fichier est une sorte de .ini.
+ * @param nom_fichier : Le fichier à ouvrir.
+ * @return : La configuration récupérée dans le fichier ou NULL en cas d'erreur.
+ */
+Une_config *lire_config(const char *nom_fichier) {
     FILE *fichier = fopen(nom_fichier, "r");
     if (fichier == NULL) {
         fprintf(stderr, "Erreur: impossible d'ouvrir le fichier de configuration %s\n", nom_fichier);
