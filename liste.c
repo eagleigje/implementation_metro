@@ -12,7 +12,7 @@ Un_elem *inserer_liste_trie(Un_elem *liste, Un_truc *truc) {
     nouveau->truc = truc;
     nouveau->suiv = NULL;
     
-    // Si la liste est vide ou si le nouvel element doit etre en tete
+    // Si la liste est vide ou si le nouvel element doit etre en tête
     if (liste == NULL || truc->user_val < liste->truc->user_val) {
         nouveau->suiv = liste;
         return nouveau;

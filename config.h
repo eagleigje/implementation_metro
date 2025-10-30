@@ -7,7 +7,7 @@ typedef struct _une_config {
     char *fichier_connexions;
     float seuil_distance_aqr;  // Seuil pour eviter coordonnees identiques dans AQR
     float temps_correspondance; // Temps moyen de correspondance en minutes
-    float temps_arret;         // Temps d'arret en station en minutes
+    float temps_arret;         // Temps d'arrêt en station en minutes
 } Une_config;
 
 // Prototypes des fonctions
