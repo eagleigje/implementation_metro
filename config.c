@@ -2,21 +2,26 @@
  * PROJET MAIN3 / METRO
  * Gestion des configurations du programme.
  */
+
 #include "config.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
 
+/**
+ * Fonction utilitaire qui enlève les espaces au début et à la fin d'une chaîne de caractères.
+ * @param str : La chaîne que l'on veut traiter.
+ * @return : La chaîne modifiée.
+ */
 static char *trim(char *str)
-// Fonction utilitaire pour enlever les espaces au debut et à la fin d'une chaîne.
 {
-    // Enlever les espaces au debut
+    // On supprime les espaces au début de chaîne.
     while (isspace((unsigned char)*str)) str++;
     if (*str == 0) {
         return str;
     }
-    // Enlever les espaces à la fin
+    // On supprime les espaces en fin de chaîne.
     char *end = str + strlen(str) - 1;
     while (end > str && isspace((unsigned char)*end)) end--;
     // Et on termine la chaîne correctement.
@@ -28,7 +33,7 @@ static char *trim(char *str)
 /**
  * Fonction utilitaire pour dupliquer une chaîne de caractères.
  * @param s : La chaîne qui doit être dupliquée.
- * @return : La chaîne dupliquée ou NULL en cas d'erreur.
+ * @return La chaîne dupliquée ou NULL en cas d'erreur.
  */
 static char *strdup_custom(const char *s) {
     size_t len = strlen(s) + 1;
@@ -43,7 +48,7 @@ static char *strdup_custom(const char *s) {
  * Fonction qui permet de lire un fichier de configuration afin de pouvoir faire varier les différents paramètres.
  * Le format du fichier est une sorte de .ini.
  * @param nom_fichier : Le fichier à ouvrir.
- * @return : La configuration récupérée dans le fichier ou NULL en cas d'erreur.
+ * @return La configuration récupérée dans le fichier ou NULL en cas d'erreur.
  */
 Une_config *lire_config(const char *nom_fichier) {
     FILE *fichier = fopen(nom_fichier, "r");
@@ -154,6 +159,10 @@ void afficher_config(const Une_config *config) {
     printf("=====================\n\n");
 }
 
+/**
+ * Fonction qui libère la mémoire de la configuration chargée.
+ * @param config : La configuration qui doit être libérée.
+ */
 void detruire_config(Une_config *config) {
     if (config == NULL) {
         return;
