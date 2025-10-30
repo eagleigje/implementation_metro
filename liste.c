@@ -79,12 +79,21 @@ void detruire_liste_et_truc(Un_elem *liste) {
     }
 }
 
-void limites_zone(Un_elem *liste, Une_coord *limite_no, Une_coord *limite_se) {
+void limites_zone(Un_elem *liste, Une_coord *limite_no, Une_coord *limite_se)
+/* Question 1.4
+ * Fonction qui détermine les longitudes et latitudes minimales et maximales des stations
+ * liste : La liste des stations.
+ * limite_no : La longitude minimale et la latitude maximale.
+ * limite_se : La longitude maximale et à la latitude minimale.
+*/
+{
     if (liste == NULL) {
         return;
     }
     
     // Initialiser avec les coordonnees du premier element
+    // no = Nord Ouest
+    // se = Sud Est
     limite_no->lon = liste->truc->coord.lon;
     limite_no->lat = liste->truc->coord.lat;
     limite_se->lon = liste->truc->coord.lon;
