@@ -8,6 +8,8 @@
 #   make clean  - Supprime tous les fichiers objets et l'exécutable
 # =========================================================================
 CC = gcc
+# On peut forcer la version de C ci-dessous en ajoutant -std=cXX où XX peut valoir 99, 17, 23, etc.
+# La version C la plus récente à ce jour est la version c23.
 CFLAGS = -Wall -Wextra -g
 LDFLAGS = -lm
 
