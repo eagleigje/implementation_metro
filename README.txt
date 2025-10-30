@@ -38,6 +38,10 @@ Le projet est organisé en plusieurs modules :
    - lignes.csv : Fichier contenant les lignes (code;vitesse;intervalle;couleur).
    - connexions.csv : Fichier contenant les connexions (à créer).
 
+5. Documentation :
+    - doc/projet-metro2025.pdf : Le PDF du projet
+    - doc/projet/html/index.html : La documentation Doxygen du projet.
+
 COMPILATION
 -----------
 Pour compiler le projet, utilisez la commande :
@@ -48,6 +52,12 @@ Pour nettoyer les fichiers objets et l'exécutable :
 
 Pour tout nettoyer et tout recompiler :
     make all
+
+Pour générer la documentation (doxygen doit être installé sur le PC) :
+    make docs
+
+Pour nettoyer la documentation :
+    make clean-docs
 
 EXECUTION
 ---------
