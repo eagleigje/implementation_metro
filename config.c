@@ -1,7 +1,7 @@
 /*
  * PROJET MAIN3 / METRO
  * Gestion des configurations du programme.
- */
+*/
 
 #include "config.h"
 #include <stdio.h>
@@ -131,7 +131,7 @@ Une_config *lire_config(const char *nom_fichier) {
     fclose(fichier);
 
     // Verifier que les fichiers obligatoires au projet sont bien définis.
-    // Sinon on donne des valeurs par défaut.
+    // Sinon, on donne des valeurs par défaut.
     if (config->fichier_stations == NULL) {
         config->fichier_stations = strdup_custom("stations.csv");
     }

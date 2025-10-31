@@ -1,3 +1,7 @@
+/*
+ * PROJET MAIN3 / METRO
+ * Gestion des configurations du programme.
+*/
 #ifndef CONFIG_H
 #define CONFIG_H
 
