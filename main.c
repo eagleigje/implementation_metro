@@ -1,3 +1,8 @@
+/*
+ * PROJET MAIN3 / METRO
+ * Programme principal.
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include "config.h"
@@ -14,16 +19,17 @@ int main(const int argc, char *argv[]) {
 
     printf("=== PROJET METRO 2025 ===\n\n");
 
-    // Charger la configuration
+    // On charge la configuration du fichier de configuration.
     printf("Chargement de la configuration depuis %s...\n", fichier_config);
     Une_config *config = lire_config(fichier_config);
     if (config == NULL) {
         fprintf(stderr, "Erreur fatale: impossible de charger la configuration\n");
         return 1;
     }
+    // On affiche ce que l'on a lu dans le fichier.
     afficher_config(config);
 
-    // Test 1 : Lecture des stations
+    // Test 1 : Lecture des stations.
     printf("1. Lecture des stations depuis %s...\n", config->fichier_stations);
     Un_elem *liste_stations = lire_stations(config->fichier_stations);
     if (liste_stations == NULL) {
@@ -33,17 +39,16 @@ int main(const int argc, char *argv[]) {
     }
     printf("Stations chargées avec succès!\n\n");
 
-    // Affichage des stations
+    // Test 2 : Affichage des stations.
     printf("2. Affichage des stations (triées par latitude):\n");
     ecrire_liste(stdout, liste_stations);
     printf("\n");
 
-    // Liberation de la memoire
-    printf("10. Libération de la mémoire...\n");
+    // On libère toute la mémoire.
+    printf("XX. Libération de la mémoire...\n");
     detruire_liste_et_truc(liste_stations);  // Detruit la liste et les stations
     detruire_config(config);
     printf("Mémoire libérée avec succès!\n\n");
-
 
     printf("=== FIN DES TESTS ===\n");
 
