@@ -1,3 +1,9 @@
+/*
+ * PROJET MAIN3 / METRO
+ * Définition des lignes. Une ligne est définie par son code, la vitesse moyenne des rames qui
+ * l’utilisent, l’intervalle moyen entre deux rames et la couleur à utiliser pour la dessiner.
+*/
+
 #ifndef LIGNE_H
 #define LIGNE_H
 
