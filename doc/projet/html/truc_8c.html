@@ -91,9 +91,9 @@ $(function(){initNavTree('truc_8c.html','',''); });
   <div class="headertitle"><div class="title">Référence du fichier truc.c</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="truc_8h_source.html">truc.h</a>&quot;</code><br />
-<code>#include &lt;stdlib.h&gt;</code><br />
+<div class="textblock"><code>#include &lt;stdlib.h&gt;</code><br />
 <code>#include &lt;string.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="truc_8h_source.html">truc.h</a>&quot;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Fonctions</h2></td></tr>
@@ -129,6 +129,16 @@ Fonctions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Fonction qui permet de créer un truc. </p><dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">coord</td><td>: Les coordonnées du truc. </td></tr>
+    <tr><td class="paramname">type</td><td>: Son type, soit une station, soit une connexion. </td></tr>
+    <tr><td class="paramname">data</td><td>: Les données de la station, ou de la connexion. </td></tr>
+    <tr><td class="paramname">uv</td><td>: user_value qui définie une clé de tri pour les listes chaînées de trucs. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>: Renvoi la structure truc créé, ou NULL en cas d'erreur. </dd></dl>
 
 </div>
 </div>
@@ -146,6 +156,12 @@ Fonctions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Fonction qui libère la mémoire d'un truc. </p><dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">truc</td><td>: Le truc à supprimer de la mémoire. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
