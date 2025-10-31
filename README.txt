@@ -38,7 +38,12 @@ Le projet est organisé en plusieurs modules :
    - lignes.csv : Fichier contenant les lignes (code;vitesse;intervalle;couleur).
    - connexions.csv : Fichier contenant les connexions (à créer).
 
-5. Documentation :
+5. Programmes optionnels à installer :
+    - doxygen : Afin de générer la documentation technique du projet.
+    - valgrind : Pour vérifier que le projet libère bien toute la mémoire à la sortie.
+    - glibc-debug : Pour valgrind.
+
+6. Documentation :
     - doc/projet-metro2025.pdf : Le PDF du projet
     - doc/projet/html/index.html : La documentation Doxygen du projet.
 
@@ -103,7 +108,7 @@ implémentées. Il reste à compléter :
 
 1. Exercice 1 : Fonctions de gestion des listes de stations (PARTIELLEMENT FAIT)
 2. Exercice 2 : Arbres binaires de recherche pour les stations (A FAIRE)
-3. Exercice 3 : Listes de lignes de métro (FAIT)
+3. Exercice 3 : Listes de lignes de métro (A FAIRE)
 4. Exercice 4 : Gestion des connexions (A FAIRE)
 5. Exercice 5 : Arbres quaternaires pour la topologie (A FAIRE)
 6. Exercice 6 : Algorithme de Dijkstra pour le plus court chemin (A FAIRE)
