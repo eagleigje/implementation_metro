@@ -1,3 +1,9 @@
+/*
+ * PROJET MAIN3 / METRO
+ * La localisation des objets est réalisée en utilisant leurs latitudes et longitudes exprimées en degrés sous forme
+ * décimale (les orientations nord et est correspondent aux valeurs positives).
+*/
+
 #ifndef COORD_H
 #define COORD_H
 
