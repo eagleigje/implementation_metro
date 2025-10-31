@@ -1,8 +1,13 @@
+/*
+ * PROJET MAIN3 / METRO
+ * Librairie permettant la manipulation de listes simplement chaînées de trucs.
+*/
+
 #ifndef LISTE_H
 #define LISTE_H
 
-#include "truc.h"
 #include <stdio.h>
+#include "truc.h"
 
 typedef struct _un_elem {
     Un_truc *truc; // Une station ou une connexion
