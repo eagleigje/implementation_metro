@@ -9,14 +9,19 @@
 #include "truc.h"
 #include "liste.h"
 
+/**
+ * Définition d'un nœud d'un arbre quaternaire.
+ * Un nœud de cet arbre peut avoir entre 0 et 4 fils suivant la répartition des objets dans les 4 partitions que ce
+ * sous-arbre contient.
+ */
 typedef struct _un_noeud {
-    Un_truc *truc; // Une station ou une connexion
-    Une_coord limite_no; // Limite zone
-    Une_coord limite_se; // Limite zone
-    struct _un_noeud *no; // Fils pour quart NO
-    struct _un_noeud *so; // Fils pour quart SO
-    struct _un_noeud *ne; // Fils pour quart NE
-    struct _un_noeud *se; // Fils pour quart SE
+    Un_truc *truc;          ///< Une station ou une connexion
+    Une_coord limite_no;    ///< Limite zone nord ouest.
+    Une_coord limite_se;    ///< Limite zone sud est.
+    struct _un_noeud *no;   ///< Fils pour quart NO
+    struct _un_noeud *so;   ///< Fils pour quart SO
+    struct _un_noeud *ne;   ///< Fils pour quart NE
+    struct _un_noeud *se;   ///< Fils pour quart SE
 } Un_noeud;
 
 // Prototypes des fonctions

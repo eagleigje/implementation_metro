@@ -9,10 +9,15 @@
 
 typedef struct _une_ligne Une_ligne;
 
+/**
+ * Une connexion correspond à une fraction de ligne unidirectionnelle reliant deux stations.
+ * La structure correspondante contient des liens vers les stations de départ et d’arrivée ainsi qu’un lien
+ * vers le descriptif dela ligne correspondante.
+ */
 typedef struct _une_connexion {
-    struct _un_truc *sta_dep; // Station de depart
-    struct _un_truc *sta_arr; // Station d'arrivée
-    Une_ligne *ligne; // Ligne
+    struct _un_truc *sta_dep;   ///< Station de départ.
+    struct _un_truc *sta_arr;   ///< Station d'arrivée.
+    Une_ligne *ligne;           ///< Ligne.
 } Une_connexion;
 
 #endif

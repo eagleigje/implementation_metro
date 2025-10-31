@@ -7,9 +7,12 @@
 #ifndef COORD_H
 #define COORD_H
 
+/**
+ * Coordonnées d'un truc.
+*/
 typedef struct _une_coord {
-    float lon; // Longitude decimale
-    float lat; // Latitude decimale
+    float lon; ///< Longitude décimale.
+    float lat; ///< Latitude décimale.
 } Une_coord;
 
 #endif

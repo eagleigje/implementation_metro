@@ -8,10 +8,13 @@
 
 #include "truc.h"
 
+/**
+ * Arbre binaire de recherche.
+ */
 typedef struct _un_nabr {
-    Un_truc *truc; // La station
-    struct _un_nabr *g; // Fils gauche strictement inférieur
-    struct _un_nabr *d; // Fils droit
+    Un_truc *truc;      ///< Les informations concernant la station
+    struct _un_nabr *g; ///< Fils gauche strictement inférieur
+    struct _un_nabr *d; ///< Fils droit
 } Un_nabr;
 
 #endif

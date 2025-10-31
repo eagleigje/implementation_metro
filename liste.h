@@ -9,9 +9,12 @@
 #include <stdio.h>
 #include "truc.h"
 
+/**
+ * Liste chaînée de "trucs".
+ */
 typedef struct _un_elem {
-    Un_truc *truc; // Une station ou une connexion
-    struct _un_elem *suiv;
+    Un_truc *truc;          ///< Une station ou une connexion
+    struct _un_elem *suiv;  ///< Element suivant de la liste chaînée.
 } Un_elem;
 
 // Prototypes des fonctions
