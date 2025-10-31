@@ -1,3 +1,9 @@
+/*
+ * PROJET MAIN3 / METRO
+ * Définition des connexions.
+ * Une connexion correspond à une fraction de ligne unidirectionnelle reliant deux stations.
+*/
+
 #ifndef CONNEXION_H
 #define CONNEXION_H
 
