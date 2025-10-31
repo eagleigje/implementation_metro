@@ -1,3 +1,8 @@
+/*
+ * PROJET MAIN3 / METRO
+ * Définition de la gestion des arbres quaternaires.
+*/
+
 #ifndef AQRTOPO_H
 #define AQRTOPO_H
 
