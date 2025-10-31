@@ -248,6 +248,7 @@ Un_truc *extraire_deb_liste(Un_elem **liste) {
 /**
  * Fonction qui extrait un élèment de la liste passée en paramètre. On supprime l'élément extrait de la liste.
  * @param liste : La liste à parcourir.
+ * @param truc : Le truc à extraire.
  * @return : Le premier élément de la liste OU NULL si la liste est vide ou si l'élément n'est pas trouvé.
  */
 Un_truc *extraire_liste(Un_elem **liste, Un_truc *truc) {
