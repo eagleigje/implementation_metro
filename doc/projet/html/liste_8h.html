@@ -91,8 +91,8 @@ $(function(){initNavTree('liste_8h.html','',''); });
   <div class="headertitle"><div class="title">Référence du fichier liste.h</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="truc_8h_source.html">truc.h</a>&quot;</code><br />
-<code>#include &lt;stdio.h&gt;</code><br />
+<div class="textblock"><code>#include &lt;stdio.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="truc_8h_source.html">truc.h</a>&quot;</code><br />
 </div>
 <p><a href="liste_8h_source.html">Aller au code source de ce fichier.</a></p>
 <table class="memberdecls">
@@ -146,6 +146,12 @@ Fonctions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Fonction de libération de la mémoire pour une liste donnée. </p><dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">liste</td><td>: La liste que l'on souhaite libérer. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -163,6 +169,12 @@ Fonctions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Fonction qui supprime en mémoire la liste et les trucs associés. </p><dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">liste</td><td>: La liste que l'on souhaite libérer. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -184,6 +196,13 @@ Fonctions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Fonction qui affiche dans flux, la liste dans son intégralité. </p><dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">flux</td><td>: Le flux de sortie (stdout théoriquement). </td></tr>
+    <tr><td class="paramname">liste</td><td>: La liste à afficher. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -201,6 +220,13 @@ Fonctions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Fonction qui extrait le premier élèment de la liste passée en paramètre. On supprime l'élément extrait de la liste. </p><dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">liste</td><td>: La liste à parcourir. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>: Le premier élément de la liste OU NULL si la liste est vide. </dd></dl>
 
 </div>
 </div>
@@ -222,6 +248,13 @@ Fonctions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Fonction qui extrait un élèment de la liste passée en paramètre. On supprime l'élément extrait de la liste. </p><dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">liste</td><td>: La liste à parcourir. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>: Le premier élément de la liste OU NULL si la liste est vide ou si l'élément n'est pas trouvé. </dd></dl>
 
 </div>
 </div>
@@ -243,6 +276,14 @@ Fonctions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Fonction d'insertion d'un nouvel élèment en début de liste. </p><dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">liste</td><td>: La liste dans laquelle ajouter le truc. </td></tr>
+    <tr><td class="paramname">truc</td><td>: Le truc que l'on veut ajouter à la liste. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>: Renvoi la liste modifiée. </dd></dl>
 
 </div>
 </div>
@@ -264,6 +305,14 @@ Fonctions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Fonction qui insère "un truc" dans la liste. La liste est considérée déjà triée. On ajoute le nouvel élèment directement au bon endroit en fonction de "user_val". </p><dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">liste</td><td>: La liste dans laquelle ajouter le truc. </td></tr>
+    <tr><td class="paramname">truc</td><td>: Le truc que l'on veut ajouter à la liste. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>: Renvoi la liste modifiée. </dd></dl>
 
 </div>
 </div>
@@ -290,6 +339,14 @@ Fonctions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Fonction qui détermine les longitudes et latitudes minimales et maximales des stations. </p><dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">liste</td><td>: La liste des stations. </td></tr>
+    <tr><td class="paramname">limite_no</td><td>: La longitude minimale et la latitude maximale. </td></tr>
+    <tr><td class="paramname">limite_se</td><td>: La longitude maximale et à la latitude minimale. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -307,6 +364,13 @@ Fonctions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Fonction qui lit le fichier en paramètre et renvoi la liste triée des stations. </p><dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">nom_fichier</td><td>: Le fichier à lire. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>: La liste triée, en fonction de la latitude, des stations du fichier. </dd></dl>
 
 </div>
 </div>
