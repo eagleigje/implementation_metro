@@ -8,12 +8,19 @@
 #include "config.h"
 #include "liste.h"
 
+/**
+ * Fonction principale du projet.
+ * @param argc : Le nombre d'arguments passés en paramètre.
+ * @param argv : Les arguments de la ligne de commande.
+ * @return : 0 si tout c'est bien passé, >0 sinon.
+ */
 int main(const int argc, char *argv[]) {
     // Nous utilisons un fichier de configuration par défaut.
     const char *fichier_config = "config.ini";
 
     // Mais on peut aussi le passer en paramètre.
     if (argc > 1) {
+        // S'il y a un paramètre, on s'attend à ce que le premier soit un path vers un fichier de configuration.
         fichier_config = argv[1];
     }
 
