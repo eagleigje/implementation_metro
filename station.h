@@ -1,3 +1,9 @@
+/*
+ * PROJET MAIN3 / METRO
+ *  Librairie qui définie une station.
+ *  Une station est définie par son nom et l’ensemble des connexions qu’elle offre pour rejoindre d’autres stations.
+*/
+
 #ifndef STATION_H
 #define STATION_H
 
