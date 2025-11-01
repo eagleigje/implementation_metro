@@ -113,8 +113,10 @@ LOCALISATION DES DONNEES
     * Informations concernants les lignes parisiennes : https://data.iledefrance-mobilites.fr/explore/dataset/referentiel-des-lignes/table/?disjunctive.transportsubmode&disjunctive.operatorname&disjunctive.networkname&disjunctive.transportmode&refine.transportmode=metro&sort=name_line&refine.status=active
     * Le répertoire "data" inclus une extraction des lignes du métro parisien dans le fichier "referentiel-des-lignes-paris.csv".
     * On trouve dans ce fichier, les noms et couleurs officiels des lignes. On peut donc s'en servir pour génèrer le fichier "lignes.csv" du sujet.
-    * On peut aussi trouver des informations officielles sur le site https://www.itineraire-metro.fr, cela va nous aider à remplir les données mais à la main.
-        * ligne 1 : https://www.itineraire-metro.fr/ligne-1.html
+    * On peut aussi trouver des informations officielles sur le site https://www.itineraire-metro.fr, cela va nous aider à remplir les données, notamment l'attente moyenne entre deux rames, mais à la main.
+        * Exemple ligne 1 : https://www.itineraire-metro.fr/ligne-1.html
+    * On peut encore trouver des informations sur les lignes sur wikipedia, avec le temps de parcours, la distance, et le nombre de stations. On peut donc en déterminer les vitesses moyennes.
+        * Exemple ligne 2 : https://fr.wikipedia.org/wiki/Ligne_2_du_m%C3%A9tro_de_Paris
 
 EXERCICES A COMPLETER
 ----------------------
