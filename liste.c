@@ -103,6 +103,7 @@ void detruire_liste(Un_elem *liste) {
  */
 void detruire_liste_et_truc(Un_elem *liste) {
     // todo : La fonction précédente ne supprime pas les trucs mais à part ça est la même que celle-ci.
+    // todo : poser la question.
     Un_elem *courant = liste;
     Un_elem *suivant;
 
