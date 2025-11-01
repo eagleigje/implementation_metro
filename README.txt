@@ -83,17 +83,19 @@ et affiche des informations de base.
 
 FICHIERS CSV
 ------------
-Format du fichier stations.csv :
-    longitude;latitude;nom_station
+** Stations **
+    Format du fichier stations.csv :
+        longitude;latitude;nom_station
 
-Exemple :
-    2.354660;48.845990;Jussieu
+    Exemple :
+        2.354660;48.845990;Jussieu
 
-Format du fichier lignes.csv :
-    code ; vitesse ; intervalle ; couleur
+** Informations lignes **
+    Format du fichier lignes.csv :
+        code;vitesse;intervalle;couleur
 
-Exemple :
-    M1 ; 35.0 ; 3.0 ; #FFCD00
+    Exemple :
+        M1;35.0;3.0;#FFCD00
 
 LOCALISATION DES DONNEES
 ------------------------
@@ -111,6 +113,8 @@ LOCALISATION DES DONNEES
     * Informations concernants les lignes parisiennes : https://data.iledefrance-mobilites.fr/explore/dataset/referentiel-des-lignes/table/?disjunctive.transportsubmode&disjunctive.operatorname&disjunctive.networkname&disjunctive.transportmode&refine.transportmode=metro&sort=name_line&refine.status=active
     * Le répertoire "data" inclus une extraction des lignes du métro parisien dans le fichier "referentiel-des-lignes-paris.csv".
     * On trouve dans ce fichier, les noms et couleurs officiels des lignes. On peut donc s'en servir pour génèrer le fichier "lignes.csv" du sujet.
+    * On peut aussi trouver des informations officielles sur le site https://www.itineraire-metro.fr, cela va nous aider à remplir les données mais à la main.
+        * ligne 1 : https://www.itineraire-metro.fr/ligne-1.html
 
 EXERCICES A COMPLETER
 ----------------------
