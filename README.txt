@@ -106,7 +106,7 @@ EXERCICES A COMPLETER
 Le projet contient une base de travail avec les structures et quelques fonctions
 implémentées. Il reste à compléter :
 
-1. Exercice 1 : Fonctions de gestion des listes de stations (PARTIELLEMENT FAIT)
+1. Exercice 1 : Fonctions de gestion des listes de stations (FAIT)
 2. Exercice 2 : Arbres binaires de recherche pour les stations (À FAIRE)
 3. Exercice 3 : Listes de lignes de métro (À FAIRE)
 4. Exercice 4 : Gestion des connexions (À FAIRE)
