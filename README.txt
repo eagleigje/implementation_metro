@@ -11,6 +11,11 @@ Il offre les fonctionnalités suivantes :
     - Sélection graphique d'objets.
     - Calcul du plus court chemin entre deux stations (algorithme de Dijkstra).
 
+INFORMATIONS COURS ABR
+----------------------
+Un arbre binaire de recherche est un arbre binaire dans lequel tout nœud a une clé qui est supérieure
+à toutes les clés de son sous-arbre gauche et inférieure à toutes les clés de son sous-arbre droit.
+
 STRUCTURE DU PROJET
 -------------------
 Le projet est organisé en plusieurs modules :
@@ -107,7 +112,7 @@ Le projet contient une base de travail avec les structures et quelques fonctions
 implémentées. Il reste à compléter :
 
 1. Exercice 1 : Fonctions de gestion des listes de stations (FAIT)
-2. Exercice 2 : Arbres binaires de recherche pour les stations (À FAIRE)
+2. Exercice 2 : Arbres binaires de recherche pour les stations (FAIT)
 3. Exercice 3 : Listes de lignes de métro (À FAIRE)
 4. Exercice 4 : Gestion des connexions (À FAIRE)
 5. Exercice 5 : Arbres quaternaires pour la topologie (À FAIRE)
