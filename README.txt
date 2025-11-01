@@ -97,14 +97,20 @@ Exemple :
 
 LOCALISATION DES DONNEES
 ------------------------
-* Stations parisiennes : https://explore.data.gouv.fr/fr/datasets/6405b01aa7f6f0f5523c8653/?Commune%20nom__contains=Paris#/resources/5b645234-e6fd-4de8-889c-574a80531aca
-* Le répertoire "data" inclus une extraction de tous les métros Français (metro-france.csv), et une extraction des métros parisiens à partir de ce fichier (metro-paris.csv).
-* L'extraction "parisienne" a été réalisée en bash :
-(head -1 metro-france.csv && grep \"Paris metro-france.csv) > metro-paris.csv
+** Stations **
+    * Stations parisiennes : https://explore.data.gouv.fr/fr/datasets/6405b01aa7f6f0f5523c8653/?Commune%20nom__contains=Paris#/resources/5b645234-e6fd-4de8-889c-574a80531aca
+    * Le répertoire "data" inclus une extraction de tous les métros Français (metro-france.csv), et une extraction des métros parisiens à partir de ce fichier (metro-paris.csv).
+    * L'extraction "parisienne" a été réalisée en bash :
+        (head -1 metro-france.csv && grep \"Paris metro-france.csv) > metro-paris.csv
 
-* On peut maintenant, extraire les données des métros parisiens dans le format demandé dans le sujet :
-(séparateur "," puis tous les champs à partir du troisième, on dédoublonne, on supprime les " et enfin, on récupère les champs 2, 3 et 1)
-cut -d "," -f3- < data/metro-paris.csv | sort | uniq | sed "s/\"//g" | awk -F "," '{print($2";"$3";"$1)}' > stations_paris.csv
+    * On peut maintenant, extraire les données des métros parisiens dans le format demandé dans le sujet :
+    (séparateur "," puis tous les champs à partir du troisième, on dédoublonne, on supprime les " et enfin, on récupère les champs 2, 3 et 1)
+        cut -d "," -f3- < data/metro-paris.csv | sort | uniq | sed "s/\"//g" | awk -F "," '{print($2";"$3";"$1)}' > stations_paris.csv
+
+** Informations lignes **
+    * Informations concernants les lignes parisiennes : https://data.iledefrance-mobilites.fr/explore/dataset/referentiel-des-lignes/table/?disjunctive.transportsubmode&disjunctive.operatorname&disjunctive.networkname&disjunctive.transportmode&refine.transportmode=metro&sort=name_line&refine.status=active
+    * Le répertoire "data" inclus une extraction des lignes du métro parisien dans le fichier "referentiel-des-lignes-paris.csv".
+    * On trouve dans ce fichier, les noms et couleurs officiels des lignes. On peut donc s'en servir pour génèrer le fichier "lignes.csv" du sujet.
 
 EXERCICES A COMPLETER
 ----------------------
