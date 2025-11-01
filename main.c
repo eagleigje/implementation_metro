@@ -5,8 +5,11 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+
 #include "config.h"
 #include "liste.h"
+#include "abr.h"
 
 /**
  * Fonction principale du projet.
@@ -51,10 +54,30 @@ int main(const int argc, char *argv[]) {
     ecrire_liste(stdout, liste_stations);
     printf("\n");
 
+    // Test 3 : Création de l'ABR.
+    printf("3. Création de l'ABR des stations\n");
+    Un_nabr *abr = construire_abr(liste_stations);
+    char nom[30] = "toto";
+    Un_truc *test = chercher_station(abr, nom);
+    if (test == NULL) {
+        printf("La station '%s' n'a pas été trouvée.\n", nom);
+    }
+    else {
+        printf("La station '%s' a été trouvée !\n", nom);
+    }
+    strcpy(nom, "Bercy");
+    if (test == NULL) {
+        printf("La station '%s' n'a pas été trouvée.\n", nom);
+    }
+    else {
+        printf("La station '%s' a été trouvée !\n", nom);
+    }
+
     // On libère toute la mémoire.
     printf("XX. Libération de la mémoire...\n");
-    detruire_liste_et_truc(liste_stations);  // Detruit la liste et les stations
-    detruire_config(config);
+    detruire_liste_et_truc(liste_stations);  // Destruction de la liste et des stations
+    detruire_abr(abr); // Destruction de l'ABR.
+    detruire_config(config); // Destruction de la configuration de départ.
     printf("Mémoire libérée avec succès!\n\n");
 
     printf("=== FIN DES TESTS ===\n");

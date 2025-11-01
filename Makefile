@@ -16,7 +16,7 @@ CFLAGS = -Wall -Wextra -g
 LDFLAGS = -lm
 
 # Fichiers objets, liste de tous les fichiers à linker.
-OBJ = truc.o liste.o config.o main.o
+OBJ = truc.o liste.o config.o abr.o main.o
 
 # Executable principal
 TARGET = metro
@@ -60,8 +60,9 @@ $(TARGET): $(OBJ)
 
 # Dépendances
 truc.o: truc.c truc.h coord.h station.h connexion.h
+abr.o: abr.c abr.h abr_type.h liste.h
 liste.o: liste.c liste.h truc.h
 config.o: config.c config.h
-main.o: main.c config.h liste.h
+main.o: main.c config.h liste.h abr.h
 
 .PHONY: all build clean
