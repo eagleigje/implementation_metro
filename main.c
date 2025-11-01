@@ -12,6 +12,35 @@
 #include "abr.h"
 
 /**
+ * Fonction qui permet de tester la recherche des noms de stations.
+ * @param abr_stations : ABR des stations.
+ */
+void test_recherche_abr(Un_nabr *abr_stations) {
+    char *stations_test[] = {
+        "Jussieu",
+        "jussieu",
+        "Chatelet",
+        "Gare du Nord",
+        "Station Inconnue",
+        "Nation",
+        NULL
+    };
+
+    for (int i = 0; stations_test[i] != NULL; i++) {
+        Un_truc *station = chercher_station(abr_stations, stations_test[i]);
+        if (station != NULL) {
+            printf("  [TROUVE] %s - Position: (%.6f, %.6f)\n",
+                   stations_test[i],
+                   station->coord.lon,
+                   station->coord.lat);
+        } else {
+            printf("  [NON TROUVE] %s\n", stations_test[i]);
+        }
+    }
+    printf("\n");
+}
+
+/**
  * Fonction principale du projet.
  * @param argc : Le nombre d'arguments passés en paramètre.
  * @param argv : Les arguments de la ligne de commande.
@@ -54,24 +83,27 @@ int main(const int argc, char *argv[]) {
     ecrire_liste(stdout, liste_stations);
     printf("\n");
 
-    // Test 3 : Création de l'ABR.
-    printf("3. Création de l'ABR des stations\n");
+    // Test 3 : calcul des zones
+    printf("3. Calcul des limites de la zone:\n");
+    Une_coord limite_no, limite_se;
+    limites_zone(liste_stations, &limite_no, &limite_se);
+    printf("Limite Nord-Ouest: lon=%.6f, lat=%.6f\n", limite_no.lon, limite_no.lat);
+    printf("Limite Sud-Est: lon=%.6f, lat=%.6f\n\n", limite_se.lon, limite_se.lat);
+
+    // Test 4 : Création de l'ABR.
+    printf("4. Création de l'ABR des stations\n");
     Un_nabr *abr = construire_abr(liste_stations);
-    char nom[30] = "toto";
-    Un_truc *test = chercher_station(abr, nom);
-    if (test == NULL) {
-        printf("La station '%s' n'a pas été trouvée.\n", nom);
+    if (abr == NULL) {
+        fprintf(stderr, "Erreur lors de la construction de l'ABR.\n");
+        detruire_liste_et_truc(liste_stations);
+        detruire_config(config);
+        return 1;
     }
-    else {
-        printf("La station '%s' a été trouvée !\n", nom);
-    }
-    strcpy(nom, "Bercy");
-    if (test == NULL) {
-        printf("La station '%s' n'a pas été trouvée.\n", nom);
-    }
-    else {
-        printf("La station '%s' a été trouvée !\n", nom);
-    }
+    printf("ABR construit avec succes!\n\n");
+
+    printf("4.1. Recherche de stations dans l'ABR\n");
+    test_recherche_abr(abr);
+    printf("\n");
 
     // On libère toute la mémoire.
     printf("XX. Libération de la mémoire...\n");
