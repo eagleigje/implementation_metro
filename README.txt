@@ -131,7 +131,9 @@ LOCALISATION DES DONNEES
         * Nous partons du principe que le temps moyens sera de 5 minutes.
     * Grâce à ces informations, nous pouvons remplir un fichier Excel que l'on trouve dans "data/informations_lignes_paris_collectées_sur_internet.xlsx"
     * Enfin, on peut extraire ces informations dans un fichier CSV "data/informations_lignes_paris_collectées_sur_internet.csv"
-    * Ce fichier va nous servir de base afin de créer les données manquantes.
+    * Ce fichier va nous servir de base afin de créer les données manquantes :
+        * On extrait les champs 1 (nom), 5 et suivants afin de créer le fichier des lignes de paris :
+            tail -n+2 data/informations_lignes_paris_collectées_sur_internet.csv | cut -d ";" -f1,5- > lignes_paris.csv
 
 EXERCICES A COMPLETER
 ----------------------
