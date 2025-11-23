@@ -13,6 +13,8 @@ var files_dup =
     [ "liste.h", "liste_8h.html", "liste_8h" ],
     [ "main.c", "main_8c.html", "main_8c" ],
     [ "station.h", "station_8h.html", "station_8h" ],
+    [ "tests.c", "tests_8c.html", "tests_8c" ],
+    [ "tests.h", "tests_8h.html", "tests_8h" ],
     [ "truc.c", "truc_8c.html", "truc_8c" ],
     [ "truc.h", "truc_8h.html", "truc_8h" ]
 ];

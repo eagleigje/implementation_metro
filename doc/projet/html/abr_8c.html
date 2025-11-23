@@ -95,6 +95,7 @@ $(function(){initNavTree('abr_8c.html','',''); });
 <code>#include &lt;ctype.h&gt;</code><br />
 <code>#include &lt;stdlib.h&gt;</code><br />
 <code>#include &lt;string.h&gt;</code><br />
+<code>#include &lt;strings.h&gt;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Fonctions</h2></td></tr>
@@ -123,10 +124,10 @@ Fonctions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Fonction qui cherche une station par son nom, dans l'ABR. Cette fonction est récursive. </p><dl class="params"><dt>Paramètres</dt><dd>
+<p>Fonction qui cherche une station par son nom, dans l'ABR. Cette fonction est récursive et insensible à la casse. </p><dl class="params"><dt>Paramètres</dt><dd>
   <table class="params">
     <tr><td class="paramname">abr</td><td>: ABR à parcourir. </td></tr>
-    <tr><td class="paramname">nom</td><td>: Le nom à rechercher. </td></tr>
+    <tr><td class="paramname">nom</td><td>: Le nom à rechercher (insensible à la casse). </td></tr>
   </table>
   </dd>
 </dl>
