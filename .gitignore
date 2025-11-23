@@ -60,3 +60,4 @@ dkms.conf
 
 # Ne prend pas le ou les programmes compilés
 metro
+tests
