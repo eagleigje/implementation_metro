@@ -2,10 +2,12 @@
 # Makefile pour le Projet Metro 2025
 # =========================================================================
 # Commandes disponibles :
-#   make        - Compile uniquement les fichiers modifiés (incrémental).
-#   make build  - Compile uniquement les fichiers modifiés (incrémental).
+#   make        - Compile les deux exécutables (metro et tests).
+#   make build  - Compile les deux exécutables (metro et tests).
 #   make all    - Nettoie et recompile tout depuis zéro (rebuild complet).
-#   make clean  - Supprime tous les fichiers objets et l'exécutable.
+#   make metro  - Compile uniquement l'application principale.
+#   make tests  - Compile uniquement le programme de tests.
+#   make clean  - Supprime tous les fichiers objets et les exécutables.
 #   make docs   - Génère la documentation Doxygen.
 #   make clean-docs - Supprime la documentation générée.
 # =========================================================================
@@ -15,22 +17,27 @@ CC = gcc
 CFLAGS = -Wall -Wextra -g
 LDFLAGS = -lm
 
-# Fichiers objets, liste de tous les fichiers à linker.
-OBJ = truc.o liste.o config.o abr.o main.o
+# Fichiers objets communs
+COMMON_OBJ = truc.o liste.o config.o abr.o
 
-# Executable principal
-TARGET = metro
+# Fichiers objets spécifiques
+MAIN_OBJ = main.o
+TESTS_OBJ = tests.o
 
-# Compilation normale incrémentable. Compilation par défaut.
-build: $(TARGET)
+# Exécutables
+TARGET_METRO = metro
+TARGET_TESTS = tests
+
+# Compilation normale incrémentable. Compilation par défaut (les deux exécutables).
+build: $(TARGET_METRO) $(TARGET_TESTS)
 
 # Rebuild complet : nettoie et recompile tout
-all: clean $(TARGET)
+all: clean $(TARGET_METRO) $(TARGET_TESTS)
 	@echo "Rebuild complet terminé avec succès!"
 
 # Nettoyage
 clean:
-	rm -f *.o $(TARGET)
+	rm -f *.o $(TARGET_METRO) $(TARGET_TESTS)
 
 # Dossier de documentation
 DOCS_DIR = doc/projet
@@ -54,9 +61,13 @@ docs:
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
-# Règle pour créer l'exécutable
-$(TARGET): $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) -o $(TARGET) $(LDFLAGS)
+# Règle pour créer l'exécutable metro
+$(TARGET_METRO): $(COMMON_OBJ) $(MAIN_OBJ)
+	$(CC) $(CFLAGS) $(COMMON_OBJ) $(MAIN_OBJ) -o $(TARGET_METRO) $(LDFLAGS)
+
+# Règle pour créer l'exécutable tests
+$(TARGET_TESTS): $(COMMON_OBJ) $(TESTS_OBJ)
+	$(CC) $(CFLAGS) $(COMMON_OBJ) $(TESTS_OBJ) -o $(TARGET_TESTS) $(LDFLAGS)
 
 # Dépendances
 truc.o: truc.c truc.h coord.h station.h connexion.h
@@ -64,5 +75,6 @@ abr.o: abr.c abr.h abr_type.h liste.h
 liste.o: liste.c liste.h truc.h
 config.o: config.c config.h
 main.o: main.c config.h liste.h abr.h
+tests.o: tests.c tests.h config.h liste.h abr.h
 
-.PHONY: all build clean
+.PHONY: all build clean metro tests
