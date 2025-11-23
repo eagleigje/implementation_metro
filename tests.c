@@ -152,6 +152,288 @@ void test_extraction_liste() {
 }
 
 /**
+ * Fonction qui teste les cas limites des listes.
+ */
+void test_cas_limites_liste() {
+    printf("6. Tests des cas limites pour les listes\n");
+    int tests_ok = 0;
+    int tests_total = 0;
+
+    // Test 6.1: Insertion dans une liste vide
+    printf("  Test 6.1: Insertion dans une liste vide\n");
+    tests_total++;
+    Une_coord coord1 = {2.35f, 48.85f};
+    Tdata data1;
+    data1.sta.nom = (char *)malloc(20);
+    strcpy(data1.sta.nom, "Station Vide");
+    data1.sta.tab_con = NULL;
+    data1.sta.nb_con = 0;
+    data1.sta.con_pcc = NULL;
+    Un_truc *truc1 = creer_truc(coord1, STA, data1, 48.85);
+    Un_elem *liste_vide = NULL;
+    liste_vide = inserer_liste_trie(liste_vide, truc1);
+    if (liste_vide != NULL && liste_vide->truc == truc1 && liste_vide->suiv == NULL) {
+        printf("    OK: insertion reussie\n");
+        tests_ok++;
+    } else {
+        printf("    ERREUR: insertion echouee\n");
+    }
+    detruire_liste_et_truc(liste_vide);
+
+    // Test 6.2: Extraction sur liste vide
+    printf("  Test 6.2: Extraction sur liste vide\n");
+    tests_total++;
+    Un_elem *liste_nulle = NULL;
+    Un_truc *extrait = extraire_deb_liste(&liste_nulle);
+    if (extrait == NULL && liste_nulle == NULL) {
+        printf("    OK: extraction retourne NULL\n");
+        tests_ok++;
+    } else {
+        printf("    ERREUR: comportement inattendu\n");
+    }
+
+    // Test 6.3: Limites de zone sur liste vide
+    printf("  Test 6.3: Calcul limites sur liste vide\n");
+    tests_total++;
+    Une_coord lim_no, lim_se;
+    limites_zone(NULL, &lim_no, &lim_se);
+    printf("    OK: fonction ne crash pas\n");
+    tests_ok++;
+
+    // Test 6.4: Insertion en début avec inserer_deb_liste
+    printf("  Test 6.4: Insertion en debut de liste\n");
+    tests_total++;
+    Un_elem *liste_deb = NULL;
+    Une_coord coord_deb = {2.36f, 48.86f};
+    Tdata data_deb;
+    data_deb.sta.nom = (char *)malloc(20);
+    strcpy(data_deb.sta.nom, "Debut");
+    data_deb.sta.tab_con = NULL;
+    data_deb.sta.nb_con = 0;
+    data_deb.sta.con_pcc = NULL;
+    Un_truc *truc_deb = creer_truc(coord_deb, STA, data_deb, 48.86);
+    liste_deb = inserer_deb_liste(liste_deb, truc_deb);
+    if (liste_deb != NULL && liste_deb->truc == truc_deb) {
+        printf("    OK: insertion en debut reussie\n");
+        tests_ok++;
+    } else {
+        printf("    ERREUR: insertion en debut echouee\n");
+    }
+    detruire_liste_et_truc(liste_deb);
+
+    printf("  Bilan: %d/%d tests reussis\n\n", tests_ok, tests_total);
+}
+
+/**
+ * Fonction qui teste la robustesse de l'ABR.
+ */
+void test_robustesse_abr() {
+    printf("7. Tests de robustesse pour l'ABR\n");
+    int tests_ok = 0;
+    int tests_total = 0;
+
+    // Test 7.1: Recherche dans ABR vide
+    printf("  Test 7.1: Recherche dans ABR vide\n");
+    tests_total++;
+    Un_truc *resultat_vide = chercher_station(NULL, "Test");
+    if (resultat_vide == NULL) {
+        printf("    OK: retourne NULL\n");
+        tests_ok++;
+    } else {
+        printf("    ERREUR: devrait retourner NULL\n");
+    }
+
+    // Test 7.2: Construction ABR depuis liste vide
+    printf("  Test 7.2: Construction ABR depuis liste vide\n");
+    tests_total++;
+    Un_nabr *abr_vide = construire_abr(NULL);
+    if (abr_vide == NULL) {
+        printf("    OK: ABR vide retourne NULL\n");
+        tests_ok++;
+    } else {
+        printf("    ERREUR: ABR devrait etre NULL\n");
+    }
+
+    // Test 7.3: Recherche avec nom vide
+    printf("  Test 7.3: Recherche avec nom vide\n");
+    tests_total++;
+    Une_coord coord_abr = {2.35f, 48.85f};
+    Tdata data_abr;
+    data_abr.sta.nom = (char *)malloc(20);
+    strcpy(data_abr.sta.nom, "StationTest");
+    data_abr.sta.tab_con = NULL;
+    data_abr.sta.nb_con = 0;
+    data_abr.sta.con_pcc = NULL;
+    Un_truc *truc_abr = creer_truc(coord_abr, STA, data_abr, 48.85);
+    Un_nabr *abr_test = creer_nabr(truc_abr);
+    Un_truc *resultat_nom_vide = chercher_station(abr_test, "");
+    if (resultat_nom_vide == NULL) {
+        printf("    OK: nom vide ne trouve rien\n");
+        tests_ok++;
+    } else {
+        printf("    ERREUR: nom vide ne devrait rien trouver\n");
+    }
+    detruire_liste_et_truc(inserer_deb_liste(NULL, truc_abr));
+    detruire_abr(abr_test);
+
+    // Test 7.4: Recherche avec caractères spéciaux
+    printf("  Test 7.4: Recherche avec caracteres speciaux\n");
+    tests_total++;
+    Une_coord coord_spec = {2.35f, 48.85f};
+    Tdata data_spec;
+    data_spec.sta.nom = (char *)malloc(30);
+    strcpy(data_spec.sta.nom, "Gare d'Austerlitz");
+    data_spec.sta.tab_con = NULL;
+    data_spec.sta.nb_con = 0;
+    data_spec.sta.con_pcc = NULL;
+    Un_truc *truc_spec = creer_truc(coord_spec, STA, data_spec, 48.85);
+    Un_nabr *abr_spec = creer_nabr(truc_spec);
+    Un_truc *resultat_spec = chercher_station(abr_spec, "Gare d'Austerlitz");
+    if (resultat_spec != NULL) {
+        printf("    OK: station avec apostrophe trouvee\n");
+        tests_ok++;
+    } else {
+        printf("    ERREUR: station avec apostrophe non trouvee\n");
+    }
+    detruire_liste_et_truc(inserer_deb_liste(NULL, truc_spec));
+    detruire_abr(abr_spec);
+
+    printf("  Bilan: %d/%d tests reussis\n\n", tests_ok, tests_total);
+}
+
+/**
+ * Fonction qui teste la gestion des configurations invalides.
+ */
+void test_config_invalide() {
+    printf("8. Tests de configuration invalide\n");
+    int tests_ok = 0;
+    int tests_total = 0;
+
+    // Test 8.1: Fichier de configuration inexistant
+    printf("  Test 8.1: Fichier config inexistant\n");
+    tests_total++;
+    Une_config *config_invalide = lire_config("fichier_inexistant_12345.ini");
+    if (config_invalide == NULL) {
+        printf("    OK: retourne NULL\n");
+        tests_ok++;
+    } else {
+        printf("    ERREUR: devrait retourner NULL\n");
+        detruire_config(config_invalide);
+    }
+
+    // Test 8.2: Destruction de config NULL
+    printf("  Test 8.2: Destruction config NULL\n");
+    tests_total++;
+    detruire_config(NULL);
+    printf("    OK: pas de crash\n");
+    tests_ok++;
+
+    printf("  Bilan: %d/%d tests reussis\n\n", tests_ok, tests_total);
+}
+
+/**
+ * Fonction qui teste la lecture de fichiers CSV malformés.
+ */
+void test_csv_malformes() {
+    printf("9. Tests de fichiers CSV malformes\n");
+    int tests_ok = 0;
+    int tests_total = 0;
+
+    // Test 9.1: Fichier stations inexistant
+    printf("  Test 9.1: Fichier stations inexistant\n");
+    tests_total++;
+    Un_elem *liste_invalide = lire_stations("stations_inexistantes_12345.csv");
+    if (liste_invalide == NULL) {
+        printf("    OK: retourne NULL\n");
+        tests_ok++;
+    } else {
+        printf("    ERREUR: devrait retourner NULL\n");
+        detruire_liste_et_truc(liste_invalide);
+    }
+
+    // Test 9.2: Fichier CSV vide
+    printf("  Test 9.2: Fichier CSV vide\n");
+    tests_total++;
+    Un_elem *liste_vide = lire_stations("test_data/stations_vide.csv");
+    if (liste_vide == NULL) {
+        printf("    OK: fichier vide retourne NULL\n");
+        tests_ok++;
+    } else {
+        printf("    ATTENTION: fichier vide retourne une liste\n");
+        int nb = 0;
+        Un_elem *temp = liste_vide;
+        while (temp != NULL) {
+            nb++;
+            temp = temp->suiv;
+        }
+        printf("    (%d elements trouves)\n", nb);
+        if (nb == 0) {
+            tests_ok++;
+        }
+        detruire_liste_et_truc(liste_vide);
+    }
+
+    // Test 9.3: Fichier CSV avec lignes malformées
+    printf("  Test 9.3: Fichier CSV avec lignes malformees\n");
+    tests_total++;
+    Un_elem *liste_malformee = lire_stations("test_data/stations_malformees.csv");
+    if (liste_malformee != NULL) {
+        int nb_stations = 0;
+        Un_elem *temp = liste_malformee;
+        while (temp != NULL) {
+            nb_stations++;
+            temp = temp->suiv;
+        }
+        printf("    OK: %d stations valides chargees (lignes invalides ignorees)\n", nb_stations);
+        tests_ok++;
+        detruire_liste_et_truc(liste_malformee);
+    } else {
+        printf("    ATTENTION: aucune station chargee\n");
+    }
+
+    printf("  Bilan: %d/%d tests reussis\n\n", tests_ok, tests_total);
+}
+
+/**
+ * Fonction qui teste la gestion mémoire avec destruction de structures.
+ */
+void test_gestion_memoire() {
+    printf("10. Tests de gestion memoire\n");
+    int tests_ok = 0;
+    int tests_total = 0;
+
+    // Test 10.1: Destruction de truc NULL
+    printf("  Test 10.1: Destruction truc NULL\n");
+    tests_total++;
+    detruire_truc(NULL);
+    printf("    OK: pas de crash\n");
+    tests_ok++;
+
+    // Test 10.2: Destruction de liste vide
+    printf("  Test 10.2: Destruction liste vide\n");
+    tests_total++;
+    detruire_liste(NULL);
+    printf("    OK: pas de crash\n");
+    tests_ok++;
+
+    // Test 10.3: Destruction de liste_et_truc vide
+    printf("  Test 10.3: Destruction liste_et_truc vide\n");
+    tests_total++;
+    detruire_liste_et_truc(NULL);
+    printf("    OK: pas de crash\n");
+    tests_ok++;
+
+    // Test 10.4: Destruction ABR vide
+    printf("  Test 10.4: Destruction ABR vide\n");
+    tests_total++;
+    detruire_abr(NULL);
+    printf("    OK: pas de crash\n");
+    tests_ok++;
+
+    printf("  Bilan: %d/%d tests reussis\n\n", tests_ok, tests_total);
+}
+
+/**
  * Fonction principale des tests.
  * @param argc : Le nombre d'arguments passés en paramètre.
  * @param argv : Les arguments de la ligne de commande.
@@ -225,6 +507,21 @@ int main(const int argc, char *argv[]) {
 
     // Test 5 : Test des fonctions d'extraction
     test_extraction_liste();
+
+    // Test 6 : Tests des cas limites pour les listes
+    test_cas_limites_liste();
+
+    // Test 7 : Tests de robustesse pour l'ABR
+    test_robustesse_abr();
+
+    // Test 8 : Tests de configuration invalide
+    test_config_invalide();
+
+    // Test 9 : Tests de fichiers CSV malformés
+    test_csv_malformes();
+
+    // Test 10 : Tests de gestion mémoire
+    test_gestion_memoire();
 
     // On libère toute la mémoire.
     printf("XX. Liberation de la memoire...\n");

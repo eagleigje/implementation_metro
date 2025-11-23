@@ -69,6 +69,12 @@ Pour compiler uniquement l'application principale :
 Pour compiler uniquement le programme de tests :
     make tests
 
+Pour compiler et exécuter les tests immédiatement :
+    make run-tests
+
+Pour vérifier les fuites mémoire avec valgrind :
+    make test-memory
+
 Pour nettoyer les fichiers objets et les exécutables :
     make clean
 
@@ -111,31 +117,18 @@ Le projet produit deux exécutables :
 
 TESTS ET VALIDATION
 -------------------
-Le programme de tests (./tests) valide les fonctionnalités suivantes :
+Le programme de tests (./tests) valide les fonctionnalités, au fur et à mesure.
+Pour ajouter de nouveaux tests :
 
-1. Chargement des stations :
-   - Parsing du fichier CSV
-   - Création de la liste triée par latitude
-   - Comptage du nombre de stations chargées
+1. Créer une nouvelle fonction de test dans `tests.c`
+2. Ajouter le prototype dans `tests.h`
+3. Appeler la fonction dans le `main()` de `tests.c`
+4. Suivre le même style de rapport (compteur tests_ok/tests_total)
 
-2. Affichage des stations :
-   - Vérification du tri par latitude
-   - Format de sortie CSV
-
-3. Calcul des limites de zone :
-   - Détermination du rectangle englobant
-   - Coordonnées Nord-Ouest et Sud-Est
-
-4. Arbre binaire de recherche (ABR) :
-   - Construction de l'ABR
-   - Recherche case-insensitive (insensible à la casse)
-   - Statistiques de recherche (trouvées/total)
-
-5. Fonctions d'extraction de liste :
-   - Extraction du premier élément
-   - Extraction d'un élément au milieu
-   - Gestion des éléments inexistants
-   - Vérification de l'intégrité de la liste après extraction
+Dans le répertoire test_data, on trouve des fichiers mals formés pour les tests.
+    * test_data/config_invalide.ini
+    * test_data/stations_malformees.csv
+    * test_data/stations_vide.csv
 
 FICHIERS CSV
 ------------
