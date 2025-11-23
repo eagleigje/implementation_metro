@@ -28,36 +28,48 @@ Le projet est organisé en plusieurs modules :
 
 2. Structures de données avancées :
    - liste.h/liste.c         : Listes chaînées de trucs
-   - abr.h/abr_type.h        : Arbres binaires de recherche (pour recherche rapide de stations)
+   - abr.h/abr.c/abr_type.h  : Arbres binaires de recherche (pour recherche rapide de stations)
    - aqrtopo.h               : Arbres quaternaires (pour représentation topologique)
    - ligne.h/ligne.c         : Gestion des lignes de métro
 
-3. Configuration :
+3. Programmes :
+   - main.c                  : Application principale (interface graphique à implémenter)
+   - tests.c/tests.h         : Programme de tests et validation
+
+4. Configuration :
    - config.h/config.c       : Système de configuration .ini
    - config.ini              : Fichier de configuration principal
    - config_alt.ini          : Exemple de configuration alternative
 
-4. Fichiers de données :
+5. Fichiers de données :
    - stations.csv : Fichier contenant les stations (longitude;latitude;nom), allégé pour les tests.
    - stations_paris.csv : Fichier contenant toutes les stations parisiennes (cf. LOCALISATION DES DONNEES).
    - lignes.csv : Fichier contenant les lignes (code;vitesse;intervalle;couleur).
    - connexions.csv : Fichier contenant les connexions (à créer).
 
-5. Programmes optionnels à installer :
+6. Programmes optionnels à installer :
     - doxygen : Afin de générer la documentation technique du projet.
     - valgrind : Pour vérifier que le projet libère bien toute la mémoire à la sortie.
     - glibc-debug : Pour valgrind.
 
-6. Documentation :
+7. Documentation :
     - doc/projet-metro2025.pdf : Le PDF du projet
     - doc/projet/html/index.html : La documentation Doxygen du projet.
 
 COMPILATION
 -----------
-Pour compiler le projet, utilisez la commande :
-    make ou make build
+Pour compiler le projet (les deux exécutables : metro et tests), utilisez :
+    make
+    ou
+    make build
 
-Pour nettoyer les fichiers objets et l'exécutable :
+Pour compiler uniquement l'application principale :
+    make metro
+
+Pour compiler uniquement le programme de tests :
+    make tests
+
+Pour nettoyer les fichiers objets et les exécutables :
     make clean
 
 Pour tout nettoyer et tout recompiler :
@@ -71,15 +83,59 @@ Pour nettoyer la documentation :
 
 EXECUTION
 ---------
-Pour lancer l'application :
+Le projet produit deux exécutables :
+
+1. Programme de TESTS (pour validation et développement) :
+    ./tests
+
+   Ce programme permet de :
+   - Charger et valider les stations depuis le fichier CSV
+   - Tester l'arbre binaire de recherche (recherche case-insensitive)
+   - Tester les fonctions d'extraction de listes
+   - Afficher des statistiques détaillées
+   - Calculer les limites de la zone géographique
+
+   Pour utiliser un fichier de configuration différent :
+    ./tests config_alt.ini
+    ./tests /chemin/vers/ma_config.ini
+
+2. Application PRINCIPALE (interface graphique à implémenter) :
     ./metro
 
-Pour utiliser un fichier de configuration différent :
+   Cette application est en cours de développement.
+   Elle sera l'interface graphique finale pour l'utilisateur.
+
+   Pour utiliser un fichier de configuration différent :
     ./metro config_alt.ini
     ./metro /chemin/vers/ma_config.ini
 
-Le programme de test actuel charge les stations et lignes depuis les fichiers CSV
-et affiche des informations de base.
+TESTS ET VALIDATION
+-------------------
+Le programme de tests (./tests) valide les fonctionnalités suivantes :
+
+1. Chargement des stations :
+   - Parsing du fichier CSV
+   - Création de la liste triée par latitude
+   - Comptage du nombre de stations chargées
+
+2. Affichage des stations :
+   - Vérification du tri par latitude
+   - Format de sortie CSV
+
+3. Calcul des limites de zone :
+   - Détermination du rectangle englobant
+   - Coordonnées Nord-Ouest et Sud-Est
+
+4. Arbre binaire de recherche (ABR) :
+   - Construction de l'ABR
+   - Recherche case-insensitive (insensible à la casse)
+   - Statistiques de recherche (trouvées/total)
+
+5. Fonctions d'extraction de liste :
+   - Extraction du premier élément
+   - Extraction d'un élément au milieu
+   - Gestion des éléments inexistants
+   - Vérification de l'intégrité de la liste après extraction
 
 FICHIERS CSV
 ------------
@@ -138,15 +194,60 @@ LOCALISATION DES DONNEES
 EXERCICES A COMPLETER
 ----------------------
 Le projet contient une base de travail avec les structures et quelques fonctions
-implémentées. Il reste à compléter :
+implémentées. Voici l'état d'avancement :
 
-1. Exercice 1 : Fonctions de gestion des listes de stations (FAIT)
-2. Exercice 2 : Arbres binaires de recherche pour les stations (FAIT)
-3. Exercice 3 : Listes de lignes de métro (À FAIRE)
-4. Exercice 4 : Gestion des connexions (À FAIRE)
-5. Exercice 5 : Arbres quaternaires pour la topologie (À FAIRE)
-6. Exercice 6 : Algorithme de Dijkstra pour le plus court chemin (À FAIRE)
-7. Exercice 7 : Interface graphique (À FAIRE)
+1. Exercice 1 : Fonctions de gestion des listes de stations ...................  FAIT
+   - creer_truc / detruire_truc
+   - inserer_liste_trie / ecrire_liste / detruire_liste / detruire_liste_et_truc
+   - lire_stations (parsing CSV avec gestion des espaces dans les noms)
+   - limites_zone (calcul du rectangle englobant)
+
+2. Exercice 2 : Arbres binaires de recherche pour les stations ...............   FAIT
+   - creer_nabr
+   - inserer_abr (avec comparaison case-insensitive)
+   - construire_abr
+   - detruire_abr
+   - chercher_station (recherche insensible à la casse)
+
+3. Exercice 3 : Listes de lignes de métro ..................................... A FAIRE
+   - lire_lignes
+   - afficher_lignes
+   - detruire_lignes
+   - chercher_ligne
+
+4. Exercice 4 : Gestion des connexions ........................................ A FAIRE
+   - inserer_deb_liste (implémentée dans liste.c)
+   - lire_connexions
+
+5. Exercice 5 : Arbres quaternaires pour la topologie ......................... A FAIRE
+   - inserer_aqr
+   - construire_aqr
+   - detruire_aqr
+   - chercher_aqr
+   - chercher_zone
+
+6. Exercice 6 : Algorithme de Dijkstra pour le plus court chemin .............. A FAIRE
+   - extraire_deb_liste (implémentée et testée)
+   - extraire_liste (implémentée et testée)
+   - dijkstra
+   - cherche_chemin
+
+7. Exercice 7 : Interface graphique ........................................... A FAIRE
+   - Design de l'interface
+   - Affichage du plan
+   - Zoom et déplacement
+   - Sélection de stations
+   - Calcul et affichage du chemin
+
+AMELIORATIONS RECENTES
+----------------------
+Version actuelle (2025) :
+- Séparation des tests et de l'application principale (architecture propre)
+- Implémentation de la recherche case-insensitive dans l'ABR (strcasecmp)
+- Tests complets des fonctions d'extraction de liste
+- Statistiques détaillées dans le programme de tests
+- Makefile mis à jour pour compiler deux exécutables distincts
+- Documentation complète du processus de test
 
 NOTES IMPORTANTES
 -----------------
@@ -157,9 +258,16 @@ NOTES IMPORTANTES
 - Le champ user_val des trucs est utilisé pour :
   * Le tri par latitude dans les listes.
   * Le calcul des distances dans l'algorithme de Dijkstra.
+- La recherche dans l'ABR est insensible à la casse (case-insensitive).
+- Les fonctions d'extraction de liste modifient la liste d'origine.
 
-CONTACT
--------
-Pour toute question, référez-vous au document de spécification du projet.
+WORKFLOW DE DEVELOPPEMENT RECOMMANDE
+-------------------------------------
+1. Développer une nouvelle fonctionnalité
+2. Ajouter des tests dans tests.c pour valider la fonctionnalité
+3. Compiler avec : make tests
+4. Exécuter les tests : ./tests
+5. Vérifier les fuites mémoire : valgrind --leak-check=full ./tests
+6. Intégrer la fonctionnalité dans main.c si nécessaire
+7. Mettre à jour ce README.txt
 
-Dernière mise à jour : 2025
