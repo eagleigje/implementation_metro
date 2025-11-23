@@ -53,8 +53,8 @@ Le projet est organisé en plusieurs modules :
     - glibc-debug : Pour valgrind.
 
 7. Documentation :
-    - doc/projet-metro2025.pdf : Le PDF du projet
-    - doc/projet/html/index.html : La documentation Doxygen du projet.
+    - doc/projet-metro2025.pdf      : Le PDF du projet
+    - doc/projet/html/index.html    : La documentation Doxygen du projet.
 
 COMPILATION
 -----------
@@ -125,7 +125,7 @@ Pour ajouter de nouveaux tests :
 3. Appeler la fonction dans le `main()` de `tests.c`
 4. Suivre le même style de rapport (compteur tests_ok/tests_total)
 
-Dans le répertoire test_data, on trouve des fichiers mals formés pour les tests.
+Dans le répertoire test_data, on trouve des fichiers mal formés pour les tests.
     * test_data/config_invalide.ini
     * test_data/stations_malformees.csv
     * test_data/stations_vide.csv
@@ -231,16 +231,6 @@ implémentées. Voici l'état d'avancement :
    - Zoom et déplacement
    - Sélection de stations
    - Calcul et affichage du chemin
-
-AMELIORATIONS RECENTES
-----------------------
-Version actuelle (2025) :
-- Séparation des tests et de l'application principale (architecture propre)
-- Implémentation de la recherche case-insensitive dans l'ABR (strcasecmp)
-- Tests complets des fonctions d'extraction de liste
-- Statistiques détaillées dans le programme de tests
-- Makefile mis à jour pour compiler deux exécutables distincts
-- Documentation complète du processus de test
 
 NOTES IMPORTANTES
 -----------------
