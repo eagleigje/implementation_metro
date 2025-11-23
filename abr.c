@@ -8,6 +8,7 @@
 #include <ctype.h>
 #include <stdlib.h>
 #include <string.h>
+#include <strings.h>
 
 /**
  * Fonction qui réalise l'allocation d'un nœud de l'arbre binaire de recherche et son initialisation.
@@ -41,11 +42,11 @@ Un_nabr *inserer_abr(Un_nabr *abr, Un_nabr *n) {
     };
 
     // Nous allons comparer le nom de la station de n par rapport à la liste des noeuds.
-    // strcmp(s1, s2) renvoi un entier tel que :
-    // Une valeur égale à 0 si s1 et s2 sont égales.
+    // strcasecmp(s1, s2) renvoi un entier tel que :
+    // Une valeur égale à 0 si s1 et s2 sont égales (insensible à la casse).
     // Une valeur négative si s1 est inférieure à s2.
     // Une valeur positive si s1 est supérieure à s2.
-    int cmp = strcmp(n->truc->data.sta.nom, abr->truc->data.sta.nom);
+    int cmp = strcasecmp(n->truc->data.sta.nom, abr->truc->data.sta.nom);
 
     if (cmp < 0) {
         // On insère à gauche (nom strictement inférieur).
@@ -103,9 +104,9 @@ void detruire_abr(Un_nabr *abr) {
 
 /**
  * Fonction qui cherche une station par son nom, dans l'ABR.
- * Cette fonction est récursive.
+ * Cette fonction est récursive et insensible à la casse.
  * @param abr : ABR à parcourir.
- * @param nom : Le nom à rechercher.
+ * @param nom : Le nom à rechercher (insensible à la casse).
  * @return : Le truc correspond à la recherche ou NULL si non trouvé.
  */
 Un_truc *chercher_station(Un_nabr *abr, char *nom) {
@@ -114,8 +115,8 @@ Un_truc *chercher_station(Un_nabr *abr, char *nom) {
         return NULL;
     }
 
-    // todo : utiliser tolower pour rechercher une station sans prendre en compte la casse ?
-    int cmp = strcmp(nom, abr->truc->data.sta.nom);
+    // Comparaison insensible à la casse avec strcasecmp
+    int cmp = strcasecmp(nom, abr->truc->data.sta.nom);
     if (cmp == 0) {
         // La station a été trouvée.
         return abr->truc;
