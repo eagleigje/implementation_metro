@@ -97,10 +97,11 @@ Une_ligne *lire_lignes(char *nom_fichier) {
     Une_ligne *tete = creer_ligne(ligne);
 
     // Puis, on lit les lignes suivantes jusqu'à la fin du fichier.
+    Une_ligne *tmp = tete;
     while (fgets(ligne, sizeof(ligne), fichier) != NULL) {
         Une_ligne *nouvelle = creer_ligne(ligne);
-        nouvelle->suiv = tete;
-        tete= nouvelle;
+        tmp->suiv = nouvelle;
+        tmp = tmp->suiv;
     }
 
     fclose(fichier);
