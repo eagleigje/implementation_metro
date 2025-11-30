@@ -103,6 +103,7 @@ Fonctions</h2></td></tr>
 <tr class="memitem:a674a7cc70709edb8a916f9ecc4c8139c" id="r_a674a7cc70709edb8a916f9ecc4c8139c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="connexion_8h.html#a2178cd5682efee02cbf7b5279c280097">Une_ligne</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a674a7cc70709edb8a916f9ecc4c8139c">lire_lignes</a> (char *nom_fichier)</td></tr>
 <tr class="memitem:ae1cea6086650c6c696e47b089b91de7c" id="r_ae1cea6086650c6c696e47b089b91de7c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae1cea6086650c6c696e47b089b91de7c">afficher_lignes</a> (<a class="el" href="connexion_8h.html#a2178cd5682efee02cbf7b5279c280097">Une_ligne</a> *ligne)</td></tr>
 <tr class="memitem:a79ec3b2b3e0f244e3da1bd9f169025cd" id="r_a79ec3b2b3e0f244e3da1bd9f169025cd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a79ec3b2b3e0f244e3da1bd9f169025cd">detruire_lignes</a> (<a class="el" href="connexion_8h.html#a2178cd5682efee02cbf7b5279c280097">Une_ligne</a> *ligne)</td></tr>
+<tr class="memitem:a4d2f54560156ddd562d66392077e4afb" id="r_a4d2f54560156ddd562d66392077e4afb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="connexion_8h.html#a2178cd5682efee02cbf7b5279c280097">Une_ligne</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4d2f54560156ddd562d66392077e4afb">chercher_ligne</a> (<a class="el" href="connexion_8h.html#a2178cd5682efee02cbf7b5279c280097">Une_ligne</a> *ligne, char *code)</td></tr>
 </table>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Documentation des fonctions</h2>
 <a id="ae1cea6086650c6c696e47b089b91de7c" name="ae1cea6086650c6c696e47b089b91de7c"></a>
@@ -125,6 +126,35 @@ Fonctions</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="a4d2f54560156ddd562d66392077e4afb" name="a4d2f54560156ddd562d66392077e4afb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4d2f54560156ddd562d66392077e4afb">&#9670;&#160;</a></span>chercher_ligne()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="connexion_8h.html#a2178cd5682efee02cbf7b5279c280097">Une_ligne</a> * chercher_ligne </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="connexion_8h.html#a2178cd5682efee02cbf7b5279c280097">Une_ligne</a> *</td>          <td class="paramname"><span class="paramname"><em>ligne</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>code</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Fonction qui recherche une station en fonction du code passé en paramètre. </p><dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ligne</td><td>: La liste de lignes à parcourir. </td></tr>
+    <tr><td class="paramname">code</td><td>: La chaîne de caractère à rechercher. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>: Soit la ligne si elle est trouvée sinon NULL. </dd></dl>
 
 </div>
 </div>
