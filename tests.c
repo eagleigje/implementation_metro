@@ -51,7 +51,7 @@ void test_recherche_abr(Un_nabr *abr_stations) {
  * Fonction qui teste les fonctions d'extraction de liste.
  */
 void test_extraction_liste() {
-    printf("5. Test des fonctions d'extraction de liste\n");
+    printf("\033[1;34m5. Test des fonctions d'extraction de liste\033[0m\n");
 
     // Creation d'une liste de test avec quelques stations fictives
     Un_elem *liste_test = NULL;
@@ -156,7 +156,7 @@ void test_extraction_liste() {
  * Fonction qui teste les cas limites des listes.
  */
 void test_cas_limites_liste() {
-    printf("6. Tests des cas limites pour les listes\n");
+    printf("\033[1;34m6. Tests des cas limites pour les listes\033[0m\n");
     int tests_ok = 0;
     int tests_total = 0;
 
@@ -229,7 +229,7 @@ void test_cas_limites_liste() {
  * Fonction qui teste la robustesse de l'ABR.
  */
 void test_robustesse_abr() {
-    printf("7. Tests de robustesse pour l'ABR\n");
+    printf("\033[1;34m7. Tests de robustesse pour l'ABR\033[0m\n");
     int tests_ok = 0;
     int tests_total = 0;
 
@@ -306,7 +306,7 @@ void test_robustesse_abr() {
  * Fonction qui teste la gestion des configurations invalides.
  */
 void test_config_invalide() {
-    printf("8. Tests de configuration invalide\n");
+    printf("\033[1;34m8. Tests de configuration invalide\033[0m\n");
     int tests_ok = 0;
     int tests_total = 0;
 
@@ -336,7 +336,7 @@ void test_config_invalide() {
  * Fonction qui teste la lecture de fichiers CSV malformés.
  */
 void test_csv_malformes() {
-    printf("9. Tests de fichiers CSV malformés\n");
+    printf("\033[1;34m9. Tests de fichiers CSV malformés\033[0m\n");
     int tests_ok = 0;
     int tests_total = 0;
 
@@ -399,7 +399,7 @@ void test_csv_malformes() {
  * Fonction qui teste la lecture et l'affichage des lignes de métro.
  */
 void test_lignes() {
-    printf("10. Tests de lecture et affichage des lignes\n");
+    printf("\033[1;34m10. Tests de lecture et affichage des lignes\033[0m\n");
     int tests_ok = 0;
     int tests_total = 0;
 
@@ -430,8 +430,48 @@ void test_lignes() {
         tests_ok++;
     }
 
-    // Test 10.3: Lecture d'un fichier lignes inexistant
-    printf("  Test 10.3: Lecture fichier lignes inexistant\n");
+    // Test 10.3: Recherche d'une ligne existante
+    if (lignes != NULL) {
+        printf("  Test 10.3: Recherche ligne M1\n");
+        tests_total++;
+        Une_ligne *ligne_m1 = chercher_ligne(lignes, "M1");
+        if (ligne_m1 != NULL) {
+            printf("    OK: ligne M1 trouvée (vitesse=%.1f, intervalle=%.1f, couleur=%s)\n",
+                   ligne_m1->vitesse, ligne_m1->intervalle, ligne_m1->color);
+            tests_ok++;
+        } else {
+            printf("    ERREUR: ligne M1 non trouvée\n");
+        }
+    }
+
+    // Test 10.4: Recherche d'une ligne inexistante
+    if (lignes != NULL) {
+        printf("  Test 10.4: Recherche ligne inexistante\n");
+        tests_total++;
+        Une_ligne *ligne_inconnue = chercher_ligne(lignes, "M99");
+        if (ligne_inconnue == NULL) {
+            printf("    OK: ligne M99 non trouvée (comportement attendu)\n");
+            tests_ok++;
+        } else {
+            printf("    ERREUR: ligne M99 trouvée alors qu'elle ne devrait pas exister\n");
+        }
+    }
+
+    // Test 10.5: Recherche sensible à la casse
+    if (lignes != NULL) {
+        printf("  Test 10.5: Recherche sensible à la casse\n");
+        tests_total++;
+        Une_ligne *ligne_min = chercher_ligne(lignes, "m1");
+        if (ligne_min == NULL) {
+            printf("    OK: recherche sensible à la casse (m1 != M1)\n");
+            tests_ok++;
+        } else {
+            printf("    ATTENTION: recherche insensible à la casse\n");
+        }
+    }
+
+    // Test 10.6: Lecture d'un fichier lignes inexistant
+    printf("  Test 10.6: Lecture fichier lignes inexistant\n");
     tests_total++;
     Une_ligne *lignes_invalide = lire_lignes("lignes_inexistantes_12345.csv");
     if (lignes_invalide == NULL) {
@@ -454,7 +494,7 @@ void test_lignes() {
  * Fonction qui teste la gestion mémoire avec destruction de structures.
  */
 void test_gestion_memoire() {
-    printf("11. Tests de gestion mémoire\n");
+    printf("\033[1;34m11. Tests de gestion mémoire\033[0m\n");
     int tests_ok = 0;
     int tests_total = 0;
 
@@ -505,7 +545,8 @@ int main(const int argc, char *argv[]) {
         fichier_config = argv[1];
     }
 
-    printf("=== TESTS - PROJET METRO 2025 ===\n\n");
+    // Cyan gras (\033[1;36m) pour :
+    printf("\033[1;36m=== TESTS - PROJET METRO 2025 ===\033[0m\n\n");
 
     // On charge la configuration du fichier de configuration.
     printf("Chargement de la configuration depuis %s...\n", fichier_config);
@@ -518,7 +559,8 @@ int main(const int argc, char *argv[]) {
     afficher_config(config);
 
     // Test 1 : Lecture des stations.
-    printf("1. Lecture des stations depuis %s...\n", config->fichier_stations);
+    //- Bleu gras (\033[1;34m) pour tous les titres de sections :
+    printf("\033[1;34m1. Lecture des stations depuis %s...\033[0m\n", config->fichier_stations);
     Un_elem *liste_stations = lire_stations(config->fichier_stations);
     if (liste_stations == NULL) {
         fprintf(stderr, "Erreur lors de la lecture des stations\n");
@@ -536,19 +578,19 @@ int main(const int argc, char *argv[]) {
     printf("Stations chargées avec succès! (%d stations)\n\n", nb_stations);
 
     // Test 2 : Affichage des stations.
-    printf("2. Affichage des stations (triées par latitude):\n");
+    printf("\033[1;34m2. Affichage des stations (triées par latitude):\033[0m\n");
     ecrire_liste(stdout, liste_stations);
     printf("\n");
 
     // Test 3 : calcul des zones
-    printf("3. Calcul des limites de la zone:\n");
+    printf("\033[1;34m3. Calcul des limites de la zone:\033[0m\n");
     Une_coord limite_no, limite_se;
     limites_zone(liste_stations, &limite_no, &limite_se);
     printf("Limite Nord-Ouest: lon=%.6f, lat=%.6f\n", limite_no.lon, limite_no.lat);
     printf("Limite Sud-Est: lon=%.6f, lat=%.6f\n\n", limite_se.lon, limite_se.lat);
 
     // Test 4 : Création de l'ABR.
-    printf("4. Création de l'ABR des stations\n");
+    printf("\033[1;34m4. Création de l'ABR des stations\033[0m\n");
     Un_nabr *abr = construire_abr(liste_stations);
     if (abr == NULL) {
         fprintf(stderr, "Erreur lors de la construction de l'ABR.\n");
@@ -589,7 +631,7 @@ int main(const int argc, char *argv[]) {
     detruire_config(config); // Destruction de la configuration de départ.
     printf("Mémoire libérée avec succès!\n\n");
 
-    printf("=== FIN DES TESTS ===\n");
+    printf("\033[1;36m=== FIN DES TESTS ===\033[0m\n");
 
     return 0;
 }

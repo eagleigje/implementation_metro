@@ -144,3 +144,23 @@ void detruire_lignes(Une_ligne *ligne) {
         ptr = suivant;
     }
 }
+
+/**
+ * Fonction qui recherche une station en fonction du code passé en paramètre.
+ * @param ligne : La liste de lignes à parcourir.
+ * @param code : La chaîne de caractère à rechercher.
+ * @return : Soit la ligne si elle est trouvée sinon NULL.
+ */
+Une_ligne *chercher_ligne(Une_ligne *ligne, char *code) {
+    Une_ligne *courant = ligne;
+
+    while (courant != NULL) {
+        // Cette recherche est sensible à la casse.
+        if (strcmp(courant->code, code) == 0) {
+            return courant;
+        }
+        courant = courant->suiv;
+    }
+
+    return NULL;
+}
