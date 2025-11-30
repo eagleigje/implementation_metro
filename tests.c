@@ -397,16 +397,17 @@ void test_csv_malformes() {
 
 /**
  * Fonction qui teste la lecture et l'affichage des lignes de métro.
+ * @param config : La configuration contenant le chemin du fichier lignes.
  */
-void test_lignes() {
+void test_lignes(Une_config *config) {
     printf("\033[1;34m10. Tests de lecture et affichage des lignes\033[0m\n");
     int tests_ok = 0;
     int tests_total = 0;
 
-    // Test 10.1: Lecture du fichier lignes.csv
-    printf("  Test 10.1: Lecture du fichier lignes.csv\n");
+    // Test 10.1: Lecture du fichier lignes depuis la configuration
+    printf("  Test 10.1: Lecture du fichier %s\n", config->fichier_lignes);
     tests_total++;
-    Une_ligne *lignes = lire_lignes("lignes.csv");
+    Une_ligne *lignes = lire_lignes(config->fichier_lignes);
     if (lignes != NULL) {
         int nb_lignes = 0;
         Une_ligne *temp = lignes;
@@ -432,15 +433,15 @@ void test_lignes() {
 
     // Test 10.3: Recherche d'une ligne existante
     if (lignes != NULL) {
-        printf("  Test 10.3: Recherche ligne M1\n");
+        printf("  Test 10.3: Recherche ligne 1\n");
         tests_total++;
-        Une_ligne *ligne_m1 = chercher_ligne(lignes, "M1");
+        Une_ligne *ligne_m1 = chercher_ligne(lignes, "1");
         if (ligne_m1 != NULL) {
-            printf("    OK: ligne M1 trouvée (vitesse=%.1f, intervalle=%.1f, couleur=%s)\n",
+            printf("    OK: ligne 1 trouvée (vitesse=%.1f, intervalle=%.1f, couleur=%s)\n",
                    ligne_m1->vitesse, ligne_m1->intervalle, ligne_m1->color);
             tests_ok++;
         } else {
-            printf("    ERREUR: ligne M1 non trouvée\n");
+            printf("    ERREUR: ligne 1 non trouvée\n");
         }
     }
 
@@ -619,7 +620,7 @@ int main(const int argc, char *argv[]) {
     test_csv_malformes();
 
     // Test 10 : Tests de lecture et affichage des lignes
-    test_lignes();
+    test_lignes(config);
 
     // Test 11 : Tests de gestion mémoire
     test_gestion_memoire();
