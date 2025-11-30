@@ -21,6 +21,7 @@ void test_cas_limites_liste();      // Tests des cas limites pour les listes
 void test_robustesse_abr();          // Tests de robustesse pour l'ABR
 void test_config_invalide();         // Tests de configuration invalide
 void test_csv_malformes();           // Tests de fichiers CSV malformés
+void test_lignes();                  // Tests de lecture et affichage des lignes
 void test_gestion_memoire();         // Tests de gestion mémoire
 
 #endif

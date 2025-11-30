@@ -7,6 +7,10 @@
 #ifndef LIGNE_H
 #define LIGNE_H
 
+#define CSV_MAX_LINE_LENGTH 256
+#define CODE_SIZE 5 // La taille max du nom d'une ligne de métro y compris le \0.
+#define COLOR_SIZE 8
+
 /**
  *  Une ligne est définie par son code, la vitesse moyenne des rames qui l’utilisent,
  *  l’intervalle moyen entre deux rames et la couleur à utiliser pour la dessiner.
@@ -21,8 +25,8 @@ typedef struct _une_ligne {
 
 // Prototypes des fonctions
 Une_ligne *lire_lignes(char *nom_fichier);
-void afficher_lignes(Une_ligne *lligne);
-void detruire_lignes(Une_ligne *lligne);
-Une_ligne *chercher_ligne(Une_ligne *lligne, char *code);
+void afficher_lignes(Une_ligne *ligne);
+void detruire_lignes(Une_ligne *ligne);
+Une_ligne *chercher_ligne(Une_ligne *ligne, char *code);
 
 #endif

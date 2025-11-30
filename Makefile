@@ -20,7 +20,7 @@ CFLAGS = -Wall -Wextra -g
 LDFLAGS = -lm
 
 # Fichiers objets communs
-COMMON_OBJ = truc.o liste.o config.o abr.o
+COMMON_OBJ = truc.o liste.o config.o abr.o ligne.o
 
 # Fichiers objets spécifiques
 MAIN_OBJ = main.o
@@ -76,8 +76,9 @@ truc.o: truc.c truc.h coord.h station.h connexion.h
 abr.o: abr.c abr.h abr_type.h liste.h
 liste.o: liste.c liste.h truc.h
 config.o: config.c config.h
+ligne.o: ligne.c ligne.h constants.h
 main.o: main.c config.h liste.h abr.h
-tests.o: tests.c tests.h config.h liste.h abr.h
+tests.o: tests.c tests.h config.h liste.h abr.h ligne.h
 
 # Cible pour exécuter les tests
 run-tests: $(TARGET_TESTS)
