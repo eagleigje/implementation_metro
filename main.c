@@ -47,7 +47,7 @@ int main(const int argc, char *argv[]) {
         return 1;
     }
 
-    printf("Configuration chargee:\n");
+    printf("Configuration chargée:\n");
     printf("  - Stations: %s\n", config->fichier_stations);
     printf("  - Lignes: %s\n", config->fichier_lignes);
     printf("  - Connexions: %s\n", config->fichier_connexions);
