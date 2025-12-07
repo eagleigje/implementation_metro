@@ -10,6 +10,7 @@
 #include "config.h"
 #include "liste.h"
 #include "abr.h"
+#include "ligne.h"
 
 /**
  * Fonction principale du projet.
@@ -52,6 +53,9 @@ int main(const int argc, char *argv[]) {
     printf("  - Lignes: %s\n", config->fichier_lignes);
     printf("  - Connexions: %s\n", config->fichier_connexions);
     printf("\n");
+
+    // Une_ligne *lignes = lire_lignes(config->fichier_lignes);
+    // afficher_lignes(lignes);
 
     // Libération de la mémoire
     detruire_config(config);
