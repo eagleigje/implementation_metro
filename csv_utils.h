@@ -1,0 +1,29 @@
+/*
+ * PROJET MAIN3 / METRO
+ * Utilitaires pour la lecture de fichiers CSV.
+ */
+
+#ifndef CSV_UTILS_H
+#define CSV_UTILS_H
+
+#define CSV_TAMPON_TAILLE 512
+
+/**
+ * Lecteur CSV pour parcourir les champs d'une ligne.
+ */
+typedef struct _un_lecteur_csv {
+    char *ptr_courant;
+    char tampon[CSV_TAMPON_TAILLE];
+    char separateur;
+    int fini;
+} Un_lecteur_csv;
+
+// Prototypes des fonctions
+void csv_init_lecteur(Un_lecteur_csv *lecteur, char *ligne, char separateur);
+int csv_champ_suivant(Un_lecteur_csv *lecteur);
+char *csv_lire_texte(Un_lecteur_csv *lecteur);
+float csv_lire_flottant(Un_lecteur_csv *lecteur);
+int csv_lire_entier(Un_lecteur_csv *lecteur);
+int csv_est_fini(Un_lecteur_csv *lecteur);
+
+#endif

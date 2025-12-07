@@ -24,5 +24,6 @@ void test_csv_malformes();           // Tests de fichiers CSV malformés
 void test_lignes(Une_config *config); // Tests de lecture et affichage des lignes
 void test_gestion_memoire();         // Tests de gestion mémoire
 void test_connexions(Une_config *config); // Tests de lecture et affichage des connexions
+void test_csv_utils();               // Tests du lecteur CSV générique
 
 #endif

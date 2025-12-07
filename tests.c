@@ -13,6 +13,7 @@
 #include "abr.h"
 #include "ligne.h"
 #include "connexion.h"
+#include "csv_utils.h"
 
 /**
  * Fonction qui permet de tester la recherche des noms de stations.
@@ -52,7 +53,7 @@ void test_recherche_abr(Un_nabr *abr_stations) {
  * Fonction qui teste les fonctions d'extraction de liste.
  */
 void test_extraction_liste() {
-    printf("\033[1;34m5. Test des fonctions d'extraction de liste\033[0m\n");
+    printf("\033[1;34m6. Test des fonctions d'extraction de liste\033[0m\n");
 
     // Creation d'une liste de test avec quelques stations fictives
     Un_elem *liste_test = NULL;
@@ -157,12 +158,12 @@ void test_extraction_liste() {
  * Fonction qui teste les cas limites des listes.
  */
 void test_cas_limites_liste() {
-    printf("\033[1;34m6. Tests des cas limites pour les listes\033[0m\n");
+    printf("\033[1;34m7. Tests des cas limites pour les listes\033[0m\n");
     int tests_ok = 0;
     int tests_total = 0;
 
-    // Test 6.1: Insertion dans une liste vide
-    printf("  Test 6.1: Insertion dans une liste vide\n");
+    // Test 7.1: Insertion dans une liste vide
+    printf("  Test 7.1: Insertion dans une liste vide\n");
     tests_total++;
     Une_coord coord1 = {2.35f, 48.85f};
     Tdata data1;
@@ -182,8 +183,8 @@ void test_cas_limites_liste() {
     }
     detruire_liste_et_truc(liste_vide);
 
-    // Test 6.2: Extraction sur liste vide
-    printf("  Test 6.2: Extraction sur liste vide\n");
+    // Test 7.2: Extraction sur liste vide
+    printf("  Test 7.2: Extraction sur liste vide\n");
     tests_total++;
     Un_elem *liste_nulle = NULL;
     Un_truc *extrait = extraire_deb_liste(&liste_nulle);
@@ -194,16 +195,16 @@ void test_cas_limites_liste() {
         printf("    ERREUR: comportement inattendu\n");
     }
 
-    // Test 6.3: Limites de zone sur liste vide
-    printf("  Test 6.3: Calcul limites sur liste vide\n");
+    // Test 7.3: Limites de zone sur liste vide
+    printf("  Test 7.3: Calcul limites sur liste vide\n");
     tests_total++;
     Une_coord lim_no, lim_se;
     limites_zone(NULL, &lim_no, &lim_se);
     printf("    OK: fonction ne se plante pas\n");
     tests_ok++;
 
-    // Test 6.4: Insertion en début avec inserer_deb_liste
-    printf("  Test 6.4: Insertion en début de liste\n");
+    // Test 7.4: Insertion en début avec inserer_deb_liste
+    printf("  Test 7.4: Insertion en début de liste\n");
     tests_total++;
     Un_elem *liste_deb = NULL;
     Une_coord coord_deb = {2.36f, 48.86f};
@@ -230,12 +231,12 @@ void test_cas_limites_liste() {
  * Fonction qui teste la robustesse de l'ABR.
  */
 void test_robustesse_abr() {
-    printf("\033[1;34m7. Tests de robustesse pour l'ABR\033[0m\n");
+    printf("\033[1;34m8. Tests de robustesse pour l'ABR\033[0m\n");
     int tests_ok = 0;
     int tests_total = 0;
 
-    // Test 7.1: Recherche dans ABR vide
-    printf("  Test 7.1: Recherche dans ABR vide\n");
+    // Test 8.1: Recherche dans ABR vide
+    printf("  Test 8.1: Recherche dans ABR vide\n");
     tests_total++;
     Un_truc *resultat_vide = chercher_station(NULL, "Test");
     if (resultat_vide == NULL) {
@@ -245,8 +246,8 @@ void test_robustesse_abr() {
         printf("    ERREUR: devrait retourner NULL\n");
     }
 
-    // Test 7.2: Construction ABR depuis liste vide
-    printf("  Test 7.2: Construction ABR depuis liste vide\n");
+    // Test 8.2: Construction ABR depuis liste vide
+    printf("  Test 8.2: Construction ABR depuis liste vide\n");
     tests_total++;
     Un_nabr *abr_vide = construire_abr(NULL);
     if (abr_vide == NULL) {
@@ -256,8 +257,8 @@ void test_robustesse_abr() {
         printf("    ERREUR: ABR devrait être NULL\n");
     }
 
-    // Test 7.3: Recherche avec nom vide
-    printf("  Test 7.3: Recherche avec nom vide\n");
+    // Test 8.3: Recherche avec nom vide
+    printf("  Test 8.3: Recherche avec nom vide\n");
     tests_total++;
     Une_coord coord_abr = {2.35f, 48.85f};
     Tdata data_abr;
@@ -278,8 +279,8 @@ void test_robustesse_abr() {
     detruire_liste_et_truc(inserer_deb_liste(NULL, truc_abr));
     detruire_abr(abr_test);
 
-    // Test 7.4: Recherche avec caractères spéciaux
-    printf("  Test 7.4: Recherche avec caractères spéciaux\n");
+    // Test 8.4: Recherche avec caractères spéciaux
+    printf("  Test 8.4: Recherche avec caractères spéciaux\n");
     tests_total++;
     Une_coord coord_spec = {2.35f, 48.85f};
     Tdata data_spec;
@@ -307,12 +308,12 @@ void test_robustesse_abr() {
  * Fonction qui teste la gestion des configurations invalides.
  */
 void test_config_invalide() {
-    printf("\033[1;34m8. Tests de configuration invalide\033[0m\n");
+    printf("\033[1;34m9. Tests de configuration invalide\033[0m\n");
     int tests_ok = 0;
     int tests_total = 0;
 
-    // Test 8.1: Fichier de configuration inexistant
-    printf("  Test 8.1: Fichier config inexistant\n");
+    // Test 9.1: Fichier de configuration inexistant
+    printf("  Test 9.1: Fichier config inexistant\n");
     tests_total++;
     Une_config *config_invalide = lire_config("fichier_inexistant_12345.ini");
     if (config_invalide == NULL) {
@@ -323,8 +324,8 @@ void test_config_invalide() {
         detruire_config(config_invalide);
     }
 
-    // Test 8.2: Destruction de config NULL
-    printf("  Test 8.2: Destruction config NULL\n");
+    // Test 9.2: Destruction de config NULL
+    printf("  Test 9.2: Destruction config NULL\n");
     tests_total++;
     detruire_config(NULL);
     printf("    OK: pas de crash\n");
@@ -337,12 +338,12 @@ void test_config_invalide() {
  * Fonction qui teste la lecture de fichiers CSV malformés.
  */
 void test_csv_malformes() {
-    printf("\033[1;34m9. Tests de fichiers CSV malformés\033[0m\n");
+    printf("\033[1;34m10. Tests de fichiers CSV malformés\033[0m\n");
     int tests_ok = 0;
     int tests_total = 0;
 
-    // Test 9.1: Fichier stations inexistant
-    printf("  Test 9.1: Fichier stations inexistant\n");
+    // Test 10.1: Fichier stations inexistant
+    printf("  Test 10.1: Fichier stations inexistant\n");
     tests_total++;
     Un_elem *liste_invalide = lire_stations("stations_inexistantes_12345.csv");
     if (liste_invalide == NULL) {
@@ -353,8 +354,8 @@ void test_csv_malformes() {
         detruire_liste_et_truc(liste_invalide);
     }
 
-    // Test 9.2: Fichier CSV vide
-    printf("  Test 9.2: Fichier CSV vide\n");
+    // Test 10.2: Fichier CSV vide
+    printf("  Test 10.2: Fichier CSV vide\n");
     tests_total++;
     Un_elem *liste_vide = lire_stations("test_data/stations_vide.csv");
     if (liste_vide == NULL) {
@@ -375,8 +376,8 @@ void test_csv_malformes() {
         detruire_liste_et_truc(liste_vide);
     }
 
-    // Test 9.3: Fichier CSV avec lignes malformées
-    printf("  Test 9.3: Fichier CSV avec lignes malformées\n");
+    // Test 10.3: Fichier CSV avec lignes malformées
+    printf("  Test 10.3: Fichier CSV avec lignes malformées\n");
     tests_total++;
     Un_elem *liste_malformee = lire_stations("test_data/stations_malformees.csv");
     if (liste_malformee != NULL) {
@@ -401,12 +402,12 @@ void test_csv_malformes() {
  * @param config : La configuration contenant le chemin du fichier lignes.
  */
 void test_lignes(Une_config *config) {
-    printf("\033[1;34m10. Tests de lecture et affichage des lignes\033[0m\n");
+    printf("\033[1;34m11. Tests de lecture et affichage des lignes\033[0m\n");
     int tests_ok = 0;
     int tests_total = 0;
 
-    // Test 10.1: Lecture du fichier lignes depuis la configuration
-    printf("  Test 10.1: Lecture du fichier %s\n", config->fichier_lignes);
+    // Test 11.1: Lecture du fichier lignes depuis la configuration
+    printf("  Test 11.1: Lecture du fichier %s\n", config->fichier_lignes);
     tests_total++;
     Une_ligne *lignes = lire_lignes(config->fichier_lignes);
     if (lignes != NULL) {
@@ -422,9 +423,9 @@ void test_lignes(Une_config *config) {
         printf("    ERREUR: impossible de charger les lignes\n");
     }
 
-    // Test 10.2: Affichage des lignes
+    // Test 11.2: Affichage des lignes
     if (lignes != NULL) {
-        printf("  Test 10.2: Affichage des lignes\n");
+        printf("  Test 11.2: Affichage des lignes\n");
         tests_total++;
         printf("    Format: code ; vitesse ; intervalle ; couleur\n");
         afficher_lignes(lignes);
@@ -432,9 +433,9 @@ void test_lignes(Une_config *config) {
         tests_ok++;
     }
 
-    // Test 10.3: Recherche d'une ligne existante
+    // Test 11.3: Recherche d'une ligne existante
     if (lignes != NULL) {
-        printf("  Test 10.3: Recherche ligne 1\n");
+        printf("  Test 11.3: Recherche ligne 1\n");
         tests_total++;
         Une_ligne *ligne_m1 = chercher_ligne(lignes, "1");
         if (ligne_m1 != NULL) {
@@ -446,9 +447,9 @@ void test_lignes(Une_config *config) {
         }
     }
 
-    // Test 10.4: Recherche d'une ligne inexistante
+    // Test 11.4: Recherche d'une ligne inexistante
     if (lignes != NULL) {
-        printf("  Test 10.4: Recherche ligne inexistante\n");
+        printf("  Test 11.4: Recherche ligne inexistante\n");
         tests_total++;
         Une_ligne *ligne_inconnue = chercher_ligne(lignes, "M99");
         if (ligne_inconnue == NULL) {
@@ -459,9 +460,9 @@ void test_lignes(Une_config *config) {
         }
     }
 
-    // Test 10.5: Recherche sensible à la casse
+    // Test 11.5: Recherche sensible à la casse
     if (lignes != NULL) {
-        printf("  Test 10.5: Recherche sensible à la casse\n");
+        printf("  Test 11.5: Recherche sensible à la casse\n");
         tests_total++;
         Une_ligne *ligne_min = chercher_ligne(lignes, "m1");
         if (ligne_min == NULL) {
@@ -472,8 +473,8 @@ void test_lignes(Une_config *config) {
         }
     }
 
-    // Test 10.6: Lecture d'un fichier lignes inexistant
-    printf("  Test 10.6: Lecture fichier lignes inexistant\n");
+    // Test 11.6: Lecture d'un fichier lignes inexistant
+    printf("  Test 11.6: Lecture fichier lignes inexistant\n");
     tests_total++;
     Une_ligne *lignes_invalide = lire_lignes("lignes_inexistantes_12345.csv");
     if (lignes_invalide == NULL) {
@@ -496,37 +497,203 @@ void test_lignes(Une_config *config) {
  * Fonction qui teste la gestion mémoire avec destruction de structures.
  */
 void test_gestion_memoire() {
-    printf("\033[1;34m11. Tests de gestion mémoire\033[0m\n");
+    printf("\033[1;34m12. Tests de gestion mémoire\033[0m\n");
     int tests_ok = 0;
     int tests_total = 0;
 
-    // Test 11.1: Destruction de truc NULL
-    printf("  Test 11.1: Destruction truc NULL\n");
+    // Test 12.1: Destruction de truc NULL
+    printf("  Test 12.1: Destruction truc NULL\n");
     tests_total++;
     detruire_truc(NULL);
     printf("    OK: pas de plantage\n");
     tests_ok++;
 
-    // Test 11.2: Destruction de liste vide
-    printf("  Test 11.2: Destruction liste vide\n");
+    // Test 12.2: Destruction de liste vide
+    printf("  Test 12.2: Destruction liste vide\n");
     tests_total++;
     detruire_liste(NULL);
     printf("    OK: pas de plantage\n");
     tests_ok++;
 
-    // Test 11.3: Destruction de liste_et_truc vide
-    printf("  Test 11.3: Destruction liste_et_truc vide\n");
+    // Test 12.3: Destruction de liste_et_truc vide
+    printf("  Test 12.3: Destruction liste_et_truc vide\n");
     tests_total++;
     detruire_liste_et_truc(NULL);
     printf("    OK: pas de plantage\n");
     tests_ok++;
 
-    // Test 11.4: Destruction ABR vide
-    printf("  Test 11.4: Destruction ABR vide\n");
+    // Test 12.4: Destruction ABR vide
+    printf("  Test 12.4: Destruction ABR vide\n");
     tests_total++;
     detruire_abr(NULL);
     printf("    OK: pas de plantage\n");
     tests_ok++;
+
+    printf("  Bilan: %d/%d tests réussis\n\n", tests_ok, tests_total);
+}
+
+/**
+ * Tests du lecteur CSV générique.
+ */
+void test_csv_utils() {
+    int tests_total = 0;
+    int tests_ok = 0;
+
+    printf("\033[1;34m1. Tests du lecteur CSV générique\033[0m\n");
+
+    // Test 1.1: Lecture d'une ligne simple avec 3 champs
+    printf("  Test 1.1: Lecture d'une ligne simple avec 3 champs\n");
+    tests_total++;
+    char ligne1[] = "Jussieu;2.354086;48.846050";
+    Un_lecteur_csv lecteur;
+    csv_init_lecteur(&lecteur, ligne1, ';');
+
+    if (csv_champ_suivant(&lecteur)) {
+        char *nom = csv_lire_texte(&lecteur);
+        if (strcmp(nom, "Jussieu") == 0) {
+            if (csv_champ_suivant(&lecteur)) {
+                float lon = csv_lire_flottant(&lecteur);
+                if (lon > 2.35 && lon < 2.36) {
+                    if (csv_champ_suivant(&lecteur)) {
+                        float lat = csv_lire_flottant(&lecteur);
+                        if (lat > 48.84 && lat < 48.85) {
+                            printf("    OK: 3 champs lus correctement\n");
+                            tests_ok++;
+                        } else {
+                            printf("    ERREUR: latitude incorrecte\n");
+                        }
+                    } else {
+                        printf("    ERREUR: échec lecture 3e champ\n");
+                    }
+                } else {
+                    printf("    ERREUR: longitude incorrecte\n");
+                }
+            } else {
+                printf("    ERREUR: échec lecture 2e champ\n");
+            }
+        } else {
+            printf("    ERREUR: nom de station incorrect\n");
+        }
+    } else {
+        printf("    ERREUR: échec lecture 1er champ\n");
+    }
+
+    // Test 1.2: Gestion des espaces en début et fin de champ
+    printf("  Test 1.2: Gestion des espaces en début et fin de champ\n");
+    tests_total++;
+    char ligne2[] = " Chatelet ;  2.347  ; 48.858 ";
+    csv_init_lecteur(&lecteur, ligne2, ';');
+
+    if (csv_champ_suivant(&lecteur)) {
+        char *nom = csv_lire_texte(&lecteur);
+        if (strcmp(nom, "Chatelet") == 0) {
+            printf("    OK: espaces correctement supprimés\n");
+            tests_ok++;
+        } else {
+            printf("    ERREUR: espaces non supprimés (nom='%s')\n", nom);
+        }
+    } else {
+        printf("    ERREUR: échec lecture champ avec espaces\n");
+    }
+
+    // Test 1.3: Lecture d'entiers
+    printf("  Test 1.3: Lecture d'entiers\n");
+    tests_total++;
+    char ligne3[] = "1;14;Paris";
+    csv_init_lecteur(&lecteur, ligne3, ';');
+
+    if (csv_champ_suivant(&lecteur)) {
+        int num1 = csv_lire_entier(&lecteur);
+        if (num1 == 1) {
+            if (csv_champ_suivant(&lecteur)) {
+                int num2 = csv_lire_entier(&lecteur);
+                if (num2 == 14) {
+                    printf("    OK: entiers lus correctement\n");
+                    tests_ok++;
+                } else {
+                    printf("    ERREUR: second entier incorrect\n");
+                }
+            } else {
+                printf("    ERREUR: échec lecture 2e champ\n");
+            }
+        } else {
+            printf("    ERREUR: premier entier incorrect\n");
+        }
+    } else {
+        printf("    ERREUR: échec lecture 1er champ\n");
+    }
+
+    // Test 1.4: Détection de fin de ligne
+    printf("  Test 1.4: Détection de fin de ligne\n");
+    tests_total++;
+    char ligne4[] = "A;B";
+    csv_init_lecteur(&lecteur, ligne4, ';');
+
+    csv_champ_suivant(&lecteur); // A
+    csv_champ_suivant(&lecteur); // B
+    if (csv_est_fini(&lecteur) == 0) {
+        if (csv_champ_suivant(&lecteur) == 0) {
+            if (csv_est_fini(&lecteur) == 1) {
+                printf("    OK: fin de ligne détectée\n");
+                tests_ok++;
+            } else {
+                printf("    ERREUR: csv_est_fini devrait retourner 1\n");
+            }
+        } else {
+            printf("    ERREUR: csv_champ_suivant devrait retourner 0\n");
+        }
+    } else {
+        printf("    ERREUR: csv_est_fini ne devrait pas être fini après 2 champs\n");
+    }
+
+    // Test 1.5: Ligne vide
+    printf("  Test 1.5: Gestion d'une ligne vide\n");
+    tests_total++;
+    char ligne5[] = "";
+    csv_init_lecteur(&lecteur, ligne5, ';');
+
+    if (csv_champ_suivant(&lecteur) == 0 && csv_est_fini(&lecteur) == 1) {
+        printf("    OK: ligne vide gérée correctement\n");
+        tests_ok++;
+    } else {
+        printf("    ERREUR: ligne vide mal gérée\n");
+    }
+
+    // Test 1.6: Champ contenant des caractères spéciaux
+    printf("  Test 1.6: Champ avec caractères spéciaux (apostrophe)\n");
+    tests_total++;
+    char ligne6[] = "Gare d'Austerlitz;2.365;48.842";
+    csv_init_lecteur(&lecteur, ligne6, ';');
+
+    if (csv_champ_suivant(&lecteur)) {
+        char *nom = csv_lire_texte(&lecteur);
+        if (strcmp(nom, "Gare d'Austerlitz") == 0) {
+            printf("    OK: apostrophe préservée\n");
+            tests_ok++;
+        } else {
+            printf("    ERREUR: apostrophe mal gérée (nom='%s')\n", nom);
+        }
+    } else {
+        printf("    ERREUR: échec lecture champ avec apostrophe\n");
+    }
+
+    // Test 1.7: Champ avec parenthèses (cas réel de Paris)
+    printf("  Test 1.7: Champ avec parenthèses\n");
+    tests_total++;
+    char ligne7[] = "Saint-Paul (Le Marais);2.361;48.855";
+    csv_init_lecteur(&lecteur, ligne7, ';');
+
+    if (csv_champ_suivant(&lecteur)) {
+        char *nom = csv_lire_texte(&lecteur);
+        if (strcmp(nom, "Saint-Paul (Le Marais)") == 0) {
+            printf("    OK: parenthèses préservées\n");
+            tests_ok++;
+        } else {
+            printf("    ERREUR: parenthèses mal gérées (nom='%s')\n", nom);
+        }
+    } else {
+        printf("    ERREUR: échec lecture champ avec parenthèses\n");
+    }
 
     printf("  Bilan: %d/%d tests réussis\n\n", tests_ok, tests_total);
 }
@@ -539,10 +706,10 @@ void test_connexions(Une_config *config) {
     int tests_total = 0;
     int tests_ok = 0;
 
-    printf("\033[1;34m12. Tests de lecture et affichage des connexions\033[0m\n");
+    printf("\033[1;34m13. Tests de lecture et affichage des connexions\033[0m\n");
 
-    // Test 12.1: Lecture du fichier connexions.csv
-    printf("  Test 12.1: Lecture du fichier connexions.csv\n");
+    // Test 13.1: Lecture du fichier connexions.csv
+    printf("  Test 13.1: Lecture du fichier connexions.csv\n");
     tests_total++;
 
     // On doit d'abord charger les lignes et les stations
@@ -578,8 +745,8 @@ void test_connexions(Une_config *config) {
         tests_ok++;
     }
 
-    // Test 12.2: Vérification du contenu des connexions
-    printf("  Test 12.2: Vérification que les connexions contiennent des données\n");
+    // Test 13.2: Vérification du contenu des connexions
+    printf("  Test 13.2: Vérification que les connexions contiennent des données\n");
     tests_total++;
     if (connexions != NULL && connexions->truc != NULL && connexions->truc->type == CON) {
         printf("    OK: les connexions contiennent des données valides\n");
@@ -588,8 +755,8 @@ void test_connexions(Une_config *config) {
         printf("    ÉCHEC: les connexions sont invalides\n");
     }
 
-    // Test 12.3: Affichage des connexions
-    printf("  Test 12.3: Affichage des connexions\n");
+    // Test 13.3: Affichage des connexions
+    printf("  Test 13.3: Affichage des connexions\n");
     tests_total++;
     if (connexions != NULL) {
         printf("    Connexions chargées:\n");
@@ -600,8 +767,8 @@ void test_connexions(Une_config *config) {
         printf("    ÉCHEC: aucune connexion à afficher\n");
     }
 
-    // Test 12.4: Vérification du calcul automatique des temps
-    printf("  Test 12.4: Vérification que les temps sont calculés (>0)\n");
+    // Test 13.4: Vérification du calcul automatique des temps
+    printf("  Test 13.4: Vérification que les temps sont calculés (>0)\n");
     tests_total++;
     if (connexions != NULL && connexions->truc != NULL && connexions->truc->user_val > 0.0) {
         printf("    OK: temps de parcours calculé = %.1f minutes\n", connexions->truc->user_val);
@@ -650,9 +817,12 @@ int main(const int argc, char *argv[]) {
     // On affiche ce que l'on a lu dans le fichier.
     afficher_config(config);
 
-    // Test 1 : Lecture des stations.
+    // Test 1 : Tests du lecteur CSV générique
+    test_csv_utils();
+
+    // Test 2 : Lecture des stations.
     //- Bleu gras (\033[1;34m) pour tous les titres de sections :
-    printf("\033[1;34m1. Lecture des stations depuis %s...\033[0m\n", config->fichier_stations);
+    printf("\033[1;34m2. Lecture des stations depuis %s...\033[0m\n", config->fichier_stations);
     Un_elem *liste_stations = lire_stations(config->fichier_stations);
     if (liste_stations == NULL) {
         fprintf(stderr, "Erreur lors de la lecture des stations\n");
@@ -669,20 +839,20 @@ int main(const int argc, char *argv[]) {
     }
     printf("Stations chargées avec succès! (%d stations)\n\n", nb_stations);
 
-    // Test 2 : Affichage des stations.
-    printf("\033[1;34m2. Affichage des stations (triées par latitude):\033[0m\n");
+    // Test 3 : Affichage des stations.
+    printf("\033[1;34m3. Affichage des stations (triées par latitude):\033[0m\n");
     ecrire_liste(stdout, liste_stations);
     printf("\n");
 
-    // Test 3 : calcul des zones
-    printf("\033[1;34m3. Calcul des limites de la zone:\033[0m\n");
+    // Test 4 : calcul des zones
+    printf("\033[1;34m4. Calcul des limites de la zone:\033[0m\n");
     Une_coord limite_no, limite_se;
     limites_zone(liste_stations, &limite_no, &limite_se);
     printf("Limite Nord-Ouest: lon=%.6f, lat=%.6f\n", limite_no.lon, limite_no.lat);
     printf("Limite Sud-Est: lon=%.6f, lat=%.6f\n\n", limite_se.lon, limite_se.lat);
 
-    // Test 4 : Création de l'ABR.
-    printf("\033[1;34m4. Création de l'ABR des stations\033[0m\n");
+    // Test 5 : Création de l'ABR.
+    printf("\033[1;34m5. Création de l'ABR des stations\033[0m\n");
     Un_nabr *abr = construire_abr(liste_stations);
     if (abr == NULL) {
         fprintf(stderr, "Erreur lors de la construction de l'ABR.\n");
@@ -692,31 +862,31 @@ int main(const int argc, char *argv[]) {
     }
     printf("ABR construit avec succès!\n\n");
 
-    printf("4.1. Recherche de stations dans l'ABR (case-insensitive)\n");
+    printf("5.1. Recherche de stations dans l'ABR (case-insensitive)\n");
     test_recherche_abr(abr);
 
-    // Test 5 : Test des fonctions d'extraction
+    // Test 6 : Test des fonctions d'extraction
     test_extraction_liste();
 
-    // Test 6 : Tests des cas limites pour les listes
+    // Test 7 : Tests des cas limites pour les listes
     test_cas_limites_liste();
 
-    // Test 7 : Tests de robustesse pour l'ABR
+    // Test 8 : Tests de robustesse pour l'ABR
     test_robustesse_abr();
 
-    // Test 8 : Tests de configuration invalide
+    // Test 9 : Tests de configuration invalide
     test_config_invalide();
 
-    // Test 9 : Tests de fichiers CSV malformés
+    // Test 10 : Tests de fichiers CSV malformés
     test_csv_malformes();
 
-    // Test 10 : Tests de lecture et affichage des lignes
+    // Test 11 : Tests de lecture et affichage des lignes
     test_lignes(config);
 
-    // Test 11 : Tests de gestion mémoire
+    // Test 12 : Tests de gestion mémoire
     test_gestion_memoire();
 
-    // Test 12 : Tests de lecture et affichage des connexions
+    // Test 13 : Tests de lecture et affichage des connexions
     test_connexions(config);
 
     // On libère toute la mémoire.
