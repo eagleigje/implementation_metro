@@ -1,8 +1,11 @@
 var searchData=
 [
-  ['tab_5fcon_0',['tab_con',['../struct__une__station.html#aef06ec611a05f806ed0a4a0bdb10058f',1,'_une_station']]],
-  ['temps_5farret_1',['temps_arret',['../struct__une__config.html#a825df5ba379e7ca99bc29926e57cb4e9',1,'_une_config']]],
-  ['temps_5fcorrespondance_2',['temps_correspondance',['../struct__une__config.html#aa8bd62b10bdfb9d216ff654bfd125e88',1,'_une_config']]],
-  ['truc_3',['truc',['../struct__un__nabr.html#a2eda9970d52c5600d7680813d4fba9e1',1,'_un_nabr::truc'],['../struct__un__noeud.html#ae0ebf5bacf6c2455cda5082ae9b397cd',1,'_un_noeud::truc'],['../struct__un__elem.html#a56c9b0eb5772289fdbc69a9a641031cf',1,'_un_elem::truc']]],
-  ['type_4',['type',['../struct__un__truc.html#a9b70dad0f8ebea8d7ab1bd7582dc1812',1,'_un_truc']]]
+  ['se_0',['se',['../struct__un__noeud.html#a5a439a039a28a9f935202f90531cf51c',1,'_un_noeud']]],
+  ['separateur_1',['separateur',['../struct__un__lecteur__csv.html#af9fff99839bdeb842fcca633b517dc0b',1,'_un_lecteur_csv']]],
+  ['seuil_5fdistance_5faqr_2',['seuil_distance_aqr',['../struct__une__config.html#ab4941752f865ba4449185234ead9c5ed',1,'_une_config']]],
+  ['so_3',['so',['../struct__un__noeud.html#a8879ed9444c199fa60b8c499cae7ce77',1,'_un_noeud']]],
+  ['sta_4',['sta',['../union__data.html#afe40e52201896187c022071902406d41',1,'_data']]],
+  ['sta_5farr_5',['sta_arr',['../struct__une__connexion.html#a2d580ce6a0599cfdaab244e4965a3f11',1,'_une_connexion']]],
+  ['sta_5fdep_6',['sta_dep',['../struct__une__connexion.html#ac5a9ab387e5c1f7a584965500d69afaf',1,'_une_connexion']]],
+  ['suiv_7',['suiv',['../struct__une__ligne.html#aa1cedb34c4c9c3a440c485f268cd78fc',1,'_une_ligne::suiv'],['../struct__un__elem.html#abbe21a3db010eb5884b57c95dda4a688',1,'_un_elem::suiv']]]
 ];

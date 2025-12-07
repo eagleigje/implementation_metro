@@ -5,5 +5,7 @@ var searchData=
   ['connexion_2ec_2',['connexion.c',['../connexion_8c.html',1,'']]],
   ['connexion_2eh_3',['connexion.h',['../connexion_8h.html',1,'']]],
   ['constants_2eh_4',['constants.h',['../constants_8h.html',1,'']]],
-  ['coord_2eh_5',['coord.h',['../coord_8h.html',1,'']]]
+  ['coord_2eh_5',['coord.h',['../coord_8h.html',1,'']]],
+  ['csv_5futils_2ec_6',['csv_utils.c',['../csv__utils_8c.html',1,'']]],
+  ['csv_5futils_2eh_7',['csv_utils.h',['../csv__utils_8h.html',1,'']]]
 ];

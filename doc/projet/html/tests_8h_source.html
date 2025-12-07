@@ -100,39 +100,23 @@ $(function(){initNavTree('tests_8h_source.html','',''); });
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#define TESTS_H</span></div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &quot;<a class="code" href="config_8h.html">config.h</a>&quot;</span></div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &quot;<a class="code" href="liste_8h.html">liste.h</a>&quot;</span></div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &quot;<a class="code" href="abr_8h.html">abr.h</a>&quot;</span></div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment">// Prototypes des fonctions de test</span></div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment">// Tests existants (Exercices 1-2)</span></div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="keywordtype">void</span> <a class="code hl_function" href="tests_8h.html#a890f076216bfc18e67702f758145853a">test_recherche_abr</a>(<a class="code hl_typedef" href="abr__type_8h.html#aa17d62fbbfd01281360dfabf4a12d807">Un_nabr</a> *abr_stations);</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="keywordtype">void</span> <a class="code hl_function" href="tests_8h.html#a3db93c4430bcc3841139a4db15827105">test_extraction_liste</a>();</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment">// Inclure tous les modules de tests</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &quot;<a class="code" href="test__csv__utils_8h.html">tests_projet/test_csv_utils.h</a>&quot;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;<a class="code" href="test__exercice1_8h.html">tests_projet/test_exercice1.h</a>&quot;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &quot;<a class="code" href="test__exercice2_8h.html">tests_projet/test_exercice2.h</a>&quot;</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &quot;<a class="code" href="test__exercice3_8h.html">tests_projet/test_exercice3.h</a>&quot;</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#include &quot;<a class="code" href="test__exercice4_8h.html">tests_projet/test_exercice4.h</a>&quot;</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#include &quot;<a class="code" href="test__autres_8h.html">tests_projet/test_autres.h</a>&quot;</span></div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment">// Tests de cas limites et robustesse</span></div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="keywordtype">void</span> <a class="code hl_function" href="tests_8h.html#a03b586f5e7ebb91cb9296a71089f34f4">test_cas_limites_liste</a>();      <span class="comment">// Tests des cas limites pour les listes</span></div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="keywordtype">void</span> <a class="code hl_function" href="tests_8h.html#ad0a4227c2b2f39cccc8a73ccce3179db">test_robustesse_abr</a>();          <span class="comment">// Tests de robustesse pour l&#39;ABR</span></div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="keywordtype">void</span> <a class="code hl_function" href="tests_8h.html#a0232bb1b71e75e09db36beb054b6b6d1">test_config_invalide</a>();         <span class="comment">// Tests de configuration invalide</span></div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="keywordtype">void</span> <a class="code hl_function" href="tests_8h.html#a3412e3050a34bd74b82c173f9fedbfd4">test_csv_malformes</a>();           <span class="comment">// Tests de fichiers CSV malformés</span></div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="keywordtype">void</span> <a class="code hl_function" href="tests_8h.html#a8fe0c223c464607173b25ae82f17120b">test_lignes</a>(<a class="code hl_typedef" href="config_8h.html#aeb977a4814f42974043a21308f3401fd">Une_config</a> *config); <span class="comment">// Tests de lecture et affichage des lignes</span></div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="keywordtype">void</span> <a class="code hl_function" href="tests_8h.html#a6e7ca79d49edb402cccd0ff923504f07">test_gestion_memoire</a>();         <span class="comment">// Tests de gestion mémoire</span></div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="keywordtype">void</span> <a class="code hl_function" href="tests_8h.html#ac71388bfc29f46f73acc0e7df6553e8d">test_connexions</a>(<a class="code hl_typedef" href="config_8h.html#aeb977a4814f42974043a21308f3401fd">Une_config</a> *config); <span class="comment">// Tests de lecture et affichage des connexions</span></div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="preprocessor">#endif</span></div>
-<div class="ttc" id="aabr_8h_html"><div class="ttname"><a href="abr_8h.html">abr.h</a></div></div>
-<div class="ttc" id="aabr__type_8h_html_aa17d62fbbfd01281360dfabf4a12d807"><div class="ttname"><a href="abr__type_8h.html#aa17d62fbbfd01281360dfabf4a12d807">Un_nabr</a></div><div class="ttdeci">struct _un_nabr Un_nabr</div></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="preprocessor">#endif</span></div>
 <div class="ttc" id="aconfig_8h_html"><div class="ttname"><a href="config_8h.html">config.h</a></div></div>
-<div class="ttc" id="aconfig_8h_html_aeb977a4814f42974043a21308f3401fd"><div class="ttname"><a href="config_8h.html#aeb977a4814f42974043a21308f3401fd">Une_config</a></div><div class="ttdeci">struct _une_config Une_config</div></div>
-<div class="ttc" id="aliste_8h_html"><div class="ttname"><a href="liste_8h.html">liste.h</a></div></div>
-<div class="ttc" id="atests_8h_html_a0232bb1b71e75e09db36beb054b6b6d1"><div class="ttname"><a href="tests_8h.html#a0232bb1b71e75e09db36beb054b6b6d1">test_config_invalide</a></div><div class="ttdeci">void test_config_invalide()</div><div class="ttdef"><b>Definition</b> tests.c:309</div></div>
-<div class="ttc" id="atests_8h_html_a03b586f5e7ebb91cb9296a71089f34f4"><div class="ttname"><a href="tests_8h.html#a03b586f5e7ebb91cb9296a71089f34f4">test_cas_limites_liste</a></div><div class="ttdeci">void test_cas_limites_liste()</div><div class="ttdef"><b>Definition</b> tests.c:159</div></div>
-<div class="ttc" id="atests_8h_html_a3412e3050a34bd74b82c173f9fedbfd4"><div class="ttname"><a href="tests_8h.html#a3412e3050a34bd74b82c173f9fedbfd4">test_csv_malformes</a></div><div class="ttdeci">void test_csv_malformes()</div><div class="ttdef"><b>Definition</b> tests.c:339</div></div>
-<div class="ttc" id="atests_8h_html_a3db93c4430bcc3841139a4db15827105"><div class="ttname"><a href="tests_8h.html#a3db93c4430bcc3841139a4db15827105">test_extraction_liste</a></div><div class="ttdeci">void test_extraction_liste()</div><div class="ttdef"><b>Definition</b> tests.c:54</div></div>
-<div class="ttc" id="atests_8h_html_a6e7ca79d49edb402cccd0ff923504f07"><div class="ttname"><a href="tests_8h.html#a6e7ca79d49edb402cccd0ff923504f07">test_gestion_memoire</a></div><div class="ttdeci">void test_gestion_memoire()</div><div class="ttdef"><b>Definition</b> tests.c:498</div></div>
-<div class="ttc" id="atests_8h_html_a890f076216bfc18e67702f758145853a"><div class="ttname"><a href="tests_8h.html#a890f076216bfc18e67702f758145853a">test_recherche_abr</a></div><div class="ttdeci">void test_recherche_abr(Un_nabr *abr_stations)</div><div class="ttdef"><b>Definition</b> tests.c:21</div></div>
-<div class="ttc" id="atests_8h_html_a8fe0c223c464607173b25ae82f17120b"><div class="ttname"><a href="tests_8h.html#a8fe0c223c464607173b25ae82f17120b">test_lignes</a></div><div class="ttdeci">void test_lignes(Une_config *config)</div><div class="ttdef"><b>Definition</b> tests.c:403</div></div>
-<div class="ttc" id="atests_8h_html_ac71388bfc29f46f73acc0e7df6553e8d"><div class="ttname"><a href="tests_8h.html#ac71388bfc29f46f73acc0e7df6553e8d">test_connexions</a></div><div class="ttdeci">void test_connexions(Une_config *config)</div><div class="ttdef"><b>Definition</b> tests.c:538</div></div>
-<div class="ttc" id="atests_8h_html_ad0a4227c2b2f39cccc8a73ccce3179db"><div class="ttname"><a href="tests_8h.html#ad0a4227c2b2f39cccc8a73ccce3179db">test_robustesse_abr</a></div><div class="ttdeci">void test_robustesse_abr()</div><div class="ttdef"><b>Definition</b> tests.c:232</div></div>
+<div class="ttc" id="atest__autres_8h_html"><div class="ttname"><a href="test__autres_8h.html">test_autres.h</a></div></div>
+<div class="ttc" id="atest__csv__utils_8h_html"><div class="ttname"><a href="test__csv__utils_8h.html">test_csv_utils.h</a></div></div>
+<div class="ttc" id="atest__exercice1_8h_html"><div class="ttname"><a href="test__exercice1_8h.html">test_exercice1.h</a></div></div>
+<div class="ttc" id="atest__exercice2_8h_html"><div class="ttname"><a href="test__exercice2_8h.html">test_exercice2.h</a></div></div>
+<div class="ttc" id="atest__exercice3_8h_html"><div class="ttname"><a href="test__exercice3_8h.html">test_exercice3.h</a></div></div>
+<div class="ttc" id="atest__exercice4_8h_html"><div class="ttname"><a href="test__exercice4_8h.html">test_exercice4.h</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->
