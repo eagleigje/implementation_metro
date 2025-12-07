@@ -5,6 +5,7 @@
 
 #include "ligne.h"
 #include "constants.h"
+#include "csv_utils.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -15,60 +16,33 @@
  * @return : Pointeur vers la nouvelle ligne ou NULL en cas d'erreur.
  */
 Une_ligne *creer_ligne(char ligne_str[CSV_MAX_LINE_LENGTH]) {
-    char code[CODE_SIZE], color[COLOR_SIZE];
-    float vitesse, intervalle;
+    Un_lecteur_csv lecteur;
 
-    // On pointe en début de la ligne récupérée.
-    char *ptr = ligne_str;
+    // On initialise le lecteur CSV
+    csv_init_lecteur(&lecteur, ligne_str, CSV_SEPARATOR);
 
-    // On saute les espaces éventuels.
-    while (*ptr == ' ') ptr++;
-    int i = 0;
-    // On parcourt la ligne jusqu'à tomber sur le séparateur, être en fin de ligne ou dépasser la taille max du champ.
-    while (*ptr != CSV_SEPARATOR && *ptr != '\0' && i < CODE_SIZE - 1) {
-        code[i++] = *ptr++;
-    }
-    code[i] = '\0';
-    // Enlever les espaces de fin
-    while (i > 0 && code[i-1] == ' ') code[--i] = '\0';
+    // On lit les champs un à un.
+    // Lecture du code de la ligne
+    if (!csv_champ_suivant(&lecteur)) return NULL;
+    char code[LINE_MAX_CODE_SIZE];
+    strcpy(code, csv_lire_texte(&lecteur));  // On doit copier les champs textes, sinon ils sont écrasés par les suivants.
 
-    // Si nous ne sommes pas sur un séparateur, la ligne dans le fichier est incorrecte.
-    if (*ptr != CSV_SEPARATOR) return NULL;
-    // Sinon, on passe le séparateur.
-    ptr++;
+    // La vitesse de la ligne
+    if (!csv_champ_suivant(&lecteur)) return NULL;
+    float vitesse = csv_lire_flottant(&lecteur);
 
-    // Lire la vitesse
-    // On saute les espaces en début de chaîne.
-    while (*ptr == ' ') ptr++;
-    // On récupère le champ
-    if (sscanf(ptr, "%f", &vitesse) != 1) return NULL;
-    // et on continue jusqu'au prochain séparateur ou la fin de ligne.
-    while (*ptr != CSV_SEPARATOR && *ptr != '\0') ptr++;
+    // L'intervalle entre deux rames sur la ligne.
+    if (!csv_champ_suivant(&lecteur)) return NULL;
+    float intervalle = csv_lire_flottant(&lecteur);
 
-    // Si nous ne sommes pas sur un séparateur, la ligne dans le fichier est incorrecte.
-    if (*ptr != CSV_SEPARATOR) return NULL;
-    // Sinon, on passe le séparateur.
-    ptr++;
+    // La couleur de ligne.
+    if (!csv_champ_suivant(&lecteur)) return NULL;
+    char color[LINE_COLOR_SIZE];
+    strcpy(color, csv_lire_texte(&lecteur));
 
-    // On cherche à lire l'intervalle avec la méthode que précédemment.
-    while (*ptr == ' ') ptr++;
-    if (sscanf(ptr, "%f", &intervalle) != 1) return NULL;
-    while (*ptr != CSV_SEPARATOR && *ptr != '\0') ptr++;
-    if (*ptr != CSV_SEPARATOR) return NULL;
-    ptr++;
-
-    // On cherche maintenant à lire la couleur qui doit être en fin de ligne
-    while (*ptr == ' ') ptr++;
-    i = 0;
-    while (*ptr != '\0' && *ptr != '\n' && i < COLOR_SIZE - 1) {
-        color[i++] = *ptr++;
-    }
-    color[i] = '\0';
-    // Enlever les espaces de fin
-    while (i > 0 && color[i-1] == ' ') color[--i] = '\0';
-
-    // On crée maintenant la ligne pour l'ajouter à la liste chaînée.
+    // On peut créer la nouvelle ligne
     Une_ligne *nouvelle = (Une_ligne *)malloc(sizeof(Une_ligne));
+    if (nouvelle == NULL) return NULL;
     nouvelle->code = (char *)malloc(strlen(code) + 1);
     strcpy(nouvelle->code, code);
     nouvelle->color = (char *)malloc(strlen(color) + 1);
