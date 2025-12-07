@@ -45,7 +45,9 @@ Le projet est organisé en plusieurs modules :
    - stations.csv : Fichier contenant les stations (longitude;latitude;nom), allégé pour les tests.
    - stations_paris.csv : Fichier contenant toutes les stations parisiennes (cf. LOCALISATION DES DONNEES).
    - lignes.csv : Fichier contenant les lignes (code;vitesse;intervalle;couleur).
-   - connexions.csv : Fichier contenant les connexions (à créer).
+   - lignes_paris.csv : Fichier contenant toutes les lignes parisiennes.
+   - connexions.csv : Fichier contenant les connexions (test).
+   - connexions_paris.csv : Fichier contenant toutes les connexions parisiennes (généré automatiquement).
 
 6. Programmes optionnels à installer :
     - doxygen : Afin de générer la documentation technique du projet.
@@ -53,8 +55,12 @@ Le projet est organisé en plusieurs modules :
     - glibc-debug : Pour valgrind.
 
 7. Documentation :
-    - doc/projet-metro2025.pdf      : Le PDF du projet
-    - doc/projet/html/index.html    : La documentation Doxygen du projet.
+    - doc/projet-metro2025.pdf         : Le PDF du projet
+    - doc/projet/html/index.html       : La documentation Doxygen du projet
+    - README_GENERER_CONNEXIONS.txt    : Guide d'utilisation du script de génération des connexions
+
+8. Scripts utilitaires :
+    - generer_connexions_paris.py      : Script Python pour générer connexions_paris.csv automatiquement
 
 COMPILATION
 -----------
@@ -146,6 +152,18 @@ FICHIERS CSV
     Exemple :
         M1;35.0;3.0;#FFCD00
 
+** Connexions **
+    Format du fichier connexions.csv :
+        code_ligne;station_départ;station_arrivée;temps_parcours
+
+    Exemple :
+        M1;Châtelet;Gare de Lyon;2.2
+
+    Pour générer automatiquement le fichier connexions_paris.csv depuis les données réelles :
+        python3 generer_connexions_paris.py
+
+    Voir README_GENERER_CONNEXIONS.txt pour plus de détails sur la génération automatique.
+
 LOCALISATION DES DONNEES
 ------------------------
 ** Stations **
@@ -202,15 +220,17 @@ implémentées. Voici l'état d'avancement :
    - detruire_abr
    - chercher_station (recherche insensible à la casse)
 
-3. Exercice 3 : Listes de lignes de métro ..................................... A FAIRE
+3. Exercice 3 : Listes de lignes de métro .....................................  FAIT
    - lire_lignes
    - afficher_lignes
    - detruire_lignes
    - chercher_ligne
 
-4. Exercice 4 : Gestion des connexions ........................................ A FAIRE
+4. Exercice 4 : Gestion des connexions ........................................  FAIT
    - inserer_deb_liste (implémentée dans liste.c)
-   - lire_connexions
+   - lire_connexions (calcul automatique des temps via formule de Haversine)
+   - ecrire_connexions
+   - Script Python pour générer connexions_paris.csv (voir README_GENERER_CONNEXIONS.txt)
 
 5. Exercice 5 : Arbres quaternaires pour la topologie ......................... A FAIRE
    - inserer_aqr

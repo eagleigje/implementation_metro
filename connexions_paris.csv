@@ -1,0 +1,669 @@
+# Fichier de connexions du métro parisien
+# Généré automatiquement depuis data/metro-paris.csv
+# Format : Code_Ligne ; Station_Départ ; Station_Arrivée ; Temps_Parcours
+# Si Temps_Parcours = 0.0, il sera calculé automatiquement
+
+# Ligne 1 (19 stations)
+1 ; Porte Maillot ; Argentine ; 0.0
+1 ; Argentine ; Porte Maillot ; 0.0
+1 ; Argentine ; Charles de Gaulle - Etoile ; 0.0
+1 ; Charles de Gaulle - Etoile ; Argentine ; 0.0
+1 ; Charles de Gaulle - Etoile ; George V ; 0.0
+1 ; George V ; Charles de Gaulle - Etoile ; 0.0
+1 ; George V ; Franklin D. Roosevelt ; 0.0
+1 ; Franklin D. Roosevelt ; George V ; 0.0
+1 ; Franklin D. Roosevelt ; Champs-Élysées - Clemenceau ; 0.0
+1 ; Champs-Élysées - Clemenceau ; Franklin D. Roosevelt ; 0.0
+1 ; Champs-Élysées - Clemenceau ; Concorde ; 0.0
+1 ; Concorde ; Champs-Élysées - Clemenceau ; 0.0
+1 ; Concorde ; Tuileries ; 0.0
+1 ; Tuileries ; Concorde ; 0.0
+1 ; Tuileries ; Palais Royal - Musée du Louvre ; 0.0
+1 ; Palais Royal - Musée du Louvre ; Tuileries ; 0.0
+1 ; Palais Royal - Musée du Louvre ; Louvre - Rivoli ; 0.0
+1 ; Louvre - Rivoli ; Palais Royal - Musée du Louvre ; 0.0
+1 ; Louvre - Rivoli ; Châtelet ; 0.0
+1 ; Châtelet ; Louvre - Rivoli ; 0.0
+1 ; Châtelet ; Hôtel de Ville ; 0.0
+1 ; Hôtel de Ville ; Châtelet ; 0.0
+1 ; Hôtel de Ville ; Saint-Paul (Le Marais) ; 0.0
+1 ; Saint-Paul (Le Marais) ; Hôtel de Ville ; 0.0
+1 ; Saint-Paul (Le Marais) ; Bastille ; 0.0
+1 ; Bastille ; Saint-Paul (Le Marais) ; 0.0
+1 ; Bastille ; Gare de Lyon ; 0.0
+1 ; Gare de Lyon ; Bastille ; 0.0
+1 ; Gare de Lyon ; Reuilly - Diderot ; 0.0
+1 ; Reuilly - Diderot ; Gare de Lyon ; 0.0
+1 ; Reuilly - Diderot ; Nation ; 0.0
+1 ; Nation ; Reuilly - Diderot ; 0.0
+1 ; Nation ; Porte de Vincennes ; 0.0
+1 ; Porte de Vincennes ; Nation ; 0.0
+1 ; Porte de Vincennes ; Château de Vincennes ; 0.0
+1 ; Château de Vincennes ; Porte de Vincennes ; 0.0
+
+# Ligne 2 (25 stations)
+2 ; Porte Dauphine ; Victor Hugo ; 0.0
+2 ; Victor Hugo ; Porte Dauphine ; 0.0
+2 ; Victor Hugo ; Charles de Gaulle - Etoile ; 0.0
+2 ; Charles de Gaulle - Etoile ; Victor Hugo ; 0.0
+2 ; Charles de Gaulle - Etoile ; Ternes ; 0.0
+2 ; Ternes ; Charles de Gaulle - Etoile ; 0.0
+2 ; Ternes ; Courcelles ; 0.0
+2 ; Courcelles ; Ternes ; 0.0
+2 ; Courcelles ; Monceau ; 0.0
+2 ; Monceau ; Courcelles ; 0.0
+2 ; Monceau ; Villiers ; 0.0
+2 ; Villiers ; Monceau ; 0.0
+2 ; Villiers ; Rome ; 0.0
+2 ; Rome ; Villiers ; 0.0
+2 ; Rome ; Place de Clichy ; 0.0
+2 ; Place de Clichy ; Rome ; 0.0
+2 ; Place de Clichy ; Blanche ; 0.0
+2 ; Blanche ; Place de Clichy ; 0.0
+2 ; Blanche ; Pigalle ; 0.0
+2 ; Pigalle ; Blanche ; 0.0
+2 ; Pigalle ; Anvers ; 0.0
+2 ; Anvers ; Pigalle ; 0.0
+2 ; Anvers ; Barbès - Rochechouart ; 0.0
+2 ; Barbès - Rochechouart ; Anvers ; 0.0
+2 ; Barbès - Rochechouart ; La Chapelle ; 0.0
+2 ; La Chapelle ; Barbès - Rochechouart ; 0.0
+2 ; La Chapelle ; Stalingrad ; 0.0
+2 ; Stalingrad ; La Chapelle ; 0.0
+2 ; Stalingrad ; Jaurès ; 0.0
+2 ; Jaurès ; Stalingrad ; 0.0
+2 ; Jaurès ; Colonel Fabien ; 0.0
+2 ; Colonel Fabien ; Jaurès ; 0.0
+2 ; Colonel Fabien ; Belleville ; 0.0
+2 ; Belleville ; Colonel Fabien ; 0.0
+2 ; Belleville ; Couronnes ; 0.0
+2 ; Couronnes ; Belleville ; 0.0
+2 ; Couronnes ; Ménilmontant ; 0.0
+2 ; Ménilmontant ; Couronnes ; 0.0
+2 ; Ménilmontant ; Père Lachaise ; 0.0
+2 ; Père Lachaise ; Ménilmontant ; 0.0
+2 ; Père Lachaise ; Philippe Auguste ; 0.0
+2 ; Philippe Auguste ; Père Lachaise ; 0.0
+2 ; Philippe Auguste ; Alexandre Dumas ; 0.0
+2 ; Alexandre Dumas ; Philippe Auguste ; 0.0
+2 ; Alexandre Dumas ; Avron ; 0.0
+2 ; Avron ; Alexandre Dumas ; 0.0
+2 ; Avron ; Nation ; 0.0
+2 ; Nation ; Avron ; 0.0
+
+# Ligne 3 (21 stations)
+3 ; Porte de Champerret ; Pereire ; 0.0
+3 ; Pereire ; Porte de Champerret ; 0.0
+3 ; Pereire ; Wagram ; 0.0
+3 ; Wagram ; Pereire ; 0.0
+3 ; Wagram ; Malesherbes ; 0.0
+3 ; Malesherbes ; Wagram ; 0.0
+3 ; Malesherbes ; Villiers ; 0.0
+3 ; Villiers ; Malesherbes ; 0.0
+3 ; Villiers ; Europe ; 0.0
+3 ; Europe ; Villiers ; 0.0
+3 ; Europe ; Saint-Lazare ; 0.0
+3 ; Saint-Lazare ; Europe ; 0.0
+3 ; Saint-Lazare ; Havre-Caumartin ; 0.0
+3 ; Havre-Caumartin ; Saint-Lazare ; 0.0
+3 ; Havre-Caumartin ; Opéra ; 0.0
+3 ; Opéra ; Havre-Caumartin ; 0.0
+3 ; Opéra ; Quatre Septembre ; 0.0
+3 ; Quatre Septembre ; Opéra ; 0.0
+3 ; Quatre Septembre ; Bourse ; 0.0
+3 ; Bourse ; Quatre Septembre ; 0.0
+3 ; Bourse ; Sentier ; 0.0
+3 ; Sentier ; Bourse ; 0.0
+3 ; Sentier ; Réaumur - Sébastopol ; 0.0
+3 ; Réaumur - Sébastopol ; Sentier ; 0.0
+3 ; Réaumur - Sébastopol ; Arts et Métiers ; 0.0
+3 ; Arts et Métiers ; Réaumur - Sébastopol ; 0.0
+3 ; Arts et Métiers ; Temple ; 0.0
+3 ; Temple ; Arts et Métiers ; 0.0
+3 ; Temple ; République ; 0.0
+3 ; République ; Temple ; 0.0
+3 ; République ; Parmentier ; 0.0
+3 ; Parmentier ; République ; 0.0
+3 ; Parmentier ; Rue Saint-Maur ; 0.0
+3 ; Rue Saint-Maur ; Parmentier ; 0.0
+3 ; Rue Saint-Maur ; Père Lachaise ; 0.0
+3 ; Père Lachaise ; Rue Saint-Maur ; 0.0
+3 ; Père Lachaise ; Gambetta ; 0.0
+3 ; Gambetta ; Père Lachaise ; 0.0
+3 ; Gambetta ; Porte de Bagnolet ; 0.0
+3 ; Porte de Bagnolet ; Gambetta ; 0.0
+
+# Ligne 3B (4 stations)
+3B ; Porte des Lilas ; Saint-Fargeau ; 0.0
+3B ; Saint-Fargeau ; Porte des Lilas ; 0.0
+3B ; Saint-Fargeau ; Pelleport ; 0.0
+3B ; Pelleport ; Saint-Fargeau ; 0.0
+3B ; Pelleport ; Gambetta ; 0.0
+3B ; Gambetta ; Pelleport ; 0.0
+
+# Ligne 4 (26 stations)
+4 ; Porte de Clignancourt ; Simplon ; 0.0
+4 ; Simplon ; Porte de Clignancourt ; 0.0
+4 ; Simplon ; Marcadet - Poissonniers ; 0.0
+4 ; Marcadet - Poissonniers ; Simplon ; 0.0
+4 ; Marcadet - Poissonniers ; Château Rouge ; 0.0
+4 ; Château Rouge ; Marcadet - Poissonniers ; 0.0
+4 ; Château Rouge ; Barbès - Rochechouart ; 0.0
+4 ; Barbès - Rochechouart ; Château Rouge ; 0.0
+4 ; Barbès - Rochechouart ; Gare du Nord ; 0.0
+4 ; Gare du Nord ; Barbès - Rochechouart ; 0.0
+4 ; Gare du Nord ; Gare de l'Est ; 0.0
+4 ; Gare de l'Est ; Gare du Nord ; 0.0
+4 ; Gare de l'Est ; Château d'Eau ; 0.0
+4 ; Château d'Eau ; Gare de l'Est ; 0.0
+4 ; Château d'Eau ; Strasbourg - Saint-Denis ; 0.0
+4 ; Strasbourg - Saint-Denis ; Château d'Eau ; 0.0
+4 ; Strasbourg - Saint-Denis ; Réaumur - Sébastopol ; 0.0
+4 ; Réaumur - Sébastopol ; Strasbourg - Saint-Denis ; 0.0
+4 ; Réaumur - Sébastopol ; Etienne Marcel ; 0.0
+4 ; Etienne Marcel ; Réaumur - Sébastopol ; 0.0
+4 ; Etienne Marcel ; Les Halles ; 0.0
+4 ; Les Halles ; Etienne Marcel ; 0.0
+4 ; Les Halles ; Châtelet ; 0.0
+4 ; Châtelet ; Les Halles ; 0.0
+4 ; Châtelet ; Cité ; 0.0
+4 ; Cité ; Châtelet ; 0.0
+4 ; Cité ; Saint-Michel ; 0.0
+4 ; Saint-Michel ; Cité ; 0.0
+4 ; Saint-Michel ; Odéon ; 0.0
+4 ; Odéon ; Saint-Michel ; 0.0
+4 ; Odéon ; Saint-Germain-des-Prés ; 0.0
+4 ; Saint-Germain-des-Prés ; Odéon ; 0.0
+4 ; Saint-Germain-des-Prés ; Saint-Sulpice ; 0.0
+4 ; Saint-Sulpice ; Saint-Germain-des-Prés ; 0.0
+4 ; Saint-Sulpice ; Saint-Placide ; 0.0
+4 ; Saint-Placide ; Saint-Sulpice ; 0.0
+4 ; Saint-Placide ; Montparnasse Bienvenue ; 0.0
+4 ; Montparnasse Bienvenue ; Saint-Placide ; 0.0
+4 ; Montparnasse Bienvenue ; Vavin ; 0.0
+4 ; Vavin ; Montparnasse Bienvenue ; 0.0
+4 ; Vavin ; Raspail ; 0.0
+4 ; Raspail ; Vavin ; 0.0
+4 ; Raspail ; Denfert-Rochereau ; 0.0
+4 ; Denfert-Rochereau ; Raspail ; 0.0
+4 ; Denfert-Rochereau ; Mouton-Duvernet ; 0.0
+4 ; Mouton-Duvernet ; Denfert-Rochereau ; 0.0
+4 ; Mouton-Duvernet ; Alésia ; 0.0
+4 ; Alésia ; Mouton-Duvernet ; 0.0
+4 ; Alésia ; Porte d'Orléans ; 0.0
+4 ; Porte d'Orléans ; Alésia ; 0.0
+
+# Ligne 5 (18 stations)
+5 ; Porte de Pantin ; Ourcq ; 0.0
+5 ; Ourcq ; Porte de Pantin ; 0.0
+5 ; Ourcq ; Laumière ; 0.0
+5 ; Laumière ; Ourcq ; 0.0
+5 ; Laumière ; Jaurès ; 0.0
+5 ; Jaurès ; Laumière ; 0.0
+5 ; Jaurès ; Stalingrad ; 0.0
+5 ; Stalingrad ; Jaurès ; 0.0
+5 ; Stalingrad ; Gare du Nord ; 0.0
+5 ; Gare du Nord ; Stalingrad ; 0.0
+5 ; Gare du Nord ; Gare de l'Est ; 0.0
+5 ; Gare de l'Est ; Gare du Nord ; 0.0
+5 ; Gare de l'Est ; Jacques Bonsergent ; 0.0
+5 ; Jacques Bonsergent ; Gare de l'Est ; 0.0
+5 ; Jacques Bonsergent ; République ; 0.0
+5 ; République ; Jacques Bonsergent ; 0.0
+5 ; République ; Oberkampf ; 0.0
+5 ; Oberkampf ; République ; 0.0
+5 ; Oberkampf ; Richard-Lenoir ; 0.0
+5 ; Richard-Lenoir ; Oberkampf ; 0.0
+5 ; Richard-Lenoir ; Bréguet-Sabin ; 0.0
+5 ; Bréguet-Sabin ; Richard-Lenoir ; 0.0
+5 ; Bréguet-Sabin ; Bastille ; 0.0
+5 ; Bastille ; Bréguet-Sabin ; 0.0
+5 ; Bastille ; Quai de la Rapée ; 0.0
+5 ; Quai de la Rapée ; Bastille ; 0.0
+5 ; Quai de la Rapée ; Gare d'Austerlitz ; 0.0
+5 ; Gare d'Austerlitz ; Quai de la Rapée ; 0.0
+5 ; Gare d'Austerlitz ; Saint-Marcel ; 0.0
+5 ; Saint-Marcel ; Gare d'Austerlitz ; 0.0
+5 ; Saint-Marcel ; Campo-Formio ; 0.0
+5 ; Campo-Formio ; Saint-Marcel ; 0.0
+5 ; Campo-Formio ; Place d'Italie ; 0.0
+5 ; Place d'Italie ; Campo-Formio ; 0.0
+
+# Ligne 6 (28 stations)
+6 ; Charles de Gaulle - Etoile ; Kléber ; 0.0
+6 ; Kléber ; Charles de Gaulle - Etoile ; 0.0
+6 ; Kléber ; Boissière ; 0.0
+6 ; Boissière ; Kléber ; 0.0
+6 ; Boissière ; Trocadéro ; 0.0
+6 ; Trocadéro ; Boissière ; 0.0
+6 ; Trocadéro ; Passy ; 0.0
+6 ; Passy ; Trocadéro ; 0.0
+6 ; Passy ; Bir-Hakeim ; 0.0
+6 ; Bir-Hakeim ; Passy ; 0.0
+6 ; Bir-Hakeim ; Dupleix ; 0.0
+6 ; Dupleix ; Bir-Hakeim ; 0.0
+6 ; Dupleix ; La Motte-Picquet - Grenelle ; 0.0
+6 ; La Motte-Picquet - Grenelle ; Dupleix ; 0.0
+6 ; La Motte-Picquet - Grenelle ; Cambronne ; 0.0
+6 ; Cambronne ; La Motte-Picquet - Grenelle ; 0.0
+6 ; Cambronne ; Sèvres-Lecourbe ; 0.0
+6 ; Sèvres-Lecourbe ; Cambronne ; 0.0
+6 ; Sèvres-Lecourbe ; Pasteur ; 0.0
+6 ; Pasteur ; Sèvres-Lecourbe ; 0.0
+6 ; Pasteur ; Montparnasse Bienvenue ; 0.0
+6 ; Montparnasse Bienvenue ; Pasteur ; 0.0
+6 ; Montparnasse Bienvenue ; Edgar Quinet ; 0.0
+6 ; Edgar Quinet ; Montparnasse Bienvenue ; 0.0
+6 ; Edgar Quinet ; Raspail ; 0.0
+6 ; Raspail ; Edgar Quinet ; 0.0
+6 ; Raspail ; Denfert-Rochereau ; 0.0
+6 ; Denfert-Rochereau ; Raspail ; 0.0
+6 ; Denfert-Rochereau ; Saint-Jacques ; 0.0
+6 ; Saint-Jacques ; Denfert-Rochereau ; 0.0
+6 ; Saint-Jacques ; Glacière ; 0.0
+6 ; Glacière ; Saint-Jacques ; 0.0
+6 ; Glacière ; Corvisart ; 0.0
+6 ; Corvisart ; Glacière ; 0.0
+6 ; Corvisart ; Place d'Italie ; 0.0
+6 ; Place d'Italie ; Corvisart ; 0.0
+6 ; Place d'Italie ; Nationale ; 0.0
+6 ; Nationale ; Place d'Italie ; 0.0
+6 ; Nationale ; Chevaleret ; 0.0
+6 ; Chevaleret ; Nationale ; 0.0
+6 ; Chevaleret ; Quai de la Gare ; 0.0
+6 ; Quai de la Gare ; Chevaleret ; 0.0
+6 ; Quai de la Gare ; Bercy ; 0.0
+6 ; Bercy ; Quai de la Gare ; 0.0
+6 ; Bercy ; Dugommier ; 0.0
+6 ; Dugommier ; Bercy ; 0.0
+6 ; Dugommier ; Daumesnil ; 0.0
+6 ; Daumesnil ; Dugommier ; 0.0
+6 ; Daumesnil ; Bel-Air ; 0.0
+6 ; Bel-Air ; Daumesnil ; 0.0
+6 ; Bel-Air ; Picpus ; 0.0
+6 ; Picpus ; Bel-Air ; 0.0
+6 ; Picpus ; Nation ; 0.0
+6 ; Nation ; Picpus ; 0.0
+
+# Ligne 7 (30 stations)
+7 ; Porte de la Villette ; Corentin Cariou ; 0.0
+7 ; Corentin Cariou ; Porte de la Villette ; 0.0
+7 ; Corentin Cariou ; Crimée ; 0.0
+7 ; Crimée ; Corentin Cariou ; 0.0
+7 ; Crimée ; Riquet ; 0.0
+7 ; Riquet ; Crimée ; 0.0
+7 ; Riquet ; Stalingrad ; 0.0
+7 ; Stalingrad ; Riquet ; 0.0
+7 ; Stalingrad ; Louis Blanc ; 0.0
+7 ; Louis Blanc ; Stalingrad ; 0.0
+7 ; Louis Blanc ; Château Landon ; 0.0
+7 ; Château Landon ; Louis Blanc ; 0.0
+7 ; Château Landon ; Gare de l'Est ; 0.0
+7 ; Gare de l'Est ; Château Landon ; 0.0
+7 ; Gare de l'Est ; Poissonnière ; 0.0
+7 ; Poissonnière ; Gare de l'Est ; 0.0
+7 ; Poissonnière ; Cadet ; 0.0
+7 ; Cadet ; Poissonnière ; 0.0
+7 ; Cadet ; Le Peletier ; 0.0
+7 ; Le Peletier ; Cadet ; 0.0
+7 ; Le Peletier ; Chaussée d'Antin - La Fayette ; 0.0
+7 ; Chaussée d'Antin - La Fayette ; Le Peletier ; 0.0
+7 ; Chaussée d'Antin - La Fayette ; Opéra ; 0.0
+7 ; Opéra ; Chaussée d'Antin - La Fayette ; 0.0
+7 ; Opéra ; Pyramides ; 0.0
+7 ; Pyramides ; Opéra ; 0.0
+7 ; Pyramides ; Palais Royal - Musée du Louvre ; 0.0
+7 ; Palais Royal - Musée du Louvre ; Pyramides ; 0.0
+7 ; Palais Royal - Musée du Louvre ; Pont Neuf ; 0.0
+7 ; Pont Neuf ; Palais Royal - Musée du Louvre ; 0.0
+7 ; Pont Neuf ; Châtelet ; 0.0
+7 ; Châtelet ; Pont Neuf ; 0.0
+7 ; Châtelet ; Pont Marie (Cité des Arts) ; 0.0
+7 ; Pont Marie (Cité des Arts) ; Châtelet ; 0.0
+7 ; Pont Marie (Cité des Arts) ; Sully - Morland ; 0.0
+7 ; Sully - Morland ; Pont Marie (Cité des Arts) ; 0.0
+7 ; Sully - Morland ; Jussieu ; 0.0
+7 ; Jussieu ; Sully - Morland ; 0.0
+7 ; Jussieu ; Place Monge ; 0.0
+7 ; Place Monge ; Jussieu ; 0.0
+7 ; Place Monge ; Censier - Daubenton ; 0.0
+7 ; Censier - Daubenton ; Place Monge ; 0.0
+7 ; Censier - Daubenton ; Les Gobelins ; 0.0
+7 ; Les Gobelins ; Censier - Daubenton ; 0.0
+7 ; Les Gobelins ; Place d'Italie ; 0.0
+7 ; Place d'Italie ; Les Gobelins ; 0.0
+7 ; Place d'Italie ; Tolbiac ; 0.0
+7 ; Tolbiac ; Place d'Italie ; 0.0
+7 ; Tolbiac ; Maison Blanche ; 0.0
+7 ; Maison Blanche ; Tolbiac ; 0.0
+7 ; Maison Blanche ; Porte d'Italie ; 0.0
+7 ; Porte d'Italie ; Maison Blanche ; 0.0
+7 ; Porte d'Italie ; Porte de Choisy ; 0.0
+7 ; Porte de Choisy ; Porte d'Italie ; 0.0
+7 ; Porte de Choisy ; Porte d'Ivry ; 0.0
+7 ; Porte d'Ivry ; Porte de Choisy ; 0.0
+7 ; Porte d'Ivry ; Maison Blanche ; 0.0
+7 ; Maison Blanche ; Porte d'Ivry ; 0.0
+
+# Ligne 7B (9 stations)
+7B ; Louis Blanc ; Jaurès ; 0.0
+7B ; Jaurès ; Louis Blanc ; 0.0
+7B ; Jaurès ; Bolivar ; 0.0
+7B ; Bolivar ; Jaurès ; 0.0
+7B ; Bolivar ; Buttes Chaumont ; 0.0
+7B ; Buttes Chaumont ; Bolivar ; 0.0
+7B ; Buttes Chaumont ; Botzaris ; 0.0
+7B ; Botzaris ; Buttes Chaumont ; 0.0
+7B ; Botzaris ; Place des Fêtes ; 0.0
+7B ; Place des Fêtes ; Botzaris ; 0.0
+7B ; Place des Fêtes ; Pré-Saint-Gervais ; 0.0
+7B ; Pré-Saint-Gervais ; Place des Fêtes ; 0.0
+7B ; Pré-Saint-Gervais ; Danube ; 0.0
+7B ; Danube ; Pré-Saint-Gervais ; 0.0
+7B ; Danube ; Botzaris ; 0.0
+7B ; Botzaris ; Danube ; 0.0
+
+# Ligne 8 (29 stations)
+8 ; Balard ; Lourmel ; 0.0
+8 ; Lourmel ; Balard ; 0.0
+8 ; Lourmel ; Boucicaut ; 0.0
+8 ; Boucicaut ; Lourmel ; 0.0
+8 ; Boucicaut ; Félix Faure ; 0.0
+8 ; Félix Faure ; Boucicaut ; 0.0
+8 ; Félix Faure ; Commerce ; 0.0
+8 ; Commerce ; Félix Faure ; 0.0
+8 ; Commerce ; La Motte-Picquet - Grenelle ; 0.0
+8 ; La Motte-Picquet - Grenelle ; Commerce ; 0.0
+8 ; La Motte-Picquet - Grenelle ; École Militaire ; 0.0
+8 ; École Militaire ; La Motte-Picquet - Grenelle ; 0.0
+8 ; École Militaire ; La Tour-Maubourg ; 0.0
+8 ; La Tour-Maubourg ; École Militaire ; 0.0
+8 ; La Tour-Maubourg ; Invalides ; 0.0
+8 ; Invalides ; La Tour-Maubourg ; 0.0
+8 ; Invalides ; Concorde ; 0.0
+8 ; Concorde ; Invalides ; 0.0
+8 ; Concorde ; Madeleine ; 0.0
+8 ; Madeleine ; Concorde ; 0.0
+8 ; Madeleine ; Opéra ; 0.0
+8 ; Opéra ; Madeleine ; 0.0
+8 ; Opéra ; Richelieu - Drouot ; 0.0
+8 ; Richelieu - Drouot ; Opéra ; 0.0
+8 ; Richelieu - Drouot ; Grands Boulevards ; 0.0
+8 ; Grands Boulevards ; Richelieu - Drouot ; 0.0
+8 ; Grands Boulevards ; Bonne Nouvelle ; 0.0
+8 ; Bonne Nouvelle ; Grands Boulevards ; 0.0
+8 ; Bonne Nouvelle ; Strasbourg - Saint-Denis ; 0.0
+8 ; Strasbourg - Saint-Denis ; Bonne Nouvelle ; 0.0
+8 ; Strasbourg - Saint-Denis ; République ; 0.0
+8 ; République ; Strasbourg - Saint-Denis ; 0.0
+8 ; République ; Filles du Calvaire ; 0.0
+8 ; Filles du Calvaire ; République ; 0.0
+8 ; Filles du Calvaire ; Saint-Sébastien - Froissart ; 0.0
+8 ; Saint-Sébastien - Froissart ; Filles du Calvaire ; 0.0
+8 ; Saint-Sébastien - Froissart ; Chemin Vert ; 0.0
+8 ; Chemin Vert ; Saint-Sébastien - Froissart ; 0.0
+8 ; Chemin Vert ; Bastille ; 0.0
+8 ; Bastille ; Chemin Vert ; 0.0
+8 ; Bastille ; Ledru-Rollin ; 0.0
+8 ; Ledru-Rollin ; Bastille ; 0.0
+8 ; Ledru-Rollin ; Faidherbe - Chaligny ; 0.0
+8 ; Faidherbe - Chaligny ; Ledru-Rollin ; 0.0
+8 ; Faidherbe - Chaligny ; Reuilly - Diderot ; 0.0
+8 ; Reuilly - Diderot ; Faidherbe - Chaligny ; 0.0
+8 ; Reuilly - Diderot ; Montgallet ; 0.0
+8 ; Montgallet ; Reuilly - Diderot ; 0.0
+8 ; Montgallet ; Daumesnil ; 0.0
+8 ; Daumesnil ; Montgallet ; 0.0
+8 ; Daumesnil ; Michel Bizot ; 0.0
+8 ; Michel Bizot ; Daumesnil ; 0.0
+8 ; Michel Bizot ; Porte Dorée ; 0.0
+8 ; Porte Dorée ; Michel Bizot ; 0.0
+8 ; Porte Dorée ; Porte de Charenton ; 0.0
+8 ; Porte de Charenton ; Porte Dorée ; 0.0
+
+# Ligne 9 (31 stations)
+9 ; Porte de Saint-Cloud ; Exelmans ; 0.0
+9 ; Exelmans ; Porte de Saint-Cloud ; 0.0
+9 ; Exelmans ; Michel-Ange - Molitor ; 0.0
+9 ; Michel-Ange - Molitor ; Exelmans ; 0.0
+9 ; Michel-Ange - Molitor ; Michel-Ange - Auteuil ; 0.0
+9 ; Michel-Ange - Auteuil ; Michel-Ange - Molitor ; 0.0
+9 ; Michel-Ange - Auteuil ; Jasmin ; 0.0
+9 ; Jasmin ; Michel-Ange - Auteuil ; 0.0
+9 ; Jasmin ; Ranelagh ; 0.0
+9 ; Ranelagh ; Jasmin ; 0.0
+9 ; Ranelagh ; La Muette ; 0.0
+9 ; La Muette ; Ranelagh ; 0.0
+9 ; La Muette ; Rue de la Pompe ; 0.0
+9 ; Rue de la Pompe ; La Muette ; 0.0
+9 ; Rue de la Pompe ; Trocadéro ; 0.0
+9 ; Trocadéro ; Rue de la Pompe ; 0.0
+9 ; Trocadéro ; Iéna ; 0.0
+9 ; Iéna ; Trocadéro ; 0.0
+9 ; Iéna ; Alma - Marceau ; 0.0
+9 ; Alma - Marceau ; Iéna ; 0.0
+9 ; Alma - Marceau ; Franklin D. Roosevelt ; 0.0
+9 ; Franklin D. Roosevelt ; Alma - Marceau ; 0.0
+9 ; Franklin D. Roosevelt ; Saint-Philippe du Roule ; 0.0
+9 ; Saint-Philippe du Roule ; Franklin D. Roosevelt ; 0.0
+9 ; Saint-Philippe du Roule ; Miromesnil ; 0.0
+9 ; Miromesnil ; Saint-Philippe du Roule ; 0.0
+9 ; Miromesnil ; Saint-Augustin ; 0.0
+9 ; Saint-Augustin ; Miromesnil ; 0.0
+9 ; Saint-Augustin ; Havre-Caumartin ; 0.0
+9 ; Havre-Caumartin ; Saint-Augustin ; 0.0
+9 ; Havre-Caumartin ; Chaussée d'Antin - La Fayette ; 0.0
+9 ; Chaussée d'Antin - La Fayette ; Havre-Caumartin ; 0.0
+9 ; Chaussée d'Antin - La Fayette ; Richelieu - Drouot ; 0.0
+9 ; Richelieu - Drouot ; Chaussée d'Antin - La Fayette ; 0.0
+9 ; Richelieu - Drouot ; Grands Boulevards ; 0.0
+9 ; Grands Boulevards ; Richelieu - Drouot ; 0.0
+9 ; Grands Boulevards ; Bonne Nouvelle ; 0.0
+9 ; Bonne Nouvelle ; Grands Boulevards ; 0.0
+9 ; Bonne Nouvelle ; Strasbourg - Saint-Denis ; 0.0
+9 ; Strasbourg - Saint-Denis ; Bonne Nouvelle ; 0.0
+9 ; Strasbourg - Saint-Denis ; République ; 0.0
+9 ; République ; Strasbourg - Saint-Denis ; 0.0
+9 ; République ; Oberkampf ; 0.0
+9 ; Oberkampf ; République ; 0.0
+9 ; Oberkampf ; Saint-Ambroise ; 0.0
+9 ; Saint-Ambroise ; Oberkampf ; 0.0
+9 ; Saint-Ambroise ; Voltaire ; 0.0
+9 ; Voltaire ; Saint-Ambroise ; 0.0
+9 ; Voltaire ; Charonne ; 0.0
+9 ; Charonne ; Voltaire ; 0.0
+9 ; Charonne ; Rue des Boulets ; 0.0
+9 ; Rue des Boulets ; Charonne ; 0.0
+9 ; Rue des Boulets ; Nation ; 0.0
+9 ; Nation ; Rue des Boulets ; 0.0
+9 ; Nation ; Buzenval ; 0.0
+9 ; Buzenval ; Nation ; 0.0
+9 ; Buzenval ; Maraîchers ; 0.0
+9 ; Maraîchers ; Buzenval ; 0.0
+9 ; Maraîchers ; Porte de Montreuil ; 0.0
+9 ; Porte de Montreuil ; Maraîchers ; 0.0
+
+# Ligne 10 (21 stations)
+10 ; Gare d'Austerlitz ; Jussieu ; 0.0
+10 ; Jussieu ; Gare d'Austerlitz ; 0.0
+10 ; Jussieu ; Cardinal Lemoine ; 0.0
+10 ; Cardinal Lemoine ; Jussieu ; 0.0
+10 ; Cardinal Lemoine ; Maubert - Mutualité ; 0.0
+10 ; Maubert - Mutualité ; Cardinal Lemoine ; 0.0
+10 ; Maubert - Mutualité ; Cluny - La Sorbonne ; 0.0
+10 ; Cluny - La Sorbonne ; Maubert - Mutualité ; 0.0
+10 ; Cluny - La Sorbonne ; Odéon ; 0.0
+10 ; Odéon ; Cluny - La Sorbonne ; 0.0
+10 ; Odéon ; Mabillon ; 0.0
+10 ; Mabillon ; Odéon ; 0.0
+10 ; Mabillon ; Sèvres - Babylone ; 0.0
+10 ; Sèvres - Babylone ; Mabillon ; 0.0
+10 ; Sèvres - Babylone ; Vaneau ; 0.0
+10 ; Vaneau ; Sèvres - Babylone ; 0.0
+10 ; Vaneau ; Duroc ; 0.0
+10 ; Duroc ; Vaneau ; 0.0
+10 ; Duroc ; Ségur ; 0.0
+10 ; Ségur ; Duroc ; 0.0
+10 ; Ségur ; La Motte-Picquet - Grenelle ; 0.0
+10 ; La Motte-Picquet - Grenelle ; Ségur ; 0.0
+10 ; La Motte-Picquet - Grenelle ; Avenue Émile Zola ; 0.0
+10 ; Avenue Émile Zola ; La Motte-Picquet - Grenelle ; 0.0
+10 ; Avenue Émile Zola ; Charles Michels ; 0.0
+10 ; Charles Michels ; Avenue Émile Zola ; 0.0
+10 ; Charles Michels ; Javel - André Citroën ; 0.0
+10 ; Javel - André Citroën ; Charles Michels ; 0.0
+10 ; Javel - André Citroën ; Église d'Auteuil ; 0.0
+10 ; Église d'Auteuil ; Javel - André Citroën ; 0.0
+10 ; Église d'Auteuil ; Michel-Ange - Auteuil ; 0.0
+10 ; Michel-Ange - Auteuil ; Église d'Auteuil ; 0.0
+10 ; Michel-Ange - Auteuil ; Porte d'Auteuil ; 0.0
+10 ; Porte d'Auteuil ; Michel-Ange - Auteuil ; 0.0
+10 ; Porte d'Auteuil ; Michel-Ange - Molitor ; 0.0
+10 ; Michel-Ange - Molitor ; Porte d'Auteuil ; 0.0
+10 ; Michel-Ange - Molitor ; Chardon Lagache ; 0.0
+10 ; Chardon Lagache ; Michel-Ange - Molitor ; 0.0
+10 ; Chardon Lagache ; Mirabeau ; 0.0
+10 ; Mirabeau ; Chardon Lagache ; 0.0
+
+# Ligne 11 (12 stations)
+11 ; Châtelet ; Hôtel de Ville ; 0.0
+11 ; Hôtel de Ville ; Châtelet ; 0.0
+11 ; Hôtel de Ville ; Rambuteau ; 0.0
+11 ; Rambuteau ; Hôtel de Ville ; 0.0
+11 ; Rambuteau ; Arts et Métiers ; 0.0
+11 ; Arts et Métiers ; Rambuteau ; 0.0
+11 ; Arts et Métiers ; République ; 0.0
+11 ; République ; Arts et Métiers ; 0.0
+11 ; République ; Goncourt ; 0.0
+11 ; Goncourt ; République ; 0.0
+11 ; Goncourt ; Belleville ; 0.0
+11 ; Belleville ; Goncourt ; 0.0
+11 ; Belleville ; Pyrénées ; 0.0
+11 ; Pyrénées ; Belleville ; 0.0
+11 ; Pyrénées ; Jourdain ; 0.0
+11 ; Jourdain ; Pyrénées ; 0.0
+11 ; Jourdain ; Place des Fêtes ; 0.0
+11 ; Place des Fêtes ; Jourdain ; 0.0
+11 ; Place des Fêtes ; Télégraphe ; 0.0
+11 ; Télégraphe ; Place des Fêtes ; 0.0
+11 ; Télégraphe ; Porte des Lilas ; 0.0
+11 ; Porte des Lilas ; Télégraphe ; 0.0
+
+# Ligne 12 (26 stations)
+12 ; Porte de la Chapelle ; Marx Dormoy ; 0.0
+12 ; Marx Dormoy ; Porte de la Chapelle ; 0.0
+12 ; Marx Dormoy ; Marcadet - Poissonniers ; 0.0
+12 ; Marcadet - Poissonniers ; Marx Dormoy ; 0.0
+12 ; Marcadet - Poissonniers ; Jules Joffrin ; 0.0
+12 ; Jules Joffrin ; Marcadet - Poissonniers ; 0.0
+12 ; Jules Joffrin ; Lamarck - Caulaincourt ; 0.0
+12 ; Lamarck - Caulaincourt ; Jules Joffrin ; 0.0
+12 ; Lamarck - Caulaincourt ; Abbesses ; 0.0
+12 ; Abbesses ; Lamarck - Caulaincourt ; 0.0
+12 ; Abbesses ; Pigalle ; 0.0
+12 ; Pigalle ; Abbesses ; 0.0
+12 ; Pigalle ; Saint-Georges ; 0.0
+12 ; Saint-Georges ; Pigalle ; 0.0
+12 ; Saint-Georges ; Notre-Dame-de-Lorette ; 0.0
+12 ; Notre-Dame-de-Lorette ; Saint-Georges ; 0.0
+12 ; Notre-Dame-de-Lorette ; Trinité - d'Estienne d'Orves ; 0.0
+12 ; Trinité - d'Estienne d'Orves ; Notre-Dame-de-Lorette ; 0.0
+12 ; Trinité - d'Estienne d'Orves ; Saint-Lazare ; 0.0
+12 ; Saint-Lazare ; Trinité - d'Estienne d'Orves ; 0.0
+12 ; Saint-Lazare ; Madeleine ; 0.0
+12 ; Madeleine ; Saint-Lazare ; 0.0
+12 ; Madeleine ; Concorde ; 0.0
+12 ; Concorde ; Madeleine ; 0.0
+12 ; Concorde ; Assemblée Nationale ; 0.0
+12 ; Assemblée Nationale ; Concorde ; 0.0
+12 ; Assemblée Nationale ; Solférino ; 0.0
+12 ; Solférino ; Assemblée Nationale ; 0.0
+12 ; Solférino ; Rue du Bac ; 0.0
+12 ; Rue du Bac ; Solférino ; 0.0
+12 ; Rue du Bac ; Sèvres - Babylone ; 0.0
+12 ; Sèvres - Babylone ; Rue du Bac ; 0.0
+12 ; Sèvres - Babylone ; Rennes ; 0.0
+12 ; Rennes ; Sèvres - Babylone ; 0.0
+12 ; Rennes ; Notre-Dame des Champs ; 0.0
+12 ; Notre-Dame des Champs ; Rennes ; 0.0
+12 ; Notre-Dame des Champs ; Montparnasse Bienvenue ; 0.0
+12 ; Montparnasse Bienvenue ; Notre-Dame des Champs ; 0.0
+12 ; Montparnasse Bienvenue ; Falguière ; 0.0
+12 ; Falguière ; Montparnasse Bienvenue ; 0.0
+12 ; Falguière ; Pasteur ; 0.0
+12 ; Pasteur ; Falguière ; 0.0
+12 ; Pasteur ; Volontaires ; 0.0
+12 ; Volontaires ; Pasteur ; 0.0
+12 ; Volontaires ; Vaugirard ; 0.0
+12 ; Vaugirard ; Volontaires ; 0.0
+12 ; Vaugirard ; Convention ; 0.0
+12 ; Convention ; Vaugirard ; 0.0
+12 ; Convention ; Porte de Versailles ; 0.0
+12 ; Porte de Versailles ; Convention ; 0.0
+
+# Ligne 13 (20 stations)
+13 ; Porte de Vanves ; Plaisance ; 0.0
+13 ; Plaisance ; Porte de Vanves ; 0.0
+13 ; Plaisance ; Pernety ; 0.0
+13 ; Pernety ; Plaisance ; 0.0
+13 ; Pernety ; Gaîté ; 0.0
+13 ; Gaîté ; Pernety ; 0.0
+13 ; Gaîté ; Montparnasse Bienvenue ; 0.0
+13 ; Montparnasse Bienvenue ; Gaîté ; 0.0
+13 ; Montparnasse Bienvenue ; Duroc ; 0.0
+13 ; Duroc ; Montparnasse Bienvenue ; 0.0
+13 ; Duroc ; Saint-François-Xavier ; 0.0
+13 ; Saint-François-Xavier ; Duroc ; 0.0
+13 ; Saint-François-Xavier ; Varenne ; 0.0
+13 ; Varenne ; Saint-François-Xavier ; 0.0
+13 ; Varenne ; Invalides ; 0.0
+13 ; Invalides ; Varenne ; 0.0
+13 ; Invalides ; Champs-Élysées - Clemenceau ; 0.0
+13 ; Champs-Élysées - Clemenceau ; Invalides ; 0.0
+13 ; Champs-Élysées - Clemenceau ; Miromesnil ; 0.0
+13 ; Miromesnil ; Champs-Élysées - Clemenceau ; 0.0
+13 ; Miromesnil ; Saint-Lazare ; 0.0
+13 ; Saint-Lazare ; Miromesnil ; 0.0
+13 ; Saint-Lazare ; Liège ; 0.0
+13 ; Liège ; Saint-Lazare ; 0.0
+13 ; Liège ; Place de Clichy ; 0.0
+13 ; Place de Clichy ; Liège ; 0.0
+13 ; Place de Clichy ; La Fourche ; 0.0
+13 ; La Fourche ; Place de Clichy ; 0.0
+13 ; La Fourche ; Guy Môquet ; 0.0
+13 ; Guy Môquet ; La Fourche ; 0.0
+13 ; Guy Môquet ; Porte de Saint-Ouen ; 0.0
+13 ; Porte de Saint-Ouen ; Guy Môquet ; 0.0
+13 ; Porte de Saint-Ouen ; La Fourche ; 0.0
+13 ; La Fourche ; Porte de Saint-Ouen ; 0.0
+13 ; La Fourche ; Brochant ; 0.0
+13 ; Brochant ; La Fourche ; 0.0
+13 ; Brochant ; Porte de Clichy ; 0.0
+13 ; Porte de Clichy ; Brochant ; 0.0
+
+# Ligne 14 (13 stations)
+14 ; Porte de Clichy ; Pont Cardinet ; 0.0
+14 ; Pont Cardinet ; Porte de Clichy ; 0.0
+14 ; Pont Cardinet ; Saint-Lazare ; 0.0
+14 ; Saint-Lazare ; Pont Cardinet ; 0.0
+14 ; Saint-Lazare ; Madeleine ; 0.0
+14 ; Madeleine ; Saint-Lazare ; 0.0
+14 ; Madeleine ; Pyramides ; 0.0
+14 ; Pyramides ; Madeleine ; 0.0
+14 ; Pyramides ; Châtelet ; 0.0
+14 ; Châtelet ; Pyramides ; 0.0
+14 ; Châtelet ; Gare de Lyon ; 0.0
+14 ; Gare de Lyon ; Châtelet ; 0.0
+14 ; Gare de Lyon ; Bercy ; 0.0
+14 ; Bercy ; Gare de Lyon ; 0.0
+14 ; Bercy ; Cour Saint-Emilion ; 0.0
+14 ; Cour Saint-Emilion ; Bercy ; 0.0
+14 ; Cour Saint-Emilion ; Bibliothèque François Mitterrand ; 0.0
+14 ; Bibliothèque François Mitterrand ; Cour Saint-Emilion ; 0.0
+14 ; Bibliothèque François Mitterrand ; Olympiades ; 0.0
+14 ; Olympiades ; Bibliothèque François Mitterrand ; 0.0
+14 ; Olympiades ; Olympiades ; 0.0
+14 ; Olympiades ; Olympiades ; 0.0
+14 ; Olympiades ; Maison Blanche ; 0.0
+14 ; Maison Blanche ; Olympiades ; 0.0
+
