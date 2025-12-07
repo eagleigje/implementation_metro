@@ -91,7 +91,8 @@ $(function(){initNavTree('connexion_8h.html','',''); });
   <div class="headertitle"><div class="title">Référence du fichier connexion.h</div></div>
 </div><!--header-->
 <div class="contents">
-
+<div class="textblock"><code>#include &lt;stdio.h&gt;</code><br />
+</div>
 <p><a href="connexion_8h_source.html">Aller au code source de ce fichier.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
@@ -101,9 +102,29 @@ Structures de données</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 id="header-typedef-members" class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 Définitions de type</h2></td></tr>
 <tr class="memitem:a2178cd5682efee02cbf7b5279c280097" id="r_a2178cd5682efee02cbf7b5279c280097"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="struct__une__ligne.html">_une_ligne</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2178cd5682efee02cbf7b5279c280097">Une_ligne</a></td></tr>
+<tr class="memitem:a8aa69637be17cc77724f2ca722d62d65" id="r_a8aa69637be17cc77724f2ca722d62d65"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="struct__un__elem.html">_un_elem</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8aa69637be17cc77724f2ca722d62d65">Un_elem</a></td></tr>
 <tr class="memitem:a5c9e8b9a6cfc7fcf8236f350933a32b0" id="r_a5c9e8b9a6cfc7fcf8236f350933a32b0"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="struct__une__connexion.html">_une_connexion</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5c9e8b9a6cfc7fcf8236f350933a32b0">Une_connexion</a></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+Fonctions</h2></td></tr>
+<tr class="memitem:a501d40e09457c621f132dcd45b7bb4ae" id="r_a501d40e09457c621f132dcd45b7bb4ae"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a8aa69637be17cc77724f2ca722d62d65">Un_elem</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a501d40e09457c621f132dcd45b7bb4ae">lire_connexions</a> (char *nom_fichier, <a class="el" href="#a2178cd5682efee02cbf7b5279c280097">Une_ligne</a> *liste_ligne, <a class="el" href="abr__type_8h.html#aa17d62fbbfd01281360dfabf4a12d807">Un_nabr</a> *abr_sta)</td></tr>
+<tr class="memitem:a3e6754d01947ee084e8dde9f865c198d" id="r_a3e6754d01947ee084e8dde9f865c198d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3e6754d01947ee084e8dde9f865c198d">ecrire_connexions</a> (FILE *flux, <a class="el" href="#a8aa69637be17cc77724f2ca722d62d65">Un_elem</a> *liste_con)</td></tr>
 </table>
 <a name="doc-typedef-members" id="doc-typedef-members"></a><h2 id="header-doc-typedef-members" class="groupheader">Documentation des définitions de type</h2>
+<a id="a8aa69637be17cc77724f2ca722d62d65" name="a8aa69637be17cc77724f2ca722d62d65"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8aa69637be17cc77724f2ca722d62d65">&#9670;&#160;</a></span>Un_elem</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef struct <a class="el" href="struct__un__elem.html">_un_elem</a> <a class="el" href="#a8aa69637be17cc77724f2ca722d62d65">Un_elem</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a5c9e8b9a6cfc7fcf8236f350933a32b0" name="a5c9e8b9a6cfc7fcf8236f350933a32b0"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5c9e8b9a6cfc7fcf8236f350933a32b0">&#9670;&#160;</a></span>Une_connexion</h2>
 
@@ -115,7 +136,7 @@ Définitions de type</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Une connexion correspond à une fraction de ligne unidirectionnelle reliant deux stations. La structure correspondante contient des liens vers les stations de départ et d’arrivée ainsi qu’un lien vers le descriptif dela ligne correspondante. </p>
+<p>Une connexion correspond à une fraction de ligne unidirectionnelle reliant deux stations. La structure correspondante contient des liens vers les stations de départ et d'arrivée ainsi qu'un lien vers le descriptif dela ligne correspondante. </p>
 
 </div>
 </div>
@@ -130,6 +151,70 @@ Définitions de type</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Documentation des fonctions</h2>
+<a id="a3e6754d01947ee084e8dde9f865c198d" name="a3e6754d01947ee084e8dde9f865c198d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3e6754d01947ee084e8dde9f865c198d">&#9670;&#160;</a></span>ecrire_connexions()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ecrire_connexions </td>
+          <td>(</td>
+          <td class="paramtype">FILE *</td>          <td class="paramname"><span class="paramname"><em>flux</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="#a8aa69637be17cc77724f2ca722d62d65">Un_elem</a> *</td>          <td class="paramname"><span class="paramname"><em>liste_con</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Fonction qui affiche sur un flux la liste des connexions. </p><dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">flux</td><td>: Le flux de sortie (stdout généralement). </td></tr>
+    <tr><td class="paramname">liste_con</td><td>: La liste des connexions à afficher. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a501d40e09457c621f132dcd45b7bb4ae" name="a501d40e09457c621f132dcd45b7bb4ae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a501d40e09457c621f132dcd45b7bb4ae">&#9670;&#160;</a></span>lire_connexions()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a8aa69637be17cc77724f2ca722d62d65">Un_elem</a> * lire_connexions </td>
+          <td>(</td>
+          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>nom_fichier</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="#a2178cd5682efee02cbf7b5279c280097">Une_ligne</a> *</td>          <td class="paramname"><span class="paramname"><em>liste_ligne</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="abr__type_8h.html#aa17d62fbbfd01281360dfabf4a12d807">Un_nabr</a> *</td>          <td class="paramname"><span class="paramname"><em>abr_sta</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Fonction qui lit le fichier CSV des connexions et construit la liste de connexions. </p><dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">nom_fichier</td><td>: Le fichier CSV des connexions, à lire. </td></tr>
+    <tr><td class="paramname">liste_ligne</td><td>: La liste des lignes de métro. </td></tr>
+    <tr><td class="paramname">abr_sta</td><td>: L'arbre binaire de recherche des stations. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>: Renvoi la liste des connexions, ou NULL en cas d'erreur. </dd></dl>
 
 </div>
 </div>

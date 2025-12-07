@@ -6,6 +6,7 @@ var files_dup =
     [ "aqrtopo.h", "aqrtopo_8h.html", "aqrtopo_8h" ],
     [ "config.c", "config_8c.html", "config_8c" ],
     [ "config.h", "config_8h.html", "config_8h" ],
+    [ "connexion.c", "connexion_8c.html", "connexion_8c" ],
     [ "connexion.h", "connexion_8h.html", "connexion_8h" ],
     [ "constants.h", "constants_8h.html", "constants_8h" ],
     [ "coord.h", "coord_8h.html", "coord_8h" ],

@@ -2,6 +2,7 @@ var tests_8h =
 [
     [ "test_cas_limites_liste", "tests_8h.html#a03b586f5e7ebb91cb9296a71089f34f4", null ],
     [ "test_config_invalide", "tests_8h.html#a0232bb1b71e75e09db36beb054b6b6d1", null ],
+    [ "test_connexions", "tests_8h.html#ac71388bfc29f46f73acc0e7df6553e8d", null ],
     [ "test_csv_malformes", "tests_8h.html#a3412e3050a34bd74b82c173f9fedbfd4", null ],
     [ "test_extraction_liste", "tests_8h.html#a3db93c4430bcc3841139a4db15827105", null ],
     [ "test_gestion_memoire", "tests_8h.html#a6e7ca79d49edb402cccd0ff923504f07", null ],
