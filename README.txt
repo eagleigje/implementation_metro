@@ -159,18 +159,18 @@ LOCALISATION DES DONNEES
         cut -d "," -f3- < data/metro-paris.csv | sort | uniq | sed "s/\"//g" | awk -F "," '{print($2";"$3";"$1)}' > stations_paris.csv
 
 ** Informations lignes **
-    * Informations concernants les lignes parisiennes : https://data.iledefrance-mobilites.fr/explore/dataset/referentiel-des-lignes/table/?disjunctive.transportsubmode&disjunctive.operatorname&disjunctive.networkname&disjunctive.transportmode&refine.transportmode=metro&sort=name_line&refine.status=active
+    * Informations concernant les lignes parisiennes : https://data.iledefrance-mobilites.fr/explore/dataset/referentiel-des-lignes/table/?disjunctive.transportsubmode&disjunctive.operatorname&disjunctive.networkname&disjunctive.transportmode&refine.transportmode=metro&sort=name_line&refine.status=active
     * Le répertoire "data" inclus une extraction des lignes du métro parisien dans le fichier "referentiel-des-lignes-paris.csv".
-    * On trouve dans ce fichier, les noms et couleurs officiels des lignes. On peut donc s'en servir pour génèrer le fichier "lignes.csv" du sujet.
+    * On trouve dans ce fichier, les noms et couleurs officiels des lignes. On peut donc s'en servir pour générer le fichier "lignes.csv" du sujet.
         * Pour extraire le nom de la ligne et sa couleur :
             * On récupère toutes les lignes en sautant la première (noms des champs).
             * On extrait les champs 2 et 11
-            * On trie sur la colonne nom (format humain sort -h)
+            * On trie sur la colonne nom (format humain "sort -h")
             * Et enfin, on extrait le champ couleur en lui ajoutant un # devant afin d'être dans le bon format.
                 tail -n+2 referentiel-des-lignes-paris.csv | cut -d ";" -f 2,11 | sort -h | sed "s/\(.*\);\(.*\)/\#\2/g" 
     * On peut aussi trouver des informations officielles sur le site https://www.itineraire-metro.fr, cela va nous aider à remplir les données, notamment l'attente moyenne entre deux rames, mais à la main.
         * Exemple ligne 1 : https://www.itineraire-metro.fr/ligne-1.html
-    * On peut encore trouver des informations sur les lignes sur wikipedia, avec le temps de parcours, la distance, et le nombre de stations. On peut donc en déterminer les vitesses moyennes.
+    * On peut encore trouver des informations sur les lignes sur Wikipédia, avec le temps de parcours, la distance, et le nombre de stations. On peut donc en déterminer les vitesses moyennes.
         * Exemple ligne 2 : https://fr.wikipedia.org/wiki/Ligne_2_du_m%C3%A9tro_de_Paris
     * L'article : https://www.liberation.fr/checknews/2018/02/14/a-quelle-vitesse-roule-le-metro-parisien_1653099/ valide les vitesses moyennes calculées.
     * Globalement, on trouve que le temps moyen entre rame est :
@@ -241,16 +241,16 @@ NOTES IMPORTANTES
 - Le champ user_val des trucs est utilisé pour :
   * Le tri par latitude dans les listes.
   * Le calcul des distances dans l'algorithme de Dijkstra.
-- La recherche dans l'ABR est insensible à la casse (case-insensitive).
+- La recherche dans l'ABR est insensible à la casse (case insensitive).
 - Les fonctions d'extraction de liste modifient la liste d'origine.
 
 WORKFLOW DE DEVELOPPEMENT RECOMMANDE
 -------------------------------------
 1. Développer une nouvelle fonctionnalité
-2. Ajouter des tests dans tests.c pour valider la fonctionnalité
+2. Ajouter des tests dans le fichier tests.c pour valider la fonctionnalité
 3. Compiler avec : make tests
 4. Exécuter les tests : ./tests
-5. Vérifier les fuites mémoire : valgrind --leak-check=full ./tests
-6. Intégrer la fonctionnalité dans main.c si nécessaire
+5. Vérifier les fuites mémoire : "valgrind --leak-check=full ./tests"
+6. Intégrer la fonctionnalité dans le fichier main.c si nécessaire
 7. Mettre à jour ce README.txt
 
