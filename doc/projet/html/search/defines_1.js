@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['station_5fname_5fsize_0',['STATION_NAME_SIZE',['../connexion_8c.html#a4d441a91b9a003691a0a64b79131ab7e',1,'connexion.c']]]
+  ['line_5fcolor_5fsize_0',['LINE_COLOR_SIZE',['../ligne_8h.html#a0ac42d81e580808472c17cfe4840c56d',1,'ligne.h']]],
+  ['line_5fmax_5fcode_5fsize_1',['LINE_MAX_CODE_SIZE',['../ligne_8h.html#aaf3c537e8b054beb005fcbff9ed80565',1,'ligne.h']]]
 ];
