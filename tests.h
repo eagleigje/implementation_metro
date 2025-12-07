@@ -7,23 +7,13 @@
 #define TESTS_H
 
 #include "config.h"
-#include "liste.h"
-#include "abr.h"
 
-// Prototypes des fonctions de test
-
-// Tests existants (Exercices 1-2)
-void test_recherche_abr(Un_nabr *abr_stations);
-void test_extraction_liste();
-
-// Tests de cas limites et robustesse
-void test_cas_limites_liste();      // Tests des cas limites pour les listes
-void test_robustesse_abr();          // Tests de robustesse pour l'ABR
-void test_config_invalide();         // Tests de configuration invalide
-void test_csv_malformes();           // Tests de fichiers CSV malformés
-void test_lignes(Une_config *config); // Tests de lecture et affichage des lignes
-void test_gestion_memoire();         // Tests de gestion mémoire
-void test_connexions(Une_config *config); // Tests de lecture et affichage des connexions
-void test_csv_utils();               // Tests du lecteur CSV générique
+// Inclure tous les modules de tests
+#include "tests_projet/test_csv_utils.h"
+#include "tests_projet/test_exercice1.h"
+#include "tests_projet/test_exercice2.h"
+#include "tests_projet/test_exercice3.h"
+#include "tests_projet/test_exercice4.h"
+#include "tests_projet/test_autres.h"
 
 #endif

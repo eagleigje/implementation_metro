@@ -24,7 +24,9 @@ COMMON_OBJ = truc.o liste.o config.o abr.o ligne.o connexion.o csv_utils.o
 
 # Fichiers objets spécifiques
 MAIN_OBJ = main.o
-TESTS_OBJ = tests.o
+TESTS_OBJ = tests.o tests_projet/test_csv_utils.o tests_projet/test_exercice1.o \
+            tests_projet/test_exercice2.o tests_projet/test_exercice3.o \
+            tests_projet/test_exercice4.o tests_projet/test_autres.o
 
 # Exécutables
 TARGET_METRO = metro
@@ -39,7 +41,7 @@ rebuild: clean $(TARGET_METRO) $(TARGET_TESTS)
 
 # Nettoyage
 clean:
-	rm -f *.o $(TARGET_METRO) $(TARGET_TESTS)
+	rm -f *.o tests_projet/*.o $(TARGET_METRO) $(TARGET_TESTS)
 
 # Dossier de documentation
 DOCS_DIR = doc/projet
@@ -80,7 +82,13 @@ ligne.o: ligne.c ligne.h constants.h
 connexion.o: connexion.c connexion.h ligne.h abr.h liste.h truc.h constants.h
 csv_utils.o: csv_utils.c csv_utils.h
 main.o: main.c config.h liste.h abr.h
-tests.o: tests.c tests.h config.h liste.h abr.h ligne.h connexion.h csv_utils.h
+tests.o: tests.c tests.h config.h liste.h abr.h
+tests_projet/test_csv_utils.o: tests_projet/test_csv_utils.c tests_projet/test_csv_utils.h csv_utils.h
+tests_projet/test_exercice1.o: tests_projet/test_exercice1.c tests_projet/test_exercice1.h liste.h truc.h
+tests_projet/test_exercice2.o: tests_projet/test_exercice2.c tests_projet/test_exercice2.h abr.h liste.h truc.h
+tests_projet/test_exercice3.o: tests_projet/test_exercice3.c tests_projet/test_exercice3.h config.h ligne.h
+tests_projet/test_exercice4.o: tests_projet/test_exercice4.c tests_projet/test_exercice4.h config.h ligne.h liste.h abr.h connexion.h
+tests_projet/test_autres.o: tests_projet/test_autres.c tests_projet/test_autres.h config.h liste.h abr.h
 
 # Cible pour exécuter les tests
 run-tests: $(TARGET_TESTS)
