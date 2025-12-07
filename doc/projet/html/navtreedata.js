@@ -25,6 +25,14 @@
 var NAVTREE =
 [
   [ "MAIN3 Info Générale Projet Métro", "index.html", [
+    [ "Espaces de nommage", "namespaces.html", [
+      [ "Liste des espaces de nommage", "namespaces.html", "namespaces_dup" ],
+      [ "Membres de l'espace de nommage", "namespacemembers.html", [
+        [ "Tout", "namespacemembers.html", null ],
+        [ "Fonctions", "namespacemembers_func.html", null ],
+        [ "Variables", "namespacemembers_vars.html", null ]
+      ] ]
+    ] ],
     [ "Structures de données", "annotated.html", [
       [ "Structures de données", "annotated.html", "annotated_dup" ],
       [ "Index des structures de données", "classes.html", null ],

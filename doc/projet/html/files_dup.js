@@ -10,6 +10,7 @@ var files_dup =
     [ "connexion.h", "connexion_8h.html", "connexion_8h" ],
     [ "constants.h", "constants_8h.html", "constants_8h" ],
     [ "coord.h", "coord_8h.html", "coord_8h" ],
+    [ "generer_connexions_paris.py", "generer__connexions__paris_8py.html", "generer__connexions__paris_8py" ],
     [ "ligne.c", "ligne_8c.html", "ligne_8c" ],
     [ "ligne.h", "ligne_8h.html", "ligne_8h" ],
     [ "liste.c", "liste_8c.html", "liste_8c" ],
