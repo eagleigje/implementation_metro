@@ -14,7 +14,7 @@
 #include <string.h>
 #include <math.h>
 
-#define STATION_NAME_SIZE 100
+#define STATION_NAME_SIZE 100 // todo : tout déplacer dans les constantes, il y a des doublons.
 
 /**
  * Fonction qui calcule la distance entre deux coordonnées (formule de Haversine).
@@ -62,7 +62,7 @@ static float calculer_temps(float distance, float vitesse) {
  * @return : Pointeur vers le nouveau truc connexion ou NULL en cas d'erreur.
  */
 static Un_truc *creer_connexion(char ligne_str[CSV_MAX_CONNECTIONS_LENGTH], Une_ligne *liste_ligne, Un_nabr *abr_sta) {
-    char code_ligne[CODE_SIZE];
+    char code_ligne[LINE_MAX_CODE_SIZE];
     char nom_dep[STATION_NAME_SIZE];
     char nom_arr[STATION_NAME_SIZE];
     float temps;
@@ -78,7 +78,7 @@ static Un_truc *creer_connexion(char ligne_str[CSV_MAX_CONNECTIONS_LENGTH], Une_
 
     // Lecture du code de la ligne
     int i = 0;
-    while (*ptr != CSV_SEPARATOR && *ptr != '\0' && i < CODE_SIZE - 1) {
+    while (*ptr != CSV_SEPARATOR && *ptr != '\0' && i < LINE_MAX_CODE_SIZE - 1) {
         code_ligne[i++] = *ptr++;
     }
     code_ligne[i] = '\0';
