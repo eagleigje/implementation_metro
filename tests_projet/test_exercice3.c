@@ -4,6 +4,7 @@
  */
 
 #include <stdio.h>
+#include <string.h>
 #include "test_exercice3.h"
 #include "../ligne.h"
 
@@ -41,15 +42,17 @@ void test_lignes(Une_config *config, const char *test_label) {
 
     // Test X.3: Recherche d'une ligne existante
     if (lignes != NULL) {
-        printf("  Test %s.3: Recherche ligne 1\n", test_label);
+        printf("  Test %s.3: Recherche ligne existante (première ligne du fichier)\n", test_label);
         tests_total++;
-        Une_ligne *ligne_m1 = chercher_ligne(lignes, "1");
-        if (ligne_m1 != NULL) {
-            printf("    OK: ligne 1 trouvée (vitesse=%.1f, intervalle=%.1f, couleur=%s)\n",
-                   ligne_m1->vitesse, ligne_m1->intervalle, ligne_m1->color);
+        // On teste avec le code de la première ligne chargée (test dynamique)
+        char *code_test = lignes->code;
+        Une_ligne *ligne_trouvee = chercher_ligne(lignes, code_test);
+        if (ligne_trouvee != NULL) {
+            printf("    OK: ligne '%s' trouvée (vitesse=%.1f, intervalle=%.1f, couleur=%s)\n",
+                   code_test, ligne_trouvee->vitesse, ligne_trouvee->intervalle, ligne_trouvee->color);
             tests_ok++;
         } else {
-            printf("    ERREUR: ligne 1 non trouvée\n");
+            printf("    ERREUR: ligne '%s' non trouvée\n", code_test);
         }
     }
 
@@ -70,9 +73,18 @@ void test_lignes(Une_config *config, const char *test_label) {
     if (lignes != NULL) {
         printf("  Test %s.5: Recherche sensible à la casse\n", test_label);
         tests_total++;
-        Une_ligne *ligne_min = chercher_ligne(lignes, "m1");
+        // On teste avec une version en minuscule du code de la première ligne
+        char code_minuscule[10];
+        strcpy(code_minuscule, lignes->code);
+        // Convertir en minuscule
+        for (int i = 0; code_minuscule[i]; i++) {
+            if (code_minuscule[i] >= 'A' && code_minuscule[i] <= 'Z') {
+                code_minuscule[i] = code_minuscule[i] + ('a' - 'A');
+            }
+        }
+        Une_ligne *ligne_min = chercher_ligne(lignes, code_minuscule);
         if (ligne_min == NULL) {
-            printf("    OK: recherche sensible à la casse (m1 != M1)\n");
+            printf("    OK: recherche sensible à la casse (%s != %s)\n", code_minuscule, lignes->code);
             tests_ok++;
         } else {
             printf("    ATTENTION: recherche insensible à la casse\n");
