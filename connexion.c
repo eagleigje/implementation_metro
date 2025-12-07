@@ -9,12 +9,11 @@
 #include "liste.h"
 #include "truc.h"
 #include "constants.h"
+#include "csv_utils.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
-
-#define STATION_NAME_SIZE 100 // todo : tout déplacer dans les constantes, il y a des doublons.
 
 /**
  * Fonction qui calcule la distance entre deux coordonnées (formule de Haversine).
@@ -62,62 +61,27 @@ static float calculer_temps(float distance, float vitesse) {
  * @return : Pointeur vers le nouveau truc connexion ou NULL en cas d'erreur.
  */
 static Un_truc *creer_connexion(char ligne_str[CSV_MAX_CONNECTIONS_LENGTH], Une_ligne *liste_ligne, Un_nabr *abr_sta) {
+    Un_lecteur_csv lecteur;
+    csv_init_lecteur(&lecteur, ligne_str, CSV_SEPARATOR);
+
+    // Lire le code de la ligne
+    if (!csv_champ_suivant(&lecteur)) return NULL;
     char code_ligne[LINE_MAX_CODE_SIZE];
-    char nom_dep[STATION_NAME_SIZE];
-    char nom_arr[STATION_NAME_SIZE];
-    float temps;
+    strcpy(code_ligne, csv_lire_texte(&lecteur));
 
-    // On pointe en début de la ligne récupérée.
-    char *ptr = ligne_str;
+    // Lire le nom de la station de départ
+    if (!csv_champ_suivant(&lecteur)) return NULL;
+    char nom_dep[STATION_NOM_TAILLE_MAX];
+    strcpy(nom_dep, csv_lire_texte(&lecteur));
 
-    // Ignorer les lignes vides ou les commentaires
-    while (*ptr == ' ') ptr++;
-    if (*ptr == '\0' || *ptr == '\n' || *ptr == '#') {
-        return NULL;
-    }
+    // Lire le nom de la station d'arrivée
+    if (!csv_champ_suivant(&lecteur)) return NULL;
+    char nom_arr[STATION_NOM_TAILLE_MAX];
+    strcpy(nom_arr, csv_lire_texte(&lecteur));
 
-    // Lecture du code de la ligne
-    int i = 0;
-    while (*ptr != CSV_SEPARATOR && *ptr != '\0' && i < LINE_MAX_CODE_SIZE - 1) {
-        code_ligne[i++] = *ptr++;
-    }
-    code_ligne[i] = '\0';
-    // Enlever les espaces de fin
-    while (i > 0 && code_ligne[i-1] == ' ') code_ligne[--i] = '\0';
-
-    // Si nous ne sommes pas sur un séparateur, la ligne dans le fichier est incorrecte.
-    if (*ptr != CSV_SEPARATOR) return NULL;
-    ptr++;
-
-    // Lecture du nom de la station de départ
-    while (*ptr == ' ') ptr++;
-    i = 0;
-    while (*ptr != CSV_SEPARATOR && *ptr != '\0' && i < STATION_NAME_SIZE - 1) {
-        nom_dep[i++] = *ptr++;
-    }
-    nom_dep[i] = '\0';
-    // Enlever les espaces de fin
-    while (i > 0 && nom_dep[i-1] == ' ') nom_dep[--i] = '\0';
-
-    if (*ptr != CSV_SEPARATOR) return NULL;
-    ptr++;
-
-    // Lecture du nom de la station d'arrivée
-    while (*ptr == ' ') ptr++;
-    i = 0;
-    while (*ptr != CSV_SEPARATOR && *ptr != '\0' && i < STATION_NAME_SIZE - 1) {
-        nom_arr[i++] = *ptr++;
-    }
-    nom_arr[i] = '\0';
-    // Enlever les espaces de fin
-    while (i > 0 && nom_arr[i-1] == ' ') nom_arr[--i] = '\0';
-
-    if (*ptr != CSV_SEPARATOR) return NULL;
-    ptr++;
-
-    // Lecture du temps de parcours
-    while (*ptr == ' ') ptr++;
-    if (sscanf(ptr, "%f", &temps) != 1) return NULL;
+    // Lire le temps de parcours
+    if (!csv_champ_suivant(&lecteur)) return NULL;
+    float temps = csv_lire_flottant(&lecteur);
 
     // Rechercher la ligne dans la liste
     Une_ligne *ligne = chercher_ligne(liste_ligne, code_ligne);

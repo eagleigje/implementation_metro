@@ -7,6 +7,8 @@
 #include <string.h>
 #include <stdio.h>
 #include "liste.h"
+#include "csv_utils.h"
+#include "constants.h"
 
 /**
  * Fonction qui insère "un truc" dans la liste. La liste est considérée déjà triée. On ajoute le nouvel élèment
@@ -171,48 +173,33 @@ Un_elem *lire_stations(char *nom_fichier) {
         fprintf(stderr, "Erreur: impossible d'ouvrir le fichier %s\n", nom_fichier);
         return NULL;
     }
-    
+
     Un_elem *liste = NULL;
     char ligne[256];
+
     // Pour chaque ligne trouvée dans le fichier
     while (fgets(ligne, sizeof(ligne), fichier) != NULL) {
-        float lon, lat;
-        
-        // On remplace les ';' par des '\0' pour délimiter les champs du fichier csv.
-        char *ptr = ligne;
-        char *debut_nom = NULL;
-        
-        // longitude, en cas d'erreur, on saute la ligne.
-        if (sscanf(ptr, "%f", &lon) != 1) continue;
-        
-        // On cherche le premier ';'.
-        while (*ptr != ';' && *ptr != '\0') ptr++;
-        if (*ptr == '\0') continue; // Si on ne le trouve pas, on saute la ligne.
-        ptr++; // On ignore le ';'.
-        
-        // latitude, en cas d'erreur, on saute la ligne.
-        while (*ptr == ' ') ptr++; // On ignore les espaces.
-        if (sscanf(ptr, "%f", &lat) != 1) continue;
-        
-        // On cherche le deuxième ';'.
-        while (*ptr != ';' && *ptr != '\0') ptr++;
-        if (*ptr == '\0') continue; // Si on ne le trouve pas, on saute la ligne.
-        ptr++; // On ignore le ';'.
-        
-        // nom de la station.
-        while (*ptr == ' ') ptr++; // Ignorer les espaces
-        debut_nom = ptr;
-        
-        // Suppression du '\n' final
-        char *fin = debut_nom;
-        while (*fin != '\0' && *fin != '\n') fin++;
-        *fin = '\0';
-        
-        // Arrivé ici, on a toutes les données et on peut créer le truc station.
+        Un_lecteur_csv lecteur;
+        csv_init_lecteur(&lecteur, ligne, CSV_SEPARATOR);
+
+        // Lire la longitude
+        if (!csv_champ_suivant(&lecteur)) continue;
+        float lon = csv_lire_flottant(&lecteur);
+
+        // Lire la latitude
+        if (!csv_champ_suivant(&lecteur)) continue;
+        float lat = csv_lire_flottant(&lecteur);
+
+        // Lire le nom de la station
+        if (!csv_champ_suivant(&lecteur)) continue;
+        char nom[STATION_NOM_TAILLE_MAX];
+        strcpy(nom, csv_lire_texte(&lecteur));
+
+        // Créer le truc station
         Une_coord coord = {lon, lat};
         Tdata data;
-        data.sta.nom = (char *)malloc(strlen(debut_nom) + 1);
-        strcpy(data.sta.nom, debut_nom);
+        data.sta.nom = (char *)malloc(strlen(nom) + 1);
+        strcpy(data.sta.nom, nom);
         data.sta.tab_con = NULL;
         data.sta.nb_con = 0;
         data.sta.con_pcc = NULL;
@@ -220,10 +207,10 @@ Un_elem *lire_stations(char *nom_fichier) {
         // On crée la nouvelle station avec :
         // ses coordonnées, ses données et user_value qui vaut la latitude pour trier sur ce champ.
         Un_truc *truc = creer_truc(coord, STA, data, lat);
-        // On Insère la nouvelle station, directement triée grâce au champ user_value
+        // On insère la nouvelle station, directement triée grâce au champ user_value
         liste = inserer_liste_trie(liste, truc);
     }
-    
+
     fclose(fichier);
     return liste;
 }

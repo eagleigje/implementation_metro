@@ -76,10 +76,10 @@ $(TARGET_TESTS): $(COMMON_OBJ) $(TESTS_OBJ)
 # Dépendances
 truc.o: truc.c truc.h coord.h station.h connexion.h
 abr.o: abr.c abr.h abr_type.h liste.h truc.h
-liste.o: liste.c liste.h truc.h station.h connexion.h coord.h
+liste.o: liste.c liste.h truc.h station.h connexion.h coord.h csv_utils.h constants.h
 config.o: config.c config.h
 ligne.o: ligne.c ligne.h constants.h csv_utils.h
-connexion.o: connexion.c connexion.h ligne.h abr.h liste.h truc.h constants.h
+connexion.o: connexion.c connexion.h ligne.h abr.h liste.h truc.h constants.h csv_utils.h
 csv_utils.o: csv_utils.c csv_utils.h
 main.o: main.c config.h liste.h abr.h
 tests.o: tests.c tests.h config.h liste.h abr.h
