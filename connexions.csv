@@ -1,0 +1,28 @@
+# Fichier de connexions du réseau de métro
+# Format : Code_Ligne ; Station_Départ ; Station_Arrivée ; Temps_Parcours
+# Si Temps_Parcours = 0.0, il sera calculé automatiquement à partir de la vitesse et de la distance
+
+# Ligne A (RER A)
+A ; La Défense ; Charles de Gaulle Etoile ; 0.0
+A ; Charles de Gaulle Etoile ; Nation ; 0.0
+A ; Nation ; Gare de Lyon ; 0.0
+
+# Ligne B (RER B)
+B ; Gare du Nord ; Chatelet Les Halles ; 0.0
+B ; Chatelet Les Halles ; Gare du Nord ; 0.0
+
+# Ligne M1 (Métro 1)
+M1 ; La Défense ; Charles de Gaulle Etoile ; 0.0
+M1 ; Charles de Gaulle Etoile ; Chatelet ; 0.0
+M1 ; Chatelet ; Gare de Lyon ; 0.0
+M1 ; Gare de Lyon ; Nation ; 0.0
+
+# Ligne M4 (Métro 4)
+M4 ; Gare du Nord ; Les Halles ; 0.0
+M4 ; Les Halles ; Chatelet ; 0.0
+M4 ; Chatelet ; Gare de Lyon ; 0.0
+
+# Ligne M14 (Métro 14)
+M14 ; Gare de Lyon ; Bercy ; 0.0
+M14 ; Bercy ; Chatelet ; 0.0
+M14 ; Chatelet ; Gare du Nord ; 0.0

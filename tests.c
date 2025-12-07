@@ -12,6 +12,7 @@
 #include "liste.h"
 #include "abr.h"
 #include "ligne.h"
+#include "connexion.h"
 
 /**
  * Fonction qui permet de tester la recherche des noms de stations.
@@ -531,6 +532,96 @@ void test_gestion_memoire() {
 }
 
 /**
+ * Test de lecture et affichage des connexions (Exercice 4).
+ * @param config : La configuration du projet contenant le fichier des connexions.
+ */
+void test_connexions(Une_config *config) {
+    int tests_total = 0;
+    int tests_ok = 0;
+
+    printf("\033[1;34m12. Tests de lecture et affichage des connexions\033[0m\n");
+
+    // Test 12.1: Lecture du fichier connexions.csv
+    printf("  Test 12.1: Lecture du fichier connexions.csv\n");
+    tests_total++;
+
+    // On doit d'abord charger les lignes et les stations
+    Une_ligne *lignes = lire_lignes(config->fichier_lignes);
+    if (lignes == NULL) {
+        printf("    ÉCHEC: impossible de charger les lignes\n");
+        printf("  Bilan: %d/%d tests réussis\n\n", tests_ok, tests_total);
+        return;
+    }
+
+    Un_elem *liste_stations = lire_stations(config->fichier_stations);
+    if (liste_stations == NULL) {
+        printf("    ÉCHEC: impossible de charger les stations\n");
+        detruire_lignes(lignes);
+        printf("  Bilan: %d/%d tests réussis\n\n", tests_ok, tests_total);
+        return;
+    }
+
+    Un_nabr *abr_stations = construire_abr(liste_stations);
+    if (abr_stations == NULL) {
+        printf("    ÉCHEC: impossible de construire l'ABR des stations\n");
+        detruire_liste_et_truc(liste_stations);
+        detruire_lignes(lignes);
+        printf("  Bilan: %d/%d tests réussis\n\n", tests_ok, tests_total);
+        return;
+    }
+
+    Un_elem *connexions = lire_connexions(config->fichier_connexions, lignes, abr_stations);
+    if (connexions == NULL) {
+        printf("    ÉCHEC: fichier non trouvé ou vide\n");
+    } else {
+        printf("    OK: fichier lu avec succès\n");
+        tests_ok++;
+    }
+
+    // Test 12.2: Vérification du contenu des connexions
+    printf("  Test 12.2: Vérification que les connexions contiennent des données\n");
+    tests_total++;
+    if (connexions != NULL && connexions->truc != NULL && connexions->truc->type == CON) {
+        printf("    OK: les connexions contiennent des données valides\n");
+        tests_ok++;
+    } else {
+        printf("    ÉCHEC: les connexions sont invalides\n");
+    }
+
+    // Test 12.3: Affichage des connexions
+    printf("  Test 12.3: Affichage des connexions\n");
+    tests_total++;
+    if (connexions != NULL) {
+        printf("    Connexions chargées:\n");
+        ecrire_connexions(stdout, connexions);
+        printf("    OK: affichage réussi\n");
+        tests_ok++;
+    } else {
+        printf("    ÉCHEC: aucune connexion à afficher\n");
+    }
+
+    // Test 12.4: Vérification du calcul automatique des temps
+    printf("  Test 12.4: Vérification que les temps sont calculés (>0)\n");
+    tests_total++;
+    if (connexions != NULL && connexions->truc != NULL && connexions->truc->user_val > 0.0) {
+        printf("    OK: temps de parcours calculé = %.1f minutes\n", connexions->truc->user_val);
+        tests_ok++;
+    } else {
+        printf("    ÉCHEC: temps de parcours non calculé\n");
+    }
+
+    // Libération de la mémoire
+    if (connexions != NULL) {
+        detruire_liste_et_truc(connexions);
+    }
+    detruire_abr(abr_stations);
+    detruire_liste_et_truc(liste_stations);
+    detruire_lignes(lignes);
+
+    printf("  Bilan: %d/%d tests réussis\n\n", tests_ok, tests_total);
+}
+
+/**
  * Fonction principale des tests.
  * @param argc : Le nombre d'arguments passés en paramètre.
  * @param argv : Les arguments de la ligne de commande.
@@ -624,6 +715,9 @@ int main(const int argc, char *argv[]) {
 
     // Test 11 : Tests de gestion mémoire
     test_gestion_memoire();
+
+    // Test 12 : Tests de lecture et affichage des connexions
+    test_connexions(config);
 
     // On libère toute la mémoire.
     printf("XX. Libération de la mémoire...\n");
