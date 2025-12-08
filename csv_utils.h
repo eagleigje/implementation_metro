@@ -9,7 +9,7 @@
 #define CSV_TAMPON_TAILLE 512
 
 /**
- * Lecteur CSV pour parcourir les champs d'une ligne.
+ * Lecteur CSV pour parcourir les champs d'une ligne, un à un.
  */
 typedef struct _un_lecteur_csv {
     char *ptr_courant;
