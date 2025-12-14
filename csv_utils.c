@@ -3,10 +3,11 @@
  * Utilitaires pour la lecture de fichiers CSV.
  */
 
-#include "csv_utils.h"
-#include "outils.h"
 #include <stdlib.h>
 #include <string.h>
+
+#include "csv_utils.h"
+#include "outils.h"
 
 /**
  * Fonction d'initialisation d'un lecteur CSV pour parcourir une ligne.

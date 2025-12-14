@@ -14,10 +14,10 @@
  * Lecteur CSV pour parcourir les champs d'une ligne, un à un.
  */
 typedef struct _un_lecteur_csv {
-    char *ptr_courant;              // Pointeur vers le début de la ligne à parcourir
-    char separateur;                // Le caractère séparateur CSV à utiliser
-    char tampon[CSV_TAMPON_TAILLE]; // Tampon qui permet de conserver le champ extrait du CSV.
-    int fini;                       // Indicateur de fin de ligne (0 = pas fini, 1 = fini)
+    char *ptr_courant;              ///<  Pointeur vers le début de la ligne à parcourir
+    char separateur;                ///<  Le caractère séparateur CSV à utiliser
+    char tampon[CSV_TAMPON_TAILLE]; ///<  Tampon qui permet de conserver le champ extrait du CSV.
+    int fini;                       ///<  Indicateur de fin de ligne (0 = pas fini, 1 = fini)
 } Un_lecteur_csv;
 
 // Prototypes des fonctions
