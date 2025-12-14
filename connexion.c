@@ -130,6 +130,30 @@ static Un_truc *creer_connexion(char *ligne_str, Une_ligne *liste_ligne, Un_nabr
 
     // Et on crée le truc avec le temps de parcours comme user_val
     Un_truc *connexion = creer_truc(coord_milieu, CON, data, temps);
+    if (connexion == NULL) {
+        fprintf(stderr, "Erreur: échec de création du truc connexion\n");
+        return NULL;
+    }
+
+    // On met à jour le tableau des connexions de la station de départ
+    // On doit réallouer le tableau pour ajouter une nouvelle connexion.
+    sta_dep->data.sta.nb_con++;
+    Un_truc **nouveau_tab = (Un_truc **)realloc(
+        sta_dep->data.sta.tab_con,
+        sta_dep->data.sta.nb_con * sizeof(Un_truc *)
+    );
+    if (nouveau_tab == NULL) {
+        // En cas d'échec, on restaure l'état précédent
+        fprintf(stderr, "Erreur: échec d'allocation pour tab_con\n");
+        sta_dep->data.sta.nb_con--;  // On annule l'incrémentation
+        detruire_truc(connexion);    // On libère la connexion créée
+        // Note: tab_con n'a pas été modifié, il reste intact
+        return NULL;
+    }
+    // On met à jour le pointeur seulement si realloc a réussi
+    sta_dep->data.sta.tab_con = nouveau_tab;
+    // On ajoute la connexion à la fin du tableau
+    sta_dep->data.sta.tab_con[sta_dep->data.sta.nb_con - 1] = connexion;
 
     return connexion;
 }
@@ -152,11 +176,25 @@ Un_elem *lire_connexions(char *nom_fichier, Une_ligne *liste_ligne, Un_nabr *abr
     char ligne[CSV_MAX_CONNECTIONS_LENGTH];
 
     // On parcourt toutes les lignes du fichier
+    int ligne_num = 0;
     while (fgets(ligne, sizeof(ligne), fichier) != NULL) {
+        ligne_num++;
+        // On supprime le retour à la ligne
+        ligne[strcspn(ligne, "\r\n")] = '\0';
+
+        // On ignore les lignes vides et les commentaires (commençant par #)
+        if (ligne[0] == '\0' || ligne[0] == '#') {
+            continue;
+        }
+
         Un_truc *connexion = creer_connexion(ligne, liste_ligne, abr_sta);
         if (connexion != NULL) {
             // On insère en début de liste (pas besoin de tri pour les connexions).
             liste_con = inserer_deb_liste(liste_con, connexion);
+        } else {
+            // On trace l'échec pour faciliter le débogage
+            fprintf(stderr, "Avertissement: échec de création de la connexion ligne %d: %s\n",
+                    ligne_num, ligne);
         }
     }
 
