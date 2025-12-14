@@ -3,12 +3,13 @@
  *  Gestion des listes de lignes de metro.
 */
 
-#include "ligne.h"
-#include "constantes.h"
-#include "csv_utils.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
+#include "ligne.h"
+#include "constantes.h"
+#include "csv_utils.h"
 
 /**
  * Fonction qui créé un maillon d'une ligne
@@ -91,7 +92,7 @@ Une_ligne *lire_lignes(char *nom_fichier) {
 
 /**
  * Fonction qui affiche sur STDOUT la liste des lignes.
- * @param ligne : La liste à afficher.
+ * @param ligne : La liste des lignes à afficher.
  */
 void afficher_lignes(Une_ligne *ligne) {
     Une_ligne *ptr = ligne;
