@@ -147,6 +147,15 @@ Fonctions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Fonction qui cherche le truc le plus proche d'une coordonnée donnée dans l'arbre quaternaire. La recherche est optimisée en explorant d'abord le quadrant le plus proche, puis en explorant les autres quadrants si nécessaire.</p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">aqr</td><td>: L'arbre quaternaire dans lequel chercher. </td></tr>
+    <tr><td class="paramname">coord</td><td>: La coordonnée de référence. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>: Le truc le plus proche, ou NULL si l'arbre est vide. </dd></dl>
 
 </div>
 </div>
@@ -178,6 +187,17 @@ Fonctions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Fonction qui cherche tous les trucs situés dans une zone rectangulaire donnée. La recherche exploite la structure de l'arbre quaternaire pour ne parcourir que les nœuds dont la zone intersecte la zone recherchée.</p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">aqr</td><td>: L'arbre quaternaire dans lequel chercher. </td></tr>
+    <tr><td class="paramname">liste</td><td>: La liste accumulée des trucs trouvés (passée par récursion). </td></tr>
+    <tr><td class="paramname">limite_no</td><td>: Coin Nord-Ouest de la zone recherchée. </td></tr>
+    <tr><td class="paramname">limite_se</td><td>: Coin Sud-Est de la zone recherchée. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>: La liste mise à jour avec les trucs trouvés dans la zone. </dd></dl>
 
 </div>
 </div>
@@ -195,6 +215,15 @@ Fonctions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Fonction qui construit un arbre quaternaire à partir d'une liste de trucs.</p>
+<p>Cette fonction peut modifier les coordonnées des trucs si deux trucs se trouvent à une distance inférieure au seuil calculé. Cela permet d'éviter une subdivision infinie de l'arbre (cas où deux trucs ont les mêmes coordonnées).</p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">liste</td><td>: La liste chaînée de trucs à insérer dans l'arbre. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>: L'arbre quaternaire construit, ou NULL si la liste est vide. </dd></dl>
 
 </div>
 </div>
@@ -212,6 +241,14 @@ Fonctions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Fonction qui détruit un arbre quaternaire et libère toute la mémoire associée. La destruction est récursive : on détruit d'abord les 4 sous-arbres, puis le nœud courant.</p>
+<p>Cette fonction ne libère PAS les trucs contenus dans l'arbre, seulement les nœuds de l'arbre eux-mêmes.</p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">aqr</td><td>: L'arbre quaternaire à détruire. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -243,6 +280,17 @@ Fonctions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Fonction qui insère un truc dans un arbre quaternaire de manière récursive. L'arbre divise l'espace en quatre quadrants : Nord-Ouest, Sud-Ouest, Nord-Est, Sud-Est.</p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">aqr</td><td>: L'arbre quaternaire dans lequel insérer (peut être NULL). </td></tr>
+    <tr><td class="paramname">limite_no</td><td>: Coordonnée du coin Nord-Ouest de la zone couverte par ce nœud. </td></tr>
+    <tr><td class="paramname">limite_se</td><td>: Coordonnée du coin Sud-Est de la zone couverte par ce nœud. </td></tr>
+    <tr><td class="paramname">truc</td><td>: Le truc, à insérer (station ou connexion). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>: L'arbre quaternaire mis à jour avec le nouveau truc. </dd></dl>
 
 </div>
 </div>
