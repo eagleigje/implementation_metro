@@ -29,19 +29,24 @@ Le projet est organisé en plusieurs modules :
 2. Structures de données avancées :
    - liste.h/liste.c         : Listes chaînées de trucs
    - abr.h/abr.c/abr_type.h  : Arbres binaires de recherche (pour recherche rapide de stations)
-   - aqrtopo.h               : Arbres quaternaires (pour représentation topologique)
+   - aqrtopo.h/aqrtopo.c     : Arbres quaternaires (pour représentation topologique)
    - ligne.h/ligne.c         : Gestion des lignes de métro
 
-3. Programmes :
+3. Utilitaires :
+   - outils.h/outils.c       : Fonctions utilitaires génériques (trim, strdup_custom)
+   - csv_utils.h/csv_utils.c : Lecteur CSV centralisé avec validation
+   - constantes.h            : Constantes globales du projet
+
+4. Programmes :
    - main.c                  : Application principale (interface graphique à implémenter)
    - tests.c/tests.h         : Programme de tests et validation
 
-4. Configuration :
+5. Configuration :
    - config.h/config.c       : Système de configuration .ini
    - config.ini              : Fichier de configuration principal
    - config_alt.ini          : Exemple de configuration alternative
 
-5. Fichiers de données :
+6. Fichiers de données :
    - stations.csv : Fichier contenant les stations (longitude;latitude;nom), allégé pour les tests.
    - stations_paris.csv : Fichier contenant toutes les stations parisiennes (cf. LOCALISATION DES DONNEES).
    - lignes.csv : Fichier contenant les lignes (code;vitesse;intervalle;couleur).
@@ -49,17 +54,17 @@ Le projet est organisé en plusieurs modules :
    - connexions.csv : Fichier contenant les connexions (test).
    - connexions_paris.csv : Fichier contenant toutes les connexions parisiennes (généré automatiquement).
 
-6. Programmes optionnels à installer :
+7. Programmes optionnels à installer :
     - doxygen : Afin de générer la documentation technique du projet.
     - valgrind : Pour vérifier que le projet libère bien toute la mémoire à la sortie.
     - glibc-debug : Pour valgrind.
 
-7. Documentation :
+8. Documentation :
     - doc/projet-metro2025.pdf         : Le PDF du projet
     - doc/projet/html/index.html       : La documentation Doxygen du projet
     - README_GENERER_CONNEXIONS.txt    : Guide d'utilisation du script de génération des connexions
 
-8. Scripts utilitaires :
+9. Scripts utilitaires :
     - generer_connexions_paris.py      : Script Python pour générer connexions_paris.csv automatiquement
 
 COMPILATION
@@ -232,12 +237,12 @@ implémentées. Voici l'état d'avancement :
    - ecrire_connexions
    - Script Python pour générer connexions_paris.csv (voir README_GENERER_CONNEXIONS.txt)
 
-5. Exercice 5 : Arbres quaternaires pour la topologie ......................... A FAIRE
-   - inserer_aqr
-   - construire_aqr
-   - detruire_aqr
-   - chercher_aqr
-   - chercher_zone
+5. Exercice 5 : Arbres quaternaires pour la topologie .........................  FAIT
+   - inserer_aqr (insertion récursive dans les 4 quadrants)
+   - construire_aqr (avec calcul automatique du seuil et détection de collisions)
+   - detruire_aqr (destruction récursive)
+   - chercher_aqr (recherche optimisée du truc le plus proche)
+   - chercher_zone (recherche de tous les trucs dans un rectangle)
 
 6. Exercice 6 : Algorithme de Dijkstra pour le plus court chemin .............. A FAIRE
    - extraire_deb_liste (implémentée et testée)
