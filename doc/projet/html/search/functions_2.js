@@ -7,5 +7,6 @@ var searchData=
   ['detruire_5fliste_4',['detruire_liste',['../liste_8c.html#a85cbb4860e615edb4747fc70a45c6083',1,'detruire_liste(Un_elem *liste):&#160;liste.c'],['../liste_8h.html#a85cbb4860e615edb4747fc70a45c6083',1,'detruire_liste(Un_elem *liste):&#160;liste.c']]],
   ['detruire_5fliste_5fet_5ftruc_5',['detruire_liste_et_truc',['../liste_8c.html#a35384b786da24a87874b3021616d8868',1,'detruire_liste_et_truc(Un_elem *liste):&#160;liste.c'],['../liste_8h.html#a35384b786da24a87874b3021616d8868',1,'detruire_liste_et_truc(Un_elem *liste):&#160;liste.c']]],
   ['detruire_5ftruc_6',['detruire_truc',['../truc_8c.html#ab1fa2fb61a2f706fcf73c853fb934d50',1,'detruire_truc(Un_truc *truc):&#160;truc.c'],['../truc_8h.html#ab1fa2fb61a2f706fcf73c853fb934d50',1,'detruire_truc(Un_truc *truc):&#160;truc.c']]],
-  ['distance_5fcarree_7',['distance_carree',['../aqrtopo_8c.html#a710d5ecc4e07ec140a126a678e64073e',1,'aqrtopo.c']]]
+  ['dijkstra_7',['dijkstra',['../dijkstra_8c.html#aa38774b9dbc887d7dae1c8590f69e89b',1,'dijkstra(Un_elem *liste_sta, Un_truc *sta_dep):&#160;dijkstra.c'],['../dijkstra_8h.html#aa38774b9dbc887d7dae1c8590f69e89b',1,'dijkstra(Un_elem *liste_sta, Un_truc *sta_dep):&#160;dijkstra.c']]],
+  ['distance_5fcarree_8',['distance_carree',['../aqrtopo_8c.html#a710d5ecc4e07ec140a126a678e64073e',1,'aqrtopo.c']]]
 ];

@@ -13,5 +13,7 @@ var dir_e4e34ef61b6fc011bbdce2dda618d234 =
     [ "test_exercice4.c", "test__exercice4_8c.html", "test__exercice4_8c" ],
     [ "test_exercice4.h", "test__exercice4_8h.html", "test__exercice4_8h" ],
     [ "test_exercice5.c", "test__exercice5_8c.html", "test__exercice5_8c" ],
-    [ "test_exercice5.h", "test__exercice5_8h.html", "test__exercice5_8h" ]
+    [ "test_exercice5.h", "test__exercice5_8h.html", "test__exercice5_8h" ],
+    [ "test_exercice6.c", "test__exercice6_8c.html", "test__exercice6_8c" ],
+    [ "test_exercice6.h", "test__exercice6_8h.html", "test__exercice6_8h" ]
 ];

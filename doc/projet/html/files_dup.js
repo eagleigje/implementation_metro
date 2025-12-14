@@ -14,6 +14,8 @@ var files_dup =
     [ "coord.h", "coord_8h.html", "coord_8h" ],
     [ "csv_utils.c", "csv__utils_8c.html", "csv__utils_8c" ],
     [ "csv_utils.h", "csv__utils_8h.html", "csv__utils_8h" ],
+    [ "dijkstra.c", "dijkstra_8c.html", "dijkstra_8c" ],
+    [ "dijkstra.h", "dijkstra_8h.html", "dijkstra_8h" ],
     [ "generer_connexions_paris.py", "generer__connexions__paris_8py.html", "generer__connexions__paris_8py" ],
     [ "ligne.c", "ligne_8c.html", "ligne_8c" ],
     [ "ligne.h", "ligne_8h.html", "ligne_8h" ],
