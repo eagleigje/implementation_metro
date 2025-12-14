@@ -6,12 +6,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
 #include "test_exercice2.h"
 #include "../liste.h"
 #include "../truc.h"
 
 /**
- * Test de recherche de stations dans l'ABR.
+ * Fonction de test de recherche de stations dans l'ABR.
  * @param abr_stations : L'ABR des stations.
  */
 void test_recherche_abr(Un_nabr *abr_stations) {
@@ -45,7 +46,7 @@ void test_recherche_abr(Un_nabr *abr_stations) {
 }
 
 /**
- * Tests de robustesse pour l'ABR.
+ * Fonction de tests de robustesse de l'ABR.
  * @param test_label : Le numéro/label du test à afficher.
  */
 void test_robustesse_abr(const char *test_label) {
@@ -64,7 +65,7 @@ void test_robustesse_abr(const char *test_label) {
         printf("    ERREUR: devrait retourner NULL\n");
     }
 
-    // Test X.2 : Construction ABR depuis liste vide
+    // Test X.2 : Construction ABR à partir d'une liste vide
     printf("  Test %s.2: Construction ABR depuis liste vide\n", test_label);
     tests_total++;
     Un_nabr *abr_vide = construire_abr(NULL);
