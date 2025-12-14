@@ -2,7 +2,9 @@
  * PROJET MAIN3 / METRO
  * Librairie gérant les "trucs". Qui sont soit des stations, soit des connexions entre des stations.
 */
+
 #include <stdlib.h>
+
 #include "truc.h"
 
 /**
@@ -37,11 +39,11 @@ void detruire_truc(Un_truc *truc) {
     }
     
     if (truc->type == STA) {
-        // Liberer le nom de la station
+        // On libère le nom de la station
         if (truc->data.sta.nom != NULL) {
             free(truc->data.sta.nom);
         }
-        // Liberer le tableau de connexions
+        // On libère le tableau de connexions
         if (truc->data.sta.tab_con != NULL) {
             free(truc->data.sta.tab_con);
         }
