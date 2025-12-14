@@ -97,9 +97,13 @@ $(function(){initNavTree('struct__un__lecteur__csv.html','',''); });
 <tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Champs de données</h2></td></tr>
 <tr class="memitem:aa0c1f5bb52b3589d2ae1189613cc0523" id="r_aa0c1f5bb52b3589d2ae1189613cc0523"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa0c1f5bb52b3589d2ae1189613cc0523">ptr_courant</a></td></tr>
-<tr class="memitem:a7c1e8c951c4a5feb6c1574b13d2f8067" id="r_a7c1e8c951c4a5feb6c1574b13d2f8067"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7c1e8c951c4a5feb6c1574b13d2f8067">tampon</a> [<a class="el" href="csv__utils_8h.html#a5b4777e03a6b9e715076b90d4a89228b">CSV_TAMPON_TAILLE</a>]</td></tr>
+<tr class="memdesc:aa0c1f5bb52b3589d2ae1189613cc0523"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointeur vers le début de la ligne à parcourir.  <br /></td></tr>
 <tr class="memitem:af9fff99839bdeb842fcca633b517dc0b" id="r_af9fff99839bdeb842fcca633b517dc0b"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af9fff99839bdeb842fcca633b517dc0b">separateur</a></td></tr>
+<tr class="memdesc:af9fff99839bdeb842fcca633b517dc0b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Le caractère séparateur CSV à utiliser.  <br /></td></tr>
+<tr class="memitem:a7c1e8c951c4a5feb6c1574b13d2f8067" id="r_a7c1e8c951c4a5feb6c1574b13d2f8067"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7c1e8c951c4a5feb6c1574b13d2f8067">tampon</a> [<a class="el" href="csv__utils_8h.html#a5b4777e03a6b9e715076b90d4a89228b">CSV_TAMPON_TAILLE</a>]</td></tr>
+<tr class="memdesc:a7c1e8c951c4a5feb6c1574b13d2f8067"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tampon qui permet de conserver le champ extrait du CSV.  <br /></td></tr>
 <tr class="memitem:af9978ab0c0170fa959f6317dfdad153c" id="r_af9978ab0c0170fa959f6317dfdad153c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af9978ab0c0170fa959f6317dfdad153c">fini</a></td></tr>
+<tr class="memdesc:af9978ab0c0170fa959f6317dfdad153c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indicateur de fin de ligne (0 = pas fini, 1 = fini).  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Description détaillée</h2>
 <div class="textblock"><p>Lecteur CSV pour parcourir les champs d'une ligne, un à un. </p>
@@ -116,6 +120,8 @@ Champs de données</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Indicateur de fin de ligne (0 = pas fini, 1 = fini). </p>
+
 </div>
 </div>
 <a id="aa0c1f5bb52b3589d2ae1189613cc0523" name="aa0c1f5bb52b3589d2ae1189613cc0523"></a>
@@ -129,6 +135,8 @@ Champs de données</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Pointeur vers le début de la ligne à parcourir. </p>
 
 </div>
 </div>
@@ -144,6 +152,8 @@ Champs de données</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Le caractère séparateur CSV à utiliser. </p>
+
 </div>
 </div>
 <a id="a7c1e8c951c4a5feb6c1574b13d2f8067" name="a7c1e8c951c4a5feb6c1574b13d2f8067"></a>
@@ -157,6 +167,8 @@ Champs de données</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Tampon qui permet de conserver le champ extrait du CSV. </p>
 
 </div>
 </div>

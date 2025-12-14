@@ -91,9 +91,9 @@ $(function(){initNavTree('aqrtopo_8c.html','',''); });
   <div class="headertitle"><div class="title">Référence du fichier aqrtopo.c</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="aqrtopo_8h_source.html">aqrtopo.h</a>&quot;</code><br />
-<code>#include &lt;stdlib.h&gt;</code><br />
+<div class="textblock"><code>#include &lt;stdlib.h&gt;</code><br />
 <code>#include &lt;math.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="aqrtopo_8h_source.html">aqrtopo.h</a>&quot;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Fonctions</h2></td></tr>
@@ -125,7 +125,7 @@ Fonctions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Fonction qui calcule un seuil de distance minimal pour l'arbre quaternaire. Le seuil est calculé automatiquement en fonction de la taille de la zone : il correspond à environ 1/10000ème de la diagonale de la zone.</p>
+<p>Fonction qui calcule un seuil de distance minimal de l'arbre quaternaire. Le seuil est calculé automatiquement en fonction de la taille de la zone : il correspond à environ 1/10000ème de la diagonale de la zone.</p>
 <p>Ce seuil permet d'éviter d'insérer deux trucs aux coordonnées trop proches, ce qui causerait une subdivision infinie de l'arbre.</p>
 <dl class="params"><dt>Paramètres</dt><dd>
   <table class="params">
@@ -156,7 +156,7 @@ Fonctions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Fonction qui cherche le truc le plus proche d'une coordonnée donnée dans l'arbre quaternaire. La recherche est optimisée en explorant d'abord le quadrant le plus proche, puis en explorant les autres quadrants si nécessaire.</p>
+<p>Fonction qui cherche le truc le plus proche d'une coordonnée donnée dans l'arbre quaternaire. La recherche est optimisée en explorant d'abord le quadrant le plus proche, puis en explorant les autres quadrants uniquement si c'est nécessaire.</p>
 <dl class="params"><dt>Paramètres</dt><dd>
   <table class="params">
     <tr><td class="paramname">aqr</td><td>: L'arbre quaternaire dans lequel chercher. </td></tr>
@@ -196,7 +196,7 @@ Fonctions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Fonction qui cherche tous les trucs situés dans une zone rectangulaire donnée. La recherche exploite la structure de l'arbre quaternaire pour ne parcourir que les nœuds dont la zone intersecte la zone recherchée.</p>
+<p>Fonction qui cherche tous les trucs situés dans une zone rectangulaire donnée. La recherche exploite la structure de l'arbre quaternaire pour ne parcourir que les nœuds dont la zone "intersecte" la zone recherchée.</p>
 <dl class="params"><dt>Paramètres</dt><dd>
   <table class="params">
     <tr><td class="paramname">aqr</td><td>: L'arbre quaternaire dans lequel chercher. </td></tr>
@@ -250,8 +250,8 @@ Fonctions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Fonction qui détruit un arbre quaternaire et libère toute la mémoire associée. La destruction est récursive : on détruit d'abord les 4 sous-arbres, puis le nœud courant.</p>
-<p>Cette fonction ne libère PAS les trucs contenus dans l'arbre, seulement les nœuds de l'arbre eux-mêmes.</p>
+<p>Fonction qui détruit un arbre quaternaire et libère toute la mémoire associée. La destruction est récursive : on détruit d'abord les quatre sous-arbres, puis le nœud courant.</p>
+<p>Cette fonction ne libère pas les trucs contenus dans l'arbre, seulement les nœuds de l'arbre eux-mêmes.</p>
 <dl class="params"><dt>Paramètres</dt><dd>
   <table class="params">
     <tr><td class="paramname">aqr</td><td>: L'arbre quaternaire à détruire. </td></tr>
@@ -279,7 +279,7 @@ Fonctions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Fonction qui calcule la distance au carré entre deux coordonnées. On utilise le carré pour éviter le calcul coûteux de la racine carrée, car on ne compare que des distances relatives.</p>
+<p>Fonction qui calcule la distance au carré entre deux coordonnées. On utilise le carré pour éviter le calcul trop lent de la racine carrée, car on ne compare que des distances relatives.</p>
 <dl class="params"><dt>Paramètres</dt><dd>
   <table class="params">
     <tr><td class="paramname">coord1</td><td>: Première coordonnée. </td></tr>
@@ -322,7 +322,7 @@ Fonctions</h2></td></tr>
 <p>Fonction qui insère un truc dans un arbre quaternaire de manière récursive. L'arbre divise l'espace en quatre quadrants : Nord-Ouest, Sud-Ouest, Nord-Est, Sud-Est.</p>
 <dl class="params"><dt>Paramètres</dt><dd>
   <table class="params">
-    <tr><td class="paramname">aqr</td><td>: L'arbre quaternaire dans lequel insérer (peut être NULL). </td></tr>
+    <tr><td class="paramname">aqr</td><td>: L'arbre quaternaire dans lequel on veut insérer (peut être NULL). </td></tr>
     <tr><td class="paramname">limite_no</td><td>: Coordonnée du coin Nord-Ouest de la zone couverte par ce nœud. </td></tr>
     <tr><td class="paramname">limite_se</td><td>: Coordonnée du coin Sud-Est de la zone couverte par ce nœud. </td></tr>
     <tr><td class="paramname">truc</td><td>: Le truc, à insérer (station ou connexion). </td></tr>

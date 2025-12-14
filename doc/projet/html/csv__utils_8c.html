@@ -91,9 +91,10 @@ $(function(){initNavTree('csv__utils_8c.html','',''); });
   <div class="headertitle"><div class="title">Référence du fichier csv_utils.c</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="csv__utils_8h_source.html">csv_utils.h</a>&quot;</code><br />
-<code>#include &lt;stdlib.h&gt;</code><br />
+<div class="textblock"><code>#include &lt;stdlib.h&gt;</code><br />
 <code>#include &lt;string.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="csv__utils_8h_source.html">csv_utils.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="outils_8h_source.html">outils.h</a>&quot;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Fonctions</h2></td></tr>
@@ -119,7 +120,7 @@ Fonctions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Avance au champ suivant dans la ligne CSV. Cette fonction extrait le prochain champ et le place dans le tampon interne. Les espaces en début et fin de champ sont automatiquement supprimés.</p>
+<p>Fonction qui permet d'avancer au champ suivant dans la ligne CSV. Cette fonction extrait le prochain champ et le place dans le tampon interne. Les espaces en début et fin de champ sont automatiquement supprimés.</p>
 <dl class="params"><dt>Paramètres</dt><dd>
   <table class="params">
     <tr><td class="paramname">lecteur</td><td>: Pointeur vers le lecteur. </td></tr>
@@ -144,7 +145,7 @@ Fonctions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Vérifie si le lecteur a atteint la fin de la ligne. Utile pour détecter si tous les champs ont été lus.</p>
+<p>Fonction qui vérifie si le lecteur a atteint la fin de la ligne. Permet de détecter si tous les champs ont bien été lus.</p>
 <dl class="params"><dt>Paramètres</dt><dd>
   <table class="params">
     <tr><td class="paramname">lecteur</td><td>: Pointeur vers le lecteur. </td></tr>
@@ -178,7 +179,7 @@ Fonctions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Initialise un lecteur CSV pour parcourir une ligne. Le lecteur est positionné au début de la ligne, afin de lire le premier champ. </p><dl class="params"><dt>Paramètres</dt><dd>
+<p>Fonction d'initialisation d'un lecteur CSV pour parcourir une ligne. Le lecteur est positionné au début de la ligne, afin de lire le premier champ. </p><dl class="params"><dt>Paramètres</dt><dd>
   <table class="params">
     <tr><td class="paramname">lecteur</td><td>: Pointeur vers le lecteur à initialiser. </td></tr>
     <tr><td class="paramname">ligne</td><td>: La ligne CSV à parcourir (ne doit pas être NULL). </td></tr>
@@ -203,7 +204,7 @@ Fonctions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Récupère le champ courant comme entier. Utilise atoi() pour la conversion.</p>
+<p>Fonction de récupèration du champ courant en tant qu'entier. Utilise atoi() pour la conversion.</p>
 <dl class="params"><dt>Paramètres</dt><dd>
   <table class="params">
     <tr><td class="paramname">lecteur</td><td>: Pointeur vers le lecteur. </td></tr>
@@ -228,7 +229,7 @@ Fonctions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Récupère le champ courant comme nombre flottant. Utilise atof() pour la conversion.</p>
+<p>Fonction de récupèration du champ courant en tant que nombre flottant. Utilise atof() pour la conversion.</p>
 <dl class="params"><dt>Paramètres</dt><dd>
   <table class="params">
     <tr><td class="paramname">lecteur</td><td>: Pointeur vers le lecteur. </td></tr>
@@ -257,7 +258,7 @@ Fonctions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Récupère le champ courant comme chaîne de caractères. Le champ est déjà nettoyé (espaces en début/fin enlevés) par <a class="el" href="#a2c8d70fccbf5d01cf64bc9b6a80410a8">csv_champ_suivant()</a>.</p>
+<p>Fonction de récupèration du champ courant comme chaîne de caractères. Le champ est déjà nettoyé (espaces en début/fin enlevés) par <a class="el" href="#a2c8d70fccbf5d01cf64bc9b6a80410a8">csv_champ_suivant()</a>.</p>
 <p>ATTENTION : Le pointeur retourné pointe vers le tampon interne du lecteur. S'il est libéré, il sera écrasé au prochain appel de <a class="el" href="#a2c8d70fccbf5d01cf64bc9b6a80410a8">csv_champ_suivant()</a>.</p>
 <dl class="params"><dt>Paramètres</dt><dd>
   <table class="params">
