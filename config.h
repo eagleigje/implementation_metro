@@ -5,6 +5,8 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
+#define MAX_CONFIG_LINE_LENGTH 256  // Taille maximale d'une ligne dans le fichier de configuration.
+
 /**
  * Structure définissant une configuration utilisable par le projet.
  */

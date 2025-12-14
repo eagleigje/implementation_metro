@@ -17,14 +17,14 @@
  * @return La configuration récupérée dans le fichier ou NULL en cas d'erreur.
  */
 Une_config *lire_config(const char *nom_fichier) {
-    // Ouverture du fichier de configuration, en lecture seule.
+    // Ouverture du fichier de configuration en lecture seule.
     FILE *fichier = fopen(nom_fichier, "r");
     if (fichier == NULL) {
         fprintf(stderr, "Erreur: impossible d'ouvrir le fichier de configuration %s\n", nom_fichier);
         return NULL;
     }
 
-    // Allocation de la mémoire pour la configuration.
+    // Allocation de la mémoire pour stocker la configuration.
     Une_config *config = (Une_config *)malloc(sizeof(Une_config));
     if (config == NULL) {
         fprintf(stderr, "Erreur: impossible de charger le fichier de configuration %s\n", nom_fichier);
@@ -32,19 +32,19 @@ Une_config *lire_config(const char *nom_fichier) {
         return NULL;
     }
 
-    // Initialisation avec des valeurs par défaut pour traiter les valeurs absentes plus loin.
+    // On initialise la structure avec des valeurs par défaut pour traiter les valeurs absentes plus loin.
     config->fichier_stations = NULL;
     config->fichier_lignes = NULL;
     config->fichier_connexions = NULL;
     config->temps_correspondance = 3.0f;
     config->temps_arret = 0.5f;
 
-    char ligne[256];
-    // Lecture du fichier de configuration, ligne par ligne.
+    char ligne[MAX_CONFIG_LINE_LENGTH];
+    // On lit le fichier de configuration, ligne par ligne.
     while (fgets(ligne, sizeof(ligne), fichier) != NULL) {
-        // Enlever le retour à la ligne.
+        // On supprime le retour à la ligne.
         ligne[strcspn(ligne, "\r\n")] = '\0';
-        // Suppression des espaces en début et fin de chaîne.
+        // On supprime les espaces en début et fin de chaîne.
         char *ligne_trim = trim(ligne);
         // On ignore les lignes vides et les commentaires, en se basant sur le premier caractère de la chaîne.
         if (ligne_trim[0] == '\0' || ligne_trim[0] == '#' || ligne_trim[0] == ';') {
@@ -90,8 +90,8 @@ Une_config *lire_config(const char *nom_fichier) {
     }
     fclose(fichier);
 
-    // Verifier que les fichiers obligatoires au projet sont bien définis.
-    // Sinon, on donne des valeurs par défaut.
+    // On finit par vérifier que les fichiers obligatoires au projet sont bien définis.
+    // Sinon, on donne des valeurs par défaut ce qui a peu de chance de fonctionner.
     if (config->fichier_stations == NULL) {
         config->fichier_stations = strdup_custom("stations.csv");
     }
