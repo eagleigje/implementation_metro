@@ -8,7 +8,7 @@
 #define STATION_H
 
 /**
-* Une station est définie par son nom et l'ensemble des connexions qu'elle offre pour rejoindre d'autres stations.
+ * Une station est définie par son nom et l'ensemble des connexions qu'elle offre pour rejoindre d'autres stations.
  */
 typedef struct _une_station {
     char *nom;                  ///< Le nom de la station.
