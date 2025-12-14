@@ -5,12 +5,13 @@
 
 #include <stdio.h>
 #include <string.h>
+
 #include "test_csv_utils.h"
 #include "../csv_utils.h"
 #include "../constantes.h"
 
 /**
- * Tests du lecteur CSV générique.
+ * Fonction de tests du lecteur CSV générique.
  * @param test_label : Le numéro/label du test à afficher.
  */
 void test_csv_utils(const char *test_label) {

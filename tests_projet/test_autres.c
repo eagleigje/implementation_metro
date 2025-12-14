@@ -4,13 +4,14 @@
  */
 
 #include <stdio.h>
+
 #include "test_autres.h"
 #include "../config.h"
 #include "../liste.h"
 #include "../abr.h"
 
 /**
- * Tests de gestion des configurations invalides.
+ * Fonction de tests de gestion des configurations invalides.
  * @param test_label : Le numéro/label du test à afficher.
  */
 void test_config_invalide(const char *test_label) {
@@ -41,7 +42,7 @@ void test_config_invalide(const char *test_label) {
 }
 
 /**
- * Tests de lecture de fichiers CSV malformés.
+ * Fonction de tests de lecture de fichiers CSV malformés.
  * @param test_label : Le numéro/label du test à afficher.
  */
 void test_csv_malformes(const char *test_label) {
@@ -105,7 +106,7 @@ void test_csv_malformes(const char *test_label) {
 }
 
 /**
- * Tests de gestion mémoire avec destruction de structures.
+ * Fonction de tests de la gestion mémoire avec destruction de structures.
  * @param test_label : Le numéro/label du test à afficher.
  */
 void test_gestion_memoire(const char *test_label) {
