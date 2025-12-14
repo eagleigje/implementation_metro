@@ -5,15 +5,22 @@
 
 #include <stdio.h>
 #include <string.h>
+
 #include "test_exercice3.h"
 #include "../ligne.h"
 
+/**
+ * Fonction de test pour la lecture et la gestion des lignes de métro (Exercice 3).
+ * Teste la lecture depuis un fichier CSV, l'affichage, la recherche et la robustesse.
+ * @param config : La configuration contenant le chemin vers le fichier lignes.csv.
+ * @param test_label : Le numéro/label du test à afficher.
+ */
 void test_lignes(Une_config *config, const char *test_label) {
     printf("\033[1;34m%s. Tests de lecture et affichage des lignes\033[0m\n", test_label);
     int tests_ok = 0;
     int tests_total = 0;
 
-    // Test X.1: Lecture du fichier lignes depuis la configuration
+    // Test X.1 : Lecture du fichier lignes depuis la configuration
     printf("  Test %s.1: Lecture du fichier %s\n", test_label, config->fichier_lignes);
     tests_total++;
     Une_ligne *lignes = lire_lignes(config->fichier_lignes);
@@ -30,7 +37,7 @@ void test_lignes(Une_config *config, const char *test_label) {
         printf("    ERREUR: impossible de charger les lignes\n");
     }
 
-    // Test X.2: Affichage des lignes
+    // Test X.2 : Affichage des lignes
     if (lignes != NULL) {
         printf("  Test %s.2: Affichage des lignes\n", test_label);
         tests_total++;
@@ -40,11 +47,11 @@ void test_lignes(Une_config *config, const char *test_label) {
         tests_ok++;
     }
 
-    // Test X.3: Recherche d'une ligne existante
+    // Test X.3 : Recherche d'une ligne existante
     if (lignes != NULL) {
         printf("  Test %s.3: Recherche ligne existante (première ligne du fichier)\n", test_label);
         tests_total++;
-        // On teste avec le code de la première ligne chargée (test dynamique)
+        // On teste avec le code de la première ligne chargée (test dynamique).
         char *code_test = lignes->code;
         Une_ligne *ligne_trouvee = chercher_ligne(lignes, code_test);
         if (ligne_trouvee != NULL) {
@@ -56,7 +63,7 @@ void test_lignes(Une_config *config, const char *test_label) {
         }
     }
 
-    // Test X.4: Recherche d'une ligne inexistante
+    // Test X.4 : Recherche d'une ligne inexistante
     if (lignes != NULL) {
         printf("  Test %s.4: Recherche ligne inexistante\n", test_label);
         tests_total++;
@@ -69,14 +76,14 @@ void test_lignes(Une_config *config, const char *test_label) {
         }
     }
 
-    // Test X.5: Recherche sensible à la casse
+    // Test X.5 : Recherche sensible à la casse
     if (lignes != NULL) {
         printf("  Test %s.5: Recherche sensible à la casse\n", test_label);
         tests_total++;
         // On teste avec une version en minuscule du code de la première ligne
         char code_minuscule[10];
         strcpy(code_minuscule, lignes->code);
-        // Convertir en minuscule
+        // On convertit en minuscule
         for (int i = 0; code_minuscule[i]; i++) {
             if (code_minuscule[i] >= 'A' && code_minuscule[i] <= 'Z') {
                 code_minuscule[i] = code_minuscule[i] + ('a' - 'A');
@@ -91,7 +98,7 @@ void test_lignes(Une_config *config, const char *test_label) {
         }
     }
 
-    // Test X.6: Lecture d'un fichier lignes inexistant
+    // Test X.6 : Lecture d'un fichier lignes inexistant
     printf("  Test %s.6: Lecture fichier lignes inexistant\n", test_label);
     tests_total++;
     Une_ligne *lignes_invalide = lire_lignes("lignes_inexistantes_12345.csv");
@@ -103,7 +110,7 @@ void test_lignes(Une_config *config, const char *test_label) {
         detruire_lignes(lignes_invalide);
     }
 
-    // Libération de la mémoire
+    // Et on libère de la mémoire
     if (lignes != NULL) {
         detruire_lignes(lignes);
     }
