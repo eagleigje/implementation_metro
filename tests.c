@@ -114,7 +114,7 @@ int main(const int argc, char *argv[]) {
     test_arbres_quaternaires("14");
 
     // On libère toute la mémoire.
-    printf("XX. Libération de la mémoire...\n");
+    printf("\033[1;34mFinal. Libération de la mémoire...\033[0m\n");
     detruire_liste_et_truc(liste_stations);  // Destruction de la liste et des stations
     detruire_abr(abr); // Destruction de l'ABR.
     detruire_config(config); // Destruction de la configuration de départ.
