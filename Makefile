@@ -20,13 +20,14 @@ CFLAGS = -Wall -Wextra -g -O3
 LDFLAGS = -lm
 
 # Fichiers objets communs
-COMMON_OBJ = truc.o liste.o config.o abr.o ligne.o connexion.o csv_utils.o aqrtopo.o outils.o
+COMMON_OBJ = truc.o liste.o config.o abr.o ligne.o connexion.o csv_utils.o aqrtopo.o outils.o dijkstra.o
 
 # Fichiers objets spécifiques
 MAIN_OBJ = main.o
 TESTS_OBJ = tests.o tests_projet/test_csv_utils.o tests_projet/test_exercice1.o \
             tests_projet/test_exercice2.o tests_projet/test_exercice3.o \
             tests_projet/test_exercice4.o tests_projet/test_exercice5.o \
+            tests_projet/test_exercice6.o \
             tests_projet/test_autres.o
 
 # Exécutables
@@ -84,6 +85,7 @@ connexion.o: connexion.c connexion.h ligne.h abr.h liste.h truc.h constantes.h c
 csv_utils.o: csv_utils.c csv_utils.h outils.h
 aqrtopo.o: aqrtopo.c aqrtopo.h truc.h liste.h
 outils.o: outils.c outils.h
+dijkstra.o: dijkstra.c dijkstra.h liste.h truc.h
 main.o: main.c config.h liste.h abr.h
 tests.o: tests.c tests.h config.h liste.h abr.h
 tests_projet/test_csv_utils.o: tests_projet/test_csv_utils.c tests_projet/test_csv_utils.h csv_utils.h
@@ -92,6 +94,7 @@ tests_projet/test_exercice2.o: tests_projet/test_exercice2.c tests_projet/test_e
 tests_projet/test_exercice3.o: tests_projet/test_exercice3.c tests_projet/test_exercice3.h config.h ligne.h
 tests_projet/test_exercice4.o: tests_projet/test_exercice4.c tests_projet/test_exercice4.h config.h ligne.h liste.h abr.h connexion.h
 tests_projet/test_exercice5.o: tests_projet/test_exercice5.c tests_projet/test_exercice5.h aqrtopo.h liste.h truc.h
+tests_projet/test_exercice6.o: tests_projet/test_exercice6.c tests_projet/test_exercice6.h dijkstra.h liste.h truc.h ligne.h
 tests_projet/test_autres.o: tests_projet/test_autres.c tests_projet/test_autres.h config.h liste.h abr.h
 
 # Cible pour exécuter les tests

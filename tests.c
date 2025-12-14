@@ -113,6 +113,9 @@ int main(const int argc, char *argv[]) {
     // Test 14 : Tests des arbres quaternaires
     test_arbres_quaternaires("14");
 
+    // Test 15 : Dijkstra et plus court chemin
+    test_dijkstra("15", config);
+
     // On libère toute la mémoire.
     printf("\033[1;34mFinal. Libération de la mémoire...\033[0m\n");
     detruire_liste_et_truc(liste_stations);  // Destruction de la liste et des stations
