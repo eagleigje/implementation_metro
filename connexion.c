@@ -3,6 +3,11 @@
  *  Gestion des connexions entre stations.
 */
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <math.h>
+
 #include "connexion.h"
 #include "ligne.h"
 #include "abr.h"
@@ -10,10 +15,6 @@
 #include "truc.h"
 #include "constantes.h"
 #include "csv_utils.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <math.h>
 
 /**
  * Fonction qui calcule la distance entre deux coordonnées (formule de Haversine).
@@ -30,7 +31,7 @@ static float calculer_distance(Une_coord coord1, Une_coord coord2) {
     float delta_lat = (coord2.lat - coord1.lat) * M_PI / 180.0;
     float delta_lon = (coord2.lon - coord1.lon) * M_PI / 180.0;
 
-    // Formule de Haversine
+    // Applicaiton de la formule de Haversine : https://fr.wikipedia.org/wiki/Formule_de_haversine
     float a = sin(delta_lat / 2.0) * sin(delta_lat / 2.0) +
               cos(lat1_rad) * cos(lat2_rad) *
               sin(delta_lon / 2.0) * sin(delta_lon / 2.0);
@@ -64,39 +65,40 @@ static Un_truc *creer_connexion(char *ligne_str, Une_ligne *liste_ligne, Un_nabr
     Un_lecteur_csv lecteur;
     csv_init_lecteur(&lecteur, ligne_str, CSV_SEPARATOR);
 
-    // Lire le code de la ligne
+    // Les champs sont extraits un à un de la ligne en cours du CSV lu.
+    // On lit le code de la ligne
     if (!csv_champ_suivant(&lecteur)) return NULL;
     char *code_ptr = csv_lire_texte(&lecteur, LINE_MAX_CODE_SIZE);
     if (code_ptr == NULL) return NULL;  // Champ trop grand
     char code_ligne[LINE_MAX_CODE_SIZE];
     strcpy(code_ligne, code_ptr);
 
-    // Lire le nom de la station de départ
+    // On lit le nom de la station de départ
     if (!csv_champ_suivant(&lecteur)) return NULL;
     char *nom_dep_ptr = csv_lire_texte(&lecteur, STATION_NOM_TAILLE_MAX);
     if (nom_dep_ptr == NULL) return NULL;  // Champ trop grand
     char nom_dep[STATION_NOM_TAILLE_MAX];
     strcpy(nom_dep, nom_dep_ptr);
 
-    // Lire le nom de la station d'arrivée
+    // On lit le nom de la station d'arrivée
     if (!csv_champ_suivant(&lecteur)) return NULL;
     char *nom_arr_ptr = csv_lire_texte(&lecteur, STATION_NOM_TAILLE_MAX);
     if (nom_arr_ptr == NULL) return NULL;  // Champ trop grand
     char nom_arr[STATION_NOM_TAILLE_MAX];
     strcpy(nom_arr, nom_arr_ptr);
 
-    // Lire le temps de parcours
+    // On lit le temps de parcours
     if (!csv_champ_suivant(&lecteur)) return NULL;
     float temps = csv_lire_flottant(&lecteur);
 
-    // Rechercher la ligne dans la liste
+    // On doit rechercher la ligne dans la liste afin de vérifier qu'elle existe bien.
     Une_ligne *ligne = chercher_ligne(liste_ligne, code_ligne);
     if (ligne == NULL) {
         fprintf(stderr, "Erreur: ligne '%s' non trouvée\n", code_ligne);
         return NULL;
     }
 
-    // Rechercher les stations dans l'ABR
+    // On doit rechercher les stations dans l'ABR afin de vérifier qu'elles existent bien dans l'arbre.
     Un_truc *sta_dep = chercher_station(abr_sta, nom_dep);
     if (sta_dep == NULL) {
         fprintf(stderr, "Erreur: station de départ '%s' non trouvée\n", nom_dep);
@@ -109,13 +111,13 @@ static Un_truc *creer_connexion(char *ligne_str, Une_ligne *liste_ligne, Un_nabr
         return NULL;
     }
 
-    // Si le temps est 0.0, le calculer à partir de la vitesse et de la distance
+    // Si le temps est 0.0, on le calcule à partir de la vitesse et de la distance
     if (temps == 0.0) {
         float distance = calculer_distance(sta_dep->coord, sta_arr->coord);
         temps = calculer_temps(distance, ligne->vitesse);
     }
 
-    // Créer le truc connexion
+    // On prépare le truc connexion
     Tdata data;
     data.con.sta_dep = sta_dep;
     data.con.sta_arr = sta_arr;
@@ -126,7 +128,7 @@ static Un_truc *creer_connexion(char *ligne_str, Une_ligne *liste_ligne, Un_nabr
     coord_milieu.lon = (sta_dep->coord.lon + sta_arr->coord.lon) / 2.0;
     coord_milieu.lat = (sta_dep->coord.lat + sta_arr->coord.lat) / 2.0;
 
-    // Créer le truc avec le temps de parcours comme user_val
+    // Et on crée le truc avec le temps de parcours comme user_val
     Un_truc *connexion = creer_truc(coord_milieu, CON, data, temps);
 
     return connexion;
@@ -149,11 +151,11 @@ Un_elem *lire_connexions(char *nom_fichier, Une_ligne *liste_ligne, Un_nabr *abr
     Un_elem *liste_con = NULL;
     char ligne[CSV_MAX_CONNECTIONS_LENGTH];
 
-    // Lire toutes les lignes du fichier
+    // On parcourt toutes les lignes du fichier
     while (fgets(ligne, sizeof(ligne), fichier) != NULL) {
         Un_truc *connexion = creer_connexion(ligne, liste_ligne, abr_sta);
         if (connexion != NULL) {
-            // Insérer en début de liste (pas besoin de tri pour les connexions)
+            // On insère en début de liste (pas besoin de tri pour les connexions)
             liste_con = inserer_deb_liste(liste_con, connexion);
         }
     }
