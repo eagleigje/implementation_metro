@@ -31,6 +31,7 @@ Le projet est organisé en plusieurs modules :
    - abr.h/abr.c/abr_type.h  : Arbres binaires de recherche (pour recherche rapide de stations)
    - aqrtopo.h/aqrtopo.c     : Arbres quaternaires (pour représentation topologique)
    - ligne.h/ligne.c         : Gestion des lignes de métro
+   - dijkstra.h/dijkstra.c   : Algorithme de Dijkstra pour le calcul du plus court chemin
 
 3. Utilitaires :
    - outils.h/outils.c       : Fonctions utilitaires génériques (trim, strdup_custom)
@@ -164,6 +165,9 @@ FICHIERS CSV
     Exemple :
         M1;Châtelet;Gare de Lyon;2.2
 
+    Le temps_parcours est le temps en minutes pour aller de la station de départ à la station d'arrivée.
+    Ce temps est utilisé par l'algorithme de Dijkstra pour calculer le plus court chemin.
+
     Pour générer automatiquement le fichier connexions_paris.csv depuis les données réelles :
         python3 generer_connexions_paris.py
 
@@ -244,11 +248,12 @@ implémentées. Voici l'état d'avancement :
    - chercher_aqr (recherche optimisée du truc le plus proche)
    - chercher_zone (recherche de tous les trucs dans un rectangle)
 
-6. Exercice 6 : Algorithme de Dijkstra pour le plus court chemin .............. A FAIRE
+6. Exercice 6 : Algorithme de Dijkstra pour le plus court chemin ..............  FAIT
    - extraire_deb_liste (implémentée et testée)
    - extraire_liste (implémentée et testée)
-   - dijkstra
-   - cherche_chemin
+   - dijkstra (avec gestion du temps de parcours, temps d'arrêt et pénalité de correspondance)
+   - cherche_chemin (reconstitution du chemin optimal)
+   - configurer_dijkstra (configuration des temps de correspondance et d'arrêt)
 
 7. Exercice 7 : Interface graphique ........................................... A FAIRE
    - Design de l'interface
@@ -268,6 +273,10 @@ NOTES IMPORTANTES
   * Le calcul des distances dans l'algorithme de Dijkstra.
 - La recherche dans l'ABR est insensible à la casse (case insensitive).
 - Les fonctions d'extraction de liste modifient la liste d'origine.
+- L'algorithme de Dijkstra utilise les paramètres de configuration :
+  * temps_correspondance : Pénalité (en minutes) ajoutée lors d'un changement de ligne
+  * temps_arret : Temps (en minutes) ajouté à chaque station visitée
+  Ces paramètres peuvent être configurés via le fichier config.ini ou config_alt.ini.
 
 WORKFLOW DE DEVELOPPEMENT RECOMMANDE
 -------------------------------------
