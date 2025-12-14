@@ -254,6 +254,8 @@ implémentées. Voici l'état d'avancement :
    - dijkstra (avec gestion du temps de parcours, temps d'arrêt et pénalité de correspondance)
    - cherche_chemin (reconstitution du chemin optimal)
    - configurer_dijkstra (configuration des temps de correspondance et d'arrêt)
+   - Pensez à appeler configurer_dijkstra(config->temps_correspondance, config->temps_arret)
+     après la lecture du fichier .ini et avant de lancer dijkstra() dans l'application.
 
 7. Exercice 7 : Interface graphique ........................................... A FAIRE
    - Design de l'interface
@@ -287,4 +289,3 @@ WORKFLOW DE DEVELOPPEMENT RECOMMANDE
 5. Vérifier les fuites mémoire : "valgrind --leak-check=full ./tests"
 6. Intégrer la fonctionnalité dans le fichier main.c si nécessaire
 7. Mettre à jour ce README.txt
-
