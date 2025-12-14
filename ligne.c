@@ -10,6 +10,7 @@
 #include "ligne.h"
 #include "constantes.h"
 #include "csv_utils.h"
+#include "outils.h"
 
 /**
  * Fonction qui créé un maillon d'une ligne
@@ -92,6 +93,9 @@ Une_ligne *lire_lignes(char *nom_fichier) {
         ligne_num++;
         // On supprime le retour à la ligne
         ligne[strcspn(ligne, "\r\n")] = '\0';
+
+        // On nettoie les espaces en début et fin
+        trim(ligne);
 
         // On ignore les lignes vides et les commentaires (commençant par #)
         if (ligne[0] == '\0' || ligne[0] == '#') {

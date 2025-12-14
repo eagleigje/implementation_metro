@@ -15,6 +15,7 @@
 #include "truc.h"
 #include "constantes.h"
 #include "csv_utils.h"
+#include "outils.h"
 
 /**
  * Fonction qui calcule la distance entre deux coordonnées (formule de Haversine).
@@ -181,6 +182,9 @@ Un_elem *lire_connexions(char *nom_fichier, Une_ligne *liste_ligne, Un_nabr *abr
         ligne_num++;
         // On supprime le retour à la ligne
         ligne[strcspn(ligne, "\r\n")] = '\0';
+
+        // On nettoie les espaces en début et fin
+        trim(ligne);
 
         // On ignore les lignes vides et les commentaires (commençant par #)
         if (ligne[0] == '\0' || ligne[0] == '#') {
