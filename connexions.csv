@@ -8,8 +8,8 @@ A ; Charles de Gaulle Etoile ; Nation ; 0.0
 A ; Nation ; Gare de Lyon ; 0.0
 
 # Ligne B (RER B)
-B ; Gare du Nord ; Chatelet Les Halles ; 0.0
-B ; Chatelet Les Halles ; Gare du Nord ; 0.0
+B ; Gare du Nord ; Châtelet Les Halles ; 0.0
+B ; Châtelet Les Halles ; Gare du Nord ; 0.0
 
 # Ligne M1 (Métro 1)
 M1 ; La Défense ; Charles de Gaulle Etoile ; 0.0

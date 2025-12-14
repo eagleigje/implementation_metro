@@ -20,6 +20,7 @@ void test_recherche_abr(Un_nabr *abr_stations) {
         "Jussieu",
         "jussieu",
         "Chatelet",
+        "Châtelet Les Halles",
         "Gare du Nord",
         "Station Inconnue",
         "Nation",
