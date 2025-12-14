@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
+
 #include "liste.h"
 #include "csv_utils.h"
 #include "constantes.h"
@@ -67,7 +68,7 @@ Un_elem *inserer_deb_liste(Un_elem *liste, Un_truc *truc) {
 /**
  * Fonction qui affiche dans flux, la liste dans son intégralité.
  * @param flux : Le flux de sortie (stdout théoriquement).
- * @param liste : La liste à afficher.
+ * @param liste : La liste donnée que l'on doit afficher.
  */
 void ecrire_liste(FILE *flux, Un_elem *liste) {
     Un_elem *courant = liste;
@@ -105,7 +106,6 @@ void detruire_liste(Un_elem *liste) {
  */
 void detruire_liste_et_truc(Un_elem *liste) {
     // todo : La fonction précédente ne supprime pas les trucs mais à part ça est la même que celle-ci.
-    // todo : poser la question.
     Un_elem *courant = liste;
     Un_elem *suivant;
 
@@ -119,7 +119,7 @@ void detruire_liste_et_truc(Un_elem *liste) {
 }
 
 /**
- * Fonction qui détermine les longitudes et latitudes minimales et maximales des stations.
+ * Fonction qui permet de déterminer les longitudes et latitudes minimales et maximales des stations.
  * @param liste : La liste des stations.
  * @param limite_no : La longitude minimale et la latitude maximale.
  * @param limite_se : La longitude maximale et à la latitude minimale.
@@ -162,7 +162,7 @@ void limites_zone(Un_elem *liste, Une_coord *limite_no, Une_coord *limite_se) {
 }
 
 /**
- * Fonction qui lit le fichier en paramètre et renvoi la liste triée des stations.
+ * Fonction qui lit le fichier CSV passé en paramètre et renvoi la liste triée des stations.
  * @param nom_fichier : Le fichier à lire.
  * @return : La liste triée, en fonction de la latitude, des stations du fichier.
  */
@@ -182,22 +182,22 @@ Un_elem *lire_stations(char *nom_fichier) {
         Un_lecteur_csv lecteur;
         csv_init_lecteur(&lecteur, ligne, CSV_SEPARATOR);
 
-        // Lire la longitude
+        // On lit la longitude
         if (!csv_champ_suivant(&lecteur)) continue;
         float lon = csv_lire_flottant(&lecteur);
 
-        // Lire la latitude
+        // La latitude
         if (!csv_champ_suivant(&lecteur)) continue;
         float lat = csv_lire_flottant(&lecteur);
 
-        // Lire le nom de la station
+        // On récupère le nom de la station
         if (!csv_champ_suivant(&lecteur)) continue;
         char *nom_ptr = csv_lire_texte(&lecteur, STATION_NOM_TAILLE_MAX);
         if (nom_ptr == NULL) continue;  // Champ trop grand, on ignore cette ligne
         char nom[STATION_NOM_TAILLE_MAX];
         strcpy(nom, nom_ptr);
 
-        // Créer le truc station
+        // On prépare le truc station
         Une_coord coord = {lon, lat};
         Tdata data;
         data.sta.nom = (char *)malloc(strlen(nom) + 1);
@@ -206,7 +206,7 @@ Un_elem *lire_stations(char *nom_fichier) {
         data.sta.nb_con = 0;
         data.sta.con_pcc = NULL;
 
-        // On crée la nouvelle station avec :
+        // Et on crée la nouvelle station avec :
         // ses coordonnées, ses données et user_value qui vaut la latitude pour trier sur ce champ.
         Un_truc *truc = creer_truc(coord, STA, data, lat);
         // On insère la nouvelle station, directement triée grâce au champ user_value
