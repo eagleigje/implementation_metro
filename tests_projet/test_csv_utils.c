@@ -19,7 +19,7 @@ void test_csv_utils(const char *test_label) {
 
     printf("\033[1;34m%s. Tests du lecteur CSV générique\033[0m\n", test_label);
 
-    // Test X.1: Lecture d'une ligne simple avec 3 champs
+    // Test X.1 : Lecture d'une ligne simple avec 3 champs
     printf("  Test %s.1: Lecture d'une ligne simple avec 3 champs\n", test_label);
     tests_total++;
     char ligne1[] = "Jussieu;2.354086;48.846050";
@@ -56,7 +56,7 @@ void test_csv_utils(const char *test_label) {
         printf("    ERREUR: échec lecture 1er champ\n");
     }
 
-    // Test X.2: Gestion des espaces en début et fin de champ
+    // Test X.2 : Gestion des espaces en début et fin de champ
     printf("  Test %s.2: Gestion des espaces en début et fin de champ\n", test_label);
     tests_total++;
     char ligne2[] = " Chatelet ;  2.347  ; 48.858 ";
@@ -74,7 +74,7 @@ void test_csv_utils(const char *test_label) {
         printf("    ERREUR: échec lecture champ avec espaces\n");
     }
 
-    // Test X.3: Lecture d'entiers
+    // Test X.3 : Lecture d'entiers
     printf("  Test %s.3: Lecture d'entiers\n", test_label);
     tests_total++;
     char ligne3[] = "1;14;Paris";
@@ -101,7 +101,7 @@ void test_csv_utils(const char *test_label) {
         printf("    ERREUR: échec lecture 1er champ\n");
     }
 
-    // Test X.4: Détection de fin de ligne
+    // Test X.4 : Détection de fin de ligne
     printf("  Test %s.4: Détection de fin de ligne\n", test_label);
     tests_total++;
     char ligne4[] = "A;B";
@@ -124,7 +124,7 @@ void test_csv_utils(const char *test_label) {
         printf("    ERREUR: csv_est_fini ne devrait pas être fini après 2 champs\n");
     }
 
-    // Test X.5: Ligne vide
+    // Test X.5 : Ligne vide
     printf("  Test %s.5: Gestion d'une ligne vide\n", test_label);
     tests_total++;
     char ligne5[] = "";
@@ -137,7 +137,7 @@ void test_csv_utils(const char *test_label) {
         printf("    ERREUR: ligne vide mal gérée\n");
     }
 
-    // Test X.6: Champ contenant des caractères spéciaux
+    // Test X.6 : Champ contenant des caractères spéciaux
     printf("  Test %s.6: Champ avec caractères spéciaux (apostrophe)\n", test_label);
     tests_total++;
     char ligne6[] = "Gare d'Austerlitz;2.365;48.842";
@@ -155,7 +155,7 @@ void test_csv_utils(const char *test_label) {
         printf("    ERREUR: échec lecture champ avec apostrophe\n");
     }
 
-    // Test X.7: Champ avec parenthèses (cas réel de Paris)
+    // Test X.7 : Champ avec parenthèses (cas réel de Paris)
     printf("  Test %s.7: Champ avec parenthèses\n", test_label);
     tests_total++;
     char ligne7[] = "Saint-Paul (Le Marais);2.361;48.855";

@@ -79,7 +79,7 @@ void test_arbres_quaternaires(const char *test_label) {
         printf("    ERREUR: échec de construction de l'AQR\n");
     }
 
-    // Test X.2: Recherche du truc le plus proche
+    // Test X.2 : Recherche du truc le plus proche
     if (aqr != NULL) {
         printf("  Test %s.2: Recherche de la station la plus proche d'un point\n", test_label);
         tests_total++;
@@ -98,7 +98,7 @@ void test_arbres_quaternaires(const char *test_label) {
         }
     }
 
-    // Test X.3: Recherche du truc le plus proche (autre point)
+    // Test X.3 : Recherche du truc le plus proche (autre point)
     if (aqr != NULL) {
         printf("  Test %s.3: Recherche de la station la plus proche (point proche de Nation)\n", test_label);
         tests_total++;
@@ -147,7 +147,7 @@ void test_arbres_quaternaires(const char *test_label) {
         detruire_liste(resultats);
     }
 
-    // Test X.5: Recherche par zone (toute la zone)
+    // Test X.5 : Recherche par zone (toute la zone)
     if (aqr != NULL) {
         printf("  Test %s.5: Recherche dans une grande zone englobant toutes les stations\n", test_label);
         tests_total++;
@@ -176,7 +176,7 @@ void test_arbres_quaternaires(const char *test_label) {
         detruire_liste(resultats_all);
     }
 
-    // Test X.6: Recherche par zone (zone vide)
+    // Test X.6 : Recherche par zone (zone vide)
     if (aqr != NULL) {
         printf("  Test %s.6: Recherche dans une zone vide (sans stations)\n", test_label);
         tests_total++;
@@ -195,7 +195,7 @@ void test_arbres_quaternaires(const char *test_label) {
         }
     }
 
-    // Test X.7: Construction AQR avec liste vide
+    // Test X.7 : Construction AQR avec liste vide
     printf("  Test %s.7: Construction AQR avec liste vide\n", test_label);
     tests_total++;
     Un_noeud *aqr_vide = construire_aqr(NULL);
@@ -207,7 +207,7 @@ void test_arbres_quaternaires(const char *test_label) {
         detruire_aqr(aqr_vide);
     }
 
-    // Test X.8: Gestion des coordonnées très proches (évite subdivision infinie)
+    // Test X.8 : Gestion des coordonnées très proches (évite subdivision infinie)
     printf("  Test %s.8: Gestion de trucs aux coordonnées très proches\n", test_label);
     tests_total++;
 

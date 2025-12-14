@@ -64,7 +64,7 @@ void test_extraction_liste(const char *test_label) {
     }
     printf("    Elèments restants: %d\n", nb_apres_1);
 
-    // Test 2: Extraction d'un element au milieu
+    // Test 2 : Extraction d'un element au milieu
     printf("  Test 2: Extraction d'un élèment au milieu\n");
     if (liste_test != NULL && liste_test->suiv != NULL) {
         Un_truc *milieu = liste_test->suiv->truc; // Deuxieme element
@@ -125,7 +125,7 @@ void test_cas_limites_liste(const char *test_label) {
     int tests_ok = 0;
     int tests_total = 0;
 
-    // Test X.1: Insertion dans une liste vide
+    // Test X.1 : Insertion dans une liste vide
     printf("  Test %s.1: Insertion dans une liste vide\n", test_label);
     tests_total++;
     Une_coord coord1 = {2.35f, 48.85f};
@@ -146,7 +146,7 @@ void test_cas_limites_liste(const char *test_label) {
     }
     detruire_liste_et_truc(liste_vide);
 
-    // Test X.2: Extraction sur liste vide
+    // Test X.2 : Extraction sur liste vide
     printf("  Test %s.2: Extraction sur liste vide\n", test_label);
     tests_total++;
     Un_elem *liste_nulle = NULL;
@@ -158,7 +158,7 @@ void test_cas_limites_liste(const char *test_label) {
         printf("    ERREUR: comportement inattendu\n");
     }
 
-    // Test X.3: Limites de zone sur liste vide
+    // Test X.3 : Limites de zone sur liste vide
     printf("  Test %s.3: Calcul limites sur liste vide\n", test_label);
     tests_total++;
     Une_coord lim_no, lim_se;
@@ -166,7 +166,7 @@ void test_cas_limites_liste(const char *test_label) {
     printf("    OK: fonction ne se plante pas\n");
     tests_ok++;
 
-    // Test X.4: Insertion en début avec inserer_deb_liste
+    // Test X.4 : Insertion en début avec inserer_deb_liste
     printf("  Test %s.4: Insertion en début de liste\n", test_label);
     tests_total++;
     Un_elem *liste_deb = NULL;

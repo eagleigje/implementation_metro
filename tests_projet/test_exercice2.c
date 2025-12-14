@@ -64,7 +64,7 @@ void test_robustesse_abr(const char *test_label) {
         printf("    ERREUR: devrait retourner NULL\n");
     }
 
-    // Test X.2: Construction ABR depuis liste vide
+    // Test X.2 : Construction ABR depuis liste vide
     printf("  Test %s.2: Construction ABR depuis liste vide\n", test_label);
     tests_total++;
     Un_nabr *abr_vide = construire_abr(NULL);
@@ -75,7 +75,7 @@ void test_robustesse_abr(const char *test_label) {
         printf("    ERREUR: ABR devrait être NULL\n");
     }
 
-    // Test X.3: Recherche avec nom vide
+    // Test X.3 : Recherche avec nom vide
     printf("  Test %s.3: Recherche avec nom vide\n", test_label);
     tests_total++;
     Une_coord coord_abr = {2.35f, 48.85f};
@@ -97,7 +97,7 @@ void test_robustesse_abr(const char *test_label) {
     detruire_liste_et_truc(inserer_deb_liste(NULL, truc_abr));
     detruire_abr(abr_test);
 
-    // Test X.4: Recherche avec caractères spéciaux
+    // Test X.4 : Recherche avec caractères spéciaux
     printf("  Test %s.4: Recherche avec caractères spéciaux\n", test_label);
     tests_total++;
     Une_coord coord_spec = {2.35f, 48.85f};
