@@ -12,7 +12,6 @@ typedef struct _une_config {
     char *fichier_stations;     ///< Path vers le fichier csv des stations.
     char *fichier_lignes;       ///< Path vers le fichier csv des lignes.
     char *fichier_connexions;   ///< Path vers le fichier csv des connexions.
-    float seuil_distance_aqr;   ///< Seuil pour éviter des coordonnées identiques dans AQR.
     float temps_correspondance; ///< Temps moyen de correspondance en minutes.
     float temps_arret;          ///< Temps d'arrêt moyen en station en minutes.
 } Une_config;

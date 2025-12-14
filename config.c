@@ -73,7 +73,6 @@ Une_config *lire_config(const char *nom_fichier) {
     config->fichier_stations = NULL;
     config->fichier_lignes = NULL;
     config->fichier_connexions = NULL;
-    config->seuil_distance_aqr = 0.00001f;
     config->temps_correspondance = 3.0f;
     config->temps_arret = 0.5f;
 
@@ -120,8 +119,6 @@ Une_config *lire_config(const char *nom_fichier) {
         } else if (strcmp(cle, "fichier_connexions") == 0) {
             if (config->fichier_connexions != NULL) free(config->fichier_connexions);
             config->fichier_connexions = strdup_custom(valeur);
-        } else if (strcmp(cle, "seuil_distance_aqr") == 0) {
-            config->seuil_distance_aqr = atof(valeur);
         } else if (strcmp(cle, "temps_correspondance") == 0) {
             config->temps_correspondance = atof(valeur);
         } else if (strcmp(cle, "temps_arret") == 0) {
@@ -159,7 +156,6 @@ void afficher_config(const Une_config *config) {
     printf("Fichier stations     : %s\n", config->fichier_stations);
     printf("Fichier lignes       : %s\n", config->fichier_lignes);
     printf("Fichier connexions   : %s\n", config->fichier_connexions);
-    printf("Seuil distance AQR   : %.6f\n", config->seuil_distance_aqr);
     printf("Temps correspondance : %.1f minutes\n", config->temps_correspondance);
     printf("Temps arret          : %.1f minutes\n", config->temps_arret);
     printf("=====================\n\n");
