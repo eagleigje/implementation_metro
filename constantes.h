@@ -3,8 +3,8 @@
  * Définitions des constantes utilisées dans tout le programme.
 */
 
-#ifndef PROJET_METRO_MAIN3_CONTANTS_H
-#define PROJET_METRO_MAIN3_CONTANTS_H
+#ifndef PROJET_METRO_MAIN3_CONSTANTES_H
+#define PROJET_METRO_MAIN3_CONSTANTES_H
 
 // Constantes de gestion des CSV
 #define CSV_SEPARATOR ';'               // Définition du séparateur par défaut des fichiers csv
@@ -19,4 +19,4 @@
 // Les connexions
 #define CSV_MAX_CONNECTIONS_LENGTH 512  // Taille maximale d'une ligne dans un fichier csv de connexions.
 
-#endif //PROJET_METRO_MAIN3_CONTANTS_H
+#endif //PROJET_METRO_MAIN3_CONSTANTES_H
