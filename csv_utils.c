@@ -8,21 +8,21 @@
 #include <string.h>
 
 /**
- * Initialise un lecteur CSV pour parcourir une ligne.
+ * Fonction d'initialisation d'un lecteur CSV pour parcourir une ligne.
  * Le lecteur est positionné au début de la ligne, afin de lire le premier champ.
  * @param lecteur : Pointeur vers le lecteur à initialiser.
  * @param ligne : La ligne CSV à parcourir (ne doit pas être NULL).
  * @param separateur : Le caractère séparateur (';' généralement).
  */
 void csv_init_lecteur(Un_lecteur_csv *lecteur, char *ligne, char separateur) {
-    lecteur->ptr_courant = ligne;
-    lecteur->separateur = separateur;
-    lecteur->fini = 0;
-    lecteur->tampon[0] = '\0';
+    lecteur->ptr_courant = ligne;       // Pointeur vers le début de la ligne à parcourir
+    lecteur->separateur = separateur;   // Le caractère séparateur CSV à utiliser
+    lecteur->fini = 0;                  // Indicateur de fin de ligne (0 = pas fini, 1 = fini)
+    lecteur->tampon[0] = '\0';          // Initialisation du tampon vide
 }
 
 /**
- * Avance au champ suivant dans la ligne CSV.
+ * Fonction qui permet d'avancer au champ suivant dans la ligne CSV.
  * Cette fonction extrait le prochain champ et le place dans le tampon interne.
  * Les espaces en début et fin de champ sont automatiquement supprimés.
  *
@@ -36,18 +36,18 @@ int csv_champ_suivant(Un_lecteur_csv *lecteur) {
         return 0;
     }
 
-    // Sauter les espaces en début de champ
+    // On saute les espaces en début de champ
     while (*lecteur->ptr_courant == ' ') {
         lecteur->ptr_courant++;
     }
 
-    // Vérifier si on est à la fin après avoir sauté les espaces
+    // On vérifie si on est arrivé à la fin après avoir sauté les espaces
     if (*lecteur->ptr_courant == '\0' || *lecteur->ptr_courant == '\n') {
         lecteur->fini = 1;
         return 0;
     }
 
-    // Copier le champ dans le tampon jusqu'au séparateur, fin de ligne ou \n
+    // On recopie le champ dans le tampon jusqu'au séparateur, fin de ligne ou \n
     int i = 0;
     while (*lecteur->ptr_courant != lecteur->separateur &&
            *lecteur->ptr_courant != '\0' &&
@@ -57,12 +57,12 @@ int csv_champ_suivant(Un_lecteur_csv *lecteur) {
     }
     lecteur->tampon[i] = '\0';
 
-    // Enlever les espaces en fin de champ
+    // On supprime les espaces en fin de champ
     while (i > 0 && lecteur->tampon[i - 1] == ' ') {
         lecteur->tampon[--i] = '\0';
     }
 
-    // Sauter le séparateur si présent
+    // Et on saute le séparateur s'il est présent
     if (*lecteur->ptr_courant == lecteur->separateur) {
         lecteur->ptr_courant++;
     }
@@ -71,7 +71,7 @@ int csv_champ_suivant(Un_lecteur_csv *lecteur) {
 }
 
 /**
- * Récupère le champ courant comme chaîne de caractères.
+ * Fonction de récupèration du champ courant comme chaîne de caractères.
  * Le champ est déjà nettoyé (espaces en début/fin enlevés) par csv_champ_suivant().
  *
  * ATTENTION : Le pointeur retourné pointe vers le tampon interne du lecteur.
@@ -83,7 +83,7 @@ int csv_champ_suivant(Un_lecteur_csv *lecteur) {
  */
 char *csv_lire_texte(Un_lecteur_csv *lecteur, size_t max_size) {
     size_t longueur = strlen(lecteur->tampon);
-    // Vérifier que le champ peut tenir dans un buffer de taille max_size (avec '\0')
+    // On vérifie que le champ peut tenir dans un buffer de taille max_size (avec '\0')
     if (longueur >= max_size) {
         return NULL;  // Champ trop grand
     }
@@ -91,7 +91,7 @@ char *csv_lire_texte(Un_lecteur_csv *lecteur, size_t max_size) {
 }
 
 /**
- * Récupère le champ courant comme nombre flottant.
+ * Fonction de récupèration du champ courant en tant que nombre flottant.
  * Utilise atof() pour la conversion.
  *
  * @param lecteur : Pointeur vers le lecteur.
@@ -102,7 +102,7 @@ float csv_lire_flottant(Un_lecteur_csv *lecteur) {
 }
 
 /**
- * Récupère le champ courant comme entier.
+ * Fonction de récupèration du champ courant en tant qu'entier.
  * Utilise atoi() pour la conversion.
  *
  * @param lecteur : Pointeur vers le lecteur.
@@ -113,8 +113,8 @@ int csv_lire_entier(Un_lecteur_csv *lecteur) {
 }
 
 /**
- * Vérifie si le lecteur a atteint la fin de la ligne.
- * Utile pour détecter si tous les champs ont été lus.
+ * Fonction qui vérifie si le lecteur a atteint la fin de la ligne.
+ * Permet de détecter si tous les champs ont bien été lus.
  *
  * @param lecteur : Pointeur vers le lecteur.
  * @return : 1 si fin de ligne atteinte, 0 sinon.
