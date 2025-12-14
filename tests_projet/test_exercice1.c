@@ -11,16 +11,16 @@
 #include "../truc.h"
 
 /**
- * Test des fonctions d'extraction de liste.
+ * Fonction de tests des fonctions d'extraction de liste.
  * @param test_label : Le numéro/label du test à afficher.
  */
 void test_extraction_liste(const char *test_label) {
     printf("\033[1;34m%s. Test des fonctions d'extraction de liste\033[0m\n", test_label);
 
-    // Creation d'une liste de test avec quelques stations fictives
+    // Création d'une liste de test avec quelques stations fictives
     Un_elem *liste_test = NULL;
 
-    // Creation de 5 stations de test
+    // Création de 5 stations de test
     for (int i = 1; i <= 5; i++) {
         Une_coord coord = {2.0f + i * 0.1f, 48.0f + i * 0.1f};
         Tdata data;
@@ -36,7 +36,7 @@ void test_extraction_liste(const char *test_label) {
         liste_test = inserer_liste_trie(liste_test, truc);
     }
 
-    // Compter les elements initiaux
+    // On compte les élèments initiaux
     int nb_initial = 0;
     Un_elem *temp = liste_test;
     while (temp != NULL) {
@@ -45,7 +45,7 @@ void test_extraction_liste(const char *test_label) {
     }
     printf("  Liste initiale: %d élèments\n", nb_initial);
 
-    // Test 1: Extraction du premier element
+    // Test 1: Extraction du premier élèment
     printf("  Test 1: Extraction du premier élèment\n");
     Un_truc *premier = extraire_deb_liste(&liste_test);
     if (premier != NULL) {
@@ -55,7 +55,7 @@ void test_extraction_liste(const char *test_label) {
         printf("    ERREUR: extraction a échoué\n");
     }
 
-    // Compter apres premiere extraction
+    // On compte après la première extraction
     int nb_apres_1 = 0;
     temp = liste_test;
     while (temp != NULL) {
@@ -64,7 +64,7 @@ void test_extraction_liste(const char *test_label) {
     }
     printf("    Elèments restants: %d\n", nb_apres_1);
 
-    // Test 2 : Extraction d'un element au milieu
+    // Test 2 : Extraction d'un élèment au milieu
     printf("  Test 2: Extraction d'un élèment au milieu\n");
     if (liste_test != NULL && liste_test->suiv != NULL) {
         Un_truc *milieu = liste_test->suiv->truc; // Deuxieme element
@@ -80,7 +80,7 @@ void test_extraction_liste(const char *test_label) {
         }
     }
 
-    // Compter apres deuxieme extraction
+    // On compte après une deuxième extraction
     int nb_apres_2 = 0;
     temp = liste_test;
     while (temp != NULL) {
@@ -112,12 +112,12 @@ void test_extraction_liste(const char *test_label) {
     printf("  Bilan: %d -> %d -> %d élèments\n", nb_initial, nb_apres_1, nb_apres_2);
     printf("  Tests d'extraction terminés!\n\n");
 
-    // Liberation de la liste de test
+    // Libération de la liste de test
     detruire_liste_et_truc(liste_test);
 }
 
 /**
- * Tests des cas limites pour les listes.
+ * Fonction de tests des cas limites pour les listes.
  * @param test_label : Le numéro/label du test à afficher.
  */
 void test_cas_limites_liste(const char *test_label) {
