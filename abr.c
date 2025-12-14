@@ -70,8 +70,11 @@ Un_nabr *construire_abr(Un_elem *liste_sta) {
 
     // Nous parcourons la liste des stations jusqu'à la fin.
     while (courant != NULL) {
-        // S'il ne s'agit d'une station, on saute (ce qui ne devrait pas arriver).
-        if (courant->truc->type != STA) continue;
+        // S'il ne s'agit pas d'une station, on saute (ce qui ne devrait pas arriver).
+        if (courant->truc->type != STA) {
+            courant = courant->suiv;
+            continue;
+        }
         // On crée le nouveau nœud.
         Un_nabr *nouveau = creer_nabr(courant->truc);
         if (nouveau != NULL) {
