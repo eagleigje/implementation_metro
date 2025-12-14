@@ -6,13 +6,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
 #include "test_exercice5.h"
 #include "../aqrtopo.h"
 #include "../liste.h"
 #include "../truc.h"
 
 /**
- * Fonction de test pour les arbres quaternaires (Exercice 5).
+ * Fonction de test des arbres quaternaires (Exercice 5).
  * @param test_label : Le numéro/label du test à afficher.
  */
 void test_arbres_quaternaires(const char *test_label) {
@@ -21,7 +22,7 @@ void test_arbres_quaternaires(const char *test_label) {
 
     printf("\033[1;34m%s. Tests des arbres quaternaires (AQR)\033[0m\n", test_label);
 
-    // Créer une liste de stations de test
+    // On crée une liste de stations de test
     Un_elem *liste_test = NULL;
 
     // Station 1 : Jussieu (2.354660, 48.845989)
@@ -68,7 +69,7 @@ void test_arbres_quaternaires(const char *test_label) {
     Un_truc *truc4 = creer_truc(coord4, STA, data4, coord4.lat);
     liste_test = inserer_liste_trie(liste_test, truc4);
 
-    // Test X.1: Construction de l'AQR
+    // Test X.1 : Construction de l'AQR
     printf("  Test %s.1: Construction de l'AQR depuis une liste de 4 stations\n", test_label);
     tests_total++;
     Un_noeud *aqr = construire_aqr(liste_test);
@@ -117,7 +118,7 @@ void test_arbres_quaternaires(const char *test_label) {
         }
     }
 
-    // Test X.4: Recherche par zone (rectangle englobant 2 stations)
+    // Test X.4 : Recherche par zone (rectangle englobant 2 stations)
     if (aqr != NULL) {
         printf("  Test %s.4: Recherche de stations dans une zone rectangulaire\n", test_label);
         tests_total++;
@@ -128,7 +129,7 @@ void test_arbres_quaternaires(const char *test_label) {
 
         Un_elem *resultats = chercher_zone(aqr, NULL, zone_no, zone_se);
 
-        // Compter les résultats
+        // On compte les résultats
         int nb_resultats = 0;
         Un_elem *temp = resultats;
         while (temp != NULL) {
@@ -143,7 +144,7 @@ void test_arbres_quaternaires(const char *test_label) {
             printf("    ERREUR: %d stations trouvées (attendu: 2)\n", nb_resultats);
         }
 
-        // Libérer la liste de résultats (pas les trucs eux-mêmes)
+        // On libère la liste des résultats (pas les trucs eux-mêmes).
         detruire_liste(resultats);
     }
 
@@ -158,7 +159,7 @@ void test_arbres_quaternaires(const char *test_label) {
 
         Un_elem *resultats_all = chercher_zone(aqr, NULL, zone_no_large, zone_se_large);
 
-        // Compter les résultats
+        // On compte les résultats
         int nb_total = 0;
         Un_elem *temp2 = resultats_all;
         while (temp2 != NULL) {
@@ -207,11 +208,11 @@ void test_arbres_quaternaires(const char *test_label) {
         detruire_aqr(aqr_vide);
     }
 
-    // Test X.8 : Gestion des coordonnées très proches (évite subdivision infinie)
+    // Test X.8 : Gestion des coordonnées très proches (test des subdivisions infinies)
     printf("  Test %s.8: Gestion de trucs aux coordonnées très proches\n", test_label);
     tests_total++;
 
-    // Créer une liste avec deux trucs aux coordonnées identiques
+    // On crée une liste avec deux trucs aux coordonnées identiques
     Un_elem *liste_doublons = NULL;
 
     // Truc 1 : Station A à (2.350000, 48.850000)
@@ -236,11 +237,11 @@ void test_arbres_quaternaires(const char *test_label) {
     Un_truc *truc_b = creer_truc(coord_b, STA, data_b, coord_b.lat);
     liste_doublons = inserer_liste_trie(liste_doublons, truc_b);
 
-    // Construire l'AQR (devrait décaler automatiquement les coordonnées)
+    // On construit l'AQR, ce qui devrait décaler automatiquement les coordonnées.
     Un_noeud *aqr_doublons = construire_aqr(liste_doublons);
 
     if (aqr_doublons != NULL) {
-        // Vérifier que les coordonnées ont été décalées
+        // On vérifie que les coordonnées ont bien été décalées
         if (truc_a->coord.lon != truc_b->coord.lon || truc_a->coord.lat != truc_b->coord.lat) {
             printf("    OK: coordonnées décalées automatiquement (A: %.6f,%.6f vs B: %.6f,%.6f)\n",
                    truc_a->coord.lon, truc_a->coord.lat, truc_b->coord.lon, truc_b->coord.lat);
@@ -256,7 +257,7 @@ void test_arbres_quaternaires(const char *test_label) {
 
     detruire_liste_et_truc(liste_doublons);
 
-    // Test X.9: Destruction de l'AQR
+    // Test X.9 : Destruction de l'AQR
     if (aqr != NULL) {
         printf("  Test %s.9: Destruction de l'AQR\n", test_label);
         tests_total++;
@@ -265,7 +266,7 @@ void test_arbres_quaternaires(const char *test_label) {
         tests_ok++;
     }
 
-    // Libérer la liste de test et les trucs
+    // On libère la liste de test et tous les trucs
     detruire_liste_et_truc(liste_test);
 
     printf("  Bilan: %d/%d tests réussis\n\n", tests_ok, tests_total);
