@@ -22,7 +22,7 @@ int main(const int argc, char *argv[]) {
 
     // Mais on peut aussi le passer en paramètre.
     if (argc > 1) {
-        // S'il y a un paramètre, on s'attend à ce que le premier soit un path vers un fichier de configuration.
+        // S'il y a un paramètre, on s'attend à ce que le premier soit le path vers un fichier de configuration.
         fichier_config = argv[1];
     }
 

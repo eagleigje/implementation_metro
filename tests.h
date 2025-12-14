@@ -8,7 +8,7 @@
 
 #include "config.h"
 
-// Inclure tous les modules de tests
+// On doit inclure tous les modules de tests
 #include "tests_projet/test_csv_utils.h"
 #include "tests_projet/test_exercice1.h"
 #include "tests_projet/test_exercice2.h"
