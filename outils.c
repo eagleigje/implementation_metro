@@ -11,7 +11,7 @@
 
 /**
  * Fonction qui supprime les espaces au début et à la fin d'une chaîne de caractères.
- * La chaîne est directement modifiée en place.
+ * La chaîne est directement modifiée.
  * Si des espaces en début sont trouvés, le contenu est déplacé au début du buffer.
  * @param str : La chaîne que l'on veut traiter.
  * @return : Le pointeur vers la chaîne (inchangé, toujours le début du buffer).
