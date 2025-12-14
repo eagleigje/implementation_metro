@@ -24,7 +24,7 @@ float calculer_seuil_aqr(Une_coord limite_no, Une_coord limite_se);
  * @return : L'arbre quaternaire mis à jour avec le nouveau truc.
  */
 Un_noeud *inserer_aqr(Un_noeud *aqr, Une_coord limite_no, Une_coord limite_se, Un_truc *truc) {
-    // Si l'arbre est vide, on créé un nouveau nœud
+    // Si l'arbre est vide, on crée un nouveau nœud
     if (aqr == NULL) {
         Un_noeud *nouveau = (Un_noeud *)malloc(sizeof(Un_noeud));
         if (nouveau == NULL) return NULL;
@@ -48,7 +48,7 @@ Un_noeud *inserer_aqr(Un_noeud *aqr, Une_coord limite_no, Une_coord limite_se, U
     // On détermine dans quel quadrant insérer le truc
     // On compare donc les coordonnées du truc avec le centre
     if (truc->coord.lon < centre.lon) {
-        // Partie Ouest (gauche)
+        // Partie ouest (gauche)
         if (truc->coord.lat >= centre.lat) {
             // Quadrant Nord-Ouest
             Une_coord nouvelle_limite_no = limite_no;
@@ -65,7 +65,7 @@ Un_noeud *inserer_aqr(Un_noeud *aqr, Une_coord limite_no, Une_coord limite_se, U
             aqr->so = inserer_aqr(aqr->so, nouvelle_limite_no, nouvelle_limite_se, truc);
         }
     } else {
-        // Partie Est (droite)
+        // Partie est (droite)
         if (truc->coord.lat >= centre.lat) {
             // Quadrant Nord-Est
             Une_coord nouvelle_limite_no;
@@ -111,7 +111,7 @@ float calculer_seuil_aqr(Une_coord limite_no, Une_coord limite_se) {
     // Pour Paris (~10km × 10km), cela donne environ 0.000014° ≈ 1.5 mètre.
     float seuil = diagonale / 10000.0f;
 
-    // On s'assure qu'on a au moins le seuil minimal (cas où tous les points sont identiques)
+    // On s'assure qu'on a au moins le seuil minimal (cas où tous les points sont identiques).
     if (seuil < SEUIL_MINIMAL) {
         seuil = SEUIL_MINIMAL;
     }
@@ -230,7 +230,7 @@ Un_truc *chercher_aqr(Un_noeud *aqr, Une_coord coord) {
     centre.lon = (aqr->limite_no.lon + aqr->limite_se.lon) / 2.0;
     centre.lat = (aqr->limite_no.lat + aqr->limite_se.lat) / 2.0;
 
-    // On détermine le quadrant prioritaire (celui qui contient le point cherché)
+    // On détermine le quadrant prioritaire (celui qui contient le point recherché).
     Un_noeud *quadrant_proche = NULL;
     Un_noeud *quadrants_autres[3] = {NULL, NULL, NULL};
     int nb_autres = 0;
