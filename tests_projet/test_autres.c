@@ -18,7 +18,7 @@ void test_config_invalide(const char *test_label) {
     int tests_ok = 0;
     int tests_total = 0;
 
-    // Test X.1: Fichier de configuration inexistant
+    // Test X.1 : Fichier de configuration inexistant
     printf("  Test %s.1: Fichier config inexistant\n", test_label);
     tests_total++;
     Une_config *config_invalide = lire_config("fichier_inexistant_12345.ini");
@@ -83,7 +83,7 @@ void test_csv_malformes(const char *test_label) {
         detruire_liste_et_truc(liste_vide);
     }
 
-    // Test X.3: Fichier CSV avec lignes malformées
+    // Test X.3 : Fichier CSV avec lignes malformées
     printf("  Test %s.3: Fichier CSV avec lignes malformées\n", test_label);
     tests_total++;
     Un_elem *liste_malformee = lire_stations("test_data/stations_malformees.csv");
@@ -120,14 +120,14 @@ void test_gestion_memoire(const char *test_label) {
     printf("    OK: pas de plantage\n");
     tests_ok++;
 
-    // Test X.2: Destruction de liste vide
+    // Test X.2 : Destruction de liste vide
     printf("  Test %s.2: Destruction liste vide\n", test_label);
     tests_total++;
     detruire_liste(NULL);
     printf("    OK: pas de plantage\n");
     tests_ok++;
 
-    // Test X.3: Destruction de liste_et_truc vide
+    // Test X.3 : Destruction de liste_et_truc vide
     printf("  Test %s.3: Destruction liste_et_truc vide\n", test_label);
     tests_total++;
     detruire_liste_et_truc(NULL);
