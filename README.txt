@@ -56,8 +56,8 @@ Le projet est organisé en plusieurs modules :
    - connexions_paris.csv : Fichier contenant toutes les connexions parisiennes (généré automatiquement).
 
 7. Programmes optionnels à installer :
-    - doxygen : Afin de générer la documentation technique du projet.
-    - valgrind : Pour vérifier que le projet libère bien toute la mémoire à la sortie.
+    - Doxygen : Afin de générer la documentation technique du projet.
+    - Valgrind : Pour vérifier que le projet libère bien toute la mémoire à la sortie.
     - glibc-debug : Pour valgrind.
 
 8. Documentation :
@@ -93,7 +93,7 @@ Pour nettoyer les fichiers objets et les exécutables :
 Pour tout nettoyer et tout recompiler :
     make all
 
-Pour générer la documentation (doxygen doit être installé sur le PC) :
+Pour générer la documentation (Doxygen doit être installé sur le PC) :
     make docs
 
 Pour nettoyer la documentation :
@@ -111,7 +111,7 @@ Le projet produit deux exécutables :
    - Tester l'arbre binaire de recherche (recherche case-insensitive)
    - Tester les fonctions d'extraction de listes
    - Afficher des statistiques détaillées
-   - Calculer les limites de la zone géographique
+   - Calculer les limites de la zone géographique.
 
    Pour utiliser un fichier de configuration différent :
     ./tests config_alt.ini
@@ -194,7 +194,7 @@ LOCALISATION DES DONNEES
             * On extrait les champs 2 et 11
             * On trie sur la colonne nom (format humain "sort -h")
             * Et enfin, on extrait le champ couleur en lui ajoutant un # devant afin d'être dans le bon format.
-                tail -n+2 referentiel-des-lignes-paris.csv | cut -d ";" -f 2,11 | sort -h | sed "s/\(.*\);\(.*\)/\#\2/g" 
+                tail -n+2 referentiel-des-lignes-paris.csv | cut -d ";" -f 2,11 | sort -h | sed "s/\(.*\);\(.*\)/\#\2/g"
     * On peut aussi trouver des informations officielles sur le site https://www.itineraire-metro.fr, cela va nous aider à remplir les données, notamment l'attente moyenne entre deux rames, mais à la main.
         * Exemple ligne 1 : https://www.itineraire-metro.fr/ligne-1.html
     * On peut encore trouver des informations sur les lignes sur Wikipédia, avec le temps de parcours, la distance, et le nombre de stations. On peut donc en déterminer les vitesses moyennes.
@@ -204,11 +204,11 @@ LOCALISATION DES DONNEES
         * En journée, l'intervalle de temps entre chaque rame est de deux à quatre minutes en semaine
         * et de trois à cinq minutes le dimanche. 
         * Après 20 heures, compter cinq à huit minutes d'attente.
-        * Nous partons du principe que le temps moyens sera de 5 minutes.
+        * Nous partons du principe que le temps moyen sera de cinq minutes.
     * Grâce à ces informations, nous pouvons remplir un fichier Excel que l'on trouve dans "data/informations_lignes_paris_collectées_sur_internet.xlsx"
     * Enfin, on peut extraire ces informations dans un fichier CSV "data/informations_lignes_paris_collectées_sur_internet.csv"
     * Ce fichier va nous servir de base afin de créer les données manquantes :
-        * On extrait les champs 1 (nom), 5 et suivants afin de créer le fichier des lignes de paris :
+        * On extrait les champs 1 (nom), 5 et suivants pour créer le fichier des lignes de paris :
             tail -n+2 data/informations_lignes_paris_collectées_sur_internet.csv | cut -d ";" -f1,5- > lignes_paris.csv
 
 EXERCICES A COMPLETER
@@ -280,7 +280,7 @@ NOTES IMPORTANTES
   * temps_arret : Temps (en minutes) ajouté à chaque station visitée
   Ces paramètres peuvent être configurés via le fichier config.ini ou config_alt.ini.
 
-WORKFLOW DE DEVELOPPEMENT RECOMMANDE
+WORKFLOW DE DÉVELOPPEMENT RECOMMANDÉ
 -------------------------------------
 1. Développer une nouvelle fonctionnalité
 2. Ajouter des tests dans le fichier tests.c pour valider la fonctionnalité
