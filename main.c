@@ -4,13 +4,9 @@
  */
 
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
 
 #include "config.h"
-#include "liste.h"
-#include "abr.h"
-#include "ligne.h"
 
 /**
  * Fonction principale du projet.

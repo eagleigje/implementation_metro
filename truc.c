@@ -3,7 +3,6 @@
  * Librairie gérant les "trucs". Qui sont soit des stations, soit des connexions entre des stations.
 */
 #include <stdlib.h>
-#include <string.h>
 #include "truc.h"
 
 /**
