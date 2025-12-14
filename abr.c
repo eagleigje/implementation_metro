@@ -3,11 +3,11 @@
  * Gestion des arbres binaires de recherche.
 */
 
-#include "abr.h"
-
 #include <stdlib.h>
-#include <string.h>
 #include <strings.h>
+
+#include "abr.h"
+#include "abr_type.h"
 
 /**
  * Fonction qui réalise l'allocation d'un nœud de l'arbre binaire de recherche et son initialisation.
@@ -105,7 +105,7 @@ void detruire_abr(Un_nabr *abr) {
  * Fonction qui cherche une station par son nom, dans l'ABR.
  * Cette fonction est récursive et insensible à la casse.
  * @param abr : ABR à parcourir.
- * @param nom : Le nom à rechercher (insensible à la casse).
+ * @param nom : Le nom de la station que l'on recherche (insensible à la casse).
  * @return : Le truc correspond à la recherche ou NULL si non trouvé.
  */
 Un_truc *chercher_station(Un_nabr *abr, char *nom) {

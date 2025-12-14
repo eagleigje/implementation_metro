@@ -6,7 +6,6 @@
 #ifndef ABR_H
 #define ABR_H
 
-#include "abr_type.h"
 #include "liste.h"
 
 // Prototypes des fonctions
