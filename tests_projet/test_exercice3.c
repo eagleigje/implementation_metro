@@ -76,9 +76,9 @@ void test_lignes(Une_config *config, const char *test_label) {
         }
     }
 
-    // Test X.5 : Recherche sensible à la casse
+    // Test X.5 : Recherche insensible à la casse
     if (lignes != NULL) {
-        printf("  Test %s.5: Recherche sensible à la casse\n", test_label);
+        printf("  Test %s.5: Recherche insensible à la casse\n", test_label);
         tests_total++;
         // On teste avec une version en minuscule du code de la première ligne
         char code_minuscule[10];
@@ -90,11 +90,11 @@ void test_lignes(Une_config *config, const char *test_label) {
             }
         }
         Une_ligne *ligne_min = chercher_ligne(lignes, code_minuscule);
-        if (ligne_min == NULL) {
-            printf("    OK: recherche sensible à la casse (%s != %s)\n", code_minuscule, lignes->code);
+        if (ligne_min != NULL) {
+            printf("    OK: recherche insensible à la casse (%s == %s)\n", code_minuscule, lignes->code);
             tests_ok++;
         } else {
-            printf("    ATTENTION: recherche insensible à la casse\n");
+            printf("    ERREUR: recherche devrait être insensible à la casse\n");
         }
     }
 

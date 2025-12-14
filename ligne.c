@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <strings.h>
 
 #include "ligne.h"
 #include "constantes.h"
@@ -173,8 +174,8 @@ Une_ligne *chercher_ligne(Une_ligne *ligne, char *code) {
     Une_ligne *courant = ligne;
 
     while (courant != NULL) {
-        // Cette recherche est sensible à la casse.
-        if (strcmp(courant->code, code) == 0) {
+        // Comparaison insensible à la casse pour faciliter les recherches.
+        if (strcasecmp(courant->code, code) == 0) {
             return courant;
         }
         courant = courant->suiv;
