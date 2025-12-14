@@ -3,49 +3,12 @@
  * Gestion des configurations du programme.
 */
 
-#include "config.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <ctype.h>
 
-/**
- * Fonction utilitaire qui enlève les espaces au début et à la fin d'une chaîne de caractères.
- * @param str : La chaîne que l'on veut traiter.
- * @return : La chaîne modifiée.
- */
-static char *trim(char *str)
-{
-    // On supprime les espaces au début de chaîne.
-    while (isspace((unsigned char)*str)) str++;
-    if (*str == 0) {
-        return str;
-    }
-    // On supprime les espaces en fin de chaîne.
-    char *end = str + strlen(str) - 1;
-    while (end > str && isspace((unsigned char)*end)) end--;
-    // Et on termine la chaîne correctement.
-    *(end + 1) = '\0';
-
-    return str;
-}
-
-/**
- * Fonction utilitaire pour dupliquer une chaîne de caractères.
- * @param s : La chaîne qui doit être dupliquée.
- * @return La chaîne dupliquée ou NULL en cas d'erreur.
- */
-static char *strdup_custom(const char *s) {
-    // Calcul de la taille de la nouvelle chaîne.
-    size_t len = strlen(s) + 1;
-    // Allocation de la nouvelle chaîne.
-    char *new_str = (char *)malloc(len);
-    if (new_str != NULL) {
-        // Recopie de la chaîne d'origine dans la nouvelle.
-        memcpy(new_str, s, len);
-    }
-    return new_str;
-}
+#include "config.h"
+#include "outils.h"
 
 /**
  * Fonction qui permet de lire un fichier de configuration afin de pouvoir faire varier les différents paramètres.

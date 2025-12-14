@@ -4,6 +4,7 @@
  */
 
 #include "csv_utils.h"
+#include "outils.h"
 #include <stdlib.h>
 #include <string.h>
 
@@ -36,13 +37,8 @@ int csv_champ_suivant(Un_lecteur_csv *lecteur) {
         return 0;
     }
 
-    // On saute les espaces en début de champ
-    while (*lecteur->ptr_courant == ' ') {
-        lecteur->ptr_courant++;
-    }
-
-    // On vérifie si on est arrivé à la fin après avoir sauté les espaces
-    if (*lecteur->ptr_courant == '\0' || *lecteur->ptr_courant == '\n') {
+    // On vérifie si on est arrivé à la fin de ligne
+    if (*lecteur->ptr_courant == '\n') {
         lecteur->fini = 1;
         return 0;
     }
@@ -57,10 +53,8 @@ int csv_champ_suivant(Un_lecteur_csv *lecteur) {
     }
     lecteur->tampon[i] = '\0';
 
-    // On supprime les espaces en fin de champ
-    while (i > 0 && lecteur->tampon[i - 1] == ' ') {
-        lecteur->tampon[--i] = '\0';
-    }
+    // On utilise trim() pour enlever les espaces en début et fin
+    trim(lecteur->tampon);
 
     // Et on saute le séparateur s'il est présent
     if (*lecteur->ptr_courant == lecteur->separateur) {

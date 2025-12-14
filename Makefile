@@ -20,7 +20,7 @@ CFLAGS = -Wall -Wextra -g -O3
 LDFLAGS = -lm
 
 # Fichiers objets communs
-COMMON_OBJ = truc.o liste.o config.o abr.o ligne.o connexion.o csv_utils.o aqrtopo.o
+COMMON_OBJ = truc.o liste.o config.o abr.o ligne.o connexion.o csv_utils.o aqrtopo.o outils.o
 
 # Fichiers objets spécifiques
 MAIN_OBJ = main.o
@@ -78,11 +78,12 @@ $(TARGET_TESTS): $(COMMON_OBJ) $(TESTS_OBJ)
 truc.o: truc.c truc.h coord.h station.h connexion.h
 abr.o: abr.c abr.h abr_type.h liste.h truc.h
 liste.o: liste.c liste.h truc.h station.h connexion.h coord.h csv_utils.h constantes.h
-config.o: config.c config.h
+config.o: config.c config.h outils.h
 ligne.o: ligne.c ligne.h constantes.h csv_utils.h
 connexion.o: connexion.c connexion.h ligne.h abr.h liste.h truc.h constantes.h csv_utils.h
-csv_utils.o: csv_utils.c csv_utils.h
+csv_utils.o: csv_utils.c csv_utils.h outils.h
 aqrtopo.o: aqrtopo.c aqrtopo.h truc.h liste.h
+outils.o: outils.c outils.h
 main.o: main.c config.h liste.h abr.h
 tests.o: tests.c tests.h config.h liste.h abr.h
 tests_projet/test_csv_utils.o: tests_projet/test_csv_utils.c tests_projet/test_csv_utils.h csv_utils.h
