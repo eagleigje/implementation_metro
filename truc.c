@@ -29,7 +29,7 @@ Un_truc *creer_truc(Une_coord coord, Ttype type, Tdata data, double uv) {
 
 /**
  * Fonction qui libère la mémoire d'un truc.
- * @param truc : Le truc à supprimer de la mémoire.
+ * @param truc : Le truc qui doit être supprimé de la mémoire.
  */
 void detruire_truc(Un_truc *truc) {
     if (truc == NULL) {
