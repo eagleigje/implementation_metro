@@ -110,7 +110,7 @@ void test_lignes(Une_config *config, const char *test_label) {
         detruire_lignes(lignes_invalide);
     }
 
-    // Et on libère de la mémoire
+    // Et on libère la mémoire
     if (lignes != NULL) {
         detruire_lignes(lignes);
     }
