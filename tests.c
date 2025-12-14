@@ -110,6 +110,9 @@ int main(const int argc, char *argv[]) {
     // Test 13 : Tests de lecture et affichage des connexions
     test_connexions(config, "13");
 
+    // Test 14 : Tests des arbres quaternaires
+    test_arbres_quaternaires("14");
+
     // On libère toute la mémoire.
     printf("XX. Libération de la mémoire...\n");
     detruire_liste_et_truc(liste_stations);  // Destruction de la liste et des stations

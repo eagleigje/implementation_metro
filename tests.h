@@ -14,6 +14,7 @@
 #include "tests_projet/test_exercice2.h"
 #include "tests_projet/test_exercice3.h"
 #include "tests_projet/test_exercice4.h"
+#include "tests_projet/test_exercice5.h"
 #include "tests_projet/test_autres.h"
 
 #endif
