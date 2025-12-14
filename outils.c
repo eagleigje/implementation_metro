@@ -31,7 +31,7 @@ char *trim(char *str) {
         return str;
     }
 
-    // On cherche la fin de la chaîne (dernier caractère non-espace)
+    // On cherche la fin de la chaîne (dernier caractère non-espace).
     char *fin = debut + strlen(debut) - 1;
     while (fin > debut && isspace((unsigned char)*fin)) fin--;
 

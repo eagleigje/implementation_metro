@@ -31,7 +31,7 @@ static float calculer_distance(Une_coord coord1, Une_coord coord2) {
     float delta_lat = (coord2.lat - coord1.lat) * M_PI / 180.0;
     float delta_lon = (coord2.lon - coord1.lon) * M_PI / 180.0;
 
-    // Applicaiton de la formule de Haversine : https://fr.wikipedia.org/wiki/Formule_de_haversine
+    // Application de la formule de Haversine : https://fr.wikipedia.org/wiki/Formule_de_haversine
     float a = sin(delta_lat / 2.0) * sin(delta_lat / 2.0) +
               cos(lat1_rad) * cos(lat2_rad) *
               sin(delta_lon / 2.0) * sin(delta_lon / 2.0);
@@ -155,7 +155,7 @@ Un_elem *lire_connexions(char *nom_fichier, Une_ligne *liste_ligne, Un_nabr *abr
     while (fgets(ligne, sizeof(ligne), fichier) != NULL) {
         Un_truc *connexion = creer_connexion(ligne, liste_ligne, abr_sta);
         if (connexion != NULL) {
-            // On insère en début de liste (pas besoin de tri pour les connexions)
+            // On insère en début de liste (pas besoin de tri pour les connexions).
             liste_con = inserer_deb_liste(liste_con, connexion);
         }
     }

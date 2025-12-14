@@ -78,7 +78,7 @@ int csv_champ_suivant(Un_lecteur_csv *lecteur) {
  */
 char *csv_lire_texte(Un_lecteur_csv *lecteur, size_t max_size) {
     size_t longueur = strlen(lecteur->tampon);
-    // On vérifie que le champ peut tenir dans un buffer de taille max_size (avec '\0')
+    // On vérifie que le champ peut tenir dans un buffer de taille max_size (avec '\0').
     if (longueur >= max_size) {
         return NULL;  // Champ trop grand
     }
