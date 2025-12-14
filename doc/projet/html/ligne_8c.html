@@ -92,7 +92,7 @@ $(function(){initNavTree('ligne_8c.html','',''); });
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &quot;<a class="el" href="ligne_8h_source.html">ligne.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="constants_8h_source.html">constants.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="constantes_8h_source.html">constantes.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="csv__utils_8h_source.html">csv_utils.h</a>&quot;</code><br />
 <code>#include &lt;stdio.h&gt;</code><br />
 <code>#include &lt;stdlib.h&gt;</code><br />
@@ -100,7 +100,6 @@ $(function(){initNavTree('ligne_8c.html','',''); });
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Fonctions</h2></td></tr>
-<tr class="memitem:a1c25cbe6b13b1f2060095eecbcd18906" id="r_a1c25cbe6b13b1f2060095eecbcd18906"><td class="memItemLeft" align="right" valign="top"><a class="el" href="connexion_8h.html#a2178cd5682efee02cbf7b5279c280097">Une_ligne</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1c25cbe6b13b1f2060095eecbcd18906">creer_ligne</a> (char ligne_str[<a class="el" href="ligne_8h.html#aefef3b6a7bb52d63b85883677fb13ed4">CSV_MAX_LINE_LENGTH</a>])</td></tr>
 <tr class="memitem:a674a7cc70709edb8a916f9ecc4c8139c" id="r_a674a7cc70709edb8a916f9ecc4c8139c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="connexion_8h.html#a2178cd5682efee02cbf7b5279c280097">Une_ligne</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a674a7cc70709edb8a916f9ecc4c8139c">lire_lignes</a> (char *nom_fichier)</td></tr>
 <tr class="memitem:ae1cea6086650c6c696e47b089b91de7c" id="r_ae1cea6086650c6c696e47b089b91de7c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae1cea6086650c6c696e47b089b91de7c">afficher_lignes</a> (<a class="el" href="connexion_8h.html#a2178cd5682efee02cbf7b5279c280097">Une_ligne</a> *ligne)</td></tr>
 <tr class="memitem:a79ec3b2b3e0f244e3da1bd9f169025cd" id="r_a79ec3b2b3e0f244e3da1bd9f169025cd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a79ec3b2b3e0f244e3da1bd9f169025cd">detruire_lignes</a> (<a class="el" href="connexion_8h.html#a2178cd5682efee02cbf7b5279c280097">Une_ligne</a> *ligne)</td></tr>
@@ -156,30 +155,6 @@ Fonctions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Renvoie</dt><dd>: Soit la ligne si elle est trouvée sinon NULL. </dd></dl>
-
-</div>
-</div>
-<a id="a1c25cbe6b13b1f2060095eecbcd18906" name="a1c25cbe6b13b1f2060095eecbcd18906"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1c25cbe6b13b1f2060095eecbcd18906">&#9670;&#160;</a></span>creer_ligne()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="connexion_8h.html#a2178cd5682efee02cbf7b5279c280097">Une_ligne</a> * creer_ligne </td>
-          <td>(</td>
-          <td class="paramtype">char</td>          <td class="paramname"><span class="paramname"><em>ligne_str</em></span>[CSV_MAX_LINE_LENGTH]</td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Fonction qui créé un maillon d'une ligne </p><dl class="params"><dt>Paramètres</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">ligne_str</td><td>: La ligne au format texte à gérer </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Renvoie</dt><dd>: Pointeur vers la nouvelle ligne ou NULL en cas d'erreur. </dd></dl>
 
 </div>
 </div>

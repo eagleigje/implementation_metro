@@ -9,7 +9,7 @@ var files_dup =
     [ "config.h", "config_8h.html", "config_8h" ],
     [ "connexion.c", "connexion_8c.html", "connexion_8c" ],
     [ "connexion.h", "connexion_8h.html", "connexion_8h" ],
-    [ "constants.h", "constants_8h.html", "constants_8h" ],
+    [ "constantes.h", "constantes_8h.html", "constantes_8h" ],
     [ "coord.h", "coord_8h.html", "coord_8h" ],
     [ "csv_utils.c", "csv__utils_8c.html", "csv__utils_8c" ],
     [ "csv_utils.h", "csv__utils_8h.html", "csv__utils_8h" ],
