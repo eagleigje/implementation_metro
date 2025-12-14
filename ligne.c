@@ -48,10 +48,22 @@ static Une_ligne *creer_ligne(char *ligne_str) {
     // On peut créer la nouvelle ligne
     Une_ligne *nouvelle = (Une_ligne *)malloc(sizeof(Une_ligne));
     if (nouvelle == NULL) return NULL;
+
     nouvelle->code = (char *)malloc(strlen(code) + 1);
+    if (nouvelle->code == NULL) {
+        free(nouvelle);
+        return NULL;
+    }
     strcpy(nouvelle->code, code);
+
     nouvelle->color = (char *)malloc(strlen(couleur) + 1);
+    if (nouvelle->color == NULL) {
+        free(nouvelle->code);
+        free(nouvelle);
+        return NULL;
+    }
     strcpy(nouvelle->color, couleur);
+
     nouvelle->vitesse = vitesse;
     nouvelle->intervalle = intervalle;
     nouvelle->suiv = NULL;
@@ -70,20 +82,39 @@ Une_ligne *lire_lignes(char *nom_fichier) {
         return NULL;
     }
 
-    // On lit la première ligne, cela nous donne la tête de liste.
+    Une_ligne *tete = NULL;
+    Une_ligne *tmp = NULL;
     char ligne[CSV_MAX_LINE_LENGTH];
-    if (fgets(ligne, sizeof(ligne), fichier) == NULL) {
-        fclose(fichier);
-        return NULL;
-    }
-    Une_ligne *tete = creer_ligne(ligne);
+    int ligne_num = 0;
 
-    // Puis, on lit les lignes suivantes jusqu'à la fin du fichier.
-    Une_ligne *tmp = tete;
+    // On lit toutes les lignes du fichier
     while (fgets(ligne, sizeof(ligne), fichier) != NULL) {
+        ligne_num++;
+        // On supprime le retour à la ligne
+        ligne[strcspn(ligne, "\r\n")] = '\0';
+
+        // On ignore les lignes vides et les commentaires (commençant par #)
+        if (ligne[0] == '\0' || ligne[0] == '#') {
+            continue;
+        }
+
         Une_ligne *nouvelle = creer_ligne(ligne);
-        tmp->suiv = nouvelle;
-        tmp = tmp->suiv;
+        if (nouvelle == NULL) {
+            // On trace l'échec et on continue
+            fprintf(stderr, "Avertissement: échec de création de la ligne %d: %s\n",
+                    ligne_num, ligne);
+            continue;
+        }
+
+        // Si c'est la première ligne valide, elle devient la tête
+        if (tete == NULL) {
+            tete = nouvelle;
+            tmp = tete;
+        } else {
+            // Sinon on l'ajoute à la fin
+            tmp->suiv = nouvelle;
+            tmp = nouvelle;
+        }
     }
 
     fclose(fichier);

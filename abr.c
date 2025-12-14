@@ -3,6 +3,7 @@
  * Gestion des arbres binaires de recherche.
 */
 
+#include <stdio.h>
 #include <stdlib.h>
 #include <strings.h>
 
@@ -12,11 +13,14 @@
 /**
  * Fonction qui réalise l'allocation d'un nœud de l'arbre binaire de recherche et son initialisation.
  * @param truc : Le truc qu'il faut utiliser pour le nouveau nœud.
- * @return : Renvoi le nouveau nœud créé.
+ * @return : Renvoi le nouveau nœud créé, ou NULL en cas d'échec d'allocation.
  */
 Un_nabr *creer_nabr(Un_truc *truc) {
     // Allocation mémoire.
     Un_nabr *nabr = (Un_nabr *)malloc(sizeof(Un_nabr));
+    if (nabr == NULL) {
+        return NULL;
+    }
 
     // Au départ le nœud n'a pas de fils.
     nabr->truc = truc;
@@ -80,6 +84,10 @@ Un_nabr *construire_abr(Un_elem *liste_sta) {
         if (nouveau != NULL) {
             // Et on l'insère au bon endroit dans l'ABR.
             abr = inserer_abr(abr, nouveau);
+        } else {
+            // Échec d'allocation, on trace l'erreur et on continue
+            fprintf(stderr, "Avertissement: échec d'allocation pour le nœud ABR de la station '%s'\n",
+                    courant->truc->data.sta.nom);
         }
         courant = courant->suiv;
     }
