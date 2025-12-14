@@ -91,6 +91,23 @@ void test_connexions(Une_config *config, const char *test_label) {
         printf("    ÉCHEC: temps de parcours non calculé\n");
     }
 
+    // Test X.5 : Vérification que tab_con est mis à jour dans les stations
+    printf("  Test %s.5: Vérification que les stations ont leurs connexions (tab_con)\n", test_label);
+    tests_total++;
+    if (connexions != NULL && connexions->truc != NULL && connexions->truc->type == CON) {
+        // On récupère la station de départ de la première connexion
+        Un_truc *sta_dep = connexions->truc->data.con.sta_dep;
+        if (sta_dep != NULL && sta_dep->data.sta.nb_con > 0 && sta_dep->data.sta.tab_con != NULL) {
+            printf("    OK: station '%s' a %d connexion(s) dans tab_con\n",
+                   sta_dep->data.sta.nom, sta_dep->data.sta.nb_con);
+            tests_ok++;
+        } else {
+            printf("    ÉCHEC: tab_con non mis à jour pour la station de départ\n");
+        }
+    } else {
+        printf("    ÉCHEC: impossible de tester (pas de connexions)\n");
+    }
+
     // Et on libère la mémoire
     if (connexions != NULL) {
         detruire_liste_et_truc(connexions);
