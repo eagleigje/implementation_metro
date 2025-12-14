@@ -15,7 +15,7 @@
  * @param ligne_str : La ligne au format texte à gérer
  * @return : Pointeur vers la nouvelle ligne ou NULL en cas d'erreur.
  */
-Une_ligne *creer_ligne(char ligne_str[CSV_MAX_LINE_LENGTH]) {
+static Une_ligne *creer_ligne(char *ligne_str) {
     Un_lecteur_csv lecteur;
 
     // On initialise le lecteur CSV
@@ -24,8 +24,10 @@ Une_ligne *creer_ligne(char ligne_str[CSV_MAX_LINE_LENGTH]) {
     // On lit les champs un à un.
     // Lecture du code de la ligne
     if (!csv_champ_suivant(&lecteur)) return NULL;
+    char *code_ptr = csv_lire_texte(&lecteur, LINE_MAX_CODE_SIZE);
+    if (code_ptr == NULL) return NULL;  // Champ trop grand
     char code[LINE_MAX_CODE_SIZE];
-    strcpy(code, csv_lire_texte(&lecteur));  // On doit copier les champs textes, sinon ils sont écrasés par les suivants.
+    strcpy(code, code_ptr);  // On doit copier les champs textes, sinon ils sont écrasés par les suivants.
 
     // La vitesse de la ligne
     if (!csv_champ_suivant(&lecteur)) return NULL;
@@ -37,16 +39,18 @@ Une_ligne *creer_ligne(char ligne_str[CSV_MAX_LINE_LENGTH]) {
 
     // La couleur de ligne.
     if (!csv_champ_suivant(&lecteur)) return NULL;
-    char color[LINE_COLOR_SIZE];
-    strcpy(color, csv_lire_texte(&lecteur));
+    char *couleur_ptr = csv_lire_texte(&lecteur, LINE_COLOR_SIZE);
+    if (couleur_ptr == NULL) return NULL;  // Champ trop grand
+    char couleur[LINE_COLOR_SIZE];
+    strcpy(couleur, couleur_ptr);
 
     // On peut créer la nouvelle ligne
     Une_ligne *nouvelle = (Une_ligne *)malloc(sizeof(Une_ligne));
     if (nouvelle == NULL) return NULL;
     nouvelle->code = (char *)malloc(strlen(code) + 1);
     strcpy(nouvelle->code, code);
-    nouvelle->color = (char *)malloc(strlen(color) + 1);
-    strcpy(nouvelle->color, color);
+    nouvelle->color = (char *)malloc(strlen(couleur) + 1);
+    strcpy(nouvelle->color, couleur);
     nouvelle->vitesse = vitesse;
     nouvelle->intervalle = intervalle;
     nouvelle->suiv = NULL;
@@ -67,7 +71,10 @@ Une_ligne *lire_lignes(char *nom_fichier) {
 
     // On lit la première ligne, cela nous donne la tête de liste.
     char ligne[CSV_MAX_LINE_LENGTH];
-    if (fgets(ligne, sizeof(ligne), fichier) == NULL) return NULL;
+    if (fgets(ligne, sizeof(ligne), fichier) == NULL) {
+        fclose(fichier);
+        return NULL;
+    }
     Une_ligne *tete = creer_ligne(ligne);
 
     // Puis, on lit les lignes suivantes jusqu'à la fin du fichier.

@@ -60,24 +60,30 @@ static float calculer_temps(float distance, float vitesse) {
  * @param abr_sta : L'arbre binaire de recherche des stations.
  * @return : Pointeur vers le nouveau truc connexion ou NULL en cas d'erreur.
  */
-static Un_truc *creer_connexion(char ligne_str[CSV_MAX_CONNECTIONS_LENGTH], Une_ligne *liste_ligne, Un_nabr *abr_sta) {
+static Un_truc *creer_connexion(char *ligne_str, Une_ligne *liste_ligne, Un_nabr *abr_sta) {
     Un_lecteur_csv lecteur;
     csv_init_lecteur(&lecteur, ligne_str, CSV_SEPARATOR);
 
     // Lire le code de la ligne
     if (!csv_champ_suivant(&lecteur)) return NULL;
+    char *code_ptr = csv_lire_texte(&lecteur, LINE_MAX_CODE_SIZE);
+    if (code_ptr == NULL) return NULL;  // Champ trop grand
     char code_ligne[LINE_MAX_CODE_SIZE];
-    strcpy(code_ligne, csv_lire_texte(&lecteur));
+    strcpy(code_ligne, code_ptr);
 
     // Lire le nom de la station de départ
     if (!csv_champ_suivant(&lecteur)) return NULL;
+    char *nom_dep_ptr = csv_lire_texte(&lecteur, STATION_NOM_TAILLE_MAX);
+    if (nom_dep_ptr == NULL) return NULL;  // Champ trop grand
     char nom_dep[STATION_NOM_TAILLE_MAX];
-    strcpy(nom_dep, csv_lire_texte(&lecteur));
+    strcpy(nom_dep, nom_dep_ptr);
 
     // Lire le nom de la station d'arrivée
     if (!csv_champ_suivant(&lecteur)) return NULL;
+    char *nom_arr_ptr = csv_lire_texte(&lecteur, STATION_NOM_TAILLE_MAX);
+    if (nom_arr_ptr == NULL) return NULL;  // Champ trop grand
     char nom_arr[STATION_NOM_TAILLE_MAX];
-    strcpy(nom_arr, csv_lire_texte(&lecteur));
+    strcpy(nom_arr, nom_arr_ptr);
 
     // Lire le temps de parcours
     if (!csv_champ_suivant(&lecteur)) return NULL;

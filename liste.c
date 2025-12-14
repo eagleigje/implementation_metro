@@ -175,7 +175,7 @@ Un_elem *lire_stations(char *nom_fichier) {
     }
 
     Un_elem *liste = NULL;
-    char ligne[256];
+    char ligne[CSV_MAX_STATIONS_LENGTH];
 
     // Pour chaque ligne trouvée dans le fichier
     while (fgets(ligne, sizeof(ligne), fichier) != NULL) {
@@ -192,8 +192,10 @@ Un_elem *lire_stations(char *nom_fichier) {
 
         // Lire le nom de la station
         if (!csv_champ_suivant(&lecteur)) continue;
+        char *nom_ptr = csv_lire_texte(&lecteur, STATION_NOM_TAILLE_MAX);
+        if (nom_ptr == NULL) continue;  // Champ trop grand, on ignore cette ligne
         char nom[STATION_NOM_TAILLE_MAX];
-        strcpy(nom, csv_lire_texte(&lecteur));
+        strcpy(nom, nom_ptr);
 
         // Créer le truc station
         Une_coord coord = {lon, lat};

@@ -7,6 +7,7 @@
 #include <string.h>
 #include "test_csv_utils.h"
 #include "../csv_utils.h"
+#include "../constants.h"
 
 /**
  * Tests du lecteur CSV générique.
@@ -26,8 +27,8 @@ void test_csv_utils(const char *test_label) {
     csv_init_lecteur(&lecteur, ligne1, ';');
 
     if (csv_champ_suivant(&lecteur)) {
-        char *nom = csv_lire_texte(&lecteur);
-        if (strcmp(nom, "Jussieu") == 0) {
+        char *nom = csv_lire_texte(&lecteur, STATION_NOM_TAILLE_MAX);
+        if (nom != NULL && strcmp(nom, "Jussieu") == 0) {
             if (csv_champ_suivant(&lecteur)) {
                 float lon = csv_lire_flottant(&lecteur);
                 if (lon > 2.35 && lon < 2.36) {
@@ -62,8 +63,8 @@ void test_csv_utils(const char *test_label) {
     csv_init_lecteur(&lecteur, ligne2, ';');
 
     if (csv_champ_suivant(&lecteur)) {
-        char *nom = csv_lire_texte(&lecteur);
-        if (strcmp(nom, "Chatelet") == 0) {
+        char *nom = csv_lire_texte(&lecteur, STATION_NOM_TAILLE_MAX);
+        if (nom != NULL && strcmp(nom, "Chatelet") == 0) {
             printf("    OK: espaces correctement supprimés\n");
             tests_ok++;
         } else {
@@ -143,8 +144,8 @@ void test_csv_utils(const char *test_label) {
     csv_init_lecteur(&lecteur, ligne6, ';');
 
     if (csv_champ_suivant(&lecteur)) {
-        char *nom = csv_lire_texte(&lecteur);
-        if (strcmp(nom, "Gare d'Austerlitz") == 0) {
+        char *nom = csv_lire_texte(&lecteur, STATION_NOM_TAILLE_MAX);
+        if (nom != NULL && strcmp(nom, "Gare d'Austerlitz") == 0) {
             printf("    OK: apostrophe préservée\n");
             tests_ok++;
         } else {
@@ -161,8 +162,8 @@ void test_csv_utils(const char *test_label) {
     csv_init_lecteur(&lecteur, ligne7, ';');
 
     if (csv_champ_suivant(&lecteur)) {
-        char *nom = csv_lire_texte(&lecteur);
-        if (strcmp(nom, "Saint-Paul (Le Marais)") == 0) {
+        char *nom = csv_lire_texte(&lecteur, STATION_NOM_TAILLE_MAX);
+        if (nom != NULL && strcmp(nom, "Saint-Paul (Le Marais)") == 0) {
             printf("    OK: parenthèses préservées\n");
             tests_ok++;
         } else {

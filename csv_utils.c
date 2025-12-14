@@ -78,9 +78,15 @@ int csv_champ_suivant(Un_lecteur_csv *lecteur) {
  * S'il est libéré, il sera écrasé au prochain appel de csv_champ_suivant().
  *
  * @param lecteur : Pointeur vers le lecteur.
- * @return : Pointeur vers le champ dans le tampon interne.
+ * @param max_size : Taille maximale attendue pour ce champ (incluant le '\0').
+ * @return : Pointeur vers le champ dans le tampon interne, ou NULL si le champ dépasse max_size.
  */
-char *csv_lire_texte(Un_lecteur_csv *lecteur) {
+char *csv_lire_texte(Un_lecteur_csv *lecteur, size_t max_size) {
+    size_t longueur = strlen(lecteur->tampon);
+    // Vérifier que le champ peut tenir dans un buffer de taille max_size (avec '\0')
+    if (longueur >= max_size) {
+        return NULL;  // Champ trop grand
+    }
     return lecteur->tampon;
 }
 
