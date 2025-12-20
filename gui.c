@@ -3,49 +3,59 @@
  * Implémentation de l'interface graphique SDL2.
  */
 
-#include <stdbool.h>
 #include <stdio.h>
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 
 #include "gui.h"
+#include "liste.h"
+#include "abr.h"
+#include "aqrtopo.h"
+#include "ligne.h"
+#include "connexion.h"
+#include "dijkstra.h"
 
 typedef enum {
-    SCREEN_MENU = 0,
-    SCREEN_MAP = 1
-} Screen;
+    ECRAN_MENU = 0,
+    ECRAN_PLAN = 1
+} Ecran;
 
 typedef enum {
-    MODE_SELECT = 0,
-    MODE_PATH = 1
+    MODE_SELECTION = 0,
+    MODE_CHEMIN = 1
 } Mode;
 
 typedef struct {
-    SDL_Window *window;
-    SDL_Renderer *renderer;
-    TTF_Font *font_small;
-    TTF_Font *font_large;
-    Screen screen;
+    SDL_Window *fenetre;
+    SDL_Renderer *moteurRendu;
+    TTF_Font *petite_police;
+    TTF_Font *grande_police;
+    Ecran ecran;
     Mode mode;
     float zoom;
-    float pan_x;
-    float pan_y;
-    int last_click_x;
-    int last_click_y;
-} AppState;
+    float decalage_x;
+    float decalage_y;
+    int dernier_clic_x;
+    int dernier_clic_y;
+    // Données du métro
+    Un_elem *liste_stations;
+    Un_nabr *abr_stations;
+    Une_ligne *lignes;
+    Un_noeud *aqr_topo;
+} Etat_gui;
 
 /**
  * Fonction qui met à jour le titre de la fenêtre pour afficher le mode courant.
  * @param app : État global de l'application graphique.
  */
-static void gui_mettre_a_jour_titre(AppState *app) {
-    const char *screen = (app->screen == SCREEN_MENU) ? "MENU" : "MAP";
-    const char *mode = (app->mode == MODE_SELECT) ? "SELECT" : "PATH";
-    char title[128];
+static void gui_mettre_a_jour_titre(Etat_gui *app) {
+    const char *ecran = (app->ecran == ECRAN_MENU) ? "MENU" : "PLAN";
+    const char *mode = (app->mode == MODE_SELECTION) ? "SÉLECTION" : "CHEMIN";
+    char titre[128];
 
-    snprintf(title, sizeof(title), "PROJET METRO 2025 - %s (mode=%s)", screen, mode);
-    SDL_SetWindowTitle(app->window, title);
+    snprintf(titre, sizeof(titre), "PROJET METRO 2025 - %s (mode=%s)", ecran, mode);
+    SDL_SetWindowTitle(app->fenetre, titre);
 }
 
 /**
@@ -64,17 +74,17 @@ static void gui_afficher_aide(void) {
  * @return Un pointeur vers la police chargée, ou NULL si aucune n'est disponible.
  */
 static TTF_Font *gui_charger_police(int taille) {
-    const char *paths[] = {
+    const char *chemins[] = {
         "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
         "/usr/share/fonts/TTF/DejaVuSans.ttf",
         "/usr/share/fonts/dejavu/DejaVuSans.ttf",
         NULL
     };
 
-    for (int i = 0; paths[i] != NULL; i++) {
-        TTF_Font *font = TTF_OpenFont(paths[i], taille);
-        if (font != NULL) {
-            return font;
+    for (int i = 0; chemins[i] != NULL; i++) {
+        TTF_Font *police = TTF_OpenFont(chemins[i], taille);
+        if (police != NULL) {
+            return police;
         }
     }
 
@@ -84,26 +94,26 @@ static TTF_Font *gui_charger_police(int taille) {
 /**
  * Fonction qui rend une ligne de texte à l'écran.
  * @param app : État global de l'application graphique.
- * @param font : Police à utiliser.
- * @param text : Texte à afficher.
+ * @param police : Police à utiliser.
+ * @param texte : Texte à afficher.
  * @param x : Position X.
  * @param y : Position Y.
- * @param color : Couleur du texte.
+ * @param couleur : Couleur du texte.
  */
-static void gui_rendu_texte(AppState *app, TTF_Font *font, const char *text, int x, int y, SDL_Color color) {
-    if (font == NULL || text == NULL) {
+static void gui_rendu_texte(Etat_gui *app, TTF_Font *police, const char *texte, int x, int y, SDL_Color couleur) {
+    if (police == NULL || texte == NULL) {
         return;
     }
 
-    SDL_Surface *surface = TTF_RenderUTF8_Blended(font, text, color);
+    SDL_Surface *surface = TTF_RenderUTF8_Blended(police, texte, couleur);
     if (surface == NULL) {
         return;
     }
 
-    SDL_Texture *texture = SDL_CreateTextureFromSurface(app->renderer, surface);
+    SDL_Texture *texture = SDL_CreateTextureFromSurface(app->moteurRendu, surface);
     if (texture != NULL) {
-        SDL_Rect dst = {x, y, surface->w, surface->h};
-        SDL_RenderCopy(app->renderer, texture, NULL, &dst);
+        SDL_Rect dest = {x, y, surface->w, surface->h};
+        SDL_RenderCopy(app->moteurRendu, texture, NULL, &dest);
         SDL_DestroyTexture(texture);
     }
     SDL_FreeSurface(surface);
@@ -112,72 +122,72 @@ static void gui_rendu_texte(AppState *app, TTF_Font *font, const char *text, int
 /**
  * Fonction qui dessine l'écran, le menu principal.
  * @param app : État global de l'application graphique.
- * @param width : Largeur de la fenêtre.
- * @param height : Hauteur de la fenêtre.
+ * @param largeur : Largeur de la fenêtre.
+ * @param hauteur : Hauteur de la fenêtre.
  */
-static void gui_dessiner_menu(AppState *app, int width, int height) {
-    SDL_SetRenderDrawColor(app->renderer, 18, 24, 32, 255);
-    SDL_RenderClear(app->renderer);
+static void gui_dessiner_menu(Etat_gui *app, int largeur, int hauteur) {
+    SDL_SetRenderDrawColor(app->moteurRendu, 18, 24, 32, 255);
+    SDL_RenderClear(app->moteurRendu);
 
-    SDL_Rect card1 = {width / 2 - 220, height / 2 - 140, 440, 70};
-    SDL_Rect card2 = {width / 2 - 220, height / 2 - 50, 440, 70};
-    SDL_Rect card3 = {width / 2 - 220, height / 2 + 40, 440, 70};
+    SDL_Rect carte1 = {largeur / 2 - 220, hauteur / 2 - 140, 440, 70};
+    SDL_Rect carte2 = {largeur / 2 - 220, hauteur / 2 - 50, 440, 70};
+    SDL_Rect carte3 = {largeur / 2 - 220, hauteur / 2 + 40, 440, 70};
 
-    SDL_SetRenderDrawColor(app->renderer, 52, 120, 196, 255);
-    SDL_RenderFillRect(app->renderer, &card1);
-    SDL_SetRenderDrawColor(app->renderer, 70, 156, 120, 255);
-    SDL_RenderFillRect(app->renderer, &card2);
-    SDL_SetRenderDrawColor(app->renderer, 160, 78, 78, 255);
-    SDL_RenderFillRect(app->renderer, &card3);
+    SDL_SetRenderDrawColor(app->moteurRendu, 52, 120, 196, 255);
+    SDL_RenderFillRect(app->moteurRendu, &carte1);
+    SDL_SetRenderDrawColor(app->moteurRendu, 70, 156, 120, 255);
+    SDL_RenderFillRect(app->moteurRendu, &carte2);
+    SDL_SetRenderDrawColor(app->moteurRendu, 160, 78, 78, 255);
+    SDL_RenderFillRect(app->moteurRendu, &carte3);
 
-    SDL_SetRenderDrawColor(app->renderer, 240, 240, 240, 255);
-    SDL_RenderDrawRect(app->renderer, &card1);
-    SDL_RenderDrawRect(app->renderer, &card2);
-    SDL_RenderDrawRect(app->renderer, &card3);
+    SDL_SetRenderDrawColor(app->moteurRendu, 240, 240, 240, 255);
+    SDL_RenderDrawRect(app->moteurRendu, &carte1);
+    SDL_RenderDrawRect(app->moteurRendu, &carte2);
+    SDL_RenderDrawRect(app->moteurRendu, &carte3);
 
-    SDL_Color text_color = {245, 245, 245, 255};
-    gui_rendu_texte(app, app->font_large, "PROJET METRO 2025", width / 2 - 150, height / 2 - 210, text_color);
-    gui_rendu_texte(app, app->font_small, "1 - Afficher plan (sélection)", card1.x + 18, card1.y + 20, text_color);
-    gui_rendu_texte(app, app->font_small, "2 - Plus court chemin", card2.x + 18, card2.y + 20, text_color);
-    gui_rendu_texte(app, app->font_small, "3 - Quitter", card3.x + 18, card3.y + 20, text_color);
+    SDL_Color couleur_texte = {245, 245, 245, 255};
+    gui_rendu_texte(app, app->grande_police, "PROJET METRO 2025", largeur / 2 - 150, hauteur / 2 - 210, couleur_texte);
+    gui_rendu_texte(app, app->petite_police, "1 - Afficher plan (sélection)", carte1.x + 18, carte1.y + 20, couleur_texte);
+    gui_rendu_texte(app, app->petite_police, "2 - Plus court chemin", carte2.x + 18, carte2.y + 20, couleur_texte);
+    gui_rendu_texte(app, app->petite_police, "3 - Quitter", carte3.x + 18, carte3.y + 20, couleur_texte);
 }
 
 /**
  * Fonction qui dessine une vue de plan simple avec une grille et un panneau d'information.
  * @param app : État global de l'application graphique.
- * @param width : Largeur de la fenêtre.
- * @param height : Hauteur de la fenêtre.
+ * @param largeur : Largeur de la fenêtre.
+ * @param hauteur : Hauteur de la fenêtre.
  */
-static void gui_dessiner_plan(AppState *app, int width, int height) {
-    SDL_SetRenderDrawColor(app->renderer, 245, 240, 228, 255);
-    SDL_RenderClear(app->renderer);
+static void gui_dessiner_plan(Etat_gui *app, int largeur, int hauteur) {
+    SDL_SetRenderDrawColor(app->moteurRendu, 245, 240, 228, 255);
+    SDL_RenderClear(app->moteurRendu);
 
-    SDL_SetRenderDrawColor(app->renderer, 210, 210, 210, 255);
-    for (int x = 0; x < width; x += 40) {
-        SDL_RenderDrawLine(app->renderer, x, 0, x, height);
+    SDL_SetRenderDrawColor(app->moteurRendu, 210, 210, 210, 255);
+    for (int x = 0; x < largeur; x += 40) {
+        SDL_RenderDrawLine(app->moteurRendu, x, 0, x, hauteur);
     }
-    for (int y = 0; y < height; y += 40) {
-        SDL_RenderDrawLine(app->renderer, 0, y, width, y);
+    for (int y = 0; y < hauteur; y += 40) {
+        SDL_RenderDrawLine(app->moteurRendu, 0, y, largeur, y);
     }
 
     SDL_Rect panneau_info = {12, 12, 220, 60};
-    SDL_SetRenderDrawColor(app->renderer, 30, 30, 30, 200);
-    SDL_RenderFillRect(app->renderer, &panneau_info);
-    SDL_SetRenderDrawColor(app->renderer, 240, 240, 240, 255);
-    SDL_RenderDrawRect(app->renderer, &panneau_info);
+    SDL_SetRenderDrawColor(app->moteurRendu, 30, 30, 30, 200);
+    SDL_RenderFillRect(app->moteurRendu, &panneau_info);
+    SDL_SetRenderDrawColor(app->moteurRendu, 240, 240, 240, 255);
+    SDL_RenderDrawRect(app->moteurRendu, &panneau_info);
 
-    SDL_Color hud_color = {240, 240, 240, 255};
-    if (app->mode == MODE_SELECT) {
-        gui_rendu_texte(app, app->font_small, "Mode : SÉLECTION", panneau_info.x + 8, panneau_info.y + 8, hud_color);
+    SDL_Color couleur_hud = {240, 240, 240, 255};
+    if (app->mode == MODE_SELECTION) {
+        gui_rendu_texte(app, app->petite_police, "Mode : SÉLECTION", panneau_info.x + 8, panneau_info.y + 8, couleur_hud);
     } else {
-        gui_rendu_texte(app, app->font_small, "Mode : PLUS COURT CHEMIN", panneau_info.x + 8, panneau_info.y + 8, hud_color);
+        gui_rendu_texte(app, app->petite_police, "Mode : PLUS COURT CHEMIN", panneau_info.x + 8, panneau_info.y + 8, couleur_hud);
     }
-    gui_rendu_texte(app, app->font_small, "S/P mode  -  ESC menu  -  Q quitter", panneau_info.x + 8, panneau_info.y + 32, hud_color);
+    gui_rendu_texte(app, app->petite_police, "S/P mode  -  ESC menu  -  Q quitter", panneau_info.x + 8, panneau_info.y + 32, couleur_hud);
 
-    if (app->last_click_x >= 0 && app->last_click_y >= 0) {
-        SDL_Rect cursor = {app->last_click_x - 4, app->last_click_y - 4, 8, 8};
-        SDL_SetRenderDrawColor(app->renderer, 200, 60, 60, 255);
-        SDL_RenderFillRect(app->renderer, &cursor);
+    if (app->dernier_clic_x >= 0 && app->dernier_clic_y >= 0) {
+        SDL_Rect curseur = {app->dernier_clic_x - 4, app->dernier_clic_y - 4, 8, 8};
+        SDL_SetRenderDrawColor(app->moteurRendu, 200, 60, 60, 255);
+        SDL_RenderFillRect(app->moteurRendu, &curseur);
     }
 }
 
@@ -187,8 +197,6 @@ static void gui_dessiner_plan(AppState *app, int width, int height) {
  * @return 0 si tout s'est bien passé, > 0 sinon.
  */
 int gui_lancer(const Une_config *config) {
-    (void)config;
-
     if (SDL_Init(SDL_INIT_VIDEO) != 0) {
         fprintf(stderr, "Erreur SDL_Init: %s\n", SDL_GetError());
         return 1;
@@ -200,21 +208,25 @@ int gui_lancer(const Une_config *config) {
         return 1;
     }
 
-    AppState app = {
-        .window = NULL,
-        .renderer = NULL,
-        .font_small = NULL,
-        .font_large = NULL,
-        .screen = SCREEN_MENU,
-        .mode = MODE_SELECT,
+    Etat_gui app = {
+        .fenetre = NULL,
+        .moteurRendu = NULL,
+        .petite_police = NULL,
+        .grande_police = NULL,
+        .ecran = ECRAN_MENU,
+        .mode = MODE_SELECTION,
         .zoom = 1.0f,
-        .pan_x = 0.0f,
-        .pan_y = 0.0f,
-        .last_click_x = -1,
-        .last_click_y = -1
+        .decalage_x = 0.0f,
+        .decalage_y = 0.0f,
+        .dernier_clic_x = -1,
+        .dernier_clic_y = -1,
+        .liste_stations = NULL,
+        .abr_stations = NULL,
+        .lignes = NULL,
+        .aqr_topo = NULL
     };
 
-    app.window = SDL_CreateWindow(
+    app.fenetre = SDL_CreateWindow(
         "PROJET METRO 2025",
         SDL_WINDOWPOS_CENTERED,
         SDL_WINDOWPOS_CENTERED,
@@ -222,28 +234,76 @@ int gui_lancer(const Une_config *config) {
         GUI_HAUTEUR_MIN,
         SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE
     );
-    if (app.window == NULL) {
+    if (app.fenetre == NULL) {
         fprintf(stderr, "Erreur SDL_CreateWindow: %s\n", SDL_GetError());
         TTF_Quit();
         SDL_Quit();
         return 1;
     }
 
-    app.renderer = SDL_CreateRenderer(app.window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
-    if (app.renderer == NULL) {
+    app.moteurRendu = SDL_CreateRenderer(app.fenetre, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+    if (app.moteurRendu == NULL) {
         fprintf(stderr, "Erreur SDL_CreateRenderer: %s\n", SDL_GetError());
-        SDL_DestroyWindow(app.window);
+        SDL_DestroyWindow(app.fenetre);
         TTF_Quit();
         SDL_Quit();
         return 1;
     }
 
-    SDL_SetWindowMinimumSize(app.window, GUI_LARGEUR_MIN, GUI_HAUTEUR_MIN);
+    SDL_SetWindowMinimumSize(app.fenetre, GUI_LARGEUR_MIN, GUI_HAUTEUR_MIN);
 
-    app.font_small = gui_charger_police(18);
-    app.font_large = gui_charger_police(26);
-    if (app.font_small == NULL || app.font_large == NULL) {
+    app.petite_police = gui_charger_police(18);
+    app.grande_police = gui_charger_police(26);
+    if (app.petite_police == NULL || app.grande_police == NULL) {
         fprintf(stderr, "Attention: aucune police TTF n'a pu être chargée\n");
+    }
+
+    // Chargement des données du métro
+    if (config != NULL) {
+        printf("Chargement des stations depuis %s...\n", config->fichier_stations);
+        app.liste_stations = lire_stations(config->fichier_stations);
+        if (app.liste_stations == NULL) {
+            fprintf(stderr, "Erreur: impossible de charger les stations\n");
+        } else {
+            // Construction de l'ABR pour la recherche rapide par nom
+            printf("Construction de l'ABR des stations...\n");
+            app.abr_stations = construire_abr(app.liste_stations);
+            if (app.abr_stations == NULL) {
+                fprintf(stderr, "Erreur: impossible de construire l'ABR\n");
+            }
+
+            // Construction de l'arbre quaternaire pour la recherche spatiale
+            printf("Construction de l'arbre quaternaire...\n");
+            app.aqr_topo = construire_aqr(app.liste_stations);
+            if (app.aqr_topo == NULL) {
+                fprintf(stderr, "Erreur: impossible de construire l'AQR\n");
+            }
+        }
+
+        // Chargement des lignes de métro
+        printf("Chargement des lignes depuis %s...\n", config->fichier_lignes);
+        app.lignes = lire_lignes(config->fichier_lignes);
+        if (app.lignes == NULL) {
+            fprintf(stderr, "Erreur: impossible de charger les lignes\n");
+        }
+
+        // Chargement des connexions (nécessite stations et lignes)
+        if (app.abr_stations != NULL && app.lignes != NULL) {
+            printf("Chargement des connexions depuis %s...\n", config->fichier_connexions);
+            Un_elem *liste_connexions = lire_connexions(config->fichier_connexions, app.lignes, app.abr_stations);
+            if (liste_connexions == NULL) {
+                fprintf(stderr, "Erreur: impossible de charger les connexions\n");
+            } else {
+                // Les connexions sont ajoutées automatiquement aux stations par lire_connexions
+                // On peut libérer la liste des connexions car elles sont référencées dans les stations
+                detruire_liste(liste_connexions);
+            }
+        }
+
+        // Configuration de l'algorithme de Dijkstra
+        configurer_dijkstra(config->temps_correspondance, config->temps_arret);
+        printf("Dijkstra configuré (correspondance=%.1f min, arrêt=%.1f min)\n",
+               config->temps_correspondance, config->temps_arret);
     }
 
     gui_mettre_a_jour_titre(&app);
@@ -257,27 +317,27 @@ int gui_lancer(const Une_config *config) {
                 running = false;
             } else if (event.type == SDL_KEYDOWN) {
                 SDL_Keycode key = event.key.keysym.sym;
-                if (app.screen == SCREEN_MENU) {
+                if (app.ecran == ECRAN_MENU) {
                     if (key == SDLK_1) {
-                        app.screen = SCREEN_MAP;
-                        app.mode = MODE_SELECT;
+                        app.ecran = ECRAN_PLAN;
+                        app.mode = MODE_SELECTION;
                         gui_mettre_a_jour_titre(&app);
                     } else if (key == SDLK_2) {
-                        app.screen = SCREEN_MAP;
-                        app.mode = MODE_PATH;
+                        app.ecran = ECRAN_PLAN;
+                        app.mode = MODE_CHEMIN;
                         gui_mettre_a_jour_titre(&app);
                     } else if (key == SDLK_3 || key == SDLK_q) {
                         running = false;
                     }
-                } else if (app.screen == SCREEN_MAP) {
+                } else if (app.ecran == ECRAN_PLAN) {
                     if (key == SDLK_ESCAPE) {
-                        app.screen = SCREEN_MENU;
+                        app.ecran = ECRAN_MENU;
                         gui_mettre_a_jour_titre(&app);
                     } else if (key == SDLK_s) {
-                        app.mode = MODE_SELECT;
+                        app.mode = MODE_SELECTION;
                         gui_mettre_a_jour_titre(&app);
                     } else if (key == SDLK_p) {
-                        app.mode = MODE_PATH;
+                        app.mode = MODE_CHEMIN;
                         gui_mettre_a_jour_titre(&app);
                     } else if (key == SDLK_q) {
                         running = false;
@@ -286,41 +346,56 @@ int gui_lancer(const Une_config *config) {
                     } else if (key == SDLK_MINUS || key == SDLK_KP_MINUS) {
                         app.zoom *= 0.9f;
                     } else if (key == SDLK_LEFT) {
-                        app.pan_x -= 10.0f;
+                        app.decalage_x -= 10.0f;
                     } else if (key == SDLK_RIGHT) {
-                        app.pan_x += 10.0f;
+                        app.decalage_x += 10.0f;
                     } else if (key == SDLK_UP) {
-                        app.pan_y -= 10.0f;
+                        app.decalage_y -= 10.0f;
                     } else if (key == SDLK_DOWN) {
-                        app.pan_y += 10.0f;
+                        app.decalage_y += 10.0f;
                     }
                 }
-            } else if (event.type == SDL_MOUSEBUTTONDOWN && app.screen == SCREEN_MAP) {
+            } else if (event.type == SDL_MOUSEBUTTONDOWN && app.ecran == ECRAN_PLAN) {
                 if (event.button.button == SDL_BUTTON_LEFT) {
-                    app.last_click_x = event.button.x;
-                    app.last_click_y = event.button.y;
+                    app.dernier_clic_x = event.button.x;
+                    app.dernier_clic_y = event.button.y;
                 }
             }
         }
 
         int width = 0;
         int height = 0;
-        SDL_GetWindowSize(app.window, &width, &height);
-        if (app.screen == SCREEN_MENU) {
+        SDL_GetWindowSize(app.fenetre, &width, &height);
+        if (app.ecran == ECRAN_MENU) {
             gui_dessiner_menu(&app, width, height);
         } else {
             gui_dessiner_plan(&app, width, height);
         }
-        SDL_RenderPresent(app.renderer);
+        SDL_RenderPresent(app.moteurRendu);
     }
 
-    SDL_DestroyRenderer(app.renderer);
-    SDL_DestroyWindow(app.window);
-    if (app.font_small != NULL) {
-        TTF_CloseFont(app.font_small);
+    // Libération de la mémoire des données du métro
+    if (app.aqr_topo != NULL) {
+        detruire_aqr(app.aqr_topo);
     }
-    if (app.font_large != NULL) {
-        TTF_CloseFont(app.font_large);
+    if (app.abr_stations != NULL) {
+        detruire_abr(app.abr_stations);
+    }
+    if (app.lignes != NULL) {
+        detruire_lignes(app.lignes);
+    }
+    if (app.liste_stations != NULL) {
+        detruire_liste_et_truc(app.liste_stations);
+    }
+
+    // Libération des ressources SDL
+    SDL_DestroyRenderer(app.moteurRendu);
+    SDL_DestroyWindow(app.fenetre);
+    if (app.petite_police != NULL) {
+        TTF_CloseFont(app.petite_police);
+    }
+    if (app.grande_police != NULL) {
+        TTF_CloseFont(app.grande_police);
     }
     TTF_Quit();
     SDL_Quit();

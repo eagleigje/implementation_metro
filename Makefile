@@ -88,8 +88,8 @@ csv_utils.o: csv_utils.c csv_utils.h outils.h
 aqrtopo.o: aqrtopo.c aqrtopo.h truc.h liste.h
 outils.o: outils.c outils.h
 dijkstra.o: dijkstra.c dijkstra.h liste.h truc.h
-main.o: main.c config.h liste.h abr.h
-gui.o: gui.c gui.h config.h
+main.o: main.c config.h liste.h abr.h gui.h
+gui.o: gui.c gui.h config.h liste.h abr.h aqrtopo.h ligne.h connexion.h dijkstra.h
 tests.o: tests.c tests.h config.h liste.h abr.h
 tests_projet/test_csv_utils.o: tests_projet/test_csv_utils.c tests_projet/test_csv_utils.h csv_utils.h
 tests_projet/test_exercice1.o: tests_projet/test_exercice1.c tests_projet/test_exercice1.h liste.h truc.h
