@@ -67,7 +67,7 @@ typedef struct {
 #define PLAN_TAILLE_GRILLE       40
 #define PLAN_PANNEAU_X           12
 #define PLAN_PANNEAU_Y           12
-#define PLAN_PANNEAU_LARGEUR     220
+#define PLAN_PANNEAU_LARGEUR     400
 #define PLAN_PANNEAU_HAUTEUR     60
 #define PLAN_MARGE_TEXTE_X       8
 #define PLAN_MARGE_TEXTE_Y_1     8
