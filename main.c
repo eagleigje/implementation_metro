@@ -27,7 +27,7 @@ int main(const int argc, char *argv[]) {
 
     printf("=== PROJET METRO 2025 ===\n\n");
     printf("Interface graphique SDL2 (Exercice 7)\n");
-    printf("Pour lancer les tests de validation, executez: ./tests\n\n");
+    printf("Pour lancer les tests de validation, exécutez : ./tests\n\n");
 
     // Chargement de la configuration pour préparer les données
     printf("Chargement de la configuration depuis %s...\n", fichier_config);
@@ -39,8 +39,10 @@ int main(const int argc, char *argv[]) {
 
     afficher_config(config);
 
+    printf("Note : SDL2 et SDL2_ttf doivent être installés pour l'interface graphique.\n");
+
     if (gui_lancer(config) != 0) {
-        fprintf(stderr, "Erreur: l'interface graphique s'est terminee avec une erreur\n");
+        fprintf(stderr, "Erreur : l'interface graphique s'est terminée avec une erreur\n");
     }
 
     // Libération de la mémoire

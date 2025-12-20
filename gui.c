@@ -3,9 +3,11 @@
  * Implémentation de l'interface graphique SDL2.
  */
 
-
+#include <stdbool.h>
 #include <stdio.h>
+
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_ttf.h>
 
 #include "gui.h"
 
@@ -22,6 +24,8 @@ typedef enum {
 typedef struct {
     SDL_Window *window;
     SDL_Renderer *renderer;
+    TTF_Font *font_small;
+    TTF_Font *font_large;
     Screen screen;
     Mode mode;
     float zoom;
@@ -35,7 +39,7 @@ typedef struct {
  * Fonction qui met à jour le titre de la fenêtre pour afficher le mode courant.
  * @param app : État global de l'application graphique.
  */
-void gui_mettre_a_jour_titre(AppState *app) {
+static void gui_mettre_a_jour_titre(AppState *app) {
     const char *screen = (app->screen == SCREEN_MENU) ? "MENU" : "MAP";
     const char *mode = (app->mode == MODE_SELECT) ? "SELECT" : "PATH";
     char title[128];
@@ -47,16 +51,67 @@ void gui_mettre_a_jour_titre(AppState *app) {
 /**
  * Fonction qui affiche les contrôles dans la console au lancement de la fenêtre.
  */
-void gui_afficher_aide(void) {
-    printf("Controles:\n");
-    printf("  MENU: 1=Afficher plan (selection), 2=Plus court chemin, 3=Quitter\n");
-    printf("  PLAN: S=Selection, P=Plus court chemin, ESC=Menu, Q=Quitter\n");
-    printf("        Fleches=Deplacer, +/-=Zoom, Click=Selection\n\n");
+static void gui_afficher_aide(void) {
+    printf("Contrôles:\n");
+    printf("  MENU: 1=Afficher plan (sélection), 2=Plus court chemin, 3=Quitter\n");
+    printf("  PLAN: S=Sélection, P=Plus court chemin, ESC=Menu, Q=Quitter\n");
+    printf("        Flèches=Déplacer, +/-=Zoom, Clic=Sélection\n\n");
+}
+
+/**
+ * Fonction qui charge une police TrueType à partir de chemins connus.
+ * @param taille : Taille en points de la police à charger.
+ * @return Un pointeur vers la police chargée, ou NULL si aucune n'est disponible.
+ */
+static TTF_Font *gui_charger_police(int taille) {
+    const char *paths[] = {
+        "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
+        "/usr/share/fonts/TTF/DejaVuSans.ttf",
+        "/usr/share/fonts/dejavu/DejaVuSans.ttf",
+        NULL
+    };
+
+    for (int i = 0; paths[i] != NULL; i++) {
+        TTF_Font *font = TTF_OpenFont(paths[i], taille);
+        if (font != NULL) {
+            return font;
+        }
+    }
+
+    return NULL;
+}
+
+/**
+ * Fonction qui rend une ligne de texte à l'écran.
+ * @param app : État global de l'application graphique.
+ * @param font : Police à utiliser.
+ * @param text : Texte à afficher.
+ * @param x : Position X.
+ * @param y : Position Y.
+ * @param color : Couleur du texte.
+ */
+static void gui_rendu_texte(AppState *app, TTF_Font *font, const char *text, int x, int y, SDL_Color color) {
+    if (font == NULL || text == NULL) {
+        return;
+    }
+
+    SDL_Surface *surface = TTF_RenderUTF8_Blended(font, text, color);
+    if (surface == NULL) {
+        return;
+    }
+
+    SDL_Texture *texture = SDL_CreateTextureFromSurface(app->renderer, surface);
+    if (texture != NULL) {
+        SDL_Rect dst = {x, y, surface->w, surface->h};
+        SDL_RenderCopy(app->renderer, texture, NULL, &dst);
+        SDL_DestroyTexture(texture);
+    }
+    SDL_FreeSurface(surface);
 }
 
 /**
  * Fonction qui dessine l'écran, le menu principal.
- * @param app : Etat global de l'application graphique.
+ * @param app : État global de l'application graphique.
  * @param width : Largeur de la fenêtre.
  * @param height : Hauteur de la fenêtre.
  */
@@ -79,13 +134,19 @@ static void gui_dessiner_menu(AppState *app, int width, int height) {
     SDL_RenderDrawRect(app->renderer, &card1);
     SDL_RenderDrawRect(app->renderer, &card2);
     SDL_RenderDrawRect(app->renderer, &card3);
+
+    SDL_Color text_color = {245, 245, 245, 255};
+    gui_rendu_texte(app, app->font_large, "PROJET METRO 2025", width / 2 - 150, height / 2 - 210, text_color);
+    gui_rendu_texte(app, app->font_small, "1 - Afficher plan (sélection)", card1.x + 18, card1.y + 20, text_color);
+    gui_rendu_texte(app, app->font_small, "2 - Plus court chemin", card2.x + 18, card2.y + 20, text_color);
+    gui_rendu_texte(app, app->font_small, "3 - Quitter", card3.x + 18, card3.y + 20, text_color);
 }
 
 /**
- * Fonction de dessin d'une vue de plan simple avec une grille et un petit panneau d'information.
- * @param app : Etat global de l'application graphique.
- * @param width : Largeur de la fenetre.
- * @param height : Hauteur de la fenetre.
+ * Fonction qui dessine une vue de plan simple avec une grille et un panneau d'information.
+ * @param app : État global de l'application graphique.
+ * @param width : Largeur de la fenêtre.
+ * @param height : Hauteur de la fenêtre.
  */
 static void gui_dessiner_plan(AppState *app, int width, int height) {
     SDL_SetRenderDrawColor(app->renderer, 245, 240, 228, 255);
@@ -105,6 +166,14 @@ static void gui_dessiner_plan(AppState *app, int width, int height) {
     SDL_SetRenderDrawColor(app->renderer, 240, 240, 240, 255);
     SDL_RenderDrawRect(app->renderer, &hud);
 
+    SDL_Color hud_color = {240, 240, 240, 255};
+    if (app->mode == MODE_SELECT) {
+        gui_rendu_texte(app, app->font_small, "Mode : SÉLECTION", hud.x + 8, hud.y + 8, hud_color);
+    } else {
+        gui_rendu_texte(app, app->font_small, "Mode : PLUS COURT CHEMIN", hud.x + 8, hud.y + 8, hud_color);
+    }
+    gui_rendu_texte(app, app->font_small, "S/P mode  -  ESC menu  -  Q quitter", hud.x + 8, hud.y + 32, hud_color);
+
     if (app->last_click_x >= 0 && app->last_click_y >= 0) {
         SDL_Rect cursor = {app->last_click_x - 4, app->last_click_y - 4, 8, 8};
         SDL_SetRenderDrawColor(app->renderer, 200, 60, 60, 255);
@@ -113,8 +182,8 @@ static void gui_dessiner_plan(AppState *app, int width, int height) {
 }
 
 /**
- * Fonction de lancement de la fenêtre principale et la boucle d'événements SDL2.
- * @param config : Configuration chargée (peut etre NULL si non disponible).
+ * Fonction qui lance la fenêtre principale et la boucle d'événements SDL2.
+ * @param config : Configuration chargée (peut être NULL si non disponible).
  * @return 0 si tout s'est bien passé, > 0 sinon.
  */
 int gui_lancer(const Une_config *config) {
@@ -125,9 +194,17 @@ int gui_lancer(const Une_config *config) {
         return 1;
     }
 
+    if (TTF_Init() != 0) {
+        fprintf(stderr, "Erreur TTF_Init: %s\n", TTF_GetError());
+        SDL_Quit();
+        return 1;
+    }
+
     AppState app = {
         .window = NULL,
         .renderer = NULL,
+        .font_small = NULL,
+        .font_large = NULL,
         .screen = SCREEN_MENU,
         .mode = MODE_SELECT,
         .zoom = 1.0f,
@@ -147,6 +224,7 @@ int gui_lancer(const Une_config *config) {
     );
     if (app.window == NULL) {
         fprintf(stderr, "Erreur SDL_CreateWindow: %s\n", SDL_GetError());
+        TTF_Quit();
         SDL_Quit();
         return 1;
     }
@@ -155,8 +233,15 @@ int gui_lancer(const Une_config *config) {
     if (app.renderer == NULL) {
         fprintf(stderr, "Erreur SDL_CreateRenderer: %s\n", SDL_GetError());
         SDL_DestroyWindow(app.window);
+        TTF_Quit();
         SDL_Quit();
         return 1;
+    }
+
+    app.font_small = gui_charger_police(18);
+    app.font_large = gui_charger_police(26);
+    if (app.font_small == NULL || app.font_large == NULL) {
+        fprintf(stderr, "Attention: aucune police TTF n'a pu être chargée\n");
     }
 
     gui_mettre_a_jour_titre(&app);
@@ -229,6 +314,13 @@ int gui_lancer(const Une_config *config) {
 
     SDL_DestroyRenderer(app.renderer);
     SDL_DestroyWindow(app.window);
+    if (app.font_small != NULL) {
+        TTF_CloseFont(app.font_small);
+    }
+    if (app.font_large != NULL) {
+        TTF_CloseFont(app.font_large);
+    }
+    TTF_Quit();
     SDL_Quit();
 
     return 0;

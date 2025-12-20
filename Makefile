@@ -17,7 +17,7 @@ CC = gcc
 # On peut forcer la version de C ci-dessous en ajoutant -std=cXX où XX peut valoir 99, 17, 23, etc.
 # La version C la plus récente à ce jour est la version c23.
 CFLAGS = -Wall -Wextra -g -O3
-LDFLAGS_METRO = -lm -lSDL2
+LDFLAGS_METRO = -lm -lSDL2 -lSDL2_ttf
 LDFLAGS_TESTS = -lm
 
 # Fichiers objets communs
