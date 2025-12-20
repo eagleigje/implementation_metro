@@ -149,6 +149,7 @@ typedef struct Etat_affichage {
     int dernier_clic_y;             // Position Y du dernier clic souris (-1 si aucun)
     // Données du métro
     Un_elem *liste_stations;        // Liste chaînée de toutes les stations
+    Un_elem *liste_connexions;      // Liste chaînée de toutes les connexions
     Un_nabr *abr_stations;          // Arbre binaire de recherche pour recherche rapide par nom
     Une_ligne *lignes;              // Liste des lignes de métro
     Un_noeud *aqr_topo;             // Arbre quaternaire pour recherche spatiale des stations

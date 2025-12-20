@@ -48,6 +48,7 @@ int gui_lancer(const Une_config *config) {
         .dernier_clic_x = -1,       // Pas de clic enregistré (-1 = invalide)
         .dernier_clic_y = -1,
         .liste_stations = NULL,     // Données du métro non chargées
+        .liste_connexions = NULL,
         .abr_stations = NULL,
         .lignes = NULL,
         .aqr_topo = NULL
@@ -121,13 +122,9 @@ int gui_lancer(const Une_config *config) {
         // Chargement des connexions (nécessite stations et lignes)
         if (app.abr_stations != NULL && app.lignes != NULL) {
             printf("Chargement des connexions depuis %s...\n", config->fichier_connexions);
-            Un_elem *liste_connexions = lire_connexions(config->fichier_connexions, app.lignes, app.abr_stations);
-            if (liste_connexions == NULL) {
+            app.liste_connexions = lire_connexions(config->fichier_connexions, app.lignes, app.abr_stations);
+            if (app.liste_connexions == NULL) {
                 fprintf(stderr, "Erreur: impossible de charger les connexions\n");
-            } else {
-                // Les connexions sont ajoutées automatiquement aux stations par lire_connexions
-                // On peut libérer la liste des connexions, car elles sont référencées dans les stations.
-                detruire_liste(liste_connexions);
             }
         }
 
@@ -184,17 +181,22 @@ int gui_lancer(const Une_config *config) {
     }
 
     // Libération de la mémoire des données du métro
+    // IMPORTANT: L'ordre de libération est très important.
+    // On libère d'abord les connexions, puis les structures qui y font référence.
+    if (app.liste_connexions != NULL) {
+        detruire_liste_et_truc(app.liste_connexions);
+    }
     if (app.aqr_topo != NULL) {
         detruire_aqr(app.aqr_topo);
     }
     if (app.abr_stations != NULL) {
         detruire_abr(app.abr_stations);
     }
-    if (app.lignes != NULL) {
-        detruire_lignes(app.lignes);
-    }
     if (app.liste_stations != NULL) {
         detruire_liste_et_truc(app.liste_stations);
+    }
+    if (app.lignes != NULL) {
+        detruire_lignes(app.lignes);
     }
 
     // Libération des ressources SDL
