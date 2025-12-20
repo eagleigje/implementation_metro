@@ -293,6 +293,58 @@ implémentées. Voici l'état d'avancement :
    - Calcul et affichage du plus court chemin (integration Dijkstra)
    - Affichage des informations de chemin (temps total, correspondances)
 
+CHOIX DE LA BIBLIOTHÈQUE GRAPHIQUE
+-----------------------------------
+Pour l'exercice 7 (interface graphique), nous avons comparé trois bibliothèques majeures :
+
+1. GTK+ (GIMP Toolkit)
+   - Toolkit complet pour interfaces utilisateur (boutons, menus, fenêtres)
+   - Orienté vers des applications de bureau traditionnelles
+   - Nombreux widgets prédéfinis
+   - Courbe d'apprentissage importante
+   - Excellente intégration avec GNOME
+   - Liens :
+     * https://www.gtk.org/
+     * https://docs.gtk.org/gtk4/
+
+2. Qt
+   - Framework complet et multiplateforme (C++)
+   - Très riche en fonctionnalités (widgets, réseau, base de données, etc.)
+   - Designer graphique pour créer des interfaces (Qt Designer)
+   - Excellent pour applications professionnelles complexes
+   - Licence complexe (GPL/LGPL ou commerciale)
+   - Nécessite une installation volumineuse
+   - Liens :
+     * https://www.qt.io/
+     * https://doc.qt.io/
+
+3. SDL2 (Simple DirectMedia Layer 2)
+   - Bibliothèque multimédia bas niveau
+   - Contrôle direct du rendu graphique (pixel par pixel)
+   - Légère et rapide
+   - Pas de widgets prédéfinis (on dessine tout manuellement)
+   - Excellente pour jeux vidéo et visualisations personnalisées
+   - Licence permissive (zlib)
+   - Liens :
+     * https://www.libsdl.org/
+     * https://wiki.libsdl.org/SDL2/FrontPage
+
+CHOIX RETENU : SDL2
+
+Raisons du choix :
+- Notre projet nécessite un rendu graphique personnalisé (plan de métro, lignes, stations)
+- Pas besoin de widgets standards (boutons, menus déroulants, etc.)
+- Besoin de contrôle total sur l'affichage (zoom, déplacement, sélection graphique)
+- Simplicité d'installation et de compilation
+- Bibliothèque légère et performante pour le rendu 2D
+- Licence permissive adaptée à un projet pédagogique
+- Bonne documentation et nombreux tutoriels disponibles
+
+GTK+ et Qt seraient surdimensionnés pour nos besoins : nous n'avons pas besoin de
+widgets complexes, juste de dessiner des formes géométriques (stations, lignes) et
+gérer des événements souris/clavier. SDL2 offre exactement ce qu'il faut sans la
+complexité additionnelle d'un toolkit complet.
+
 INFORMATIONS SDL2
 -----------------
 - Tutos et documentation :
