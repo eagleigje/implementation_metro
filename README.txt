@@ -56,16 +56,18 @@ Le projet est organisé en plusieurs modules :
    - connexions_paris.csv : Fichier contenant toutes les connexions parisiennes (généré automatiquement).
 
 7. Programmes à installer :
-    - SDL2 (lib SDL2 + en-tetes) : Necessaire pour compiler l'interface graphique.
+    - SDL2 (lib SDL2 + en-têtes) : Nécessaire pour compiler l'interface graphique.
+    - SDL2_ttf : Nécessaire pour afficher du texte (noms de stations, lignes,
+      panneaux d'information), car SDL2 ne fournit pas de rendu de texte nativement.
 
-    INSTALLATION SDL2 (LINUX)
-    -------------------------
+    INSTALLATION SDL2 / SDL2_TTF (LINUX)
+    ------------------------------------
     Ubuntu / Debian :
         sudo apt update
-        sudo apt install libsdl2-dev
+        sudo apt install libsdl2-dev libsdl2-ttf-dev
 
     Arch Linux :
-        sudo pacman -S sdl2
+        sudo pacman -S sdl2 sdl2_ttf
 
 8. Programmes optionnels à installer :
     - Doxygen : Afin de générer la documentation technique du projet.
@@ -83,6 +85,10 @@ Le projet est organisé en plusieurs modules :
 
 COMPILATION
 -----------
+Prérequis (GUI) :
+    - SDL2 et SDL2_ttf doivent être installés pour compiler l'exécutable `metro`.
+    - Le programme `tests` ne dépend pas de SDL2.
+
 Pour compiler le projet (les deux exécutables : metro et tests), utilisez :
     make
     ou
@@ -134,6 +140,7 @@ Le projet produit deux exécutables :
     ./metro
 
    Cette application est l'interface graphique de l'utilisateur.
+   Elle nécessite SDL2 et SDL2_ttf installés (voir section Installation).
 
    Pour utiliser un fichier de configuration différent :
     ./metro config_alt.ini
@@ -248,7 +255,7 @@ implémentées. Voici l'état d'avancement :
    - chercher_ligne
 
 4. Exercice 4 : Gestion des connexions ........................................  FAIT
-   - inserer_deb_liste (implémentée dans liste.c)
+   - inserer_deb_liste (implémentée dans le fichier liste.c)
    - lire_connexions (calcul automatique des temps via formule de Haversine)
    - ecrire_connexions
    - Script Python pour générer connexions_paris.csv (voir README_GENERER_CONNEXIONS.txt)
@@ -266,10 +273,10 @@ implémentées. Voici l'état d'avancement :
    - dijkstra (avec gestion du temps de parcours, temps d'arrêt et pénalité de correspondance)
    - cherche_chemin (reconstitution du chemin optimal)
    - configurer_dijkstra (configuration des temps de correspondance et d'arrêt)
-   - Pensez à appeler configurer_dijkstra(config->temps_correspondance, config->temps_arret)
+   - Pensez à appeler la fonction configurer_dijkstra(config->temps_correspondance, config->temps_arret)
      après la lecture du fichier .ini et avant de lancer dijkstra() dans l'application.
 
-7. Exercice 7 : Interface graphique ........................................... A FAIRE
+7. Exercice 7 : Interface graphique ........................................... EN COURS
    - Design de l'interface
    - Affichage du plan
    - Zoom et déplacement
