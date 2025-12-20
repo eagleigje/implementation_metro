@@ -17,10 +17,12 @@ CC = gcc
 # On peut forcer la version de C ci-dessous en ajoutant -std=cXX où XX peut valoir 99, 17, 23, etc.
 # La version C la plus récente à ce jour est la version c23.
 CFLAGS = -Wall -Wextra -g -O3
-LDFLAGS = -lm
+LDFLAGS_METRO = -lm -lSDL2
+LDFLAGS_TESTS = -lm
 
 # Fichiers objets communs
 COMMON_OBJ = truc.o liste.o config.o abr.o ligne.o connexion.o csv_utils.o aqrtopo.o outils.o dijkstra.o
+GUI_OBJ = gui.o
 
 # Fichiers objets spécifiques
 MAIN_OBJ = main.o
@@ -68,12 +70,12 @@ docs:
 	$(CC) $(CFLAGS) -c $< -o $@
 
 # Règle pour créer l'exécutable metro
-$(TARGET_METRO): $(COMMON_OBJ) $(MAIN_OBJ)
-	$(CC) $(CFLAGS) $(COMMON_OBJ) $(MAIN_OBJ) -o $(TARGET_METRO) $(LDFLAGS)
+$(TARGET_METRO): $(COMMON_OBJ) $(GUI_OBJ) $(MAIN_OBJ)
+	$(CC) $(CFLAGS) $(COMMON_OBJ) $(GUI_OBJ) $(MAIN_OBJ) -o $(TARGET_METRO) $(LDFLAGS_METRO)
 
 # Règle pour créer l'exécutable tests
 $(TARGET_TESTS): $(COMMON_OBJ) $(TESTS_OBJ)
-	$(CC) $(CFLAGS) $(COMMON_OBJ) $(TESTS_OBJ) -o $(TARGET_TESTS) $(LDFLAGS)
+	$(CC) $(CFLAGS) $(COMMON_OBJ) $(TESTS_OBJ) -o $(TARGET_TESTS) $(LDFLAGS_TESTS)
 
 # Dépendances
 truc.o: truc.c truc.h coord.h station.h connexion.h
@@ -87,6 +89,7 @@ aqrtopo.o: aqrtopo.c aqrtopo.h truc.h liste.h
 outils.o: outils.c outils.h
 dijkstra.o: dijkstra.c dijkstra.h liste.h truc.h
 main.o: main.c config.h liste.h abr.h
+gui.o: gui.c gui.h config.h
 tests.o: tests.c tests.h config.h liste.h abr.h
 tests_projet/test_csv_utils.o: tests_projet/test_csv_utils.c tests_projet/test_csv_utils.h csv_utils.h
 tests_projet/test_exercice1.o: tests_projet/test_exercice1.c tests_projet/test_exercice1.h liste.h truc.h

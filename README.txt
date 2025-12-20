@@ -59,6 +59,16 @@ Le projet est organisé en plusieurs modules :
     - Doxygen : Afin de générer la documentation technique du projet.
     - Valgrind : Pour vérifier que le projet libère bien toute la mémoire à la sortie.
     - glibc-debug : Pour valgrind.
+    - SDL2 (lib SDL2 + en-tetes) : Necessaire pour compiler l'interface graphique.
+
+INSTALLATION SDL2 (LINUX)
+-------------------------
+Ubuntu / Debian :
+    sudo apt update
+    sudo apt install libsdl2-dev
+
+Arch Linux :
+    sudo pacman -S sdl2
 
 8. Documentation :
     - doc/projet-metro2025.pdf         : Le PDF du projet
@@ -117,11 +127,10 @@ Le projet produit deux exécutables :
     ./tests config_alt.ini
     ./tests /chemin/vers/ma_config.ini
 
-2. Application PRINCIPALE (interface graphique à implémenter) :
+2. Application PRINCIPALE (interface graphique SDL2) :
     ./metro
 
-   Cette application est en cours de développement.
-   Elle sera l'interface graphique finale pour l'utilisateur.
+   Cette application est l'interface graphique de l'utilisateur.
 
    Pour utiliser un fichier de configuration différent :
     ./metro config_alt.ini

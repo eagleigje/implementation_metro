@@ -7,6 +7,7 @@
 #include <string.h>
 
 #include "config.h"
+#include "gui.h"
 
 /**
  * Fonction principale du projet.
@@ -25,16 +26,8 @@ int main(const int argc, char *argv[]) {
     }
 
     printf("=== PROJET METRO 2025 ===\n\n");
-    printf("Interface graphique a implementer (Exercice 7)\n");
+    printf("Interface graphique SDL2 (Exercice 7)\n");
     printf("Pour lancer les tests de validation, executez: ./tests\n\n");
-
-    // TODO: Implémenter l'interface graphique (Exercice 7)
-    // - Design de l'interface
-    // - Permettre à l'utilisateur de choisir les fonctionnalités
-    // - Affichage du plan du métro
-    // - Zoom et déplacement
-    // - Sélection de stations
-    // - Calcul et affichage du plus court chemin
 
     // Chargement de la configuration pour préparer les données
     printf("Chargement de la configuration depuis %s...\n", fichier_config);
@@ -46,8 +39,9 @@ int main(const int argc, char *argv[]) {
 
     afficher_config(config);
 
-    // Une_ligne *lignes = lire_lignes(config->fichier_lignes);
-    // afficher_lignes(lignes);
+    if (gui_lancer(config) != 0) {
+        fprintf(stderr, "Erreur: l'interface graphique s'est terminee avec une erreur\n");
+    }
 
     // Libération de la mémoire
     detruire_config(config);
