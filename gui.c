@@ -43,13 +43,13 @@ typedef struct {
     Un_nabr *abr_stations;
     Une_ligne *lignes;
     Un_noeud *aqr_topo;
-} Etat_gui;
+} Etat_affichage;
 
 /**
  * Fonction qui met à jour le titre de la fenêtre pour afficher le mode courant.
  * @param app : État global de l'application graphique.
  */
-void gui_mettre_a_jour_titre(Etat_gui *app) {
+void gui_mettre_a_jour_titre(Etat_affichage *app) {
     const char *ecran = (app->ecran == ECRAN_MENU) ? "MENU" : "PLAN";
     const char *mode = (app->mode == MODE_SELECTION) ? "SÉLECTION" : "CHEMIN";
     char titre[128];
@@ -100,7 +100,7 @@ TTF_Font *gui_charger_police(int taille) {
  * @param y : Position Y.
  * @param couleur : Couleur du texte.
  */
-void gui_rendu_texte(Etat_gui *app, TTF_Font *police, const char *texte, int x, int y, SDL_Color couleur) {
+void gui_rendu_texte(Etat_affichage *app, TTF_Font *police, const char *texte, int x, int y, SDL_Color couleur) {
     if (police == NULL || texte == NULL) {
         return;
     }
@@ -125,7 +125,7 @@ void gui_rendu_texte(Etat_gui *app, TTF_Font *police, const char *texte, int x, 
  * @param largeur : Largeur de la fenêtre.
  * @param hauteur : Hauteur de la fenêtre.
  */
-void gui_dessiner_menu(Etat_gui *app, int largeur, int hauteur) {
+void gui_dessiner_menu(Etat_affichage *app, int largeur, int hauteur) {
     SDL_SetRenderDrawColor(app->moteurRendu, 18, 24, 32, 255);
     SDL_RenderClear(app->moteurRendu);
 
@@ -158,7 +158,7 @@ void gui_dessiner_menu(Etat_gui *app, int largeur, int hauteur) {
  * @param largeur : Largeur de la fenêtre.
  * @param hauteur : Hauteur de la fenêtre.
  */
-void gui_dessiner_plan(Etat_gui *app, int largeur, int hauteur) {
+void gui_dessiner_plan(Etat_affichage *app, int largeur, int hauteur) {
     SDL_SetRenderDrawColor(app->moteurRendu, 245, 240, 228, 255);
     SDL_RenderClear(app->moteurRendu);
 
@@ -176,13 +176,13 @@ void gui_dessiner_plan(Etat_gui *app, int largeur, int hauteur) {
     SDL_SetRenderDrawColor(app->moteurRendu, 240, 240, 240, 255);
     SDL_RenderDrawRect(app->moteurRendu, &panneau_info);
 
-    SDL_Color couleur_hud = {240, 240, 240, 255};
+    SDL_Color couleur_info = {240, 240, 240, 255};
     if (app->mode == MODE_SELECTION) {
-        gui_rendu_texte(app, app->petite_police, "Mode : SÉLECTION", panneau_info.x + 8, panneau_info.y + 8, couleur_hud);
+        gui_rendu_texte(app, app->petite_police, "Mode : SÉLECTION", panneau_info.x + 8, panneau_info.y + 8, couleur_info);
     } else {
-        gui_rendu_texte(app, app->petite_police, "Mode : PLUS COURT CHEMIN", panneau_info.x + 8, panneau_info.y + 8, couleur_hud);
+        gui_rendu_texte(app, app->petite_police, "Mode : PLUS COURT CHEMIN", panneau_info.x + 8, panneau_info.y + 8, couleur_info);
     }
-    gui_rendu_texte(app, app->petite_police, "S/P mode  -  ESC menu  -  Q quitter", panneau_info.x + 8, panneau_info.y + 32, couleur_hud);
+    gui_rendu_texte(app, app->petite_police, "S/P mode  -  ESC menu  -  Q quitter", panneau_info.x + 8, panneau_info.y + 32, couleur_info);
 
     if (app->dernier_clic_x >= 0 && app->dernier_clic_y >= 0) {
         SDL_Rect curseur = {app->dernier_clic_x - 4, app->dernier_clic_y - 4, 8, 8};
@@ -208,7 +208,7 @@ int gui_lancer(const Une_config *config) {
         return 1;
     }
 
-    Etat_gui app = {
+    Etat_affichage app = {
         .fenetre = NULL,
         .moteurRendu = NULL,
         .petite_police = NULL,
