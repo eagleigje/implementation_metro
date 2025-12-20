@@ -1,13 +1,13 @@
 /*
  * PROJET MAIN3 / METRO
- * Implementation de l'interface graphique SDL2.
+ * Implémentation de l'interface graphique SDL2.
  */
-#include "gui.h"
 
-#include <stdbool.h>
+
 #include <stdio.h>
-
 #include <SDL2/SDL.h>
+
+#include "gui.h"
 
 typedef enum {
     SCREEN_MENU = 0,
@@ -32,10 +32,10 @@ typedef struct {
 } AppState;
 
 /**
- * Met a jour le titre de la fenetre pour afficher le mode courant.
- * @param app Etat global de l'application graphique.
+ * Fonction qui met à jour le titre de la fenêtre pour afficher le mode courant.
+ * @param app : État global de l'application graphique.
  */
-static void gui_mettre_a_jour_titre(AppState *app) {
+void gui_mettre_a_jour_titre(AppState *app) {
     const char *screen = (app->screen == SCREEN_MENU) ? "MENU" : "MAP";
     const char *mode = (app->mode == MODE_SELECT) ? "SELECT" : "PATH";
     char title[128];
@@ -45,9 +45,9 @@ static void gui_mettre_a_jour_titre(AppState *app) {
 }
 
 /**
- * Affiche les controles dans la console.
+ * Fonction qui affiche les contrôles dans la console au lancement de la fenêtre.
  */
-static void gui_afficher_aide(void) {
+void gui_afficher_aide(void) {
     printf("Controles:\n");
     printf("  MENU: 1=Afficher plan (selection), 2=Plus court chemin, 3=Quitter\n");
     printf("  PLAN: S=Selection, P=Plus court chemin, ESC=Menu, Q=Quitter\n");
@@ -55,10 +55,10 @@ static void gui_afficher_aide(void) {
 }
 
 /**
- * Dessine l'ecran de menu principal.
- * @param app Etat global de l'application graphique.
- * @param width Largeur de la fenetre.
- * @param height Hauteur de la fenetre.
+ * Fonction qui dessine l'écran, le menu principal.
+ * @param app : Etat global de l'application graphique.
+ * @param width : Largeur de la fenêtre.
+ * @param height : Hauteur de la fenêtre.
  */
 static void gui_dessiner_menu(AppState *app, int width, int height) {
     SDL_SetRenderDrawColor(app->renderer, 18, 24, 32, 255);
@@ -82,10 +82,10 @@ static void gui_dessiner_menu(AppState *app, int width, int height) {
 }
 
 /**
- * Dessine une vue de plan simple avec une grille et un HUD minimal.
- * @param app Etat global de l'application graphique.
- * @param width Largeur de la fenetre.
- * @param height Hauteur de la fenetre.
+ * Fonction de dessin d'une vue de plan simple avec une grille et un petit panneau d'information.
+ * @param app : Etat global de l'application graphique.
+ * @param width : Largeur de la fenetre.
+ * @param height : Hauteur de la fenetre.
  */
 static void gui_dessiner_plan(AppState *app, int width, int height) {
     SDL_SetRenderDrawColor(app->renderer, 245, 240, 228, 255);
@@ -113,9 +113,9 @@ static void gui_dessiner_plan(AppState *app, int width, int height) {
 }
 
 /**
- * Lance la fenetre principale et la boucle d'evenements SDL2.
- * @param config Configuration chargee (peut etre NULL si non disponible).
- * @return 0 si tout s'est bien passe, > 0 sinon.
+ * Fonction de lancement de la fenêtre principale et la boucle d'événements SDL2.
+ * @param config : Configuration chargée (peut etre NULL si non disponible).
+ * @return 0 si tout s'est bien passé, > 0 sinon.
  */
 int gui_lancer(const Une_config *config) {
     (void)config;
