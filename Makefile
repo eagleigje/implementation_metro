@@ -22,7 +22,7 @@ LDFLAGS_TESTS = -lm
 
 # Fichiers objets communs
 COMMON_OBJ = truc.o liste.o config.o abr.o ligne.o connexion.o csv_utils.o aqrtopo.o outils.o dijkstra.o
-GUI_OBJ = gui.o
+GUI_OBJ = gui/gui.o gui/gui_commun.o gui/gui_menu.o gui/gui_plan.o
 
 # Fichiers objets spécifiques
 MAIN_OBJ = main.o
@@ -45,7 +45,7 @@ rebuild: clean $(TARGET_METRO) $(TARGET_TESTS)
 
 # Nettoyage
 clean:
-	rm -f *.o tests_projet/*.o $(TARGET_METRO) $(TARGET_TESTS)
+	rm -f *.o tests_projet/*.o gui/*.o $(TARGET_METRO) $(TARGET_TESTS)
 
 # Dossier de documentation
 DOCS_DIR = doc/projet
@@ -88,8 +88,11 @@ csv_utils.o: csv_utils.c csv_utils.h outils.h
 aqrtopo.o: aqrtopo.c aqrtopo.h truc.h liste.h
 outils.o: outils.c outils.h
 dijkstra.o: dijkstra.c dijkstra.h liste.h truc.h
-main.o: main.c config.h liste.h abr.h gui.h
-gui.o: gui.c gui.h config.h liste.h abr.h aqrtopo.h ligne.h connexion.h dijkstra.h
+main.o: main.c config.h gui/gui.h
+gui/gui.o: gui/gui.c gui/gui.h gui/gui_commun.h gui/gui_menu.h gui/gui_plan.h config.h liste.h abr.h aqrtopo.h ligne.h connexion.h dijkstra.h
+gui/gui_commun.o: gui/gui_commun.c gui/gui_commun.h gui/gui.h
+gui/gui_menu.o: gui/gui_menu.c gui/gui_menu.h gui/gui.h gui/gui_commun.h
+gui/gui_plan.o: gui/gui_plan.c gui/gui_plan.h gui/gui.h gui/gui_commun.h
 tests.o: tests.c tests.h config.h liste.h abr.h
 tests_projet/test_csv_utils.o: tests_projet/test_csv_utils.c tests_projet/test_csv_utils.h csv_utils.h
 tests_projet/test_exercice1.o: tests_projet/test_exercice1.c tests_projet/test_exercice1.h liste.h truc.h

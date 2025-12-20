@@ -7,7 +7,7 @@
 #include <string.h>
 
 #include "config.h"
-#include "gui.h"
+#include "gui/gui.h"
 
 /**
  * Fonction principale du projet.
