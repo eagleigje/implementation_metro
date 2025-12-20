@@ -49,7 +49,7 @@ typedef struct {
  * Fonction qui met à jour le titre de la fenêtre pour afficher le mode courant.
  * @param app : État global de l'application graphique.
  */
-static void gui_mettre_a_jour_titre(Etat_gui *app) {
+void gui_mettre_a_jour_titre(Etat_gui *app) {
     const char *ecran = (app->ecran == ECRAN_MENU) ? "MENU" : "PLAN";
     const char *mode = (app->mode == MODE_SELECTION) ? "SÉLECTION" : "CHEMIN";
     char titre[128];
@@ -61,7 +61,7 @@ static void gui_mettre_a_jour_titre(Etat_gui *app) {
 /**
  * Fonction qui affiche les contrôles dans la console au lancement de la fenêtre.
  */
-static void gui_afficher_aide(void) {
+void gui_afficher_aide(void) {
     printf("Contrôles:\n");
     printf("  MENU: 1=Afficher plan (sélection), 2=Plus court chemin, 3=Quitter\n");
     printf("  PLAN: S=Sélection, P=Plus court chemin, ESC=Menu, Q=Quitter\n");
@@ -73,7 +73,7 @@ static void gui_afficher_aide(void) {
  * @param taille : Taille en points de la police à charger.
  * @return Un pointeur vers la police chargée, ou NULL si aucune n'est disponible.
  */
-static TTF_Font *gui_charger_police(int taille) {
+TTF_Font *gui_charger_police(int taille) {
     const char *chemins[] = {
         "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
         "/usr/share/fonts/TTF/DejaVuSans.ttf",
@@ -100,7 +100,7 @@ static TTF_Font *gui_charger_police(int taille) {
  * @param y : Position Y.
  * @param couleur : Couleur du texte.
  */
-static void gui_rendu_texte(Etat_gui *app, TTF_Font *police, const char *texte, int x, int y, SDL_Color couleur) {
+void gui_rendu_texte(Etat_gui *app, TTF_Font *police, const char *texte, int x, int y, SDL_Color couleur) {
     if (police == NULL || texte == NULL) {
         return;
     }
@@ -125,7 +125,7 @@ static void gui_rendu_texte(Etat_gui *app, TTF_Font *police, const char *texte, 
  * @param largeur : Largeur de la fenêtre.
  * @param hauteur : Hauteur de la fenêtre.
  */
-static void gui_dessiner_menu(Etat_gui *app, int largeur, int hauteur) {
+void gui_dessiner_menu(Etat_gui *app, int largeur, int hauteur) {
     SDL_SetRenderDrawColor(app->moteurRendu, 18, 24, 32, 255);
     SDL_RenderClear(app->moteurRendu);
 
@@ -158,7 +158,7 @@ static void gui_dessiner_menu(Etat_gui *app, int largeur, int hauteur) {
  * @param largeur : Largeur de la fenêtre.
  * @param hauteur : Hauteur de la fenêtre.
  */
-static void gui_dessiner_plan(Etat_gui *app, int largeur, int hauteur) {
+void gui_dessiner_plan(Etat_gui *app, int largeur, int hauteur) {
     SDL_SetRenderDrawColor(app->moteurRendu, 245, 240, 228, 255);
     SDL_RenderClear(app->moteurRendu);
 
@@ -295,7 +295,7 @@ int gui_lancer(const Une_config *config) {
                 fprintf(stderr, "Erreur: impossible de charger les connexions\n");
             } else {
                 // Les connexions sont ajoutées automatiquement aux stations par lire_connexions
-                // On peut libérer la liste des connexions car elles sont référencées dans les stations
+                // On peut libérer la liste des connexions, car elles sont référencées dans les stations.
                 detruire_liste(liste_connexions);
             }
         }
