@@ -4,8 +4,6 @@
  */
 
 #include <stdio.h>
-
-#include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 
 #include "gui.h"
@@ -16,33 +14,47 @@
 #include "connexion.h"
 #include "dijkstra.h"
 
+/**
+ * Type énuméré représentant les différents écrans de l'application.
+ * ECRAN_MENU : Écran d'accueil avec les options de navigation.
+ * ECRAN_PLAN : Écran principal affichant le plan du métro.
+ */
 typedef enum {
     ECRAN_MENU = 0,
     ECRAN_PLAN = 1
 } Ecran;
 
+/**
+ * Type énuméré représentant les modes d'interaction disponibles sur le plan.
+ * MODE_SELECTION : Permet de sélectionner des stations individuellement.
+ * MODE_CHEMIN : Permet de calculer le plus court chemin entre deux stations.
+ */
 typedef enum {
     MODE_SELECTION = 0,
     MODE_CHEMIN = 1
 } Mode;
 
+/**
+ * Structure contenant l'état global de l'interface graphique.
+ * Regroupe les ressources SDL, les paramètres d'affichage et les données du métro.
+ */
 typedef struct {
-    SDL_Window *fenetre;
-    SDL_Renderer *moteurRendu;
-    TTF_Font *petite_police;
-    TTF_Font *grande_police;
-    Ecran ecran;
-    Mode mode;
-    float zoom;
-    float decalage_x;
-    float decalage_y;
-    int dernier_clic_x;
-    int dernier_clic_y;
+    SDL_Window *fenetre;            // Fenêtre principale de l'application
+    SDL_Renderer *moteurRendu;      // Moteur de rendu SDL pour dessiner à l'écran
+    TTF_Font *petite_police;        // Police de petite taille pour les textes secondaires
+    TTF_Font *grande_police;        // Police de grande taille pour les titres
+    Ecran ecran;                    // Écran actuellement affiché (menu ou plan)
+    Mode mode;                      // Mode d'interaction actif (sélection ou chemin)
+    float zoom;                     // Facteur de zoom appliqué au plan (1.0 = échelle normale)
+    float decalage_x;               // Décalage horizontal de la caméra en pixels
+    float decalage_y;               // Décalage vertical de la caméra en pixels
+    int dernier_clic_x;             // Position X du dernier clic souris (-1 si aucun)
+    int dernier_clic_y;             // Position Y du dernier clic souris (-1 si aucun)
     // Données du métro
-    Un_elem *liste_stations;
-    Un_nabr *abr_stations;
-    Une_ligne *lignes;
-    Un_noeud *aqr_topo;
+    Un_elem *liste_stations;        // Liste chaînée de toutes les stations
+    Un_nabr *abr_stations;          // Arbre binaire de recherche pour recherche rapide par nom
+    Une_ligne *lignes;              // Liste des lignes de métro
+    Un_noeud *aqr_topo;             // Arbre quaternaire pour recherche spatiale des stations
 } Etat_affichage;
 
 /**
@@ -111,7 +123,7 @@ void gui_rendu_texte(Etat_affichage *app, TTF_Font *police, const char *texte, i
         return;
     }
 
-    // On génère une surface avec le texte rendu en UTF-8 avec antialiasing (Blended)
+    // On génère une surface avec le texte rendu en UTF-8 avec antialiasing.
     SDL_Surface *surface = TTF_RenderUTF8_Blended(police, texte, couleur);
     if (surface == NULL) {
         return;
@@ -136,35 +148,40 @@ void gui_rendu_texte(Etat_affichage *app, TTF_Font *police, const char *texte, i
  * @param hauteur : Hauteur de la fenêtre.
  */
 void gui_dessiner_menu(Etat_affichage *app, int largeur, int hauteur) {
-    // On efface l'écran avec la couleur de fond (bleu-gris foncé)
-    SDL_SetRenderDrawColor(app->moteurRendu, 18, 24, 32, 255);
+    // On efface l'écran avec la couleur de fond (bleu-gris foncé).
+    Couleur fond = COULEUR_FOND_MENU;
+    SDL_SetRenderDrawColor(app->moteurRendu, fond.r, fond.g, fond.b, fond.a);
     SDL_RenderClear(app->moteurRendu);
 
     // On définit les positions des trois cartes du menu, centrées à l'écran
-    SDL_Rect carte1 = {largeur / 2 - 220, hauteur / 2 - 140, 440, 70};
-    SDL_Rect carte2 = {largeur / 2 - 220, hauteur / 2 - 50, 440, 70};
-    SDL_Rect carte3 = {largeur / 2 - 220, hauteur / 2 + 40, 440, 70};
+    SDL_Rect carte1 = {largeur / 2 - MENU_LARGEUR_CARTE / 2, hauteur / 2 + MENU_OFFSET_CARTE_1_Y, MENU_LARGEUR_CARTE, MENU_HAUTEUR_CARTE};
+    SDL_Rect carte2 = {largeur / 2 - MENU_LARGEUR_CARTE / 2, hauteur / 2 + MENU_OFFSET_CARTE_2_Y, MENU_LARGEUR_CARTE, MENU_HAUTEUR_CARTE};
+    SDL_Rect carte3 = {largeur / 2 - MENU_LARGEUR_CARTE / 2, hauteur / 2 + MENU_OFFSET_CARTE_3_Y, MENU_LARGEUR_CARTE, MENU_HAUTEUR_CARTE};
 
     // On dessine les cartes avec des couleurs différentes pour chaque option
-    SDL_SetRenderDrawColor(app->moteurRendu, 52, 120, 196, 255);  // Bleu pour option 1
+    Couleur c1 = COULEUR_CARTE_1;
+    SDL_SetRenderDrawColor(app->moteurRendu, c1.r, c1.g, c1.b, c1.a);
     SDL_RenderFillRect(app->moteurRendu, &carte1);
-    SDL_SetRenderDrawColor(app->moteurRendu, 70, 156, 120, 255);  // Vert pour option 2
+    Couleur c2 = COULEUR_CARTE_2;
+    SDL_SetRenderDrawColor(app->moteurRendu, c2.r, c2.g, c2.b, c2.a);
     SDL_RenderFillRect(app->moteurRendu, &carte2);
-    SDL_SetRenderDrawColor(app->moteurRendu, 160, 78, 78, 255);   // Rouge pour option 3
+    Couleur c3 = COULEUR_CARTE_3;
+    SDL_SetRenderDrawColor(app->moteurRendu, c3.r, c3.g, c3.b, c3.a);
     SDL_RenderFillRect(app->moteurRendu, &carte3);
 
     // On ajoute les contours des cartes en blanc
-    SDL_SetRenderDrawColor(app->moteurRendu, 240, 240, 240, 255);
+    Couleur contour = COULEUR_CONTOUR_CARTE;
+    SDL_SetRenderDrawColor(app->moteurRendu, contour.r, contour.g, contour.b, contour.a);
     SDL_RenderDrawRect(app->moteurRendu, &carte1);
     SDL_RenderDrawRect(app->moteurRendu, &carte2);
     SDL_RenderDrawRect(app->moteurRendu, &carte3);
 
     // On affiche les textes du menu
-    SDL_Color couleur_texte = {245, 245, 245, 255};
-    gui_rendu_texte(app, app->grande_police, "PROJET METRO 2025", largeur / 2 - 150, hauteur / 2 - 210, couleur_texte);
-    gui_rendu_texte(app, app->petite_police, "1 - Afficher plan (sélection)", carte1.x + 18, carte1.y + 20, couleur_texte);
-    gui_rendu_texte(app, app->petite_police, "2 - Plus court chemin", carte2.x + 18, carte2.y + 20, couleur_texte);
-    gui_rendu_texte(app, app->petite_police, "3 - Quitter", carte3.x + 18, carte3.y + 20, couleur_texte);
+    SDL_Color couleur_texte = COULEUR_SDL(COULEUR_TEXTE_MENU);
+    gui_rendu_texte(app, app->grande_police, "PROJET METRO 2025", largeur / 2 - 150, hauteur / 2 + MENU_OFFSET_TITRE_Y, couleur_texte);
+    gui_rendu_texte(app, app->petite_police, "1 - Afficher plan (sélection)", carte1.x + MENU_MARGE_TEXTE_X, carte1.y + MENU_MARGE_TEXTE_Y, couleur_texte);
+    gui_rendu_texte(app, app->petite_police, "2 - Plus court chemin", carte2.x + MENU_MARGE_TEXTE_X, carte2.y + MENU_MARGE_TEXTE_Y, couleur_texte);
+    gui_rendu_texte(app, app->petite_police, "3 - Quitter", carte3.x + MENU_MARGE_TEXTE_X, carte3.y + MENU_MARGE_TEXTE_Y, couleur_texte);
 }
 
 /**
@@ -174,40 +191,45 @@ void gui_dessiner_menu(Etat_affichage *app, int largeur, int hauteur) {
  * @param hauteur : Hauteur de la fenêtre.
  */
 void gui_dessiner_plan(Etat_affichage *app, int largeur, int hauteur) {
-    // On efface l'écran avec une couleur beige clair (style carte)
-    SDL_SetRenderDrawColor(app->moteurRendu, 245, 240, 228, 255);
+    // On efface l'écran avec une couleur beige clair (style carte).
+    Couleur fond = COULEUR_FOND_PLAN;
+    SDL_SetRenderDrawColor(app->moteurRendu, fond.r, fond.g, fond.b, fond.a);
     SDL_RenderClear(app->moteurRendu);
 
-    // On dessine une grille de repérage (quadrillage tous les 40 pixels)
-    SDL_SetRenderDrawColor(app->moteurRendu, 210, 210, 210, 255);
-    for (int x = 0; x < largeur; x += 40) {
+    // On dessine une grille de repérage (quadrillage tous les N pixels).
+    Couleur grille = COULEUR_GRILLE;
+    SDL_SetRenderDrawColor(app->moteurRendu, grille.r, grille.g, grille.b, grille.a);
+    for (int x = 0; x < largeur; x += PLAN_TAILLE_GRILLE) {
         SDL_RenderDrawLine(app->moteurRendu, x, 0, x, hauteur);
     }
-    for (int y = 0; y < hauteur; y += 40) {
+    for (int y = 0; y < hauteur; y += PLAN_TAILLE_GRILLE) {
         SDL_RenderDrawLine(app->moteurRendu, 0, y, largeur, y);
     }
 
     // On dessine le panneau d'information en haut à gauche
-    SDL_Rect panneau_info = {12, 12, 220, 60};
-    SDL_SetRenderDrawColor(app->moteurRendu, 30, 30, 30, 200);  // Fond semi-transparent
+    SDL_Rect panneau_info = {PLAN_PANNEAU_X, PLAN_PANNEAU_Y, PLAN_PANNEAU_LARGEUR, PLAN_PANNEAU_HAUTEUR};
+    Couleur fond_panneau = COULEUR_PANNEAU_FOND;
+    SDL_SetRenderDrawColor(app->moteurRendu, fond_panneau.r, fond_panneau.g, fond_panneau.b, fond_panneau.a);
     SDL_RenderFillRect(app->moteurRendu, &panneau_info);
-    SDL_SetRenderDrawColor(app->moteurRendu, 240, 240, 240, 255);  // Bordure blanche
+    Couleur bordure_panneau = COULEUR_PANNEAU_BORDURE;
+    SDL_SetRenderDrawColor(app->moteurRendu, bordure_panneau.r, bordure_panneau.g, bordure_panneau.b, bordure_panneau.a);
     SDL_RenderDrawRect(app->moteurRendu, &panneau_info);
 
     // On affiche le mode actif dans le panneau
-    SDL_Color couleur_info = {240, 240, 240, 255};
+    SDL_Color couleur_info = COULEUR_SDL(COULEUR_TEXTE_INFO);
     if (app->mode == MODE_SELECTION) {
-        gui_rendu_texte(app, app->petite_police, "Mode : SÉLECTION", panneau_info.x + 8, panneau_info.y + 8, couleur_info);
+        gui_rendu_texte(app, app->petite_police, "Mode : SÉLECTION", panneau_info.x + PLAN_MARGE_TEXTE_X, panneau_info.y + PLAN_MARGE_TEXTE_Y_1, couleur_info);
     } else {
-        gui_rendu_texte(app, app->petite_police, "Mode : PLUS COURT CHEMIN", panneau_info.x + 8, panneau_info.y + 8, couleur_info);
+        gui_rendu_texte(app, app->petite_police, "Mode : PLUS COURT CHEMIN", panneau_info.x + PLAN_MARGE_TEXTE_X, panneau_info.y + PLAN_MARGE_TEXTE_Y_1, couleur_info);
     }
     // On affiche les raccourcis clavier
-    gui_rendu_texte(app, app->petite_police, "S/P mode  -  ESC menu  -  Q quitter", panneau_info.x + 8, panneau_info.y + 32, couleur_info);
+    gui_rendu_texte(app, app->petite_police, "S/P mode  -  ESC menu  -  Q quitter", panneau_info.x + PLAN_MARGE_TEXTE_X, panneau_info.y + PLAN_MARGE_TEXTE_Y_2, couleur_info);
 
     // Si l'utilisateur a cliqué, on affiche un curseur rouge à la position du clic
     if (app->dernier_clic_x >= 0 && app->dernier_clic_y >= 0) {
-        SDL_Rect curseur = {app->dernier_clic_x - 4, app->dernier_clic_y - 4, 8, 8};
-        SDL_SetRenderDrawColor(app->moteurRendu, 200, 60, 60, 255);
+        SDL_Rect curseur = {app->dernier_clic_x - PLAN_CURSEUR_DEMI_TAILLE, app->dernier_clic_y - PLAN_CURSEUR_DEMI_TAILLE, PLAN_CURSEUR_TAILLE, PLAN_CURSEUR_TAILLE};
+        Couleur couleur_curseur = COULEUR_CURSEUR;
+        SDL_SetRenderDrawColor(app->moteurRendu, couleur_curseur.r, couleur_curseur.g, couleur_curseur.b, couleur_curseur.a);
         SDL_RenderFillRect(app->moteurRendu, &curseur);
     }
 }
@@ -280,8 +302,8 @@ int gui_lancer(const Une_config *config) {
     SDL_SetWindowMinimumSize(app.fenetre, GUI_LARGEUR_MIN, GUI_HAUTEUR_MIN);
 
     // Chargement des polices TTF pour l'affichage de texte
-    app.petite_police = gui_charger_police(18);
-    app.grande_police = gui_charger_police(26);
+    app.petite_police = gui_charger_police(TAILLE_PETITE_POLICE);
+    app.grande_police = gui_charger_police(TAILLE_GRANDE_POLICE);
     if (app.petite_police == NULL || app.grande_police == NULL) {
         fprintf(stderr, "Attention: aucune police TTF n'a pu être chargée\n");
     }
@@ -351,7 +373,7 @@ int gui_lancer(const Une_config *config) {
                 SDL_Keycode key = event.key.keysym.sym;
                 // Gestion des touches selon l'écran actif
                 if (app.ecran == ECRAN_MENU) {
-                    // On est dans le menu : touches 1, 2, 3 ou Q
+                    // On est dans le menu : on accepte les touches 1, 2, 3 ou Q.
                     if (key == SDLK_1) {
                         app.ecran = ECRAN_PLAN;
                         app.mode = MODE_SELECTION;
@@ -377,17 +399,17 @@ int gui_lancer(const Une_config *config) {
                     } else if (key == SDLK_q) {
                         running = false;
                     } else if (key == SDLK_PLUS || key == SDLK_KP_PLUS) {
-                        app.zoom *= 1.1f;  // Zoom avant (facteur 1.1)
+                        app.zoom *= ZOOM_FACTEUR_AVANT;  // Zoom avant
                     } else if (key == SDLK_MINUS || key == SDLK_KP_MINUS) {
-                        app.zoom *= 0.9f;  // Zoom arrière (facteur 0.9)
+                        app.zoom *= ZOOM_FACTEUR_ARRIERE;  // Zoom arrière
                     } else if (key == SDLK_LEFT) {
-                        app.decalage_x -= 10.0f;  // Déplacement vers la gauche
+                        app.decalage_x -= DEPLACEMENT_PAS;  // Déplacement vers la gauche
                     } else if (key == SDLK_RIGHT) {
-                        app.decalage_x += 10.0f;  // Déplacement vers la droite
+                        app.decalage_x += DEPLACEMENT_PAS;  // Déplacement vers la droite
                     } else if (key == SDLK_UP) {
-                        app.decalage_y -= 10.0f;  // Déplacement vers le haut
+                        app.decalage_y -= DEPLACEMENT_PAS;  // Déplacement vers le haut
                     } else if (key == SDLK_DOWN) {
-                        app.decalage_y += 10.0f;  // Déplacement vers le bas
+                        app.decalage_y += DEPLACEMENT_PAS;  // Déplacement vers le bas
                     }
                 }
             } else if (event.type == SDL_MOUSEBUTTONDOWN && app.ecran == ECRAN_PLAN) {
