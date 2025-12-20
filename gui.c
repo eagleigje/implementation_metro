@@ -50,10 +50,12 @@ typedef struct {
  * @param app : État global de l'application graphique.
  */
 void gui_mettre_a_jour_titre(Etat_affichage *app) {
+    // On détermine le texte à afficher selon l'écran et le mode actifs
     const char *ecran = (app->ecran == ECRAN_MENU) ? "MENU" : "PLAN";
     const char *mode = (app->mode == MODE_SELECTION) ? "SÉLECTION" : "CHEMIN";
     char titre[128];
 
+    // On construit le titre et on l'affiche dans la barre de fenêtre
     snprintf(titre, sizeof(titre), "PROJET METRO 2025 - %s (mode=%s)", ecran, mode);
     SDL_SetWindowTitle(app->fenetre, titre);
 }
@@ -71,9 +73,10 @@ void gui_afficher_aide(void) {
 /**
  * Fonction qui charge une police TrueType à partir de chemins connus.
  * @param taille : Taille en points de la police à charger.
- * @return Un pointeur vers la police chargée, ou NULL si aucune n'est disponible.
+ * @return : Un pointeur vers la police chargée, ou NULL si aucune n'est disponible.
  */
 TTF_Font *gui_charger_police(int taille) {
+    // Liste des chemins système connus où chercher la police DejaVu Sans
     const char *chemins[] = {
         "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
         "/usr/share/fonts/TTF/DejaVuSans.ttf",
@@ -81,6 +84,7 @@ TTF_Font *gui_charger_police(int taille) {
         NULL
     };
 
+    // On essaie chaque chemin jusqu'à trouver une police disponible
     for (int i = 0; chemins[i] != NULL; i++) {
         TTF_Font *police = TTF_OpenFont(chemins[i], taille);
         if (police != NULL) {
@@ -88,6 +92,7 @@ TTF_Font *gui_charger_police(int taille) {
         }
     }
 
+    // Aucune police trouvée
     return NULL;
 }
 
@@ -101,21 +106,26 @@ TTF_Font *gui_charger_police(int taille) {
  * @param couleur : Couleur du texte.
  */
 void gui_rendu_texte(Etat_affichage *app, TTF_Font *police, const char *texte, int x, int y, SDL_Color couleur) {
+    // Vérification des paramètres
     if (police == NULL || texte == NULL) {
         return;
     }
 
+    // On génère une surface avec le texte rendu en UTF-8 avec antialiasing (Blended)
     SDL_Surface *surface = TTF_RenderUTF8_Blended(police, texte, couleur);
     if (surface == NULL) {
         return;
     }
 
+    // On convertit la surface en texture pour l'affichage GPU
     SDL_Texture *texture = SDL_CreateTextureFromSurface(app->moteurRendu, surface);
     if (texture != NULL) {
+        // On définit la zone de destination avec la taille de la surface
         SDL_Rect dest = {x, y, surface->w, surface->h};
         SDL_RenderCopy(app->moteurRendu, texture, NULL, &dest);
         SDL_DestroyTexture(texture);
     }
+    // On libère la surface qui n'est plus nécessaire
     SDL_FreeSurface(surface);
 }
 
@@ -126,25 +136,30 @@ void gui_rendu_texte(Etat_affichage *app, TTF_Font *police, const char *texte, i
  * @param hauteur : Hauteur de la fenêtre.
  */
 void gui_dessiner_menu(Etat_affichage *app, int largeur, int hauteur) {
+    // On efface l'écran avec la couleur de fond (bleu-gris foncé)
     SDL_SetRenderDrawColor(app->moteurRendu, 18, 24, 32, 255);
     SDL_RenderClear(app->moteurRendu);
 
+    // On définit les positions des trois cartes du menu, centrées à l'écran
     SDL_Rect carte1 = {largeur / 2 - 220, hauteur / 2 - 140, 440, 70};
     SDL_Rect carte2 = {largeur / 2 - 220, hauteur / 2 - 50, 440, 70};
     SDL_Rect carte3 = {largeur / 2 - 220, hauteur / 2 + 40, 440, 70};
 
-    SDL_SetRenderDrawColor(app->moteurRendu, 52, 120, 196, 255);
+    // On dessine les cartes avec des couleurs différentes pour chaque option
+    SDL_SetRenderDrawColor(app->moteurRendu, 52, 120, 196, 255);  // Bleu pour option 1
     SDL_RenderFillRect(app->moteurRendu, &carte1);
-    SDL_SetRenderDrawColor(app->moteurRendu, 70, 156, 120, 255);
+    SDL_SetRenderDrawColor(app->moteurRendu, 70, 156, 120, 255);  // Vert pour option 2
     SDL_RenderFillRect(app->moteurRendu, &carte2);
-    SDL_SetRenderDrawColor(app->moteurRendu, 160, 78, 78, 255);
+    SDL_SetRenderDrawColor(app->moteurRendu, 160, 78, 78, 255);   // Rouge pour option 3
     SDL_RenderFillRect(app->moteurRendu, &carte3);
 
+    // On ajoute les contours des cartes en blanc
     SDL_SetRenderDrawColor(app->moteurRendu, 240, 240, 240, 255);
     SDL_RenderDrawRect(app->moteurRendu, &carte1);
     SDL_RenderDrawRect(app->moteurRendu, &carte2);
     SDL_RenderDrawRect(app->moteurRendu, &carte3);
 
+    // On affiche les textes du menu
     SDL_Color couleur_texte = {245, 245, 245, 255};
     gui_rendu_texte(app, app->grande_police, "PROJET METRO 2025", largeur / 2 - 150, hauteur / 2 - 210, couleur_texte);
     gui_rendu_texte(app, app->petite_police, "1 - Afficher plan (sélection)", carte1.x + 18, carte1.y + 20, couleur_texte);
@@ -159,9 +174,11 @@ void gui_dessiner_menu(Etat_affichage *app, int largeur, int hauteur) {
  * @param hauteur : Hauteur de la fenêtre.
  */
 void gui_dessiner_plan(Etat_affichage *app, int largeur, int hauteur) {
+    // On efface l'écran avec une couleur beige clair (style carte)
     SDL_SetRenderDrawColor(app->moteurRendu, 245, 240, 228, 255);
     SDL_RenderClear(app->moteurRendu);
 
+    // On dessine une grille de repérage (quadrillage tous les 40 pixels)
     SDL_SetRenderDrawColor(app->moteurRendu, 210, 210, 210, 255);
     for (int x = 0; x < largeur; x += 40) {
         SDL_RenderDrawLine(app->moteurRendu, x, 0, x, hauteur);
@@ -170,20 +187,24 @@ void gui_dessiner_plan(Etat_affichage *app, int largeur, int hauteur) {
         SDL_RenderDrawLine(app->moteurRendu, 0, y, largeur, y);
     }
 
+    // On dessine le panneau d'information en haut à gauche
     SDL_Rect panneau_info = {12, 12, 220, 60};
-    SDL_SetRenderDrawColor(app->moteurRendu, 30, 30, 30, 200);
+    SDL_SetRenderDrawColor(app->moteurRendu, 30, 30, 30, 200);  // Fond semi-transparent
     SDL_RenderFillRect(app->moteurRendu, &panneau_info);
-    SDL_SetRenderDrawColor(app->moteurRendu, 240, 240, 240, 255);
+    SDL_SetRenderDrawColor(app->moteurRendu, 240, 240, 240, 255);  // Bordure blanche
     SDL_RenderDrawRect(app->moteurRendu, &panneau_info);
 
+    // On affiche le mode actif dans le panneau
     SDL_Color couleur_info = {240, 240, 240, 255};
     if (app->mode == MODE_SELECTION) {
         gui_rendu_texte(app, app->petite_police, "Mode : SÉLECTION", panneau_info.x + 8, panneau_info.y + 8, couleur_info);
     } else {
         gui_rendu_texte(app, app->petite_police, "Mode : PLUS COURT CHEMIN", panneau_info.x + 8, panneau_info.y + 8, couleur_info);
     }
+    // On affiche les raccourcis clavier
     gui_rendu_texte(app, app->petite_police, "S/P mode  -  ESC menu  -  Q quitter", panneau_info.x + 8, panneau_info.y + 32, couleur_info);
 
+    // Si l'utilisateur a cliqué, on affiche un curseur rouge à la position du clic
     if (app->dernier_clic_x >= 0 && app->dernier_clic_y >= 0) {
         SDL_Rect curseur = {app->dernier_clic_x - 4, app->dernier_clic_y - 4, 8, 8};
         SDL_SetRenderDrawColor(app->moteurRendu, 200, 60, 60, 255);
@@ -194,45 +215,49 @@ void gui_dessiner_plan(Etat_affichage *app, int largeur, int hauteur) {
 /**
  * Fonction qui lance la fenêtre principale et la boucle d'événements SDL2.
  * @param config : Configuration chargée (peut être NULL si non disponible).
- * @return 0 si tout s'est bien passé, > 0 sinon.
+ * @return : 0 si tout s'est bien passé, > 0 sinon.
  */
 int gui_lancer(const Une_config *config) {
+    // Initialisation du sous-système vidéo de SDL2
     if (SDL_Init(SDL_INIT_VIDEO) != 0) {
         fprintf(stderr, "Erreur SDL_Init: %s\n", SDL_GetError());
         return 1;
     }
 
+    // Initialisation de SDL2_ttf pour le rendu de texte
     if (TTF_Init() != 0) {
         fprintf(stderr, "Erreur TTF_Init: %s\n", TTF_GetError());
         SDL_Quit();
         return 1;
     }
 
+    // Initialisation de la structure d'état de l'application
     Etat_affichage app = {
         .fenetre = NULL,
         .moteurRendu = NULL,
         .petite_police = NULL,
         .grande_police = NULL,
-        .ecran = ECRAN_MENU,
-        .mode = MODE_SELECTION,
-        .zoom = 1.0f,
-        .decalage_x = 0.0f,
+        .ecran = ECRAN_MENU,        // On démarre sur le menu principal
+        .mode = MODE_SELECTION,     // Mode sélection par défaut
+        .zoom = 1.0f,               // Zoom initial à 1:1
+        .decalage_x = 0.0f,         // Pas de déplacement initial
         .decalage_y = 0.0f,
-        .dernier_clic_x = -1,
+        .dernier_clic_x = -1,       // Pas de clic enregistré (-1 = invalide)
         .dernier_clic_y = -1,
-        .liste_stations = NULL,
+        .liste_stations = NULL,     // Données du métro non chargées
         .abr_stations = NULL,
         .lignes = NULL,
         .aqr_topo = NULL
     };
 
+    // Création de la fenêtre principale, centrée à l'écran
     app.fenetre = SDL_CreateWindow(
         "PROJET METRO 2025",
         SDL_WINDOWPOS_CENTERED,
         SDL_WINDOWPOS_CENTERED,
         GUI_LARGEUR_MIN,
         GUI_HAUTEUR_MIN,
-        SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE
+        SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE  // Fenêtre visible et redimensionnable
     );
     if (app.fenetre == NULL) {
         fprintf(stderr, "Erreur SDL_CreateWindow: %s\n", SDL_GetError());
@@ -241,6 +266,7 @@ int gui_lancer(const Une_config *config) {
         return 1;
     }
 
+    // Création du moteur de rendu accéléré avec vsync
     app.moteurRendu = SDL_CreateRenderer(app.fenetre, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
     if (app.moteurRendu == NULL) {
         fprintf(stderr, "Erreur SDL_CreateRenderer: %s\n", SDL_GetError());
@@ -250,8 +276,10 @@ int gui_lancer(const Une_config *config) {
         return 1;
     }
 
+    // On impose une taille minimale pour la fenêtre
     SDL_SetWindowMinimumSize(app.fenetre, GUI_LARGEUR_MIN, GUI_HAUTEUR_MIN);
 
+    // Chargement des polices TTF pour l'affichage de texte
     app.petite_police = gui_charger_police(18);
     app.grande_police = gui_charger_police(26);
     if (app.petite_police == NULL || app.grande_police == NULL) {
@@ -306,18 +334,24 @@ int gui_lancer(const Une_config *config) {
                config->temps_correspondance, config->temps_arret);
     }
 
+    // Initialisation finale de l'interface
     gui_mettre_a_jour_titre(&app);
     gui_afficher_aide();
 
+    // Boucle principale de l'application
     bool running = true;
     while (running) {
         SDL_Event event;
+        // On traite tous les événements en attente (clavier, souris, fermeture, etc.)
         while (SDL_PollEvent(&event)) {
             if (event.type == SDL_QUIT) {
+                // L'utilisateur a fermé la fenêtre
                 running = false;
             } else if (event.type == SDL_KEYDOWN) {
                 SDL_Keycode key = event.key.keysym.sym;
+                // Gestion des touches selon l'écran actif
                 if (app.ecran == ECRAN_MENU) {
+                    // On est dans le menu : touches 1, 2, 3 ou Q
                     if (key == SDLK_1) {
                         app.ecran = ECRAN_PLAN;
                         app.mode = MODE_SELECTION;
@@ -330,6 +364,7 @@ int gui_lancer(const Une_config *config) {
                         running = false;
                     }
                 } else if (app.ecran == ECRAN_PLAN) {
+                    // On est sur le plan : touches ESC, S, P, Q, +/-, flèches
                     if (key == SDLK_ESCAPE) {
                         app.ecran = ECRAN_MENU;
                         gui_mettre_a_jour_titre(&app);
@@ -342,20 +377,21 @@ int gui_lancer(const Une_config *config) {
                     } else if (key == SDLK_q) {
                         running = false;
                     } else if (key == SDLK_PLUS || key == SDLK_KP_PLUS) {
-                        app.zoom *= 1.1f;
+                        app.zoom *= 1.1f;  // Zoom avant (facteur 1.1)
                     } else if (key == SDLK_MINUS || key == SDLK_KP_MINUS) {
-                        app.zoom *= 0.9f;
+                        app.zoom *= 0.9f;  // Zoom arrière (facteur 0.9)
                     } else if (key == SDLK_LEFT) {
-                        app.decalage_x -= 10.0f;
+                        app.decalage_x -= 10.0f;  // Déplacement vers la gauche
                     } else if (key == SDLK_RIGHT) {
-                        app.decalage_x += 10.0f;
+                        app.decalage_x += 10.0f;  // Déplacement vers la droite
                     } else if (key == SDLK_UP) {
-                        app.decalage_y -= 10.0f;
+                        app.decalage_y -= 10.0f;  // Déplacement vers le haut
                     } else if (key == SDLK_DOWN) {
-                        app.decalage_y += 10.0f;
+                        app.decalage_y += 10.0f;  // Déplacement vers le bas
                     }
                 }
             } else if (event.type == SDL_MOUSEBUTTONDOWN && app.ecran == ECRAN_PLAN) {
+                // Gestion des clics souris (uniquement sur le plan)
                 if (event.button.button == SDL_BUTTON_LEFT) {
                     app.dernier_clic_x = event.button.x;
                     app.dernier_clic_y = event.button.y;
@@ -363,6 +399,7 @@ int gui_lancer(const Une_config *config) {
             }
         }
 
+        // Dessin de l'écran selon l'état actif
         int width = 0;
         int height = 0;
         SDL_GetWindowSize(app.fenetre, &width, &height);
@@ -371,6 +408,7 @@ int gui_lancer(const Une_config *config) {
         } else {
             gui_dessiner_plan(&app, width, height);
         }
+        // On affiche le rendu à l'écran
         SDL_RenderPresent(app.moteurRendu);
     }
 
