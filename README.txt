@@ -39,7 +39,7 @@ Le projet est organisé en plusieurs modules :
    - constantes.h            : Constantes globales du projet
 
 4. Programmes :
-   - main.c                  : Application principale (interface graphique à implémenter)
+   - main.c                  : Application principale avec interface graphique.
    - tests.c/tests.h         : Programme de tests et validation
 
 5. Configuration :
@@ -55,27 +55,30 @@ Le projet est organisé en plusieurs modules :
    - connexions.csv : Fichier contenant les connexions (test).
    - connexions_paris.csv : Fichier contenant toutes les connexions parisiennes (généré automatiquement).
 
-7. Programmes optionnels à installer :
+7. Programmes à installer :
+    - SDL2 (lib SDL2 + en-tetes) : Necessaire pour compiler l'interface graphique.
+
+    INSTALLATION SDL2 (LINUX)
+    -------------------------
+    Ubuntu / Debian :
+        sudo apt update
+        sudo apt install libsdl2-dev
+
+    Arch Linux :
+        sudo pacman -S sdl2
+
+8. Programmes optionnels à installer :
     - Doxygen : Afin de générer la documentation technique du projet.
     - Valgrind : Pour vérifier que le projet libère bien toute la mémoire à la sortie.
     - glibc-debug : Pour valgrind.
-    - SDL2 (lib SDL2 + en-tetes) : Necessaire pour compiler l'interface graphique.
 
-INSTALLATION SDL2 (LINUX)
--------------------------
-Ubuntu / Debian :
-    sudo apt update
-    sudo apt install libsdl2-dev
 
-Arch Linux :
-    sudo pacman -S sdl2
-
-8. Documentation :
+9. Documentation :
     - doc/projet-metro2025.pdf         : Le PDF du projet
     - doc/projet/html/index.html       : La documentation Doxygen du projet
     - README_GENERER_CONNEXIONS.txt    : Guide d'utilisation du script de génération des connexions
 
-9. Scripts utilitaires :
+10. Scripts utilitaires :
     - generer_connexions_paris.py      : Script Python pour générer connexions_paris.csv automatiquement
 
 COMPILATION
@@ -272,6 +275,15 @@ implémentées. Voici l'état d'avancement :
    - Zoom et déplacement
    - Sélection de stations
    - Calcul et affichage du chemin
+
+INFORMATIONS SDL2
+-----------------
+- Tutos et documentation :
+    - https://www.meruvia.fr/index.php/fr/big-tuto-sdl-2
+    - https://devopssec.fr/article/cours-introduction-sdl-2
+    - https://wiki.libsdl.org/SDL2/Tutorials
+    - https://lazyfoo.net/tutorials/SDL/index.php
+    - https://wiki.libsdl.org/SDL2/FrontPage
 
 NOTES IMPORTANTES
 -----------------
