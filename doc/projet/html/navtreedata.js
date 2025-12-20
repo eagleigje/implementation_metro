@@ -58,7 +58,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "abr_8c.html",
-"test__exercice4_8h_source.html"
+"struct__un__noeud.html"
 ];
 
 var SYNCONMSG = 'cliquez pour désactiver la synchronisation du panel';

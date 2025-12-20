@@ -10,5 +10,7 @@ var annotated_dup =
     [ "_une_connexion", "struct__une__connexion.html", "struct__une__connexion" ],
     [ "_une_coord", "struct__une__coord.html", "struct__une__coord" ],
     [ "_une_ligne", "struct__une__ligne.html", "struct__une__ligne" ],
-    [ "_une_station", "struct__une__station.html", "struct__une__station" ]
+    [ "_une_station", "struct__une__station.html", "struct__une__station" ],
+    [ "Couleur", "structCouleur.html", "structCouleur" ],
+    [ "Etat_affichage", "structEtat__affichage.html", "structEtat__affichage" ]
 ];
