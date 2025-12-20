@@ -1,18 +1,19 @@
-# =========================================================================
+# ====================================================================================
 # Makefile pour le Projet Metro 2025
-# =========================================================================
+# ====================================================================================
 # Commandes disponibles :
-#   make             - Compile les deux exécutables (metro et tests).
-#   make all         - Compile les deux exécutables (metro et tests).
-#   make rebuild     - Nettoie et recompile tout depuis zéro (rebuild complet).
-#   make metro       - Compile uniquement l'application principale.
-#   make tests       - Compile uniquement le programme de tests.
-#   make run-tests   - Compile et exécute les tests.
-#   make test-memory - Compile et exécute les tests avec valgrind.
-#   make clean       - Supprime tous les fichiers objets et les exécutables.
-#   make docs        - Génère la documentation Doxygen.
-#   make clean-docs  - Supprime la documentation générée.
-# =========================================================================
+#   make                 	- Compile les deux exécutables (metro et tests).
+#   make all             	- Compile les deux exécutables (metro et tests).
+#   make rebuild         	- Nettoie et recompile tout depuis zéro (rebuild complet).
+#   make metro           	- Compile uniquement l'application principale.
+#   make tests           	- Compile uniquement le programme de tests.
+#   make run-tests       	- Compile et exécute les tests.
+#   make test-memory     	- Compile et exécute les tests avec valgrind.
+#   make test-memory-metro 	- Compile et exécute metro avec valgrind.
+#   make clean           	- Supprime tous les fichiers objets et les exécutables.
+#   make docs            	- Génère la documentation Doxygen.
+#   make clean-docs      	- Supprime la documentation générée.
+# ====================================================================================
 CC = gcc
 # On peut forcer la version de C ci-dessous en ajoutant -std=cXX où XX peut valoir 99, 17, 23, etc.
 # La version C la plus récente à ce jour est la version c23.
@@ -117,4 +118,12 @@ test-memory: $(TARGET_TESTS)
 	@echo "========================================="
 	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(TARGET_TESTS)
 
-.PHONY: all rebuild clean metro tests run-tests test-memory docs clean-docs
+# Cible pour exécuter le programme principal avec valgrind
+test-memory-metro: $(TARGET_METRO)
+	@echo "========================================="
+	@echo "Vérification mémoire du programme metro avec valgrind..."
+	@echo "========================================="
+	@echo "Note: Interagissez avec l'interface puis quittez proprement pour voir le rapport"
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(TARGET_METRO)
+
+.PHONY: all rebuild clean metro tests run-tests test-memory test-memory-metro docs clean-docs

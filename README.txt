@@ -117,8 +117,11 @@ Pour compiler uniquement le programme de tests :
 Pour compiler et exécuter les tests immédiatement :
     make run-tests
 
-Pour vérifier les fuites mémoire avec valgrind :
+Pour vérifier les fuites mémoire du programme de tests avec valgrind :
     make test-memory
+
+Pour vérifier les fuites mémoire du programme principal avec valgrind :
+    make test-memory-metro
 
 Pour nettoyer les fichiers objets et les exécutables :
     make clean
