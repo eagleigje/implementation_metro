@@ -160,19 +160,19 @@ static void gui_dessiner_plan(AppState *app, int width, int height) {
         SDL_RenderDrawLine(app->renderer, 0, y, width, y);
     }
 
-    SDL_Rect hud = {12, 12, 220, 60};
+    SDL_Rect panneau_info = {12, 12, 220, 60};
     SDL_SetRenderDrawColor(app->renderer, 30, 30, 30, 200);
-    SDL_RenderFillRect(app->renderer, &hud);
+    SDL_RenderFillRect(app->renderer, &panneau_info);
     SDL_SetRenderDrawColor(app->renderer, 240, 240, 240, 255);
-    SDL_RenderDrawRect(app->renderer, &hud);
+    SDL_RenderDrawRect(app->renderer, &panneau_info);
 
     SDL_Color hud_color = {240, 240, 240, 255};
     if (app->mode == MODE_SELECT) {
-        gui_rendu_texte(app, app->font_small, "Mode : SÉLECTION", hud.x + 8, hud.y + 8, hud_color);
+        gui_rendu_texte(app, app->font_small, "Mode : SÉLECTION", panneau_info.x + 8, panneau_info.y + 8, hud_color);
     } else {
-        gui_rendu_texte(app, app->font_small, "Mode : PLUS COURT CHEMIN", hud.x + 8, hud.y + 8, hud_color);
+        gui_rendu_texte(app, app->font_small, "Mode : PLUS COURT CHEMIN", panneau_info.x + 8, panneau_info.y + 8, hud_color);
     }
-    gui_rendu_texte(app, app->font_small, "S/P mode  -  ESC menu  -  Q quitter", hud.x + 8, hud.y + 32, hud_color);
+    gui_rendu_texte(app, app->font_small, "S/P mode  -  ESC menu  -  Q quitter", panneau_info.x + 8, panneau_info.y + 32, hud_color);
 
     if (app->last_click_x >= 0 && app->last_click_y >= 0) {
         SDL_Rect cursor = {app->last_click_x - 4, app->last_click_y - 4, 8, 8};
