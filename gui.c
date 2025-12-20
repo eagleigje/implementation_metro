@@ -218,9 +218,9 @@ int gui_lancer(const Une_config *config) {
         "PROJET METRO 2025",
         SDL_WINDOWPOS_CENTERED,
         SDL_WINDOWPOS_CENTERED,
-        1000,
-        700,
-        SDL_WINDOW_SHOWN
+        GUI_LARGEUR_MIN,
+        GUI_HAUTEUR_MIN,
+        SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE
     );
     if (app.window == NULL) {
         fprintf(stderr, "Erreur SDL_CreateWindow: %s\n", SDL_GetError());
@@ -237,6 +237,8 @@ int gui_lancer(const Une_config *config) {
         SDL_Quit();
         return 1;
     }
+
+    SDL_SetWindowMinimumSize(app.window, GUI_LARGEUR_MIN, GUI_HAUTEUR_MIN);
 
     app.font_small = gui_charger_police(18);
     app.font_large = gui_charger_police(26);

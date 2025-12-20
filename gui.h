@@ -7,6 +7,12 @@
 
 #include "config.h"
 
+// Tailles minimales de la fenêtre graphique
+enum {
+    GUI_LARGEUR_MIN = 1000,
+    GUI_HAUTEUR_MIN = 700
+};
+
 /**
  * Fonction qui lance l'interface graphique SDL2.
  * Cette fonction ouvre la fenêtre principale et gère la boucle d'événements.
