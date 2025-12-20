@@ -40,15 +40,28 @@ Le projet est organisé en plusieurs modules :
 
 4. Programmes :
    - main.c                  : Point d'entrée de l'application principale
-   - gui.h/gui.c             : Interface graphique SDL2 (exercice 7)
    - tests.c/tests.h         : Programme de tests et validation
 
-5. Configuration :
+5. Interface graphique (exercice 7) :
+   Le répertoire gui/ contient l'implémentation de l'interface SDL2 :
+   - gui/gui.h               : Types, constantes, structure Etat_affichage, fonction publique
+   - gui/gui.c               : Boucle principale, initialisation/destruction SDL, dispatch des événements
+   - gui/gui_commun.h/c      : Fonctions communes (polices, rendu texte, aide)
+   - gui/gui_menu.h/c        : Ecran menu (dessin, gestion clavier/souris)
+   - gui/gui_plan.h/c        : Ecran plan (dessin, gestion clavier/souris, grille, panneau info)
+
+   Organisation modulaire pour faciliter la maintenance et l'évolution du code :
+   - Séparation par écran
+   - Fonctions communes centralisées dans gui_commun
+   - Chaque module est indépendant
+   - Prêt pour l'ajout de l'affichage des stations, lignes et chemins
+
+6. Configuration :
    - config.h/config.c       : Système de configuration .ini
    - config.ini              : Fichier de configuration principal
    - config_alt.ini          : Exemple de configuration alternative
 
-6. Fichiers de données :
+7. Fichiers de données :
    - stations.csv : Fichier contenant les stations (longitude;latitude;nom), allégé pour les tests.
    - stations_paris.csv : Fichier contenant toutes les stations parisiennes (cf. LOCALISATION DES DONNEES).
    - lignes.csv : Fichier contenant les lignes (code;vitesse;intervalle;couleur).
@@ -56,7 +69,7 @@ Le projet est organisé en plusieurs modules :
    - connexions.csv : Fichier contenant les connexions (test).
    - connexions_paris.csv : Fichier contenant toutes les connexions parisiennes (généré automatiquement).
 
-7. Programmes à installer :
+8. Programmes à installer :
     - SDL2 (lib SDL2 + en-têtes) : Nécessaire pour compiler l'interface graphique.
     - SDL2_ttf : Nécessaire pour afficher du texte (noms de stations, lignes,
       panneaux d'information), car SDL2 ne fournit pas de rendu de texte nativement.
@@ -70,18 +83,18 @@ Le projet est organisé en plusieurs modules :
     Arch Linux :
         sudo pacman -S sdl2 sdl2_ttf
 
-8. Programmes optionnels à installer :
+9. Programmes optionnels à installer :
     - Doxygen : Afin de générer la documentation technique du projet.
     - Valgrind : Pour vérifier que le projet libère bien toute la mémoire à la sortie.
     - glibc-debug : Pour valgrind.
 
 
-9. Documentation :
+10. Documentation :
     - doc/projet-metro2025.pdf         : Le PDF du projet
     - doc/projet/html/index.html       : La documentation Doxygen du projet
     - README_GENERER_CONNEXIONS.txt    : Guide d'utilisation du script de génération des connexions
 
-10. Scripts utilitaires :
+11. Scripts utilitaires :
     - generer_connexions_paris.py      : Script Python pour générer connexions_paris.csv automatiquement
 
 COMPILATION
@@ -280,20 +293,27 @@ implémentées. Voici l'état d'avancement :
 7. Exercice 7 : Interface graphique ........................................... EN COURS
    FAIT :
    - Architecture de base (structure Etat_affichage, enum Ecran/Mode)
+   - Organisation modulaire du code GUI dans le répertoire gui/
+     * gui/gui.c : Boucle principale et dispatch des événements
+     * gui/gui_commun.c : Fonctions communes (polices, texte, aide)
+     * gui/gui_menu.c : Ecran menu (dessin, gestion clavier/souris)
+     * gui/gui_plan.c : Ecran plan (dessin, gestion clavier/souris)
    - Menu principal avec 3 options (affichage plan, calcul chemin, quitter)
-   - Ecran plan avec grille de reperage et panneau d'information
-   - Chargement des donnees du metro (stations, ABR, AQR, lignes, connexions)
-   - Gestion du zoom (+/-) et deplacement (fleches directionnelles)
-   - Detection des clics souris (curseur rouge)
-   - Extraction des constantes (couleurs, dimensions) dans gui.h
+     * Support clavier (touches 1, 2, 3, Q)
+     * Support souris (clic sur les cartes)
+   - Ecran plan avec grille de repérage et panneau d'information
+   - Chargement des données du métro (stations, ABR, AQR, lignes, connexions)
+   - Gestion du zoom (+/-) et déplacement (flèches directionnelles)
+   - Détection des clics souris (curseur rouge)
+   - Extraction des constantes (couleurs, dimensions) dans gui/gui.h
    A FAIRE :
    - Affichage graphique des stations sur le plan
    - Affichage graphique des lignes et connexions
-   - Selection interactive de stations (avec ABR/AQR)
-   - Calcul et affichage du plus court chemin (integration Dijkstra)
+   - Sélection interactive de stations (avec ABR/AQR)
+   - Calcul et affichage du plus court chemin (intégration Dijkstra)
    - Affichage des informations de chemin (temps total, correspondances)
 
-CHOIX DE LA BIBLIOTHÈQUE GRAPHIQUE
+CHOIX DE LA BIBLIOTHEQUE GRAPHIQUE
 -----------------------------------
 Pour l'exercice 7 (interface graphique), nous avons comparé trois bibliothèques majeures :
 
@@ -370,7 +390,7 @@ NOTES IMPORTANTES
   * temps_arret : Temps (en minutes) ajouté à chaque station visitée
   Ces paramètres peuvent être configurés via le fichier config.ini ou config_alt.ini.
 
-WORKFLOW DE DÉVELOPPEMENT RECOMMANDÉ
+WORKFLOW DE DEVELOPPEMENT RECOMMANDE
 -------------------------------------
 1. Développer une nouvelle fonctionnalité
 2. Ajouter des tests dans le fichier tests.c pour valider la fonctionnalité
