@@ -43,12 +43,19 @@ void detruire_truc(Un_truc *truc) {
         if (truc->data.sta.nom != NULL) {
             free(truc->data.sta.nom);
         }
-        // On libère le tableau de connexions
+        // On libère les connexions puis le tableau de connexions
         if (truc->data.sta.tab_con != NULL) {
+            // On libère chaque connexion pointée par le tableau
+            for (unsigned int i = 0; i < truc->data.sta.nb_con; i++) {
+                if (truc->data.sta.tab_con[i] != NULL) {
+                    free(truc->data.sta.tab_con[i]);
+                }
+            }
+            // Puis on libère le tableau lui-même
             free(truc->data.sta.tab_con);
         }
     }
-    // Pour les connexions (CON), pas de liberation particuliere
+    // Pour les connexions (CON), pas de libération particulière
     
     free(truc);
 }
