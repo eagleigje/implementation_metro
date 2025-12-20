@@ -39,7 +39,8 @@ Le projet est organisé en plusieurs modules :
    - constantes.h            : Constantes globales du projet
 
 4. Programmes :
-   - main.c                  : Application principale avec interface graphique.
+   - main.c                  : Point d'entrée de l'application principale
+   - gui.h/gui.c             : Interface graphique SDL2 (exercice 7)
    - tests.c/tests.h         : Programme de tests et validation
 
 5. Configuration :
@@ -277,11 +278,20 @@ implémentées. Voici l'état d'avancement :
      après la lecture du fichier .ini et avant de lancer dijkstra() dans l'application.
 
 7. Exercice 7 : Interface graphique ........................................... EN COURS
-   - Design de l'interface
-   - Affichage du plan
-   - Zoom et déplacement
-   - Sélection de stations
-   - Calcul et affichage du chemin
+   FAIT :
+   - Architecture de base (structure Etat_affichage, enum Ecran/Mode)
+   - Menu principal avec 3 options (affichage plan, calcul chemin, quitter)
+   - Ecran plan avec grille de reperage et panneau d'information
+   - Chargement des donnees du metro (stations, ABR, AQR, lignes, connexions)
+   - Gestion du zoom (+/-) et deplacement (fleches directionnelles)
+   - Detection des clics souris (curseur rouge)
+   - Extraction des constantes (couleurs, dimensions) dans gui.h
+   A FAIRE :
+   - Affichage graphique des stations sur le plan
+   - Affichage graphique des lignes et connexions
+   - Selection interactive de stations (avec ABR/AQR)
+   - Calcul et affichage du plus court chemin (integration Dijkstra)
+   - Affichage des informations de chemin (temps total, correspondances)
 
 INFORMATIONS SDL2
 -----------------
