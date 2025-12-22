@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.15.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>MAIN3 Info Générale Projet Métro: Référence du fichier gui.c</title>
+<title>MAIN3 Info Générale Projet Métro: Référence du fichier gui/gui.c</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -92,196 +92,29 @@ $(function(){initNavTree('gui_8c.html','',''); });
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &lt;stdio.h&gt;</code><br />
+<code>#include &lt;stdbool.h&gt;</code><br />
+<code>#include &lt;SDL2/SDL.h&gt;</code><br />
 <code>#include &lt;SDL2/SDL_ttf.h&gt;</code><br />
 <code>#include &quot;<a class="el" href="gui_8h_source.html">gui.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="liste_8h_source.html">liste.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="abr_8h_source.html">abr.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="aqrtopo_8h_source.html">aqrtopo.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="ligne_8h_source.html">ligne.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="connexion_8h_source.html">connexion.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="dijkstra_8h_source.html">dijkstra.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="gui__commun_8h_source.html">gui_commun.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="gui__menu_8h_source.html">gui_menu.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="gui__plan_8h_source.html">gui_plan.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="connexion_8h_source.html">../connexion.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="dijkstra_8h_source.html">../dijkstra.h</a>&quot;</code><br />
 </div><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
-Structures de données</h2></td></tr>
-<tr class="memitem:Etat_5Faffichage" id="r_Etat_5Faffichage"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structEtat__affichage.html">Etat_affichage</a></td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-enum-members" class="groupheader"><a id="enum-members" name="enum-members"></a>
-Énumérations</h2></td></tr>
-<tr class="memitem:a747e93e490a1320112535d34e179938f" id="r_a747e93e490a1320112535d34e179938f"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a747e93e490a1320112535d34e179938f">Ecran</a> { <a class="el" href="#a747e93e490a1320112535d34e179938faae065559d9dc40927a9c23f79d9c9600">ECRAN_MENU</a> = 0
-, <a class="el" href="#a747e93e490a1320112535d34e179938faf77aca94ebede3c4c3ea4a412496e1bc">ECRAN_PLAN</a> = 1
- }</td></tr>
-<tr class="memitem:a46c8a310cf4c094f8c80e1cb8dc1f911" id="r_a46c8a310cf4c094f8c80e1cb8dc1f911"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a46c8a310cf4c094f8c80e1cb8dc1f911">Mode</a> { <a class="el" href="#a46c8a310cf4c094f8c80e1cb8dc1f911a9da505794f0f720b7a06d0e2152783fb">MODE_SELECTION</a> = 0
-, <a class="el" href="#a46c8a310cf4c094f8c80e1cb8dc1f911a53bb881a76b0a0c0d973352cc9c0712f">MODE_CHEMIN</a> = 1
- }</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Fonctions</h2></td></tr>
-<tr class="memitem:a06aefc5b8522b5087dfe841e16e06087" id="r_a06aefc5b8522b5087dfe841e16e06087"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a06aefc5b8522b5087dfe841e16e06087">gui_mettre_a_jour_titre</a> (<a class="el" href="structEtat__affichage.html">Etat_affichage</a> *app)</td></tr>
-<tr class="memitem:acf8022fb0a4380cd5074d419d776047d" id="r_acf8022fb0a4380cd5074d419d776047d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acf8022fb0a4380cd5074d419d776047d">gui_afficher_aide</a> (void)</td></tr>
-<tr class="memitem:a1d5dcfdfeec3efda3ad0f6782ab5a8ff" id="r_a1d5dcfdfeec3efda3ad0f6782ab5a8ff"><td class="memItemLeft" align="right" valign="top">TTF_Font *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1d5dcfdfeec3efda3ad0f6782ab5a8ff">gui_charger_police</a> (int taille)</td></tr>
-<tr class="memitem:abd3cb49753b2be5bb526a3501c4d83a1" id="r_abd3cb49753b2be5bb526a3501c4d83a1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abd3cb49753b2be5bb526a3501c4d83a1">gui_rendu_texte</a> (<a class="el" href="structEtat__affichage.html">Etat_affichage</a> *app, TTF_Font *police, const char *texte, int x, int y, SDL_Color couleur)</td></tr>
-<tr class="memitem:a70d12fe449f51dc5c87b7f97d09b624c" id="r_a70d12fe449f51dc5c87b7f97d09b624c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a70d12fe449f51dc5c87b7f97d09b624c">gui_dessiner_menu</a> (<a class="el" href="structEtat__affichage.html">Etat_affichage</a> *app, int largeur, int hauteur)</td></tr>
-<tr class="memitem:aea3f731e7a8bf7a92fe1efb44f734a0c" id="r_aea3f731e7a8bf7a92fe1efb44f734a0c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aea3f731e7a8bf7a92fe1efb44f734a0c">gui_dessiner_plan</a> (<a class="el" href="structEtat__affichage.html">Etat_affichage</a> *app, int largeur, int hauteur)</td></tr>
-<tr class="memitem:a26246ee2ce0d98ee2b1f305ea05c466f" id="r_a26246ee2ce0d98ee2b1f305ea05c466f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a26246ee2ce0d98ee2b1f305ea05c466f">gui_lancer</a> (const <a class="el" href="config_8h.html#aeb977a4814f42974043a21308f3401fd">Une_config</a> *config)</td></tr>
+<tr class="memitem:a785a916cb1be07d35e39f152bf1f08ed" id="r_a785a916cb1be07d35e39f152bf1f08ed"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a785a916cb1be07d35e39f152bf1f08ed">lancer_gui</a> (const <a class="el" href="config_8h.html#aeb977a4814f42974043a21308f3401fd">Une_config</a> *config)</td></tr>
 </table>
-<a name="doc-enum-members" id="doc-enum-members"></a><h2 id="header-doc-enum-members" class="groupheader">Documentation du type de l'énumération</h2>
-<a id="a747e93e490a1320112535d34e179938f" name="a747e93e490a1320112535d34e179938f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a747e93e490a1320112535d34e179938f">&#9670;&#160;</a></span>Ecran</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">enum <a class="el" href="#a747e93e490a1320112535d34e179938f">Ecran</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Type énuméré représentant les différents écrans de l'application. ECRAN_MENU : Écran d'accueil avec les options de navigation. ECRAN_PLAN : Écran principal affichant le plan du métro. </p>
-<table class="fieldtable">
-<tr><th colspan="2">Valeurs énumérées</th></tr><tr><td class="fieldname"><a id="a747e93e490a1320112535d34e179938faae065559d9dc40927a9c23f79d9c9600" name="a747e93e490a1320112535d34e179938faae065559d9dc40927a9c23f79d9c9600"></a>ECRAN_MENU&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a747e93e490a1320112535d34e179938faf77aca94ebede3c4c3ea4a412496e1bc" name="a747e93e490a1320112535d34e179938faf77aca94ebede3c4c3ea4a412496e1bc"></a>ECRAN_PLAN&#160;</td><td class="fielddoc"></td></tr>
-</table>
-
-</div>
-</div>
-<a id="a46c8a310cf4c094f8c80e1cb8dc1f911" name="a46c8a310cf4c094f8c80e1cb8dc1f911"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a46c8a310cf4c094f8c80e1cb8dc1f911">&#9670;&#160;</a></span>Mode</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">enum <a class="el" href="#a46c8a310cf4c094f8c80e1cb8dc1f911">Mode</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Type énuméré représentant les modes d'interaction disponibles sur le plan. MODE_SELECTION : Permet de sélectionner des stations individuellement. MODE_CHEMIN : Permet de calculer le plus court chemin entre deux stations. </p>
-<table class="fieldtable">
-<tr><th colspan="2">Valeurs énumérées</th></tr><tr><td class="fieldname"><a id="a46c8a310cf4c094f8c80e1cb8dc1f911a9da505794f0f720b7a06d0e2152783fb" name="a46c8a310cf4c094f8c80e1cb8dc1f911a9da505794f0f720b7a06d0e2152783fb"></a>MODE_SELECTION&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a46c8a310cf4c094f8c80e1cb8dc1f911a53bb881a76b0a0c0d973352cc9c0712f" name="a46c8a310cf4c094f8c80e1cb8dc1f911a53bb881a76b0a0c0d973352cc9c0712f"></a>MODE_CHEMIN&#160;</td><td class="fielddoc"></td></tr>
-</table>
-
-</div>
-</div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Documentation des fonctions</h2>
-<a id="acf8022fb0a4380cd5074d419d776047d" name="acf8022fb0a4380cd5074d419d776047d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acf8022fb0a4380cd5074d419d776047d">&#9670;&#160;</a></span>gui_afficher_aide()</h2>
+<a id="a785a916cb1be07d35e39f152bf1f08ed" name="a785a916cb1be07d35e39f152bf1f08ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a785a916cb1be07d35e39f152bf1f08ed">&#9670;&#160;</a></span>lancer_gui()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void gui_afficher_aide </td>
-          <td>(</td>
-          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Fonction qui affiche les contrôles dans la console au lancement de la fenêtre. </p>
-
-</div>
-</div>
-<a id="a1d5dcfdfeec3efda3ad0f6782ab5a8ff" name="a1d5dcfdfeec3efda3ad0f6782ab5a8ff"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1d5dcfdfeec3efda3ad0f6782ab5a8ff">&#9670;&#160;</a></span>gui_charger_police()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">TTF_Font * gui_charger_police </td>
-          <td>(</td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>taille</em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Fonction qui charge une police TrueType à partir de chemins connus. </p><dl class="params"><dt>Paramètres</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">taille</td><td>: Taille en points de la police à charger. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Renvoie</dt><dd>: Un pointeur vers la police chargée, ou NULL si aucune n'est disponible. </dd></dl>
-
-</div>
-</div>
-<a id="a70d12fe449f51dc5c87b7f97d09b624c" name="a70d12fe449f51dc5c87b7f97d09b624c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a70d12fe449f51dc5c87b7f97d09b624c">&#9670;&#160;</a></span>gui_dessiner_menu()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void gui_dessiner_menu </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structEtat__affichage.html">Etat_affichage</a> *</td>          <td class="paramname"><span class="paramname"><em>app</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>largeur</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>hauteur</em></span>&#160;)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Fonction qui dessine l'écran, le menu principal. </p><dl class="params"><dt>Paramètres</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">app</td><td>: État global de l'application graphique. </td></tr>
-    <tr><td class="paramname">largeur</td><td>: Largeur de la fenêtre. </td></tr>
-    <tr><td class="paramname">hauteur</td><td>: Hauteur de la fenêtre. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="aea3f731e7a8bf7a92fe1efb44f734a0c" name="aea3f731e7a8bf7a92fe1efb44f734a0c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aea3f731e7a8bf7a92fe1efb44f734a0c">&#9670;&#160;</a></span>gui_dessiner_plan()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void gui_dessiner_plan </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structEtat__affichage.html">Etat_affichage</a> *</td>          <td class="paramname"><span class="paramname"><em>app</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>largeur</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>hauteur</em></span>&#160;)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Fonction qui dessine une vue de plan simple avec une grille et un panneau d'information. </p><dl class="params"><dt>Paramètres</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">app</td><td>: État global de l'application graphique. </td></tr>
-    <tr><td class="paramname">largeur</td><td>: Largeur de la fenêtre. </td></tr>
-    <tr><td class="paramname">hauteur</td><td>: Hauteur de la fenêtre. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="a26246ee2ce0d98ee2b1f305ea05c466f" name="a26246ee2ce0d98ee2b1f305ea05c466f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a26246ee2ce0d98ee2b1f305ea05c466f">&#9670;&#160;</a></span>gui_lancer()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int gui_lancer </td>
+          <td class="memname">int lancer_gui </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="config_8h.html#aeb977a4814f42974043a21308f3401fd">Une_config</a> *</td>          <td class="paramname"><span class="paramname"><em>config</em></span></td><td>)</td>
           <td></td>
@@ -298,81 +131,6 @@ Fonctions</h2></td></tr>
 
 </div>
 </div>
-<a id="a06aefc5b8522b5087dfe841e16e06087" name="a06aefc5b8522b5087dfe841e16e06087"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a06aefc5b8522b5087dfe841e16e06087">&#9670;&#160;</a></span>gui_mettre_a_jour_titre()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void gui_mettre_a_jour_titre </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structEtat__affichage.html">Etat_affichage</a> *</td>          <td class="paramname"><span class="paramname"><em>app</em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Fonction qui met à jour le titre de la fenêtre pour afficher le mode courant. </p><dl class="params"><dt>Paramètres</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">app</td><td>: État global de l'application graphique. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="abd3cb49753b2be5bb526a3501c4d83a1" name="abd3cb49753b2be5bb526a3501c4d83a1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abd3cb49753b2be5bb526a3501c4d83a1">&#9670;&#160;</a></span>gui_rendu_texte()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void gui_rendu_texte </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structEtat__affichage.html">Etat_affichage</a> *</td>          <td class="paramname"><span class="paramname"><em>app</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">TTF_Font *</td>          <td class="paramname"><span class="paramname"><em>police</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>texte</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>x</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>y</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">SDL_Color</td>          <td class="paramname"><span class="paramname"><em>couleur</em></span>&#160;)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Fonction qui rend une ligne de texte à l'écran. </p><dl class="params"><dt>Paramètres</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">app</td><td>: État global de l'application graphique. </td></tr>
-    <tr><td class="paramname">police</td><td>: Police à utiliser. </td></tr>
-    <tr><td class="paramname">texte</td><td>: Texte à afficher. </td></tr>
-    <tr><td class="paramname">x</td><td>: Position X. </td></tr>
-    <tr><td class="paramname">y</td><td>: Position Y. </td></tr>
-    <tr><td class="paramname">couleur</td><td>: <a class="el" href="structCouleur.html">Couleur</a> du texte. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <div id="page-nav" class="page-nav-panel">
@@ -386,7 +144,7 @@ Fonctions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="gui_8c.html">gui.c</a></li>
+    <li class="navelem"><a href="dir_11bc0974ce736ce9a6fadebbeb7a8314.html">gui</a></li><li class="navelem"><a href="gui_8c.html">gui.c</a></li>
     <li class="footer">Généré par <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.15.0 </li>
   </ul>
 </div>

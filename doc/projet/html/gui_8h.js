@@ -1,9 +1,10 @@
 var gui_8h =
 [
     [ "Couleur", "structCouleur.html", "structCouleur" ],
-    [ "COULEUR_CARTE_1", "gui_8h.html#ac6eb743b760f064f282f38413325e028", null ],
-    [ "COULEUR_CARTE_2", "gui_8h.html#a1a0d67a5a78c71b39545f0d28df172ee", null ],
-    [ "COULEUR_CARTE_3", "gui_8h.html#a4b6e087fd7ba7fea174327f8b06922bf", null ],
+    [ "Etat_affichage", "structEtat__affichage.html", "structEtat__affichage" ],
+    [ "COULEUR_BOUTON_MENU_1", "gui_8h.html#af7ecaa231db6ab3a98de56057f404f4f", null ],
+    [ "COULEUR_BOUTON_MENU_2", "gui_8h.html#aeb19938394b44efb0cf268240c4624d0", null ],
+    [ "COULEUR_BOUTON_MENU_3", "gui_8h.html#a4256ddd508373d0a25f133aa620f2413", null ],
     [ "COULEUR_CONTOUR_CARTE", "gui_8h.html#a89fe939ddd53db5b883804e34a114113", null ],
     [ "COULEUR_CURSEUR", "gui_8h.html#aed98fd8a30e6fa9eee35c14020db84ab", null ],
     [ "COULEUR_FOND_MENU", "gui_8h.html#a7e86400045af356547a0b150e20e069c", null ],
@@ -12,6 +13,7 @@ var gui_8h =
     [ "COULEUR_PANNEAU_BORDURE", "gui_8h.html#a3edaea6d8db24e6dc52fef6c0a254915", null ],
     [ "COULEUR_PANNEAU_FOND", "gui_8h.html#a5d06570e2154616ce51ad2ef6285986d", null ],
     [ "COULEUR_SDL", "gui_8h.html#ad989c6ae1b68f24eff098f6cdb678105", null ],
+    [ "COULEUR_STATION", "gui_8h.html#aeff7b787d5d391f586f3fd78a4f86c73", null ],
     [ "COULEUR_TEXTE_INFO", "gui_8h.html#a12e1f9c7b2a22d505dd708ef09e68dcc", null ],
     [ "COULEUR_TEXTE_MENU", "gui_8h.html#a0ccc4f7590135ce82adfa26cdbbaa960", null ],
     [ "DEPLACEMENT_PAS", "gui_8h.html#a464a2b8881cdb96b64be047b58c12fff", null ],
@@ -23,8 +25,9 @@ var gui_8h =
     [ "MENU_OFFSET_CARTE_2_Y", "gui_8h.html#a6d4f4d742e2e153081d83750f23511dc", null ],
     [ "MENU_OFFSET_CARTE_3_Y", "gui_8h.html#a2a1713df0e0f04e79b780e33966da519", null ],
     [ "MENU_OFFSET_TITRE_Y", "gui_8h.html#ab08ddfcadd6b476c45eebf71c8198295", null ],
-    [ "PLAN_CURSEUR_DEMI_TAILLE", "gui_8h.html#a9863d498e507cca4bf8ffd15d0797722", null ],
     [ "PLAN_CURSEUR_TAILLE", "gui_8h.html#a4645990b6e03740d417ed3117453a666", null ],
+    [ "PLAN_EPAISSEUR_LIGNE", "gui_8h.html#ada36a6759e6e6d33a5b4268859aac92e", null ],
+    [ "PLAN_MARGE_PLAN", "gui_8h.html#abe106b141aab6c738445f65612545558", null ],
     [ "PLAN_MARGE_TEXTE_X", "gui_8h.html#aaaf078ac32233425218d405a1e5219bb", null ],
     [ "PLAN_MARGE_TEXTE_Y_1", "gui_8h.html#a514f2607b53fddf2f99cb74c2b8a7a4f", null ],
     [ "PLAN_MARGE_TEXTE_Y_2", "gui_8h.html#a5ef594150903a072b955d1e410c700b0", null ],
@@ -33,9 +36,19 @@ var gui_8h =
     [ "PLAN_PANNEAU_X", "gui_8h.html#a77097567d70af2b2aae27d77b74a3871", null ],
     [ "PLAN_PANNEAU_Y", "gui_8h.html#aca3b2b83ee45f320ec9fd98a90313915", null ],
     [ "PLAN_TAILLE_GRILLE", "gui_8h.html#aedb261259f448602a9b006d2bbc05098", null ],
+    [ "PLAN_TAILLE_STATION", "gui_8h.html#a3a66cdb0fcab602891e4d76964429bef", null ],
     [ "TAILLE_GRANDE_POLICE", "gui_8h.html#a0521e91809c477eaabe97b79fcf3e547", null ],
     [ "TAILLE_PETITE_POLICE", "gui_8h.html#ace3091653ac99b028578cfc1148dab68", null ],
     [ "ZOOM_FACTEUR_ARRIERE", "gui_8h.html#a216338f26523db4856f5a9b29a1cdfe5", null ],
     [ "ZOOM_FACTEUR_AVANT", "gui_8h.html#a2d8bd8b8ad13a272d574458d6f8fa6ce", null ],
-    [ "gui_lancer", "gui_8h.html#a26246ee2ce0d98ee2b1f305ea05c466f", null ]
+    [ "Etat_affichage", "gui_8h.html#a57510dfa60ffd1aa7fbbc4d5334f7313", null ],
+    [ "Ecran", "gui_8h.html#a747e93e490a1320112535d34e179938f", [
+      [ "ECRAN_MENU", "gui_8h.html#a747e93e490a1320112535d34e179938faae065559d9dc40927a9c23f79d9c9600", null ],
+      [ "ECRAN_PLAN", "gui_8h.html#a747e93e490a1320112535d34e179938faf77aca94ebede3c4c3ea4a412496e1bc", null ]
+    ] ],
+    [ "Mode", "gui_8h.html#a46c8a310cf4c094f8c80e1cb8dc1f911", [
+      [ "MODE_SELECTION", "gui_8h.html#a46c8a310cf4c094f8c80e1cb8dc1f911a9da505794f0f720b7a06d0e2152783fb", null ],
+      [ "MODE_CHEMIN", "gui_8h.html#a46c8a310cf4c094f8c80e1cb8dc1f911a53bb881a76b0a0c0d973352cc9c0712f", null ]
+    ] ],
+    [ "lancer_gui", "gui_8h.html#a785a916cb1be07d35e39f152bf1f08ed", null ]
 ];

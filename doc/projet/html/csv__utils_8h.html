@@ -102,6 +102,11 @@ Structures de données</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 id="header-define-members" class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
 <tr class="memitem:a5b4777e03a6b9e715076b90d4a89228b" id="r_a5b4777e03a6b9e715076b90d4a89228b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5b4777e03a6b9e715076b90d4a89228b">CSV_TAMPON_TAILLE</a>&#160;&#160;&#160;512</td></tr>
+<tr class="memitem:a9f2bd7b30fc1545d43a4b3d48f90e704" id="r_a9f2bd7b30fc1545d43a4b3d48f90e704"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9f2bd7b30fc1545d43a4b3d48f90e704">CSV_OK</a>&#160;&#160;&#160;0</td></tr>
+<tr class="memitem:ad956c50aaa15698dd9faf25c847aeabb" id="r_ad956c50aaa15698dd9faf25c847aeabb"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad956c50aaa15698dd9faf25c847aeabb">CSV_ERR_TEXTE</a>&#160;&#160;&#160;1</td></tr>
+<tr class="memitem:aa18a67a1138982e237b1febcd12cf726" id="r_aa18a67a1138982e237b1febcd12cf726"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa18a67a1138982e237b1febcd12cf726">CSV_ERR_FLOAT</a>&#160;&#160;&#160;2</td></tr>
+<tr class="memitem:a270dbc6f1ef404e9e0dc5ecb0c13bf60" id="r_a270dbc6f1ef404e9e0dc5ecb0c13bf60"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a270dbc6f1ef404e9e0dc5ecb0c13bf60">CSV_ERR_ALLOC</a>&#160;&#160;&#160;3</td></tr>
+<tr class="memitem:ac7bed5a7f80eecf31505c9542d16fa2c" id="r_ac7bed5a7f80eecf31505c9542d16fa2c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac7bed5a7f80eecf31505c9542d16fa2c">CSV_ERR_REFERENCE</a>&#160;&#160;&#160;4</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-typedef-members" class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 Définitions de type</h2></td></tr>
@@ -113,10 +118,81 @@ Fonctions</h2></td></tr>
 <tr class="memitem:a2c8d70fccbf5d01cf64bc9b6a80410a8" id="r_a2c8d70fccbf5d01cf64bc9b6a80410a8"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2c8d70fccbf5d01cf64bc9b6a80410a8">csv_champ_suivant</a> (<a class="el" href="#adbd81c96e24b5a9384f65229906ef143">Un_lecteur_csv</a> *lecteur)</td></tr>
 <tr class="memitem:a103092800f1477ec4872da8dd5bb3fa0" id="r_a103092800f1477ec4872da8dd5bb3fa0"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a103092800f1477ec4872da8dd5bb3fa0">csv_lire_texte</a> (<a class="el" href="#adbd81c96e24b5a9384f65229906ef143">Un_lecteur_csv</a> *lecteur, size_t max_size)</td></tr>
 <tr class="memitem:a44a2bd298dc1ab0e60236d1087e74e91" id="r_a44a2bd298dc1ab0e60236d1087e74e91"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a44a2bd298dc1ab0e60236d1087e74e91">csv_lire_flottant</a> (<a class="el" href="#adbd81c96e24b5a9384f65229906ef143">Un_lecteur_csv</a> *lecteur)</td></tr>
+<tr class="memitem:a71c0d07fda7ff6ae5353c3d07896b555" id="r_a71c0d07fda7ff6ae5353c3d07896b555"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a71c0d07fda7ff6ae5353c3d07896b555">csv_lire_flottant_valide</a> (<a class="el" href="#adbd81c96e24b5a9384f65229906ef143">Un_lecteur_csv</a> *lecteur, float *valeur)</td></tr>
 <tr class="memitem:a2b93d1b6c2fc5ded566c466bd4629555" id="r_a2b93d1b6c2fc5ded566c466bd4629555"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2b93d1b6c2fc5ded566c466bd4629555">csv_lire_entier</a> (<a class="el" href="#adbd81c96e24b5a9384f65229906ef143">Un_lecteur_csv</a> *lecteur)</td></tr>
 <tr class="memitem:ab3d57bc2c593e04a2e59f814c5562766" id="r_ab3d57bc2c593e04a2e59f814c5562766"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab3d57bc2c593e04a2e59f814c5562766">csv_est_fini</a> (<a class="el" href="#adbd81c96e24b5a9384f65229906ef143">Un_lecteur_csv</a> *lecteur)</td></tr>
 </table>
 <a name="doc-define-members" id="doc-define-members"></a><h2 id="header-doc-define-members" class="groupheader">Documentation des macros</h2>
+<a id="a270dbc6f1ef404e9e0dc5ecb0c13bf60" name="a270dbc6f1ef404e9e0dc5ecb0c13bf60"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a270dbc6f1ef404e9e0dc5ecb0c13bf60">&#9670;&#160;</a></span>CSV_ERR_ALLOC</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CSV_ERR_ALLOC&#160;&#160;&#160;3</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa18a67a1138982e237b1febcd12cf726" name="aa18a67a1138982e237b1febcd12cf726"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa18a67a1138982e237b1febcd12cf726">&#9670;&#160;</a></span>CSV_ERR_FLOAT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CSV_ERR_FLOAT&#160;&#160;&#160;2</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac7bed5a7f80eecf31505c9542d16fa2c" name="ac7bed5a7f80eecf31505c9542d16fa2c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac7bed5a7f80eecf31505c9542d16fa2c">&#9670;&#160;</a></span>CSV_ERR_REFERENCE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CSV_ERR_REFERENCE&#160;&#160;&#160;4</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad956c50aaa15698dd9faf25c847aeabb" name="ad956c50aaa15698dd9faf25c847aeabb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad956c50aaa15698dd9faf25c847aeabb">&#9670;&#160;</a></span>CSV_ERR_TEXTE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CSV_ERR_TEXTE&#160;&#160;&#160;1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9f2bd7b30fc1545d43a4b3d48f90e704" name="a9f2bd7b30fc1545d43a4b3d48f90e704"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9f2bd7b30fc1545d43a4b3d48f90e704">&#9670;&#160;</a></span>CSV_OK</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CSV_OK&#160;&#160;&#160;0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a5b4777e03a6b9e715076b90d4a89228b" name="a5b4777e03a6b9e715076b90d4a89228b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5b4777e03a6b9e715076b90d4a89228b">&#9670;&#160;</a></span>CSV_TAMPON_TAILLE</h2>
 
@@ -279,6 +355,35 @@ Fonctions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Renvoie</dt><dd>: La valeur convertie en float. Retourne 0.0 si le champ ne peut pas être converti. </dd></dl>
+
+</div>
+</div>
+<a id="a71c0d07fda7ff6ae5353c3d07896b555" name="a71c0d07fda7ff6ae5353c3d07896b555"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a71c0d07fda7ff6ae5353c3d07896b555">&#9670;&#160;</a></span>csv_lire_flottant_valide()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int csv_lire_flottant_valide </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#adbd81c96e24b5a9384f65229906ef143">Un_lecteur_csv</a> *</td>          <td class="paramname"><span class="paramname"><em>lecteur</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *</td>          <td class="paramname"><span class="paramname"><em>valeur</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Fonction de récupération du champ courant en tant que nombre flottant avec validation stricte. </p><dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">lecteur</td><td>: Pointeur vers le lecteur. </td></tr>
+    <tr><td class="paramname">valeur</td><td>: Sortie de la valeur convertie. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>: 1 si la conversion est valide, 0 sinon. </dd></dl>
 
 </div>
 </div>

@@ -102,6 +102,7 @@ Fonctions</h2></td></tr>
 <tr class="memitem:a2c8d70fccbf5d01cf64bc9b6a80410a8" id="r_a2c8d70fccbf5d01cf64bc9b6a80410a8"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2c8d70fccbf5d01cf64bc9b6a80410a8">csv_champ_suivant</a> (<a class="el" href="csv__utils_8h.html#adbd81c96e24b5a9384f65229906ef143">Un_lecteur_csv</a> *lecteur)</td></tr>
 <tr class="memitem:a103092800f1477ec4872da8dd5bb3fa0" id="r_a103092800f1477ec4872da8dd5bb3fa0"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a103092800f1477ec4872da8dd5bb3fa0">csv_lire_texte</a> (<a class="el" href="csv__utils_8h.html#adbd81c96e24b5a9384f65229906ef143">Un_lecteur_csv</a> *lecteur, size_t max_size)</td></tr>
 <tr class="memitem:a44a2bd298dc1ab0e60236d1087e74e91" id="r_a44a2bd298dc1ab0e60236d1087e74e91"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a44a2bd298dc1ab0e60236d1087e74e91">csv_lire_flottant</a> (<a class="el" href="csv__utils_8h.html#adbd81c96e24b5a9384f65229906ef143">Un_lecteur_csv</a> *lecteur)</td></tr>
+<tr class="memitem:a71c0d07fda7ff6ae5353c3d07896b555" id="r_a71c0d07fda7ff6ae5353c3d07896b555"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a71c0d07fda7ff6ae5353c3d07896b555">csv_lire_flottant_valide</a> (<a class="el" href="csv__utils_8h.html#adbd81c96e24b5a9384f65229906ef143">Un_lecteur_csv</a> *lecteur, float *valeur)</td></tr>
 <tr class="memitem:a2b93d1b6c2fc5ded566c466bd4629555" id="r_a2b93d1b6c2fc5ded566c466bd4629555"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2b93d1b6c2fc5ded566c466bd4629555">csv_lire_entier</a> (<a class="el" href="csv__utils_8h.html#adbd81c96e24b5a9384f65229906ef143">Un_lecteur_csv</a> *lecteur)</td></tr>
 <tr class="memitem:ab3d57bc2c593e04a2e59f814c5562766" id="r_ab3d57bc2c593e04a2e59f814c5562766"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab3d57bc2c593e04a2e59f814c5562766">csv_est_fini</a> (<a class="el" href="csv__utils_8h.html#adbd81c96e24b5a9384f65229906ef143">Un_lecteur_csv</a> *lecteur)</td></tr>
 </table>
@@ -237,6 +238,35 @@ Fonctions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Renvoie</dt><dd>: La valeur convertie en float. Retourne 0.0 si le champ ne peut pas être converti. </dd></dl>
+
+</div>
+</div>
+<a id="a71c0d07fda7ff6ae5353c3d07896b555" name="a71c0d07fda7ff6ae5353c3d07896b555"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a71c0d07fda7ff6ae5353c3d07896b555">&#9670;&#160;</a></span>csv_lire_flottant_valide()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int csv_lire_flottant_valide </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="csv__utils_8h.html#adbd81c96e24b5a9384f65229906ef143">Un_lecteur_csv</a> *</td>          <td class="paramname"><span class="paramname"><em>lecteur</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *</td>          <td class="paramname"><span class="paramname"><em>valeur</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Fonction de récupération du champ courant en tant que nombre flottant avec validation stricte. </p><dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">lecteur</td><td>: Pointeur vers le lecteur. </td></tr>
+    <tr><td class="paramname">valeur</td><td>: Sortie de la valeur convertie. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>: 1 si la conversion est valide, 0 sinon. </dd></dl>
 
 </div>
 </div>

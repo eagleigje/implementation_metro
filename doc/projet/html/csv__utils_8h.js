@@ -1,6 +1,11 @@
 var csv__utils_8h =
 [
     [ "_un_lecteur_csv", "struct__un__lecteur__csv.html", "struct__un__lecteur__csv" ],
+    [ "CSV_ERR_ALLOC", "csv__utils_8h.html#a270dbc6f1ef404e9e0dc5ecb0c13bf60", null ],
+    [ "CSV_ERR_FLOAT", "csv__utils_8h.html#aa18a67a1138982e237b1febcd12cf726", null ],
+    [ "CSV_ERR_REFERENCE", "csv__utils_8h.html#ac7bed5a7f80eecf31505c9542d16fa2c", null ],
+    [ "CSV_ERR_TEXTE", "csv__utils_8h.html#ad956c50aaa15698dd9faf25c847aeabb", null ],
+    [ "CSV_OK", "csv__utils_8h.html#a9f2bd7b30fc1545d43a4b3d48f90e704", null ],
     [ "CSV_TAMPON_TAILLE", "csv__utils_8h.html#a5b4777e03a6b9e715076b90d4a89228b", null ],
     [ "Un_lecteur_csv", "csv__utils_8h.html#adbd81c96e24b5a9384f65229906ef143", null ],
     [ "csv_champ_suivant", "csv__utils_8h.html#a2c8d70fccbf5d01cf64bc9b6a80410a8", null ],
@@ -8,5 +13,6 @@ var csv__utils_8h =
     [ "csv_init_lecteur", "csv__utils_8h.html#a665df711b29065d650ae3c98d28420e6", null ],
     [ "csv_lire_entier", "csv__utils_8h.html#a2b93d1b6c2fc5ded566c466bd4629555", null ],
     [ "csv_lire_flottant", "csv__utils_8h.html#a44a2bd298dc1ab0e60236d1087e74e91", null ],
+    [ "csv_lire_flottant_valide", "csv__utils_8h.html#a71c0d07fda7ff6ae5353c3d07896b555", null ],
     [ "csv_lire_texte", "csv__utils_8h.html#a103092800f1477ec4872da8dd5bb3fa0", null ]
 ];

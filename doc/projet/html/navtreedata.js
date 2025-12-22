@@ -44,7 +44,7 @@ var NAVTREE =
     [ "Fichiers", "files.html", [
       [ "Liste des fichiers", "files.html", "files_dup" ],
       [ "Variables globale", "globals.html", [
-        [ "Tout", "globals.html", null ],
+        [ "Tout", "globals.html", "globals_dup" ],
         [ "Fonctions", "globals_func.html", null ],
         [ "Définitions de type", "globals_type.html", null ],
         [ "Énumérations", "globals_enum.html", null ],
@@ -58,7 +58,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "abr_8c.html",
-"struct__un__noeud.html"
+"namespacegenerer__connexions__paris.html#aca0dcdc9601ba10474162f9151b71e2d"
 ];
 
 var SYNCONMSG = 'cliquez pour désactiver la synchronisation du panel';

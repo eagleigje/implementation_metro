@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.15.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>MAIN3 Info Générale Projet Métro: Référence du fichier gui.h</title>
+<title>MAIN3 Info Générale Projet Métro: Référence du fichier gui/gui.h</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -91,20 +91,27 @@ $(function(){initNavTree('gui_8h.html','',''); });
   <div class="headertitle"><div class="title">Référence du fichier gui.h</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="config_8h_source.html">config.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &lt;SDL2/SDL.h&gt;</code><br />
+<code>#include &lt;SDL2/SDL_ttf.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="config_8h_source.html">../config.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="liste_8h_source.html">../liste.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="abr_8h_source.html">../abr.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="aqrtopo_8h_source.html">../aqrtopo.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="ligne_8h_source.html">../ligne.h</a>&quot;</code><br />
 </div>
 <p><a href="gui_8h_source.html">Aller au code source de ce fichier.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Structures de données</h2></td></tr>
 <tr class="memitem:Couleur" id="r_Couleur"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structCouleur.html">Couleur</a></td></tr>
+<tr class="memitem:Etat_5Faffichage" id="r_Etat_5Faffichage"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structEtat__affichage.html">Etat_affichage</a></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-define-members" class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
 <tr class="memitem:a7e86400045af356547a0b150e20e069c" id="r_a7e86400045af356547a0b150e20e069c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7e86400045af356547a0b150e20e069c">COULEUR_FOND_MENU</a>&#160;&#160;&#160;((<a class="el" href="structCouleur.html">Couleur</a>){18, 24, 32, 255})</td></tr>
-<tr class="memitem:ac6eb743b760f064f282f38413325e028" id="r_ac6eb743b760f064f282f38413325e028"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac6eb743b760f064f282f38413325e028">COULEUR_CARTE_1</a>&#160;&#160;&#160;((<a class="el" href="structCouleur.html">Couleur</a>){52, 120, 196, 255})</td></tr>
-<tr class="memitem:a1a0d67a5a78c71b39545f0d28df172ee" id="r_a1a0d67a5a78c71b39545f0d28df172ee"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1a0d67a5a78c71b39545f0d28df172ee">COULEUR_CARTE_2</a>&#160;&#160;&#160;((<a class="el" href="structCouleur.html">Couleur</a>){70, 156, 120, 255})</td></tr>
-<tr class="memitem:a4b6e087fd7ba7fea174327f8b06922bf" id="r_a4b6e087fd7ba7fea174327f8b06922bf"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4b6e087fd7ba7fea174327f8b06922bf">COULEUR_CARTE_3</a>&#160;&#160;&#160;((<a class="el" href="structCouleur.html">Couleur</a>){160, 78, 78, 255})</td></tr>
+<tr class="memitem:af7ecaa231db6ab3a98de56057f404f4f" id="r_af7ecaa231db6ab3a98de56057f404f4f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af7ecaa231db6ab3a98de56057f404f4f">COULEUR_BOUTON_MENU_1</a>&#160;&#160;&#160;((<a class="el" href="structCouleur.html">Couleur</a>){52, 120, 196, 255})</td></tr>
+<tr class="memitem:aeb19938394b44efb0cf268240c4624d0" id="r_aeb19938394b44efb0cf268240c4624d0"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aeb19938394b44efb0cf268240c4624d0">COULEUR_BOUTON_MENU_2</a>&#160;&#160;&#160;((<a class="el" href="structCouleur.html">Couleur</a>){70, 156, 120, 255})</td></tr>
+<tr class="memitem:a4256ddd508373d0a25f133aa620f2413" id="r_a4256ddd508373d0a25f133aa620f2413"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4256ddd508373d0a25f133aa620f2413">COULEUR_BOUTON_MENU_3</a>&#160;&#160;&#160;((<a class="el" href="structCouleur.html">Couleur</a>){160, 78, 78, 255})</td></tr>
 <tr class="memitem:a89fe939ddd53db5b883804e34a114113" id="r_a89fe939ddd53db5b883804e34a114113"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a89fe939ddd53db5b883804e34a114113">COULEUR_CONTOUR_CARTE</a>&#160;&#160;&#160;((<a class="el" href="structCouleur.html">Couleur</a>){240, 240, 240, 255})</td></tr>
 <tr class="memitem:a0ccc4f7590135ce82adfa26cdbbaa960" id="r_a0ccc4f7590135ce82adfa26cdbbaa960"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0ccc4f7590135ce82adfa26cdbbaa960">COULEUR_TEXTE_MENU</a>&#160;&#160;&#160;((<a class="el" href="structCouleur.html">Couleur</a>){245, 245, 245, 255})</td></tr>
 <tr class="memitem:a3042c0b99c765ecd22877c0d9dc2f158" id="r_a3042c0b99c765ecd22877c0d9dc2f158"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3042c0b99c765ecd22877c0d9dc2f158">COULEUR_FOND_PLAN</a>&#160;&#160;&#160;((<a class="el" href="structCouleur.html">Couleur</a>){245, 240, 228, 255})</td></tr>
@@ -113,6 +120,7 @@ Macros</h2></td></tr>
 <tr class="memitem:a3edaea6d8db24e6dc52fef6c0a254915" id="r_a3edaea6d8db24e6dc52fef6c0a254915"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3edaea6d8db24e6dc52fef6c0a254915">COULEUR_PANNEAU_BORDURE</a>&#160;&#160;&#160;((<a class="el" href="structCouleur.html">Couleur</a>){240, 240, 240, 255})</td></tr>
 <tr class="memitem:a12e1f9c7b2a22d505dd708ef09e68dcc" id="r_a12e1f9c7b2a22d505dd708ef09e68dcc"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a12e1f9c7b2a22d505dd708ef09e68dcc">COULEUR_TEXTE_INFO</a>&#160;&#160;&#160;((<a class="el" href="structCouleur.html">Couleur</a>){240, 240, 240, 255})</td></tr>
 <tr class="memitem:aed98fd8a30e6fa9eee35c14020db84ab" id="r_aed98fd8a30e6fa9eee35c14020db84ab"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aed98fd8a30e6fa9eee35c14020db84ab">COULEUR_CURSEUR</a>&#160;&#160;&#160;((<a class="el" href="structCouleur.html">Couleur</a>){200, 60, 60, 255})</td></tr>
+<tr class="memitem:aeff7b787d5d391f586f3fd78a4f86c73" id="r_aeff7b787d5d391f586f3fd78a4f86c73"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aeff7b787d5d391f586f3fd78a4f86c73">COULEUR_STATION</a>&#160;&#160;&#160;((<a class="el" href="structCouleur.html">Couleur</a>){20, 20, 20, 255})</td></tr>
 <tr class="memitem:a447f6ae220b692867a448a28d6e38ba8" id="r_a447f6ae220b692867a448a28d6e38ba8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a447f6ae220b692867a448a28d6e38ba8">MENU_LARGEUR_CARTE</a>&#160;&#160;&#160;440</td></tr>
 <tr class="memitem:a5529f63b1cbcb4e53c4cb0d74a335c3b" id="r_a5529f63b1cbcb4e53c4cb0d74a335c3b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5529f63b1cbcb4e53c4cb0d74a335c3b">MENU_HAUTEUR_CARTE</a>&#160;&#160;&#160;70</td></tr>
 <tr class="memitem:a3b25b260845b4b27eb9ab907f5b0e7bc" id="r_a3b25b260845b4b27eb9ab907f5b0e7bc"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3b25b260845b4b27eb9ab907f5b0e7bc">MENU_OFFSET_CARTE_1_Y</a>&#160;&#160;&#160;-140</td></tr>
@@ -122,6 +130,7 @@ Macros</h2></td></tr>
 <tr class="memitem:afe1618a294b115ac97852ee71182905e" id="r_afe1618a294b115ac97852ee71182905e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afe1618a294b115ac97852ee71182905e">MENU_MARGE_TEXTE_X</a>&#160;&#160;&#160;18</td></tr>
 <tr class="memitem:a9494dfafdc084cc9130a7154f365b56c" id="r_a9494dfafdc084cc9130a7154f365b56c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9494dfafdc084cc9130a7154f365b56c">MENU_MARGE_TEXTE_Y</a>&#160;&#160;&#160;20</td></tr>
 <tr class="memitem:aedb261259f448602a9b006d2bbc05098" id="r_aedb261259f448602a9b006d2bbc05098"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aedb261259f448602a9b006d2bbc05098">PLAN_TAILLE_GRILLE</a>&#160;&#160;&#160;40</td></tr>
+<tr class="memitem:abe106b141aab6c738445f65612545558" id="r_abe106b141aab6c738445f65612545558"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abe106b141aab6c738445f65612545558">PLAN_MARGE_PLAN</a>&#160;&#160;&#160;24</td></tr>
 <tr class="memitem:a77097567d70af2b2aae27d77b74a3871" id="r_a77097567d70af2b2aae27d77b74a3871"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a77097567d70af2b2aae27d77b74a3871">PLAN_PANNEAU_X</a>&#160;&#160;&#160;12</td></tr>
 <tr class="memitem:aca3b2b83ee45f320ec9fd98a90313915" id="r_aca3b2b83ee45f320ec9fd98a90313915"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aca3b2b83ee45f320ec9fd98a90313915">PLAN_PANNEAU_Y</a>&#160;&#160;&#160;12</td></tr>
 <tr class="memitem:a5022d2adaadf38cd5c48f15dcb99972a" id="r_a5022d2adaadf38cd5c48f15dcb99972a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5022d2adaadf38cd5c48f15dcb99972a">PLAN_PANNEAU_LARGEUR</a>&#160;&#160;&#160;400</td></tr>
@@ -129,8 +138,9 @@ Macros</h2></td></tr>
 <tr class="memitem:aaaf078ac32233425218d405a1e5219bb" id="r_aaaf078ac32233425218d405a1e5219bb"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aaaf078ac32233425218d405a1e5219bb">PLAN_MARGE_TEXTE_X</a>&#160;&#160;&#160;8</td></tr>
 <tr class="memitem:a514f2607b53fddf2f99cb74c2b8a7a4f" id="r_a514f2607b53fddf2f99cb74c2b8a7a4f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a514f2607b53fddf2f99cb74c2b8a7a4f">PLAN_MARGE_TEXTE_Y_1</a>&#160;&#160;&#160;8</td></tr>
 <tr class="memitem:a5ef594150903a072b955d1e410c700b0" id="r_a5ef594150903a072b955d1e410c700b0"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5ef594150903a072b955d1e410c700b0">PLAN_MARGE_TEXTE_Y_2</a>&#160;&#160;&#160;32</td></tr>
-<tr class="memitem:a9863d498e507cca4bf8ffd15d0797722" id="r_a9863d498e507cca4bf8ffd15d0797722"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9863d498e507cca4bf8ffd15d0797722">PLAN_CURSEUR_DEMI_TAILLE</a>&#160;&#160;&#160;4</td></tr>
 <tr class="memitem:a4645990b6e03740d417ed3117453a666" id="r_a4645990b6e03740d417ed3117453a666"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4645990b6e03740d417ed3117453a666">PLAN_CURSEUR_TAILLE</a>&#160;&#160;&#160;8</td></tr>
+<tr class="memitem:a3a66cdb0fcab602891e4d76964429bef" id="r_a3a66cdb0fcab602891e4d76964429bef"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3a66cdb0fcab602891e4d76964429bef">PLAN_TAILLE_STATION</a>&#160;&#160;&#160;6</td></tr>
+<tr class="memitem:ada36a6759e6e6d33a5b4268859aac92e" id="r_ada36a6759e6e6d33a5b4268859aac92e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ada36a6759e6e6d33a5b4268859aac92e">PLAN_EPAISSEUR_LIGNE</a>&#160;&#160;&#160;2</td></tr>
 <tr class="memitem:a2d8bd8b8ad13a272d574458d6f8fa6ce" id="r_a2d8bd8b8ad13a272d574458d6f8fa6ce"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2d8bd8b8ad13a272d574458d6f8fa6ce">ZOOM_FACTEUR_AVANT</a>&#160;&#160;&#160;1.1f</td></tr>
 <tr class="memitem:a216338f26523db4856f5a9b29a1cdfe5" id="r_a216338f26523db4856f5a9b29a1cdfe5"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a216338f26523db4856f5a9b29a1cdfe5">ZOOM_FACTEUR_ARRIERE</a>&#160;&#160;&#160;0.9f</td></tr>
 <tr class="memitem:a464a2b8881cdb96b64be047b58c12fff" id="r_a464a2b8881cdb96b64be047b58c12fff"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a464a2b8881cdb96b64be047b58c12fff">DEPLACEMENT_PAS</a>&#160;&#160;&#160;10.0f</td></tr>
@@ -138,53 +148,63 @@ Macros</h2></td></tr>
 <tr class="memitem:a0521e91809c477eaabe97b79fcf3e547" id="r_a0521e91809c477eaabe97b79fcf3e547"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0521e91809c477eaabe97b79fcf3e547">TAILLE_GRANDE_POLICE</a>&#160;&#160;&#160;26</td></tr>
 <tr class="memitem:ad989c6ae1b68f24eff098f6cdb678105" id="r_ad989c6ae1b68f24eff098f6cdb678105"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad989c6ae1b68f24eff098f6cdb678105">COULEUR_SDL</a>(c)</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-typedef-members" class="groupheader"><a id="typedef-members" name="typedef-members"></a>
+Définitions de type</h2></td></tr>
+<tr class="memitem:a57510dfa60ffd1aa7fbbc4d5334f7313" id="r_a57510dfa60ffd1aa7fbbc4d5334f7313"><td class="memItemLeft" align="right" valign="top">typedef struct Etat_affichage&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a57510dfa60ffd1aa7fbbc4d5334f7313">Etat_affichage</a></td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-enum-members" class="groupheader"><a id="enum-members" name="enum-members"></a>
 Énumérations</h2></td></tr>
-<tr class="memitem:a414c68cf91244353d88ca05b37a437e5" id="r_a414c68cf91244353d88ca05b37a437e5"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom">{ <a class="el" href="#a414c68cf91244353d88ca05b37a437e5a887e2f641ff954708122365e477a7036">GUI_LARGEUR_MIN</a> = 1000
-, <a class="el" href="#a414c68cf91244353d88ca05b37a437e5afff91855dfb7e4e75c39c9414effb86c">GUI_HAUTEUR_MIN</a> = 700
+<tr class="memitem:a50843706b5a51d1252bee2ddecefa863" id="r_a50843706b5a51d1252bee2ddecefa863"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom">{ <a class="el" href="#a50843706b5a51d1252bee2ddecefa863a887e2f641ff954708122365e477a7036">GUI_LARGEUR_MIN</a> = 1000
+, <a class="el" href="#a50843706b5a51d1252bee2ddecefa863afff91855dfb7e4e75c39c9414effb86c">GUI_HAUTEUR_MIN</a> = 700
+ }</td></tr>
+<tr class="memitem:a747e93e490a1320112535d34e179938f" id="r_a747e93e490a1320112535d34e179938f"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a747e93e490a1320112535d34e179938f">Ecran</a> { <a class="el" href="#a747e93e490a1320112535d34e179938faae065559d9dc40927a9c23f79d9c9600">ECRAN_MENU</a> = 0
+, <a class="el" href="#a747e93e490a1320112535d34e179938faf77aca94ebede3c4c3ea4a412496e1bc">ECRAN_PLAN</a> = 1
+ }</td></tr>
+<tr class="memitem:a46c8a310cf4c094f8c80e1cb8dc1f911" id="r_a46c8a310cf4c094f8c80e1cb8dc1f911"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a46c8a310cf4c094f8c80e1cb8dc1f911">Mode</a> { <a class="el" href="#a46c8a310cf4c094f8c80e1cb8dc1f911a9da505794f0f720b7a06d0e2152783fb">MODE_SELECTION</a> = 0
+, <a class="el" href="#a46c8a310cf4c094f8c80e1cb8dc1f911a53bb881a76b0a0c0d973352cc9c0712f">MODE_CHEMIN</a> = 1
  }</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Fonctions</h2></td></tr>
-<tr class="memitem:a26246ee2ce0d98ee2b1f305ea05c466f" id="r_a26246ee2ce0d98ee2b1f305ea05c466f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a26246ee2ce0d98ee2b1f305ea05c466f">gui_lancer</a> (const <a class="el" href="config_8h.html#aeb977a4814f42974043a21308f3401fd">Une_config</a> *config)</td></tr>
+<tr class="memitem:a785a916cb1be07d35e39f152bf1f08ed" id="r_a785a916cb1be07d35e39f152bf1f08ed"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a785a916cb1be07d35e39f152bf1f08ed">lancer_gui</a> (const <a class="el" href="config_8h.html#aeb977a4814f42974043a21308f3401fd">Une_config</a> *config)</td></tr>
 </table>
 <a name="doc-define-members" id="doc-define-members"></a><h2 id="header-doc-define-members" class="groupheader">Documentation des macros</h2>
-<a id="ac6eb743b760f064f282f38413325e028" name="ac6eb743b760f064f282f38413325e028"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac6eb743b760f064f282f38413325e028">&#9670;&#160;</a></span>COULEUR_CARTE_1</h2>
+<a id="af7ecaa231db6ab3a98de56057f404f4f" name="af7ecaa231db6ab3a98de56057f404f4f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af7ecaa231db6ab3a98de56057f404f4f">&#9670;&#160;</a></span>COULEUR_BOUTON_MENU_1</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define COULEUR_CARTE_1&#160;&#160;&#160;((<a class="el" href="structCouleur.html">Couleur</a>){52, 120, 196, 255})</td>
+          <td class="memname">#define COULEUR_BOUTON_MENU_1&#160;&#160;&#160;((<a class="el" href="structCouleur.html">Couleur</a>){52, 120, 196, 255})</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a1a0d67a5a78c71b39545f0d28df172ee" name="a1a0d67a5a78c71b39545f0d28df172ee"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1a0d67a5a78c71b39545f0d28df172ee">&#9670;&#160;</a></span>COULEUR_CARTE_2</h2>
+<a id="aeb19938394b44efb0cf268240c4624d0" name="aeb19938394b44efb0cf268240c4624d0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeb19938394b44efb0cf268240c4624d0">&#9670;&#160;</a></span>COULEUR_BOUTON_MENU_2</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define COULEUR_CARTE_2&#160;&#160;&#160;((<a class="el" href="structCouleur.html">Couleur</a>){70, 156, 120, 255})</td>
+          <td class="memname">#define COULEUR_BOUTON_MENU_2&#160;&#160;&#160;((<a class="el" href="structCouleur.html">Couleur</a>){70, 156, 120, 255})</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a4b6e087fd7ba7fea174327f8b06922bf" name="a4b6e087fd7ba7fea174327f8b06922bf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4b6e087fd7ba7fea174327f8b06922bf">&#9670;&#160;</a></span>COULEUR_CARTE_3</h2>
+<a id="a4256ddd508373d0a25f133aa620f2413" name="a4256ddd508373d0a25f133aa620f2413"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4256ddd508373d0a25f133aa620f2413">&#9670;&#160;</a></span>COULEUR_BOUTON_MENU_3</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define COULEUR_CARTE_3&#160;&#160;&#160;((<a class="el" href="structCouleur.html">Couleur</a>){160, 78, 78, 255})</td>
+          <td class="memname">#define COULEUR_BOUTON_MENU_3&#160;&#160;&#160;((<a class="el" href="structCouleur.html">Couleur</a>){160, 78, 78, 255})</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -305,6 +325,20 @@ Fonctions</h2></td></tr>
 </div><div class="memdoc">
 <b>Valeur :</b><div class="fragment"><div class="line">((SDL_Color){c.r, c.g, c.b, c.a})</div>
 </div><!-- fragment -->
+</div>
+</div>
+<a id="aeff7b787d5d391f586f3fd78a4f86c73" name="aeff7b787d5d391f586f3fd78a4f86c73"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeff7b787d5d391f586f3fd78a4f86c73">&#9670;&#160;</a></span>COULEUR_STATION</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define COULEUR_STATION&#160;&#160;&#160;((<a class="el" href="structCouleur.html">Couleur</a>){20, 20, 20, 255})</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
 </div>
 </div>
 <a id="a12e1f9c7b2a22d505dd708ef09e68dcc" name="a12e1f9c7b2a22d505dd708ef09e68dcc"></a>
@@ -461,20 +495,6 @@ Fonctions</h2></td></tr>
 
 </div>
 </div>
-<a id="a9863d498e507cca4bf8ffd15d0797722" name="a9863d498e507cca4bf8ffd15d0797722"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9863d498e507cca4bf8ffd15d0797722">&#9670;&#160;</a></span>PLAN_CURSEUR_DEMI_TAILLE</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define PLAN_CURSEUR_DEMI_TAILLE&#160;&#160;&#160;4</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a id="a4645990b6e03740d417ed3117453a666" name="a4645990b6e03740d417ed3117453a666"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4645990b6e03740d417ed3117453a666">&#9670;&#160;</a></span>PLAN_CURSEUR_TAILLE</h2>
 
@@ -483,6 +503,34 @@ Fonctions</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">#define PLAN_CURSEUR_TAILLE&#160;&#160;&#160;8</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ada36a6759e6e6d33a5b4268859aac92e" name="ada36a6759e6e6d33a5b4268859aac92e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada36a6759e6e6d33a5b4268859aac92e">&#9670;&#160;</a></span>PLAN_EPAISSEUR_LIGNE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PLAN_EPAISSEUR_LIGNE&#160;&#160;&#160;2</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="abe106b141aab6c738445f65612545558" name="abe106b141aab6c738445f65612545558"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abe106b141aab6c738445f65612545558">&#9670;&#160;</a></span>PLAN_MARGE_PLAN</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PLAN_MARGE_PLAN&#160;&#160;&#160;24</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -601,6 +649,20 @@ Fonctions</h2></td></tr>
 
 </div>
 </div>
+<a id="a3a66cdb0fcab602891e4d76964429bef" name="a3a66cdb0fcab602891e4d76964429bef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3a66cdb0fcab602891e4d76964429bef">&#9670;&#160;</a></span>PLAN_TAILLE_STATION</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PLAN_TAILLE_STATION&#160;&#160;&#160;6</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a0521e91809c477eaabe97b79fcf3e547" name="a0521e91809c477eaabe97b79fcf3e547"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0521e91809c477eaabe97b79fcf3e547">&#9670;&#160;</a></span>TAILLE_GRANDE_POLICE</h2>
 
@@ -657,9 +719,25 @@ Fonctions</h2></td></tr>
 
 </div>
 </div>
+<a name="doc-typedef-members" id="doc-typedef-members"></a><h2 id="header-doc-typedef-members" class="groupheader">Documentation des définitions de type</h2>
+<a id="a57510dfa60ffd1aa7fbbc4d5334f7313" name="a57510dfa60ffd1aa7fbbc4d5334f7313"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a57510dfa60ffd1aa7fbbc4d5334f7313">&#9670;&#160;</a></span>Etat_affichage</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef struct Etat_affichage Etat_affichage</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Structure contenant l'état global de l'interface graphique. Regroupe les ressources SDL, les paramètres d'affichage et les données du métro. </p>
+
+</div>
+</div>
 <a name="doc-enum-members" id="doc-enum-members"></a><h2 id="header-doc-enum-members" class="groupheader">Documentation du type de l'énumération</h2>
-<a id="a414c68cf91244353d88ca05b37a437e5" name="a414c68cf91244353d88ca05b37a437e5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a414c68cf91244353d88ca05b37a437e5">&#9670;&#160;</a></span>anonymous enum</h2>
+<a id="a50843706b5a51d1252bee2ddecefa863" name="a50843706b5a51d1252bee2ddecefa863"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a50843706b5a51d1252bee2ddecefa863">&#9670;&#160;</a></span>anonymous enum</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -670,21 +748,59 @@ Fonctions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <table class="fieldtable">
-<tr><th colspan="2">Valeurs énumérées</th></tr><tr><td class="fieldname"><a id="a414c68cf91244353d88ca05b37a437e5a887e2f641ff954708122365e477a7036" name="a414c68cf91244353d88ca05b37a437e5a887e2f641ff954708122365e477a7036"></a>GUI_LARGEUR_MIN&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a414c68cf91244353d88ca05b37a437e5afff91855dfb7e4e75c39c9414effb86c" name="a414c68cf91244353d88ca05b37a437e5afff91855dfb7e4e75c39c9414effb86c"></a>GUI_HAUTEUR_MIN&#160;</td><td class="fielddoc"></td></tr>
+<tr><th colspan="2">Valeurs énumérées</th></tr><tr><td class="fieldname"><a id="a50843706b5a51d1252bee2ddecefa863a887e2f641ff954708122365e477a7036" name="a50843706b5a51d1252bee2ddecefa863a887e2f641ff954708122365e477a7036"></a>GUI_LARGEUR_MIN&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a50843706b5a51d1252bee2ddecefa863afff91855dfb7e4e75c39c9414effb86c" name="a50843706b5a51d1252bee2ddecefa863afff91855dfb7e4e75c39c9414effb86c"></a>GUI_HAUTEUR_MIN&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
 </div>
 </div>
-<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Documentation des fonctions</h2>
-<a id="a26246ee2ce0d98ee2b1f305ea05c466f" name="a26246ee2ce0d98ee2b1f305ea05c466f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a26246ee2ce0d98ee2b1f305ea05c466f">&#9670;&#160;</a></span>gui_lancer()</h2>
+<a id="a747e93e490a1320112535d34e179938f" name="a747e93e490a1320112535d34e179938f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a747e93e490a1320112535d34e179938f">&#9670;&#160;</a></span>Ecran</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int gui_lancer </td>
+          <td class="memname">enum <a class="el" href="#a747e93e490a1320112535d34e179938f">Ecran</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Type énuméré représentant les différents écrans de l'application. ECRAN_MENU : Écran d'accueil avec les options de navigation. ECRAN_PLAN : Écran principal affichant le plan du métro. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Valeurs énumérées</th></tr><tr><td class="fieldname"><a id="a747e93e490a1320112535d34e179938faae065559d9dc40927a9c23f79d9c9600" name="a747e93e490a1320112535d34e179938faae065559d9dc40927a9c23f79d9c9600"></a>ECRAN_MENU&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a747e93e490a1320112535d34e179938faf77aca94ebede3c4c3ea4a412496e1bc" name="a747e93e490a1320112535d34e179938faf77aca94ebede3c4c3ea4a412496e1bc"></a>ECRAN_PLAN&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+</div>
+</div>
+<a id="a46c8a310cf4c094f8c80e1cb8dc1f911" name="a46c8a310cf4c094f8c80e1cb8dc1f911"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a46c8a310cf4c094f8c80e1cb8dc1f911">&#9670;&#160;</a></span>Mode</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="#a46c8a310cf4c094f8c80e1cb8dc1f911">Mode</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Type énuméré représentant les modes d'interaction disponibles sur le plan. MODE_SELECTION : Permet de sélectionner des stations individuellement. MODE_CHEMIN : Permet de calculer le plus court chemin entre deux stations. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Valeurs énumérées</th></tr><tr><td class="fieldname"><a id="a46c8a310cf4c094f8c80e1cb8dc1f911a9da505794f0f720b7a06d0e2152783fb" name="a46c8a310cf4c094f8c80e1cb8dc1f911a9da505794f0f720b7a06d0e2152783fb"></a>MODE_SELECTION&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a46c8a310cf4c094f8c80e1cb8dc1f911a53bb881a76b0a0c0d973352cc9c0712f" name="a46c8a310cf4c094f8c80e1cb8dc1f911a53bb881a76b0a0c0d973352cc9c0712f"></a>MODE_CHEMIN&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Documentation des fonctions</h2>
+<a id="a785a916cb1be07d35e39f152bf1f08ed" name="a785a916cb1be07d35e39f152bf1f08ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a785a916cb1be07d35e39f152bf1f08ed">&#9670;&#160;</a></span>lancer_gui()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int lancer_gui </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="config_8h.html#aeb977a4814f42974043a21308f3401fd">Une_config</a> *</td>          <td class="paramname"><span class="paramname"><em>config</em></span></td><td>)</td>
           <td></td>
@@ -714,7 +830,7 @@ Fonctions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="gui_8h.html">gui.h</a></li>
+    <li class="navelem"><a href="dir_11bc0974ce736ce9a6fadebbeb7a8314.html">gui</a></li><li class="navelem"><a href="gui_8h.html">gui.h</a></li>
     <li class="footer">Généré par <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.15.0 </li>
   </ul>
 </div>
