@@ -109,7 +109,8 @@ run-tests: $(TARGET_TESTS)
 	@echo "========================================="
 	@echo "Exécution des tests..."
 	@echo "========================================="
-	./$(TARGET_TESTS)
+	@echo "Note : stderr est redirigé vers stdout pour préserver l'ordre d'affichage."
+	./$(TARGET_TESTS) 2>&1
 
 # Cible pour exécuter les tests avec valgrind
 test-memory: $(TARGET_TESTS)
