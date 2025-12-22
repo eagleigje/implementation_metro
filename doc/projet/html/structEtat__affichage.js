@@ -4,6 +4,7 @@ var structEtat__affichage =
     [ "aqr_topo", "structEtat__affichage.html#af1c9f6d65f69d78a8c071d55a40c4838", null ],
     [ "decalage_x", "structEtat__affichage.html#ab0e906de35e2861d3af26c20446af133", null ],
     [ "decalage_y", "structEtat__affichage.html#a418e5b56a1480b559fac076cc00ed75f", null ],
+    [ "deplacement_actif", "structEtat__affichage.html#adcb656afbd9a9cbfb4b55b4b05ba9448", null ],
     [ "dernier_clic_x", "structEtat__affichage.html#a4f2e7c0c6f05235a7d47c344a61a8468", null ],
     [ "dernier_clic_y", "structEtat__affichage.html#aa7f27a68685d820302b6e627f0d69127", null ],
     [ "ecran", "structEtat__affichage.html#a5ab7a050981f4ae17245ba76b2c7cdd3", null ],
@@ -16,5 +17,9 @@ var structEtat__affichage =
     [ "mode", "structEtat__affichage.html#acaff7e88c9d3c093298c2ebe510ba712", null ],
     [ "moteurRendu", "structEtat__affichage.html#a59ea84b46bacab0b60d71b69767cb354", null ],
     [ "petite_police", "structEtat__affichage.html#a45f0e9c1f294959c87a258f4696093b1", null ],
+    [ "souris_prec_x", "structEtat__affichage.html#ac9b2be7b94db0c9d78ad6547880b4856", null ],
+    [ "souris_prec_y", "structEtat__affichage.html#af188bbe2f7ea793bc8c38d67af20d20c", null ],
+    [ "souris_x", "structEtat__affichage.html#ad72c3b457edde039e7d148a9e0af917c", null ],
+    [ "souris_y", "structEtat__affichage.html#a3ed8fd5f8ac9fbffdab81cdf13ce8a39", null ],
     [ "zoom", "structEtat__affichage.html#a78760e71f6ceeecea963bd118a94909e", null ]
 ];
