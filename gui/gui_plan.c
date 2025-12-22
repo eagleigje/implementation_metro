@@ -111,7 +111,7 @@ static void geo_vers_ecran(Etat_affichage *app, Une_coord coord, int largeur, in
  * @param largeur : Largeur de la fenêtre.
  * @param hauteur : Hauteur de la fenêtre.
  */
-void gui_plan_dessiner(Etat_affichage *app, int largeur, int hauteur) {
+void gui_dessiner_plan(Etat_affichage *app, int largeur, int hauteur) {
     // On efface l'écran avec une couleur beige clair (style carte).
     Couleur fond = COULEUR_FOND_PLAN;
     SDL_SetRenderDrawColor(app->moteurRendu, fond.r, fond.g, fond.b, fond.a);
@@ -202,7 +202,8 @@ void gui_plan_dessiner(Etat_affichage *app, int largeur, int hauteur) {
 
     // Si l'utilisateur a cliqué, on affiche un curseur rouge à la position du clic
     if (app->dernier_clic_x >= 0 && app->dernier_clic_y >= 0) {
-        SDL_Rect curseur = {app->dernier_clic_x - PLAN_CURSEUR_DEMI_TAILLE, app->dernier_clic_y - PLAN_CURSEUR_DEMI_TAILLE, PLAN_CURSEUR_TAILLE, PLAN_CURSEUR_TAILLE};
+        int demi_taille = PLAN_CURSEUR_TAILLE / 2;
+        SDL_Rect curseur = {app->dernier_clic_x - demi_taille, app->dernier_clic_y - demi_taille, PLAN_CURSEUR_TAILLE, PLAN_CURSEUR_TAILLE};
         Couleur couleur_curseur = COULEUR_CURSEUR;
         SDL_SetRenderDrawColor(app->moteurRendu, couleur_curseur.r, couleur_curseur.g, couleur_curseur.b, couleur_curseur.a);
         SDL_RenderFillRect(app->moteurRendu, &curseur);

@@ -80,7 +80,6 @@ typedef struct {
 #define PLAN_MARGE_TEXTE_X       8    // Marge X du texte dans le panneau.
 #define PLAN_MARGE_TEXTE_Y_1     8    // Décalage Y du premier texte du panneau.
 #define PLAN_MARGE_TEXTE_Y_2     32   // Décalage Y du second texte du panneau.
-#define PLAN_CURSEUR_DEMI_TAILLE 4    // Demi-taille du curseur de clic.
 #define PLAN_CURSEUR_TAILLE      8    // Taille du curseur de clic.
 #define PLAN_TAILLE_STATION      6    // Taille d'une station (carré).
 #define PLAN_EPAISSEUR_LIGNE     2    // Épaisseur des lignes de connexion (en pixels).
@@ -132,7 +131,7 @@ typedef enum {
 } Mode;
 
 // =============================================================================
-// STRUCTURE D'ÉTAT
+// STRUCTURE D'ETAT DU PLAN
 // =============================================================================
 
 /**

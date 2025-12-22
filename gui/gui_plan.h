@@ -17,7 +17,7 @@ typedef struct Etat_affichage Etat_affichage;
  * @param largeur : Largeur de la fenêtre.
  * @param hauteur : Hauteur de la fenêtre.
  */
-void gui_plan_dessiner(Etat_affichage *app, int largeur, int hauteur);
+void gui_dessiner_plan(Etat_affichage *app, int largeur, int hauteur);
 
 /**
  * Fonction qui gère les événements clavier sur le plan.

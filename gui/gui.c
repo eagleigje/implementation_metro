@@ -175,7 +175,7 @@ int lancer_gui(const Une_config *config) {
         if (app.ecran == ECRAN_MENU) {
             gui_menu_dessiner(&app, width, height);
         } else {
-            gui_plan_dessiner(&app, width, height);
+            gui_dessiner_plan(&app, width, height);
         }
         // On affiche le rendu à l'écran
         SDL_RenderPresent(app.moteurRendu);
