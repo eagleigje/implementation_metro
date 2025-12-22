@@ -97,6 +97,30 @@ float csv_lire_flottant(Un_lecteur_csv *lecteur) {
 }
 
 /**
+ * Fonction de récupération du champ courant en tant que nombre flottant avec validation stricte.
+ * @param lecteur : Pointeur vers le lecteur.
+ * @param valeur : Sortie de la valeur convertie.
+ * @return : 1 si la conversion est valide, 0 sinon.
+ */
+int csv_lire_flottant_valide(Un_lecteur_csv *lecteur, float *valeur) {
+    if (lecteur == NULL || valeur == NULL) {
+        return 0;
+    }
+
+    char *fin = NULL;
+    // strtod permet de détecter une conversion invalide grâce au pointeur fin.
+    // On sait si tout le champ a été lu.
+    // atof renvoie simplement 0.0 sans signaler l’erreur, ce qui rend impossible de distinguer “0 valide” de “non numérique”.
+    double tmp = strtod(lecteur->tampon, &fin);
+    if (fin == lecteur->tampon || *fin != '\0') {
+        return 0;
+    }
+
+    *valeur = (float)tmp;
+    return 1;
+}
+
+/**
  * Fonction de récupèration du champ courant en tant qu'entier.
  * Utilise atoi() pour la conversion.
  *

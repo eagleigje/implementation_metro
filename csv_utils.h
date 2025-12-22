@@ -10,6 +10,13 @@
 
 #define CSV_TAMPON_TAILLE 512
 
+// Codes d'erreur renvoyés lors de la lecture d'un CSV
+#define CSV_OK 0              // Aucun problème détecté.
+#define CSV_ERR_TEXTE 1       // Champ texte invalide ou trop long.
+#define CSV_ERR_FLOAT 2       // Valeur numérique invalide.
+#define CSV_ERR_ALLOC 3       // Erreur d'allocation mémoire.
+#define CSV_ERR_REFERENCE 4   // Référence inconnue (ligne ou station).
+
 /**
  * Lecteur CSV pour parcourir les champs d'une ligne, un à un.
  */
@@ -25,6 +32,7 @@ void csv_init_lecteur(Un_lecteur_csv *lecteur, char *ligne, char separateur);
 int csv_champ_suivant(Un_lecteur_csv *lecteur);
 char *csv_lire_texte(Un_lecteur_csv *lecteur, size_t max_size);
 float csv_lire_flottant(Un_lecteur_csv *lecteur);
+int csv_lire_flottant_valide(Un_lecteur_csv *lecteur, float *valeur);
 int csv_lire_entier(Un_lecteur_csv *lecteur);
 int csv_est_fini(Un_lecteur_csv *lecteur);
 
