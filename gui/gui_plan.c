@@ -291,7 +291,7 @@ void gui_dessiner_plan(Etat_affichage *app, int largeur, int hauteur) {
         gui_rendu_texte(app, app->petite_police, "Mode : PLUS COURT CHEMIN", panneau_info.x + PLAN_MARGE_TEXTE_X, panneau_info.y + PLAN_MARGE_TEXTE_Y_1, couleur_info);
     }
     // On affiche les raccourcis clavier
-    gui_rendu_texte(app, app->petite_police, "S/P mode  -  ESC menu  -  Q quitter", panneau_info.x + PLAN_MARGE_TEXTE_X, panneau_info.y + PLAN_MARGE_TEXTE_Y_2, couleur_info);
+    gui_rendu_texte(app, app->petite_police, "S/P mode  -  R réinitialiser  -  ESC menu  -  Q quitter", panneau_info.x + PLAN_MARGE_TEXTE_X, panneau_info.y + PLAN_MARGE_TEXTE_Y_2, couleur_info);
 
     // Si l'utilisateur a cliqué, on affiche un curseur rouge à la position du clic
     if (app->dernier_clic_x >= 0 && app->dernier_clic_y >= 0) {
@@ -330,6 +330,10 @@ void gui_plan_gerer_clavier(Etat_affichage *app, SDL_Keycode key, bool *running)
     } else if (key == SDLK_p) {
         app->mode = MODE_CHEMIN;
         gui_mettre_a_jour_titre(app);
+    } else if (key == SDLK_r) {
+        app->zoom = 1.0f;
+        app->decalage_x = 0.0f;
+        app->decalage_y = 0.0f;
     } else if (key == SDLK_q) {
         *running = false;
     } else if (key == SDLK_PLUS || key == SDLK_KP_PLUS) {

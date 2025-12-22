@@ -150,11 +150,14 @@ typedef struct Etat_affichage {
     Ecran ecran;                    // Écran actuellement affiché (menu ou plan)
     Mode mode;                      // Mode d'interaction actif (sélection ou chemin)
     float zoom;                     // Facteur de zoom appliqué au plan (1.0 = échelle normale)
-    float decalage_x;               // Décalage horizontal de la caméra en pixels
-    float decalage_y;               // Décalage vertical de la caméra en pixels
+    float decalage_x;               // Décalage horizontal de l'affichage en pixels
+    float decalage_y;               // Décalage vertical de l'affichage en pixels
     int marge_plan;                 // Marge en pixels autour du plan projeté
     int souris_x;                   // Position X de la souris (pixels)
     int souris_y;                   // Position Y de la souris (pixels)
+    int souris_prec_x;              // Position X précédente de la souris (pixels)
+    int souris_prec_y;              // Position Y précédente de la souris (pixels)
+    int deplacement_actif;          // 1 si déplacement à la souris actif, 0 sinon
     int dernier_clic_x;             // Position X du dernier clic souris (-1 si aucun)
     int dernier_clic_y;             // Position Y du dernier clic souris (-1 si aucun)
     // Données du métro

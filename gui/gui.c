@@ -48,6 +48,9 @@ int lancer_gui(const Une_config *config) {
         .marge_plan = PLAN_MARGE_PLAN,
         .souris_x = -1,             // Position souris inconnue au départ
         .souris_y = -1,
+        .souris_prec_x = -1,
+        .souris_prec_y = -1,
+        .deplacement_actif = 0,
         .dernier_clic_x = -1,       // Pas de clic enregistré (-1 = invalide)
         .dernier_clic_y = -1,
         .liste_stations = NULL,     // Données du métro non chargées
@@ -171,10 +174,32 @@ int lancer_gui(const Une_config *config) {
                     } else if (app.ecran == ECRAN_PLAN) {
                         gui_plan_gerer_clic(&app, event.button.x, event.button.y);
                     }
+                } else if (event.button.button == SDL_BUTTON_RIGHT && app.ecran == ECRAN_PLAN) {
+                    app.deplacement_actif = 1;
+                    app.souris_prec_x = event.button.x;
+                    app.souris_prec_y = event.button.y;
+                }
+            } else if (event.type == SDL_MOUSEBUTTONUP) {
+                if (event.button.button == SDL_BUTTON_RIGHT) {
+                    app.deplacement_actif = 0;
                 }
             } else if (event.type == SDL_MOUSEMOTION) {
                 app.souris_x = event.motion.x;
                 app.souris_y = event.motion.y;
+                if (app.deplacement_actif && app.ecran == ECRAN_PLAN) {
+                    int dx = app.souris_x - app.souris_prec_x;
+                    int dy = app.souris_y - app.souris_prec_y;
+                    app.decalage_x += dx;
+                    app.decalage_y += dy;
+                    app.souris_prec_x = app.souris_x;
+                    app.souris_prec_y = app.souris_y;
+                }
+            } else if (event.type == SDL_MOUSEWHEEL && app.ecran == ECRAN_PLAN) {
+                if (event.wheel.y > 0) {
+                    app.zoom *= ZOOM_FACTEUR_AVANT;
+                } else if (event.wheel.y < 0) {
+                    app.zoom *= ZOOM_FACTEUR_ARRIERE;
+                }
             }
         }
 
