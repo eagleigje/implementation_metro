@@ -31,6 +31,11 @@
 static float TEMPS_CORRESPONDANCE = 3.0f;
 static float TEMPS_ARRET = 0.5f;
 
+/**
+ * Fonction qui configure les paramètres globaux utilisés par l'algorithme Dijkstra.
+ * @param temps_correspondance : Temps moyen de correspondance en minutes.
+ * @param temps_arret : Temps moyen d'arrêt en station en minutes.
+ */
 void configurer_dijkstra(float temps_correspondance, float temps_arret) {
     if (temps_correspondance >= 0.0f) {
         TEMPS_CORRESPONDANCE = temps_correspondance;
