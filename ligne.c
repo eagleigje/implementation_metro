@@ -14,12 +14,16 @@
 #include "outils.h"
 
 /**
- * Fonction qui créé un maillon d'une ligne
- * @param ligne_str : La ligne au format texte à gérer
+ * Fonction qui crée un maillon d'une ligne.
+ * @param ligne_str : La ligne au format texte à gérer.
+ * @param err : Code d'erreur en sortie (optionnel).
  * @return : Pointeur vers la nouvelle ligne ou NULL en cas d'erreur.
  */
-static Une_ligne *creer_ligne(char *ligne_str) {
+static Une_ligne *creer_ligne(char *ligne_str, int *err) {
     Un_lecteur_csv lecteur;
+    if (err != NULL) {
+        *err = CSV_OK;
+    }
 
     // On initialise le lecteur CSV
     csv_init_lecteur(&lecteur, ligne_str, CSV_SEPARATOR);
@@ -28,32 +32,62 @@ static Une_ligne *creer_ligne(char *ligne_str) {
     // Lecture du code de la ligne
     if (!csv_champ_suivant(&lecteur)) return NULL;
     char *code_ptr = csv_lire_texte(&lecteur, LINE_MAX_CODE_SIZE);
-    if (code_ptr == NULL) return NULL;  // Champ trop grand
+    if (code_ptr == NULL) {
+        if (err != NULL) {
+            *err = CSV_ERR_TEXTE;
+        }
+        return NULL;  // Champ trop grand
+    }
     char code[LINE_MAX_CODE_SIZE];
     strcpy(code, code_ptr);  // On doit copier les champs textes, sinon ils sont écrasés par les suivants.
 
     // La vitesse de la ligne
     if (!csv_champ_suivant(&lecteur)) return NULL;
-    float vitesse = csv_lire_flottant(&lecteur);
+    float vitesse = 0.0f;
+    if (!csv_lire_flottant_valide(&lecteur, &vitesse)) {
+        if (err != NULL) {
+            *err = CSV_ERR_FLOAT;
+        }
+        return NULL;
+    }
 
     // L'intervalle entre deux rames sur la ligne.
     if (!csv_champ_suivant(&lecteur)) return NULL;
-    float intervalle = csv_lire_flottant(&lecteur);
+    float intervalle = 0.0f;
+    if (!csv_lire_flottant_valide(&lecteur, &intervalle)) {
+        if (err != NULL) {
+            *err = CSV_ERR_FLOAT;
+        }
+        return NULL;
+    }
 
     // La couleur de ligne.
     if (!csv_champ_suivant(&lecteur)) return NULL;
     char *couleur_ptr = csv_lire_texte(&lecteur, LINE_COLOR_SIZE);
-    if (couleur_ptr == NULL) return NULL;  // Champ trop grand
+    if (couleur_ptr == NULL) {
+        if (err != NULL) {
+            *err = CSV_ERR_TEXTE;
+        }
+        return NULL;  // Champ trop grand
+    }
     char couleur[LINE_COLOR_SIZE];
     strcpy(couleur, couleur_ptr);
 
     // On peut créer la nouvelle ligne
     Une_ligne *nouvelle = (Une_ligne *)malloc(sizeof(Une_ligne));
-    if (nouvelle == NULL) return NULL;
+    if (nouvelle == NULL) {
+        if (err != NULL) {
+            *err = CSV_ERR_ALLOC;
+        }
+        return NULL;
+    }
 
     nouvelle->code = (char *)malloc(strlen(code) + 1);
     if (nouvelle->code == NULL) {
         free(nouvelle);
+        if (err != NULL) {
+            *err = CSV_ERR_ALLOC;
+        }
         return NULL;
     }
     strcpy(nouvelle->code, code);
@@ -62,6 +96,9 @@ static Une_ligne *creer_ligne(char *ligne_str) {
     if (nouvelle->color == NULL) {
         free(nouvelle->code);
         free(nouvelle);
+        if (err != NULL) {
+            *err = CSV_ERR_ALLOC;
+        }
         return NULL;
     }
     strcpy(nouvelle->color, couleur);
@@ -88,6 +125,7 @@ Une_ligne *lire_lignes(char *nom_fichier) {
     Une_ligne *tmp = NULL;
     char ligne[CSV_MAX_LINE_LENGTH];
     int ligne_num = 0;
+    int lignes_ignorees = 0;
 
     // On lit toutes les lignes du fichier
     while (fgets(ligne, sizeof(ligne), fichier) != NULL) {
@@ -103,11 +141,15 @@ Une_ligne *lire_lignes(char *nom_fichier) {
             continue;
         }
 
-        Une_ligne *nouvelle = creer_ligne(ligne);
+        int err = CSV_OK;
+        Une_ligne *nouvelle = creer_ligne(ligne, &err);
         if (nouvelle == NULL) {
-            // On trace l'échec et on continue
-            fprintf(stderr, "Avertissement: échec de création de la ligne %d: %s\n",
-                    ligne_num, ligne);
+            // On trace uniquement les erreurs graves d'allocation
+            if (err == CSV_ERR_ALLOC) {
+                fprintf(stderr, "Avertissement : ligne %d ignorée (erreur d'allocation)\n", ligne_num);
+            } else {
+                lignes_ignorees++;
+            }
             continue;
         }
 
@@ -123,6 +165,9 @@ Une_ligne *lire_lignes(char *nom_fichier) {
     }
 
     fclose(fichier);
+    if (lignes_ignorees > 0) {
+        fprintf(stderr, "Avertissement : %d ligne(s) de lignes ignorée(s) (valeurs invalides)\n", lignes_ignorees);
+    }
     return tete;
 }
 

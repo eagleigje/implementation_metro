@@ -10,6 +10,7 @@
 #include "liste.h"
 #include "csv_utils.h"
 #include "constantes.h"
+#include "outils.h"
 
 /**
  * Fonction qui insère "un truc" dans la liste. La liste est considérée déjà triée. On ajoute le nouvel élèment
@@ -178,17 +179,32 @@ Un_elem *lire_stations(char *nom_fichier) {
     char ligne[CSV_MAX_STATIONS_LENGTH];
 
     // Pour chaque ligne trouvée dans le fichier
+    int ligne_num = 0;
+    int lignes_ignorees = 0;
     while (fgets(ligne, sizeof(ligne), fichier) != NULL) {
+        ligne_num++;
+        trim(ligne);
+        if (ligne[0] == '\0' || ligne[0] == '#') {
+            continue;
+        }
         Un_lecteur_csv lecteur;
         csv_init_lecteur(&lecteur, ligne, CSV_SEPARATOR);
 
         // On lit la longitude
         if (!csv_champ_suivant(&lecteur)) continue;
-        float lon = csv_lire_flottant(&lecteur);
+        float lon = 0.0f;
+        if (!csv_lire_flottant_valide(&lecteur, &lon)) {
+            lignes_ignorees++;
+            continue;
+        }
 
         // La latitude
         if (!csv_champ_suivant(&lecteur)) continue;
-        float lat = csv_lire_flottant(&lecteur);
+        float lat = 0.0f;
+        if (!csv_lire_flottant_valide(&lecteur, &lat)) {
+            lignes_ignorees++;
+            continue;
+        }
 
         // On récupère le nom de la station
         if (!csv_champ_suivant(&lecteur)) continue;
@@ -214,6 +230,9 @@ Un_elem *lire_stations(char *nom_fichier) {
     }
 
     fclose(fichier);
+    if (lignes_ignorees > 0) {
+        fprintf(stderr, "Avertissement : %d ligne(s) de stations ignorée(s) (valeurs invalides)\n", lignes_ignorees);
+    }
     return liste;
 }
 
