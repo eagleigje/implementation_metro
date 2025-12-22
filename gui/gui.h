@@ -84,6 +84,7 @@ typedef struct {
 #define PLAN_TAILLE_STATION      6    // Taille d'une station (carré).
 #define PLAN_EPAISSEUR_LIGNE     2    // Épaisseur des lignes de connexion (en pixels).
 #define PLAN_DISTANCE_SURVOL     8    // Distance maximale pour détecter une station sous la souris.
+#define PLAN_DISTANCE_SURVOL_LIGNE 6  // Distance maximale pour détecter une ligne sous la souris.
 #define PLAN_BULLE_MARGE         6    // Marge interne de la bulle de texte.
 #define PLAN_BULLE_OFFSET_X      12   // Décalage X de la bulle par rapport au curseur.
 #define PLAN_BULLE_OFFSET_Y      12   // Décalage Y de la bulle par rapport au curseur.

@@ -16,6 +16,89 @@
 static void geo_vers_ecran(Etat_affichage *app, Une_coord coord, int largeur, int hauteur, int *x, int *y);
 
 /**
+ * Fonction qui calcule la distance au carré entre un point et un segment.
+ * @param px : Coordonnée X du point.
+ * @param py : Coordonnée Y du point.
+ * @param x1 : Coordonnée X du segment (point 1).
+ * @param y1 : Coordonnée Y du segment (point 1).
+ * @param x2 : Coordonnée X du segment (point 2).
+ * @param y2 : Coordonnée Y du segment (point 2).
+ * @return : Distance au carré entre le point et le segment.
+ */
+static float distance_segment_carre(int px, int py, int x1, int y1, int x2, int y2) {
+    float vx = (float)(x2 - x1);
+    float vy = (float)(y2 - y1);
+    float wx = (float)(px - x1);
+    float wy = (float)(py - y1);
+
+    float c1 = vx * wx + vy * wy;
+    if (c1 <= 0.0f) {
+        float dx = (float)(px - x1);
+        float dy = (float)(py - y1);
+        return dx * dx + dy * dy;
+    }
+
+    float c2 = vx * vx + vy * vy;
+    if (c2 <= c1) {
+        float dx = (float)(px - x2);
+        float dy = (float)(py - y2);
+        return dx * dx + dy * dy;
+    }
+
+    float b = c1 / c2;
+    float bx = (float)x1 + b * vx;
+    float by = (float)y1 + b * vy;
+    float dx = (float)px - bx;
+    float dy = (float)py - by;
+    return dx * dx + dy * dy;
+}
+
+/**
+ * Fonction qui recherche la ligne la plus proche de la souris.
+ * @param app : État global de l'application graphique.
+ * @param largeur : Largeur de la fenêtre.
+ * @param hauteur : Hauteur de la fenêtre.
+ * @return : Ligne la plus proche ou NULL si aucune n'est à portée.
+ */
+static Une_ligne *trouver_ligne_proche(Etat_affichage *app, int largeur, int hauteur) {
+    if (app == NULL || app->liste_connexions == NULL) {
+        return NULL;
+    }
+
+    int seuil = PLAN_DISTANCE_SURVOL_LIGNE;
+    float meilleur = (float)(seuil * seuil) + 1.0f;
+    Une_ligne *ligne_proche = NULL;
+
+    for (Un_elem *elem = app->liste_connexions; elem != NULL; elem = elem->suiv) {
+        if (elem->truc == NULL || elem->truc->type != CON) {
+            continue;
+        }
+
+        Un_truc *sta_dep = elem->truc->data.con.sta_dep;
+        Un_truc *sta_arr = elem->truc->data.con.sta_arr;
+        Une_ligne *ligne = elem->truc->data.con.ligne;
+        if (sta_dep == NULL || sta_arr == NULL || ligne == NULL) {
+            continue;
+        }
+
+        int x1 = 0;
+        int y1 = 0;
+        int x2 = 0;
+        int y2 = 0;
+        geo_vers_ecran(app, sta_dep->coord, largeur, hauteur, &x1, &y1);
+        geo_vers_ecran(app, sta_arr->coord, largeur, hauteur, &x2, &y2);
+
+        float dist2 = distance_segment_carre(app->souris_x, app->souris_y, x1, y1, x2, y2);
+        if (dist2 < meilleur) {
+            meilleur = dist2;
+            ligne_proche = ligne;
+        }
+    }
+
+    return ligne_proche;
+}
+
+/**
  * Fonction qui recherche la station la plus proche de la souris.
  * @param app : État global de l'application graphique.
  * @param largeur : Largeur de la fenêtre.
@@ -309,6 +392,13 @@ void gui_dessiner_plan(Etat_affichage *app, int largeur, int hauteur) {
         Un_truc *station = trouver_station_proche(app, largeur, hauteur, &sx, &sy);
         if (station != NULL && station->data.sta.nom != NULL) {
             dessiner_bulle_texte(app, station->data.sta.nom, largeur, hauteur);
+        } else {
+            Une_ligne *ligne = trouver_ligne_proche(app, largeur, hauteur);
+            if (ligne != NULL && ligne->code != NULL) {
+                char etiquette[64];
+                snprintf(etiquette, sizeof(etiquette), "Ligne %s", ligne->code);
+                dessiner_bulle_texte(app, etiquette, largeur, hauteur);
+            }
         }
     }
 }
