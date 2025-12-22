@@ -5,6 +5,7 @@
 
 #include <SDL2/SDL.h>
 #include <stdbool.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -108,28 +109,32 @@ static void dessiner_bulle_texte(Etat_affichage *app, const char *texte, int lar
  * @return : 1 si la conversion est valide, 0 sinon.
  */
 static int couleur_depuis_hex(const char *texte, Couleur *couleur) {
-    if (texte == NULL || couleur == NULL) {
+    if (texte == NULL) {
         return 0;
     }
 
     // On accepte les formats "#RRGGBB" ou "RRGGBB"
-    const char *ptr = (texte[0] == '#') ? texte + 1 : texte;
+    const char *ptr = texte;
+    if (texte[0] == '#') {
+        ptr = texte + 1;
+    }
     if (strlen(ptr) != 6) {
         return 0;
     }
 
-    // On convertit la chaîne hexadécimale en entier
-    char *fin = NULL;
-    long valeur = strtol(ptr, &fin, 16);
-    if (fin == NULL || *fin != '\0') {
+    unsigned int r = 0;
+    unsigned int g = 0;
+    unsigned int b = 0;
+    // "%2x" lit exactement 2 caractères hexadécimaux (RR, puis GG, puis BB).
+    if (sscanf(ptr, "%2x%2x%2x", &r, &g, &b) != 3) {
         return 0;
     }
 
-    // On extrait les composantes RGB à partir de l'entier
-    couleur->r = (valeur >> 16) & 0xFF;
-    couleur->g = (valeur >> 8) & 0xFF;
-    couleur->b = valeur & 0xFF;
-    couleur->a = 255;
+    // On affecte les composantes lues
+    couleur->r = (unsigned char)r;
+    couleur->g = (unsigned char)g;
+    couleur->b = (unsigned char)b;
+    couleur->a = 255;                   // Alpha opaque par défaut.
     return 1;
 }
 

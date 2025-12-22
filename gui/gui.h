@@ -27,10 +27,10 @@ enum {
 // =============================================================================
 
 typedef struct {
-    char r; // Red
-    char g; // Green
-    char b; // Blue
-    char a; // Alpha pour la transparence.
+    unsigned char r; // Rouge
+    unsigned char g; // Vert
+    unsigned char b; // Bleu
+    unsigned char a; // Alpha pour la transparence.
 } Couleur;
 
 // =============================================================================
