@@ -382,6 +382,7 @@ INFORMATIONS SDL2
     - https://wiki.libsdl.org/SDL2/Tutorials
     - https://lazyfoo.net/tutorials/SDL/index.php
     - https://wiki.libsdl.org/SDL2/FrontPage
+- Afin d'accélérer l'apprentissage et la mise en application du code, nous nous sommes aidé de Claude AI et ChatGPT.
 
 NOTES IMPORTANTES
 -----------------
