@@ -48,7 +48,7 @@ typedef struct {
 // Couleurs du plan
 #define COULEUR_FOND_PLAN        ((Couleur){245, 240, 228, 255})   // Fond du plan (beige clair).
 #define COULEUR_GRILLE           ((Couleur){210, 210, 210, 255})   // Couleur de la grille.
-#define COULEUR_PANNEAU_FOND     ((Couleur){30, 30, 30, 200})      // Fond du panneau d'information.
+#define COULEUR_PANNEAU_FOND     ((Couleur){30, 30, 30, 140})      // Fond du panneau d'information.
 #define COULEUR_PANNEAU_BORDURE  ((Couleur){240, 240, 240, 255})   // Bordure du panneau.
 #define COULEUR_TEXTE_INFO       ((Couleur){240, 240, 240, 255})   // Texte d'information.
 #define COULEUR_CURSEUR          ((Couleur){200, 60, 60, 255})     // Curseur de clic.

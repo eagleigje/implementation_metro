@@ -83,6 +83,11 @@ int lancer_gui(const Une_config *config) {
         return 1;
     }
 
+    // Active la gestion de la transparence des panneaux.
+    if (SDL_SetRenderDrawBlendMode(app.moteurRendu, SDL_BLENDMODE_BLEND) != 0) {
+        fprintf(stderr, "Avertissement : impossible d'activer le mode de fusion SDL\n");
+    }
+
     // On impose une taille minimale pour la fenêtre
     SDL_SetWindowMinimumSize(app.fenetre, GUI_LARGEUR_MIN, GUI_HAUTEUR_MIN);
 
