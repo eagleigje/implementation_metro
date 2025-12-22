@@ -15,6 +15,7 @@
 
 // Déclaration pour l'utiliser avant sa définition
 static void geo_vers_ecran(Etat_affichage *app, Une_coord coord, int largeur, int hauteur, int *x, int *y);
+static int ecran_vers_geo(Etat_affichage *app, int x, int y, int largeur, int hauteur, Une_coord *coord);
 
 /**
  * Fonction qui calcule la distance au carré entre un point et un segment.
@@ -114,9 +115,42 @@ static Un_truc *trouver_station_proche(Etat_affichage *app, int largeur, int hau
         return NULL;
     }
 
+    static int info_aqr_loggee = 0;
     int seuil = distance_max;
     int meilleur = seuil * seuil + 1;
     Un_truc *station_proche = NULL;
+
+    // Si l'AQR est disponible, on cherche un candidat proche en coordonnées géographiques
+    if (app->aqr_topo != NULL) {
+        if (!info_aqr_loggee) {
+            printf("Sélection : AQR activé pour la recherche de station.\n");
+            info_aqr_loggee = 1;
+        }
+        Une_coord coord_ref;
+        if (ecran_vers_geo(app, x_ref, y_ref, largeur, hauteur, &coord_ref)) {
+            Un_truc *candidat = chercher_aqr(app->aqr_topo, coord_ref);
+            if (candidat != NULL) {
+                int sx = 0;
+                int sy = 0;
+                geo_vers_ecran(app, candidat->coord, largeur, hauteur, &sx, &sy);
+                int dx = x_ref - sx;
+                int dy = y_ref - sy;
+                int dist2 = dx * dx + dy * dy;
+                if (dist2 <= meilleur) {
+                    station_proche = candidat;
+                    *px = sx;
+                    *py = sy;
+                    return station_proche;
+                }
+                return NULL;
+            }
+        }
+    } else {
+        if (!info_aqr_loggee) {
+            printf("Sélection : AQR indisponible, recherche par liste.\n");
+            info_aqr_loggee = 1;
+        }
+    }
 
     for (Un_elem *elem = app->liste_stations; elem != NULL; elem = elem->suiv) {
         if (elem->truc == NULL || elem->truc->type != STA) {
@@ -460,6 +494,60 @@ static void geo_vers_ecran(Etat_affichage *app, Une_coord coord, int largeur, in
 
     *x = (int)px;
     *y = (int)py;
+}
+
+/**
+ * Fonction qui convertit une position écran en coordonnée géographique.
+ * @param app : État global de l'application graphique.
+ * @param x : Position X en pixels.
+ * @param y : Position Y en pixels.
+ * @param largeur : Largeur de la fenêtre.
+ * @param hauteur : Hauteur de la fenêtre.
+ * @param coord : Sortie de la coordonnée géographique.
+ * @return : 1 si la conversion est valide, 0 sinon.
+ */
+static int ecran_vers_geo(Etat_affichage *app, int x, int y, int largeur, int hauteur, Une_coord *coord) {
+    if (app == NULL || app->liste_stations == NULL || coord == NULL) {
+        return 0;
+    }
+
+    Une_coord limite_no;
+    Une_coord limite_se;
+    limites_zone(app->liste_stations, &limite_no, &limite_se);
+
+    float lon_min = limite_no.lon;
+    float lon_max = limite_se.lon;
+    float lat_min = limite_se.lat;
+    float lat_max = limite_no.lat;
+
+    float largeur_geo = lon_max - lon_min;
+    float hauteur_geo = lat_max - lat_min;
+    if (largeur_geo == 0.0f || hauteur_geo == 0.0f) {
+        return 0;
+    }
+
+    float marge = (float)app->marge_plan;
+    float largeur_util = (float)largeur - 2.0f * marge;
+    float hauteur_util = (float)hauteur - 2.0f * marge;
+    if (largeur_util <= 0.0f || hauteur_util <= 0.0f) {
+        return 0;
+    }
+
+    if (app->zoom == 0.0f) {
+        return 0;
+    }
+
+    // On annule le zoom et le décalage pour revenir aux coordonnées de base
+    float px = ((float)x - largeur / 2.0f - app->decalage_x) / app->zoom + largeur / 2.0f;
+    float py = ((float)y - hauteur / 2.0f - app->decalage_y) / app->zoom + hauteur / 2.0f;
+
+    // On convertit les pixels en coordonnées normalisées [0,1]
+    float nx = (px - marge) / largeur_util;
+    float ny = (py - marge) / hauteur_util;
+
+    coord->lon = lon_min + nx * largeur_geo;
+    coord->lat = lat_max - ny * hauteur_geo;
+    return 1;
 }
 
 /**
