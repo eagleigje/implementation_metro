@@ -52,6 +52,7 @@ typedef struct {
 #define COULEUR_PANNEAU_BORDURE  ((Couleur){240, 240, 240, 255})   // Bordure du panneau.
 #define COULEUR_TEXTE_INFO       ((Couleur){240, 240, 240, 255})   // Texte d'information.
 #define COULEUR_CURSEUR          ((Couleur){200, 60, 60, 255})     // Curseur de clic.
+#define COULEUR_STATION          ((Couleur){20, 20, 20, 255})      // Couleur des stations.
 
 // =============================================================================
 // CONSTANTES DE DIMENSIONS - MENU PRINCIPAL
@@ -81,6 +82,8 @@ typedef struct {
 #define PLAN_MARGE_TEXTE_Y_2     32   // Décalage Y du second texte du panneau.
 #define PLAN_CURSEUR_DEMI_TAILLE 4    // Demi-taille du curseur de clic.
 #define PLAN_CURSEUR_TAILLE      8    // Taille du curseur de clic.
+#define PLAN_TAILLE_STATION      6    // Taille d'une station (carré).
+#define PLAN_EPAISSEUR_LIGNE     2    // Épaisseur des lignes de connexion (en pixels).
 
 // =============================================================================
 // CONSTANTES DE CONTRÔLE
