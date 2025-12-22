@@ -53,6 +53,7 @@ typedef struct {
 #define COULEUR_TEXTE_INFO       ((Couleur){240, 240, 240, 255})   // Texte d'information.
 #define COULEUR_CURSEUR          ((Couleur){200, 60, 60, 255})     // Curseur de clic.
 #define COULEUR_STATION          ((Couleur){20, 20, 20, 255})      // Couleur des stations.
+#define COULEUR_STATION_SEL      ((Couleur){255, 80, 0, 255})      // Couleur de la station sélectionnée.
 
 // =============================================================================
 // CONSTANTES DE DIMENSIONS - MENU PRINCIPAL
@@ -82,9 +83,11 @@ typedef struct {
 #define PLAN_MARGE_TEXTE_Y_2     32   // Décalage Y du second texte du panneau.
 #define PLAN_CURSEUR_TAILLE      8    // Taille du curseur de clic.
 #define PLAN_TAILLE_STATION      6    // Taille d'une station (carré).
+#define PLAN_TAILLE_STATION_SEL  14   // Taille de la station sélectionnée (carré).
 #define PLAN_EPAISSEUR_LIGNE     2    // Épaisseur des lignes de connexion (en pixels).
 #define PLAN_DISTANCE_SURVOL     8    // Distance maximale pour détecter une station sous la souris.
 #define PLAN_DISTANCE_SURVOL_LIGNE 6  // Distance maximale pour détecter une ligne sous la souris.
+#define PLAN_DISTANCE_SELECTION  10   // Distance maximale pour sélectionner une station au clic.
 #define PLAN_BULLE_MARGE         6    // Marge interne de la bulle de texte.
 #define PLAN_BULLE_OFFSET_X      12   // Décalage X de la bulle par rapport au curseur.
 #define PLAN_BULLE_OFFSET_Y      12   // Décalage Y de la bulle par rapport au curseur.
@@ -161,6 +164,7 @@ typedef struct Etat_affichage {
     int deplacement_actif;          // 1 si déplacement à la souris actif, 0 sinon
     int dernier_clic_x;             // Position X du dernier clic souris (-1 si aucun)
     int dernier_clic_y;             // Position Y du dernier clic souris (-1 si aucun)
+    Un_truc *station_selectionnee;  // Station sélectionnée par clic (NULL si aucune)
     // Données du métro
     Un_elem *liste_stations;        // Liste chaînée de toutes les stations
     Un_elem *liste_connexions;      // Liste chaînée de toutes les connexions

@@ -107,12 +107,13 @@ static Une_ligne *trouver_ligne_proche(Etat_affichage *app, int largeur, int hau
  * @param py : Sortie de la position Y de la station.
  * @return : Station la plus proche ou NULL si aucune n'est à portée.
  */
-static Un_truc *trouver_station_proche(Etat_affichage *app, int largeur, int hauteur, int *px, int *py) {
+static Un_truc *trouver_station_proche(Etat_affichage *app, int largeur, int hauteur,
+                                       int x_ref, int y_ref, int *px, int *py, int distance_max) {
     if (app == NULL || app->liste_stations == NULL) {
         return NULL;
     }
 
-    int seuil = PLAN_DISTANCE_SURVOL;
+    int seuil = distance_max;
     int meilleur = seuil * seuil + 1;
     Un_truc *station_proche = NULL;
 
@@ -125,8 +126,8 @@ static Un_truc *trouver_station_proche(Etat_affichage *app, int largeur, int hau
         int sy = 0;
         geo_vers_ecran(app, elem->truc->coord, largeur, hauteur, &sx, &sy);
 
-        int dx = app->souris_x - sx;
-        int dy = app->souris_y - sy;
+        int dx = x_ref - sx;
+        int dy = y_ref - sy;
         int dist2 = dx * dx + dy * dy;
         if (dist2 < meilleur) {
             meilleur = dist2;
@@ -357,6 +358,19 @@ void gui_dessiner_plan(Etat_affichage *app, int largeur, int hauteur) {
         }
     }
 
+    // On met en évidence la station sélectionnée
+    if (app->station_selectionnee != NULL) {
+        int sx = 0;
+        int sy = 0;
+        geo_vers_ecran(app, app->station_selectionnee->coord, largeur, hauteur, &sx, &sy);
+
+        Couleur couleur_sel = COULEUR_STATION_SEL;
+        SDL_SetRenderDrawColor(app->moteurRendu, couleur_sel.r, couleur_sel.g, couleur_sel.b, couleur_sel.a);
+        int demi_taille = PLAN_TAILLE_STATION_SEL / 2;
+        SDL_Rect marqueur = {sx - demi_taille, sy - demi_taille, PLAN_TAILLE_STATION_SEL, PLAN_TAILLE_STATION_SEL};
+        SDL_RenderDrawRect(app->moteurRendu, &marqueur);
+    }
+
     // On dessine le panneau d'information en haut à gauche
     SDL_Rect panneau_info = {PLAN_PANNEAU_X, PLAN_PANNEAU_Y, PLAN_PANNEAU_LARGEUR, PLAN_PANNEAU_HAUTEUR};
     Couleur fond_panneau = COULEUR_PANNEAU_FOND;
@@ -389,7 +403,9 @@ void gui_dessiner_plan(Etat_affichage *app, int largeur, int hauteur) {
     if (app->souris_x >= 0 && app->souris_y >= 0) {
         int sx = 0;
         int sy = 0;
-        Un_truc *station = trouver_station_proche(app, largeur, hauteur, &sx, &sy);
+        Un_truc *station = trouver_station_proche(
+            app, largeur, hauteur, app->souris_x, app->souris_y, &sx, &sy, PLAN_DISTANCE_SURVOL
+        );
         if (station != NULL && station->data.sta.nom != NULL) {
             dessiner_bulle_texte(app, station->data.sta.nom, largeur, hauteur);
         } else {
@@ -451,4 +467,23 @@ void gui_plan_gerer_clic(Etat_affichage *app, int x, int y) {
     // On enregistre la position du clic pour afficher un curseur
     app->dernier_clic_x = x;
     app->dernier_clic_y = y;
+
+    // On tente de sélectionner la station la plus proche du clic
+    int largeur = 0;
+    int hauteur = 0;
+    SDL_GetWindowSize(app->fenetre, &largeur, &hauteur);
+    int sx = 0;
+    int sy = 0;
+    Un_truc *station = trouver_station_proche(app, largeur, hauteur, x, y, &sx, &sy, PLAN_DISTANCE_SELECTION);
+    if (station != NULL) {
+        if (station != app->station_selectionnee && station->data.sta.nom != NULL) {
+            printf("Station sélectionnée : %s\n", station->data.sta.nom);
+        }
+        app->station_selectionnee = station;
+    } else {
+        if (app->station_selectionnee != NULL) {
+            printf("Station sélectionnée : aucune\n");
+        }
+        app->station_selectionnee = NULL;
+    }
 }
