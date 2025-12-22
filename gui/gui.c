@@ -54,6 +54,9 @@ int lancer_gui(const Une_config *config) {
         .dernier_clic_x = -1,       // Pas de clic enregistré (-1 = invalide)
         .dernier_clic_y = -1,
         .station_selectionnee = NULL,
+        .station_depart = NULL,
+        .station_arrivee = NULL,
+        .chemin_courant = NULL,
         .liste_stations = NULL,     // Données du métro non chargées
         .liste_connexions = NULL,
         .abr_stations = NULL,

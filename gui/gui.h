@@ -91,6 +91,8 @@ typedef struct {
 #define PLAN_BULLE_MARGE         6    // Marge interne de la bulle de texte.
 #define PLAN_BULLE_OFFSET_X      12   // Décalage X de la bulle par rapport au curseur.
 #define PLAN_BULLE_OFFSET_Y      12   // Décalage Y de la bulle par rapport au curseur.
+#define PLAN_ENCART_MARGE        8    // Marge interne de l'encart de chemin.
+#define PLAN_ENCART_ECART_LIGNE  4    // Espace vertical entre les lignes de l'encart.
 
 // =============================================================================
 // CONSTANTES DE CONTRÔLE
@@ -165,6 +167,9 @@ typedef struct Etat_affichage {
     int dernier_clic_x;             // Position X du dernier clic souris (-1 si aucun)
     int dernier_clic_y;             // Position Y du dernier clic souris (-1 si aucun)
     Un_truc *station_selectionnee;  // Station sélectionnée par clic (NULL si aucune)
+    Un_truc *station_depart;        // Station de départ (mode chemin)
+    Un_truc *station_arrivee;       // Station d'arrivée (mode chemin)
+    Un_elem *chemin_courant;        // Liste des connexions du chemin courant
     // Données du métro
     Un_elem *liste_stations;        // Liste chaînée de toutes les stations
     Un_elem *liste_connexions;      // Liste chaînée de toutes les connexions

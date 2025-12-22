@@ -11,6 +11,7 @@
 #include "gui.h"
 #include "gui_plan.h"
 #include "gui_commun.h"
+#include "../dijkstra.h"
 
 // Déclaration pour l'utiliser avant sa définition
 static void geo_vers_ecran(Etat_affichage *app, Une_coord coord, int largeur, int hauteur, int *x, int *y);
@@ -183,6 +184,57 @@ static void dessiner_bulle_texte(Etat_affichage *app, const char *texte, int lar
 
     SDL_Color couleur_texte = COULEUR_SDL(COULEUR_TEXTE_INFO);
     gui_rendu_texte(app, app->petite_police, texte, bx + PLAN_BULLE_MARGE, by + PLAN_BULLE_MARGE, couleur_texte);
+}
+
+/**
+ * Fonction qui affiche un chemin en console sous forme de segments.
+ * @param chemin : Liste de connexions constituant le chemin.
+ */
+static void afficher_chemin_console(Un_elem *chemin) {
+    if (chemin == NULL) {
+        return;
+    }
+
+    printf("Chemin (segments) :\n");
+    float temps_total = 0.0f;
+    const char *ligne_courante = NULL;
+    const char *station_debut = NULL;
+    const char *station_fin = NULL;
+
+    for (Un_elem *elem = chemin; elem != NULL; elem = elem->suiv) {
+        if (elem->truc == NULL || elem->truc->type != CON) {
+            continue;
+        }
+        Une_connexion *con = &elem->truc->data.con;
+        if (con->ligne == NULL || con->ligne->code == NULL ||
+            con->sta_dep == NULL || con->sta_arr == NULL ||
+            con->sta_dep->data.sta.nom == NULL || con->sta_arr->data.sta.nom == NULL) {
+            continue;
+        }
+
+        temps_total += elem->truc->user_val;
+
+        if (ligne_courante == NULL) {
+            ligne_courante = con->ligne->code;
+            station_debut = con->sta_dep->data.sta.nom;
+            station_fin = con->sta_arr->data.sta.nom;
+            continue;
+        }
+
+        if (strcmp(ligne_courante, con->ligne->code) == 0) {
+            station_fin = con->sta_arr->data.sta.nom;
+        } else {
+            printf("  Ligne %s de %s à %s\n", ligne_courante, station_debut, station_fin);
+            ligne_courante = con->ligne->code;
+            station_debut = con->sta_dep->data.sta.nom;
+            station_fin = con->sta_arr->data.sta.nom;
+        }
+    }
+
+    if (ligne_courante != NULL && station_debut != NULL && station_fin != NULL) {
+        printf("  Ligne %s de %s à %s\n", ligne_courante, station_debut, station_fin);
+    }
+    printf("Temps total estimé : %.1f min\n", temps_total);
 }
 
 /**
@@ -371,6 +423,53 @@ void gui_dessiner_plan(Etat_affichage *app, int largeur, int hauteur) {
         SDL_RenderDrawRect(app->moteurRendu, &marqueur);
     }
 
+    // On dessine le chemin courant s'il existe
+    if (app->chemin_courant != NULL) {
+        Couleur couleur_chemin = COULEUR_STATION_SEL;
+        SDL_SetRenderDrawColor(app->moteurRendu, couleur_chemin.r, couleur_chemin.g, couleur_chemin.b, couleur_chemin.a);
+        for (Un_elem *elem = app->chemin_courant; elem != NULL; elem = elem->suiv) {
+            if (elem->truc == NULL || elem->truc->type != CON) {
+                continue;
+            }
+            Un_truc *sta_dep = elem->truc->data.con.sta_dep;
+            Un_truc *sta_arr = elem->truc->data.con.sta_arr;
+            if (sta_dep == NULL || sta_arr == NULL) {
+                continue;
+            }
+            int x1 = 0;
+            int y1 = 0;
+            int x2 = 0;
+            int y2 = 0;
+            geo_vers_ecran(app, sta_dep->coord, largeur, hauteur, &x1, &y1);
+            geo_vers_ecran(app, sta_arr->coord, largeur, hauteur, &x2, &y2);
+            for (int offset = -PLAN_EPAISSEUR_LIGNE / 2; offset <= PLAN_EPAISSEUR_LIGNE / 2; offset++) {
+                SDL_RenderDrawLine(app->moteurRendu, x1, y1 + offset, x2, y2 + offset);
+            }
+        }
+    }
+
+    // On met en évidence la station de départ et d'arrivée en mode chemin
+    if (app->station_depart != NULL) {
+        int sx = 0;
+        int sy = 0;
+        geo_vers_ecran(app, app->station_depart->coord, largeur, hauteur, &sx, &sy);
+        Couleur couleur_sel = COULEUR_STATION_SEL;
+        SDL_SetRenderDrawColor(app->moteurRendu, couleur_sel.r, couleur_sel.g, couleur_sel.b, couleur_sel.a);
+        int demi_taille = PLAN_TAILLE_STATION_SEL / 2;
+        SDL_Rect marqueur = {sx - demi_taille, sy - demi_taille, PLAN_TAILLE_STATION_SEL, PLAN_TAILLE_STATION_SEL};
+        SDL_RenderDrawRect(app->moteurRendu, &marqueur);
+    }
+    if (app->station_arrivee != NULL) {
+        int sx = 0;
+        int sy = 0;
+        geo_vers_ecran(app, app->station_arrivee->coord, largeur, hauteur, &sx, &sy);
+        Couleur couleur_sel = COULEUR_STATION_SEL;
+        SDL_SetRenderDrawColor(app->moteurRendu, couleur_sel.r, couleur_sel.g, couleur_sel.b, couleur_sel.a);
+        int demi_taille = PLAN_TAILLE_STATION_SEL / 2;
+        SDL_Rect marqueur = {sx - demi_taille, sy - demi_taille, PLAN_TAILLE_STATION_SEL, PLAN_TAILLE_STATION_SEL};
+        SDL_RenderDrawRect(app->moteurRendu, &marqueur);
+    }
+
     // On dessine le panneau d'information en haut à gauche
     SDL_Rect panneau_info = {PLAN_PANNEAU_X, PLAN_PANNEAU_Y, PLAN_PANNEAU_LARGEUR, PLAN_PANNEAU_HAUTEUR};
     Couleur fond_panneau = COULEUR_PANNEAU_FOND;
@@ -485,5 +584,42 @@ void gui_plan_gerer_clic(Etat_affichage *app, int x, int y) {
             printf("Station sélectionnée : aucune\n");
         }
         app->station_selectionnee = NULL;
+    }
+
+    // En mode chemin, on choisit d'abord le départ puis l'arrivée
+    if (app->mode == MODE_CHEMIN) {
+        if (station == NULL) {
+            return;
+        }
+
+        if (app->station_depart == NULL || (app->station_depart != NULL && app->station_arrivee != NULL)) {
+            app->station_depart = station;
+            app->station_arrivee = NULL;
+            if (app->chemin_courant != NULL) {
+                detruire_liste(app->chemin_courant);
+                app->chemin_courant = NULL;
+            }
+            if (station->data.sta.nom != NULL) {
+                printf("Station de départ : %s\n", station->data.sta.nom);
+            }
+        } else if (app->station_arrivee == NULL) {
+            app->station_arrivee = station;
+            if (station->data.sta.nom != NULL) {
+                printf("Station d'arrivée : %s\n", station->data.sta.nom);
+            }
+            if (app->liste_stations != NULL && app->station_depart != NULL) {
+                dijkstra(app->liste_stations, app->station_depart);
+                if (app->chemin_courant != NULL) {
+                    detruire_liste(app->chemin_courant);
+                }
+                app->chemin_courant = cherche_chemin(app->station_arrivee);
+                if (app->chemin_courant == NULL) {
+                    printf("Aucun chemin trouvé.\n");
+                } else {
+                    printf("Chemin calculé.\n");
+                    afficher_chemin_console(app->chemin_courant);
+                }
+            }
+        }
     }
 }
