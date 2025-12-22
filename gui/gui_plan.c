@@ -238,6 +238,134 @@ static void afficher_chemin_console(Un_elem *chemin) {
 }
 
 /**
+ * Fonction qui construit un résumé du chemin pour affichage graphique.
+ * @param chemin : Liste des connexions du chemin.
+ * @param lignes : Tableau de chaînes à remplir.
+ * @param max_lignes : Capacité maximale du tableau.
+ * @param temps_total : Sortie du temps total estimé.
+ * @return : Nombre de lignes écrites dans le tableau.
+ */
+static int construire_resume_chemin(Un_elem *chemin, char lignes[][128], int max_lignes, float *temps_total) {
+    if (chemin == NULL || lignes == NULL || max_lignes <= 0 || temps_total == NULL) {
+        return 0;
+    }
+
+    *temps_total = 0.0f;
+    int count = 0;
+    const char *ligne_courante = NULL;
+    const char *station_debut = NULL;
+    const char *station_fin = NULL;
+
+    for (Un_elem *elem = chemin; elem != NULL; elem = elem->suiv) {
+        if (elem->truc == NULL || elem->truc->type != CON) {
+            continue;
+        }
+        Une_connexion *con = &elem->truc->data.con;
+        if (con->ligne == NULL || con->ligne->code == NULL ||
+            con->sta_dep == NULL || con->sta_arr == NULL ||
+            con->sta_dep->data.sta.nom == NULL || con->sta_arr->data.sta.nom == NULL) {
+            continue;
+        }
+
+        *temps_total += elem->truc->user_val;
+
+        if (ligne_courante == NULL) {
+            ligne_courante = con->ligne->code;
+            station_debut = con->sta_dep->data.sta.nom;
+            station_fin = con->sta_arr->data.sta.nom;
+            continue;
+        }
+
+        if (strcmp(ligne_courante, con->ligne->code) == 0) {
+            station_fin = con->sta_arr->data.sta.nom;
+        } else {
+            if (count < max_lignes) {
+                snprintf(lignes[count], 128, "Ligne %s de %s à %s", ligne_courante, station_debut, station_fin);
+                count++;
+            }
+            ligne_courante = con->ligne->code;
+            station_debut = con->sta_dep->data.sta.nom;
+            station_fin = con->sta_arr->data.sta.nom;
+        }
+    }
+
+    if (ligne_courante != NULL && station_debut != NULL && station_fin != NULL) {
+        if (count < max_lignes) {
+            snprintf(lignes[count], 128, "Ligne %s de %s à %s", ligne_courante, station_debut, station_fin);
+            count++;
+        }
+    }
+
+    if (count < max_lignes) {
+        snprintf(lignes[count], 128, "Temps total estimé : %.1f min", *temps_total);
+        count++;
+    }
+
+    return count;
+}
+
+/**
+ * Fonction qui dessine un encart résumant le chemin courant.
+ * @param app : État global de l'application graphique.
+ * @param largeur : Largeur de la fenêtre.
+ * @param hauteur : Hauteur de la fenêtre.
+ */
+static void dessiner_encart_chemin(Etat_affichage *app, int largeur, int hauteur) {
+    if (app == NULL || app->chemin_courant == NULL || app->petite_police == NULL) {
+        return;
+    }
+    if (app->station_depart == NULL || app->station_arrivee == NULL) {
+        return;
+    }
+
+    char lignes[32][128];
+    float temps_total = 0.0f;
+    int nb_lignes = construire_resume_chemin(app->chemin_courant, lignes, 32, &temps_total);
+    if (nb_lignes == 0) {
+        return;
+    }
+
+    int largeur_texte_max = 0;
+    int hauteur_texte = 0;
+    for (int i = 0; i < nb_lignes; i++) {
+        int w = 0;
+        int h = 0;
+        if (TTF_SizeUTF8(app->petite_police, lignes[i], &w, &h) == 0) {
+            if (w > largeur_texte_max) {
+                largeur_texte_max = w;
+            }
+            if (h > hauteur_texte) {
+                hauteur_texte = h;
+            }
+        }
+    }
+
+    int hauteur_totale = nb_lignes * hauteur_texte + (nb_lignes - 1) * PLAN_ENCART_ECART_LIGNE;
+    int bw = largeur_texte_max + 2 * PLAN_ENCART_MARGE;
+    int bh = hauteur_totale + 2 * PLAN_ENCART_MARGE;
+
+    int bx = largeur - bw - app->marge_plan;
+    int by = hauteur - bh - app->marge_plan;
+    if (bx < 0) bx = 0;
+    if (by < 0) by = 0;
+
+    SDL_Rect encart = {bx, by, bw, bh};
+    Couleur fond = COULEUR_PANNEAU_FOND;
+    SDL_SetRenderDrawColor(app->moteurRendu, fond.r, fond.g, fond.b, fond.a);
+    SDL_RenderFillRect(app->moteurRendu, &encart);
+    Couleur bordure = COULEUR_PANNEAU_BORDURE;
+    SDL_SetRenderDrawColor(app->moteurRendu, bordure.r, bordure.g, bordure.b, bordure.a);
+    SDL_RenderDrawRect(app->moteurRendu, &encart);
+
+    SDL_Color couleur_texte = COULEUR_SDL(COULEUR_TEXTE_INFO);
+    int y = by + PLAN_ENCART_MARGE;
+    for (int i = 0; i < nb_lignes; i++) {
+        gui_rendu_texte(app, app->petite_police, lignes[i], bx + PLAN_ENCART_MARGE, y, couleur_texte);
+        y += hauteur_texte + PLAN_ENCART_ECART_LIGNE;
+    }
+}
+
+/**
  * Fonction qui convertit une couleur hexadécimale (#RRGGBB) en Couleur.
  * @param texte : Chaîne hexadécimale (avec ou sans #).
  * @param couleur : Sortie de la couleur convertie.
@@ -497,6 +625,9 @@ void gui_dessiner_plan(Etat_affichage *app, int largeur, int hauteur) {
         SDL_SetRenderDrawColor(app->moteurRendu, couleur_curseur.r, couleur_curseur.g, couleur_curseur.b, couleur_curseur.a);
         SDL_RenderFillRect(app->moteurRendu, &curseur);
     }
+
+    // On affiche un encart récapitulatif du chemin si disponible
+    dessiner_encart_chemin(app, largeur, hauteur);
 
     // Si la souris survole une station, on affiche son nom près du curseur
     if (app->souris_x >= 0 && app->souris_y >= 0) {
