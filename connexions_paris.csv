@@ -3,7 +3,15 @@
 # Format : Code_Ligne ; Station_Départ ; Station_Arrivée ; Temps_Parcours
 # Si Temps_Parcours = 0.0, il sera calculé automatiquement
 
-# Ligne 1 (19 stations)
+# Ligne 1 (ID 13) (25 stations)
+1 ; La Défense (Grande Arche) ; Esplanade de la Défense ; 0.0
+1 ; Esplanade de la Défense ; La Défense (Grande Arche) ; 0.0
+1 ; Esplanade de la Défense ; Pont de Neuilly ; 0.0
+1 ; Pont de Neuilly ; Esplanade de la Défense ; 0.0
+1 ; Pont de Neuilly ; Les Sablons ; 0.0
+1 ; Les Sablons ; Pont de Neuilly ; 0.0
+1 ; Les Sablons ; Porte Maillot ; 0.0
+1 ; Porte Maillot ; Les Sablons ; 0.0
 1 ; Porte Maillot ; Argentine ; 0.0
 1 ; Argentine ; Porte Maillot ; 0.0
 1 ; Argentine ; Charles de Gaulle - Etoile ; 0.0
@@ -38,10 +46,14 @@
 1 ; Nation ; Reuilly - Diderot ; 0.0
 1 ; Nation ; Porte de Vincennes ; 0.0
 1 ; Porte de Vincennes ; Nation ; 0.0
-1 ; Porte de Vincennes ; Château de Vincennes ; 0.0
-1 ; Château de Vincennes ; Porte de Vincennes ; 0.0
+1 ; Porte de Vincennes ; Saint-Mandé ; 0.0
+1 ; Saint-Mandé ; Porte de Vincennes ; 0.0
+1 ; Saint-Mandé ; Bérault ; 0.0
+1 ; Bérault ; Saint-Mandé ; 0.0
+1 ; Bérault ; Château de Vincennes ; 0.0
+1 ; Château de Vincennes ; Bérault ; 0.0
 
-# Ligne 2 (25 stations)
+# Ligne 2 (ID 14) (25 stations)
 2 ; Porte Dauphine ; Victor Hugo ; 0.0
 2 ; Victor Hugo ; Porte Dauphine ; 0.0
 2 ; Victor Hugo ; Charles de Gaulle - Etoile ; 0.0
@@ -91,7 +103,13 @@
 2 ; Avron ; Nation ; 0.0
 2 ; Nation ; Avron ; 0.0
 
-# Ligne 3 (21 stations)
+# Ligne 3 (ID 15) (25 stations)
+3 ; Pont de Levallois - Bécon ; Anatole France ; 0.0
+3 ; Anatole France ; Pont de Levallois - Bécon ; 0.0
+3 ; Anatole France ; Louise Michel ; 0.0
+3 ; Louise Michel ; Anatole France ; 0.0
+3 ; Louise Michel ; Porte de Champerret ; 0.0
+3 ; Porte de Champerret ; Louise Michel ; 0.0
 3 ; Porte de Champerret ; Pereire ; 0.0
 3 ; Pereire ; Porte de Champerret ; 0.0
 3 ; Pereire ; Wagram ; 0.0
@@ -132,8 +150,10 @@
 3 ; Gambetta ; Père Lachaise ; 0.0
 3 ; Gambetta ; Porte de Bagnolet ; 0.0
 3 ; Porte de Bagnolet ; Gambetta ; 0.0
+3 ; Porte de Bagnolet ; Gallieni ; 0.0
+3 ; Gallieni ; Porte de Bagnolet ; 0.0
 
-# Ligne 3B (4 stations)
+# Ligne 3B (ID 16) (4 stations)
 3B ; Porte des Lilas ; Saint-Fargeau ; 0.0
 3B ; Saint-Fargeau ; Porte des Lilas ; 0.0
 3B ; Saint-Fargeau ; Pelleport ; 0.0
@@ -141,7 +161,7 @@
 3B ; Pelleport ; Gambetta ; 0.0
 3B ; Gambetta ; Pelleport ; 0.0
 
-# Ligne 4 (26 stations)
+# Ligne 4 (ID 17) (29 stations)
 4 ; Porte de Clignancourt ; Simplon ; 0.0
 4 ; Simplon ; Porte de Clignancourt ; 0.0
 4 ; Simplon ; Marcadet - Poissonniers ; 0.0
@@ -192,8 +212,22 @@
 4 ; Alésia ; Mouton-Duvernet ; 0.0
 4 ; Alésia ; Porte d'Orléans ; 0.0
 4 ; Porte d'Orléans ; Alésia ; 0.0
+4 ; Porte d'Orléans ; Mairie de Montrouge ; 0.0
+4 ; Mairie de Montrouge ; Porte d'Orléans ; 0.0
+4 ; Mairie de Montrouge ; Barbara ; 0.0
+4 ; Barbara ; Mairie de Montrouge ; 0.0
+4 ; Barbara ; Bagneux - Lucie Aubrac ; 0.0
+4 ; Bagneux - Lucie Aubrac ; Barbara ; 0.0
 
-# Ligne 5 (18 stations)
+# Ligne 5 (ID 18) (22 stations)
+5 ; Bobigny Pablo Picasso ; Bobigny-Pantin - Raymond Queneau ; 0.0
+5 ; Bobigny-Pantin - Raymond Queneau ; Bobigny Pablo Picasso ; 0.0
+5 ; Bobigny-Pantin - Raymond Queneau ; Église de Pantin ; 0.0
+5 ; Église de Pantin ; Bobigny-Pantin - Raymond Queneau ; 0.0
+5 ; Église de Pantin ; Hoche ; 0.0
+5 ; Hoche ; Église de Pantin ; 0.0
+5 ; Hoche ; Porte de Pantin ; 0.0
+5 ; Porte de Pantin ; Hoche ; 0.0
 5 ; Porte de Pantin ; Ourcq ; 0.0
 5 ; Ourcq ; Porte de Pantin ; 0.0
 5 ; Ourcq ; Laumière ; 0.0
@@ -229,7 +263,7 @@
 5 ; Campo-Formio ; Place d'Italie ; 0.0
 5 ; Place d'Italie ; Campo-Formio ; 0.0
 
-# Ligne 6 (28 stations)
+# Ligne 6 (ID 19) (28 stations)
 6 ; Charles de Gaulle - Etoile ; Kléber ; 0.0
 6 ; Kléber ; Charles de Gaulle - Etoile ; 0.0
 6 ; Kléber ; Boissière ; 0.0
@@ -285,7 +319,13 @@
 6 ; Picpus ; Nation ; 0.0
 6 ; Nation ; Picpus ; 0.0
 
-# Ligne 7 (30 stations)
+# Ligne 7 (ID 20) (34 stations)
+7 ; La Courneuve - 8 Mai 1945 ; Fort d'Aubervilliers ; 0.0
+7 ; Fort d'Aubervilliers ; La Courneuve - 8 Mai 1945 ; 0.0
+7 ; Fort d'Aubervilliers ; Aubervilliers-Pantin Quatre Chemins ; 0.0
+7 ; Aubervilliers-Pantin Quatre Chemins ; Fort d'Aubervilliers ; 0.0
+7 ; Aubervilliers-Pantin Quatre Chemins ; Porte de la Villette ; 0.0
+7 ; Porte de la Villette ; Aubervilliers-Pantin Quatre Chemins ; 0.0
 7 ; Porte de la Villette ; Corentin Cariou ; 0.0
 7 ; Corentin Cariou ; Porte de la Villette ; 0.0
 7 ; Corentin Cariou ; Crimée ; 0.0
@@ -342,10 +382,22 @@
 7 ; Porte de Choisy ; Porte d'Italie ; 0.0
 7 ; Porte de Choisy ; Porte d'Ivry ; 0.0
 7 ; Porte d'Ivry ; Porte de Choisy ; 0.0
-7 ; Porte d'Ivry ; Maison Blanche ; 0.0
-7 ; Maison Blanche ; Porte d'Ivry ; 0.0
+7 ; Porte d'Ivry ; Pierre et Marie Curie ; 0.0
+7 ; Pierre et Marie Curie ; Porte d'Ivry ; 0.0
+7 ; Pierre et Marie Curie ; Mairie d'Ivry ; 0.0
+7 ; Mairie d'Ivry ; Pierre et Marie Curie ; 0.0
 
-# Ligne 7B (9 stations)
+# Ligne 7 (ID 21) (5 stations)
+7 ; Maison Blanche ; Le Kremlin-Bicêtre ; 0.0
+7 ; Le Kremlin-Bicêtre ; Maison Blanche ; 0.0
+7 ; Le Kremlin-Bicêtre ; Villejuif Léo Lagrange ; 0.0
+7 ; Villejuif Léo Lagrange ; Le Kremlin-Bicêtre ; 0.0
+7 ; Villejuif Léo Lagrange ; Villejuif Paul Vaillant-Couturier ; 0.0
+7 ; Villejuif Paul Vaillant-Couturier ; Villejuif Léo Lagrange ; 0.0
+7 ; Villejuif Paul Vaillant-Couturier ; Villejuif - Louis Aragon ; 0.0
+7 ; Villejuif - Louis Aragon ; Villejuif Paul Vaillant-Couturier ; 0.0
+
+# Ligne 7B (ID 22) (9 stations)
 7B ; Louis Blanc ; Jaurès ; 0.0
 7B ; Jaurès ; Louis Blanc ; 0.0
 7B ; Jaurès ; Bolivar ; 0.0
@@ -363,7 +415,7 @@
 7B ; Danube ; Botzaris ; 0.0
 7B ; Botzaris ; Danube ; 0.0
 
-# Ligne 8 (29 stations)
+# Ligne 8 (ID 23) (38 stations)
 8 ; Balard ; Lourmel ; 0.0
 8 ; Lourmel ; Balard ; 0.0
 8 ; Lourmel ; Boucicaut ; 0.0
@@ -420,8 +472,32 @@
 8 ; Porte Dorée ; Michel Bizot ; 0.0
 8 ; Porte Dorée ; Porte de Charenton ; 0.0
 8 ; Porte de Charenton ; Porte Dorée ; 0.0
+8 ; Porte de Charenton ; Liberté ; 0.0
+8 ; Liberté ; Porte de Charenton ; 0.0
+8 ; Liberté ; Charenton - Écoles ; 0.0
+8 ; Charenton - Écoles ; Liberté ; 0.0
+8 ; Charenton - Écoles ; Ecole Vétérinaire de Maisons-Alfort ; 0.0
+8 ; Ecole Vétérinaire de Maisons-Alfort ; Charenton - Écoles ; 0.0
+8 ; Ecole Vétérinaire de Maisons-Alfort ; Maisons-Alfort - Stade ; 0.0
+8 ; Maisons-Alfort - Stade ; Ecole Vétérinaire de Maisons-Alfort ; 0.0
+8 ; Maisons-Alfort - Stade ; Maisons-Alfort - Les Juilliottes ; 0.0
+8 ; Maisons-Alfort - Les Juilliottes ; Maisons-Alfort - Stade ; 0.0
+8 ; Maisons-Alfort - Les Juilliottes ; Créteil - L'Échat ; 0.0
+8 ; Créteil - L'Échat ; Maisons-Alfort - Les Juilliottes ; 0.0
+8 ; Créteil - L'Échat ; Créteil - Université ; 0.0
+8 ; Créteil - Université ; Créteil - L'Échat ; 0.0
+8 ; Créteil - Université ; Créteil - Préfecture ; 0.0
+8 ; Créteil - Préfecture ; Créteil - Université ; 0.0
+8 ; Créteil - Préfecture ; Pointe du Lac ; 0.0
+8 ; Pointe du Lac ; Créteil - Préfecture ; 0.0
 
-# Ligne 9 (31 stations)
+# Ligne 9 (ID 24) (37 stations)
+9 ; Pont de Sèvres ; Billancourt ; 0.0
+9 ; Billancourt ; Pont de Sèvres ; 0.0
+9 ; Billancourt ; Marcel Sembat ; 0.0
+9 ; Marcel Sembat ; Billancourt ; 0.0
+9 ; Marcel Sembat ; Porte de Saint-Cloud ; 0.0
+9 ; Porte de Saint-Cloud ; Marcel Sembat ; 0.0
 9 ; Porte de Saint-Cloud ; Exelmans ; 0.0
 9 ; Exelmans ; Porte de Saint-Cloud ; 0.0
 9 ; Exelmans ; Michel-Ange - Molitor ; 0.0
@@ -482,8 +558,14 @@
 9 ; Maraîchers ; Buzenval ; 0.0
 9 ; Maraîchers ; Porte de Montreuil ; 0.0
 9 ; Porte de Montreuil ; Maraîchers ; 0.0
+9 ; Porte de Montreuil ; Robespierre ; 0.0
+9 ; Robespierre ; Porte de Montreuil ; 0.0
+9 ; Robespierre ; Croix de Chavaux ; 0.0
+9 ; Croix de Chavaux ; Robespierre ; 0.0
+9 ; Croix de Chavaux ; Mairie de Montreuil ; 0.0
+9 ; Mairie de Montreuil ; Croix de Chavaux ; 0.0
 
-# Ligne 10 (21 stations)
+# Ligne 10 (ID 25) (20 stations)
 10 ; Gare d'Austerlitz ; Jussieu ; 0.0
 10 ; Jussieu ; Gare d'Austerlitz ; 0.0
 10 ; Jussieu ; Cardinal Lemoine ; 0.0
@@ -518,14 +600,20 @@
 10 ; Michel-Ange - Auteuil ; Église d'Auteuil ; 0.0
 10 ; Michel-Ange - Auteuil ; Porte d'Auteuil ; 0.0
 10 ; Porte d'Auteuil ; Michel-Ange - Auteuil ; 0.0
-10 ; Porte d'Auteuil ; Michel-Ange - Molitor ; 0.0
-10 ; Michel-Ange - Molitor ; Porte d'Auteuil ; 0.0
+10 ; Porte d'Auteuil ; Boulogne Jean Jaurès ; 0.0
+10 ; Boulogne Jean Jaurès ; Porte d'Auteuil ; 0.0
+10 ; Boulogne Jean Jaurès ; Boulogne Pont de Saint-Cloud ; 0.0
+10 ; Boulogne Pont de Saint-Cloud ; Boulogne Jean Jaurès ; 0.0
+
+# Ligne 10 (ID 26) (4 stations)
+10 ; Boulogne Jean Jaurès ; Michel-Ange - Molitor ; 0.0
+10 ; Michel-Ange - Molitor ; Boulogne Jean Jaurès ; 0.0
 10 ; Michel-Ange - Molitor ; Chardon Lagache ; 0.0
 10 ; Chardon Lagache ; Michel-Ange - Molitor ; 0.0
 10 ; Chardon Lagache ; Mirabeau ; 0.0
 10 ; Mirabeau ; Chardon Lagache ; 0.0
 
-# Ligne 11 (12 stations)
+# Ligne 11 (ID 27) (13 stations)
 11 ; Châtelet ; Hôtel de Ville ; 0.0
 11 ; Hôtel de Ville ; Châtelet ; 0.0
 11 ; Hôtel de Ville ; Rambuteau ; 0.0
@@ -548,8 +636,16 @@
 11 ; Télégraphe ; Place des Fêtes ; 0.0
 11 ; Télégraphe ; Porte des Lilas ; 0.0
 11 ; Porte des Lilas ; Télégraphe ; 0.0
+11 ; Porte des Lilas ; Mairie des Lilas ; 0.0
+11 ; Mairie des Lilas ; Porte des Lilas ; 0.0
 
-# Ligne 12 (26 stations)
+# Ligne 12 (ID 28) (31 stations)
+12 ; Mairie d'Aubervilliers ; Aimé Césaire ; 0.0
+12 ; Aimé Césaire ; Mairie d'Aubervilliers ; 0.0
+12 ; Aimé Césaire ; Front Populaire ; 0.0
+12 ; Front Populaire ; Aimé Césaire ; 0.0
+12 ; Front Populaire ; Porte de la Chapelle ; 0.0
+12 ; Porte de la Chapelle ; Front Populaire ; 0.0
 12 ; Porte de la Chapelle ; Marx Dormoy ; 0.0
 12 ; Marx Dormoy ; Porte de la Chapelle ; 0.0
 12 ; Marx Dormoy ; Marcadet - Poissonniers ; 0.0
@@ -600,8 +696,18 @@
 12 ; Convention ; Vaugirard ; 0.0
 12 ; Convention ; Porte de Versailles ; 0.0
 12 ; Porte de Versailles ; Convention ; 0.0
+12 ; Porte de Versailles ; Corentin Celton ; 0.0
+12 ; Corentin Celton ; Porte de Versailles ; 0.0
+12 ; Corentin Celton ; Mairie d'Issy ; 0.0
+12 ; Mairie d'Issy ; Corentin Celton ; 0.0
 
-# Ligne 13 (20 stations)
+# Ligne 13 (ID 29) (26 stations)
+13 ; Châtillon-Montrouge ; Malakoff - Rue Etienne Dolet ; 0.0
+13 ; Malakoff - Rue Etienne Dolet ; Châtillon-Montrouge ; 0.0
+13 ; Malakoff - Rue Etienne Dolet ; Malakoff - Plateau de Vanves ; 0.0
+13 ; Malakoff - Plateau de Vanves ; Malakoff - Rue Etienne Dolet ; 0.0
+13 ; Malakoff - Plateau de Vanves ; Porte de Vanves ; 0.0
+13 ; Porte de Vanves ; Malakoff - Plateau de Vanves ; 0.0
 13 ; Porte de Vanves ; Plaisance ; 0.0
 13 ; Plaisance ; Porte de Vanves ; 0.0
 13 ; Plaisance ; Pernety ; 0.0
@@ -634,14 +740,38 @@
 13 ; Guy Môquet ; La Fourche ; 0.0
 13 ; Guy Môquet ; Porte de Saint-Ouen ; 0.0
 13 ; Porte de Saint-Ouen ; Guy Môquet ; 0.0
-13 ; Porte de Saint-Ouen ; La Fourche ; 0.0
-13 ; La Fourche ; Porte de Saint-Ouen ; 0.0
+13 ; Porte de Saint-Ouen ; Garibaldi ; 0.0
+13 ; Garibaldi ; Porte de Saint-Ouen ; 0.0
+13 ; Garibaldi ; Mairie de Saint-Ouen ; 0.0
+13 ; Mairie de Saint-Ouen ; Garibaldi ; 0.0
+13 ; Mairie de Saint-Ouen ; Carrefour Pleyel ; 0.0
+13 ; Carrefour Pleyel ; Mairie de Saint-Ouen ; 0.0
+13 ; Carrefour Pleyel ; Saint-Denis - Porte de Paris ; 0.0
+13 ; Saint-Denis - Porte de Paris ; Carrefour Pleyel ; 0.0
+13 ; Saint-Denis - Porte de Paris ; Basilique de Saint-Denis ; 0.0
+13 ; Basilique de Saint-Denis ; Saint-Denis - Porte de Paris ; 0.0
+13 ; Basilique de Saint-Denis ; Saint-Denis - Université ; 0.0
+13 ; Saint-Denis - Université ; Basilique de Saint-Denis ; 0.0
+
+# Ligne 13 (ID 30) (7 stations)
 13 ; La Fourche ; Brochant ; 0.0
 13 ; Brochant ; La Fourche ; 0.0
 13 ; Brochant ; Porte de Clichy ; 0.0
 13 ; Porte de Clichy ; Brochant ; 0.0
+13 ; Porte de Clichy ; Mairie de Clichy ; 0.0
+13 ; Mairie de Clichy ; Porte de Clichy ; 0.0
+13 ; Mairie de Clichy ; Gabriel Péri ; 0.0
+13 ; Gabriel Péri ; Mairie de Clichy ; 0.0
+13 ; Gabriel Péri ; Les Agnettes ; 0.0
+13 ; Les Agnettes ; Gabriel Péri ; 0.0
+13 ; Les Agnettes ; Asnières - Gennevilliers Les Courtilles ; 0.0
+13 ; Asnières - Gennevilliers Les Courtilles ; Les Agnettes ; 0.0
 
-# Ligne 14 (13 stations)
+# Ligne 14 (ID 31) (13 stations)
+14 ; Mairie de Saint-Ouen ; Saint-Ouen ; 0.0
+14 ; Saint-Ouen ; Mairie de Saint-Ouen ; 0.0
+14 ; Saint-Ouen ; Porte de Clichy ; 0.0
+14 ; Porte de Clichy ; Saint-Ouen ; 0.0
 14 ; Porte de Clichy ; Pont Cardinet ; 0.0
 14 ; Pont Cardinet ; Porte de Clichy ; 0.0
 14 ; Pont Cardinet ; Saint-Lazare ; 0.0
@@ -662,8 +792,20 @@
 14 ; Bibliothèque François Mitterrand ; Cour Saint-Emilion ; 0.0
 14 ; Bibliothèque François Mitterrand ; Olympiades ; 0.0
 14 ; Olympiades ; Bibliothèque François Mitterrand ; 0.0
-14 ; Olympiades ; Olympiades ; 0.0
-14 ; Olympiades ; Olympiades ; 0.0
+
+# Ligne 14 (ID 35) (8 stations)
 14 ; Olympiades ; Maison Blanche ; 0.0
 14 ; Maison Blanche ; Olympiades ; 0.0
+14 ; Maison Blanche ; Hôpital bicêtre ; 0.0
+14 ; Hôpital bicêtre ; Maison Blanche ; 0.0
+14 ; Hôpital bicêtre ; Villejuif – Gustave Roussy ; 0.0
+14 ; Villejuif – Gustave Roussy ; Hôpital bicêtre ; 0.0
+14 ; Villejuif – Gustave Roussy ; L’Haÿ-les-roses ; 0.0
+14 ; L’Haÿ-les-roses ; Villejuif – Gustave Roussy ; 0.0
+14 ; L’Haÿ-les-roses ; Chevilly-larue ; 0.0
+14 ; Chevilly-larue ; L’Haÿ-les-roses ; 0.0
+14 ; Chevilly-larue ; Thiais – Orly ; 0.0
+14 ; Thiais – Orly ; Chevilly-larue ; 0.0
+14 ; Thiais – Orly ; Aéroport d’Orly ; 0.0
+14 ; Aéroport d’Orly ; Thiais – Orly ; 0.0
 

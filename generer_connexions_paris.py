@@ -13,7 +13,7 @@ def lire_metro_paris(fichier_metro="data/metro-paris.csv"):
     Lit le fichier metro-paris.csv et organise les stations par ligne dans l'ordre.
 
     Returns:
-        dict: {code_ligne: [(nom_station, lon, lat), ...]}
+        dict: {id_ligne: {"code": code_ligne, "stations": [nom_station, ...]}}
     """
     lignes = {}
 
@@ -22,6 +22,7 @@ def lire_metro_paris(fichier_metro="data/metro-paris.csv"):
             reader = csv.DictReader(f)
 
             for row in reader:
+                id_ligne = row['ID Line'].strip()
                 code_ligne = row['Libelle Line'].strip()
                 nom_station = row['Libelle station'].strip()
 
@@ -32,12 +33,12 @@ def lire_metro_paris(fichier_metro="data/metro-paris.csv"):
                 elif code_ligne.lower() == '7bis':
                     code_ligne = '7B'
 
-                # Initialiser la ligne si nécessaire
-                if code_ligne not in lignes:
-                    lignes[code_ligne] = []
+                # Initialiser la ligne si nécessaire (par ID pour ne pas mélanger les branches)
+                if id_ligne not in lignes:
+                    lignes[id_ligne] = {"code": code_ligne, "stations": []}
 
                 # Ajouter la station (on garde l'ordre du fichier CSV)
-                lignes[code_ligne].append(nom_station)
+                lignes[id_ligne]["stations"].append(nom_station)
 
         return lignes
 
@@ -75,26 +76,19 @@ def generer_connexions(fichier_metro="data/metro-paris.csv",
         f.write("# Si Temps_Parcours = 0.0, il sera calculé automatiquement\n")
         f.write("\n")
 
-        # Trier les lignes par code (1, 2, 3, ...)
-        def tri_ligne(code):
-            """Fonction de tri personnalisée pour les codes de ligne."""
-            # Séparer le numéro de la lettre éventuelle (ex: "3B" -> 3, "B")
-            if code[-1].isalpha() and len(code) > 1:
-                return (int(code[:-1]), code[-1])
-            else:
-                return (int(code), "")
-
-        lignes_triees = sorted(lignes.keys(), key=tri_ligne)
+        # Trier les lignes par ID pour ne pas mélanger les branches
+        lignes_triees = sorted(lignes.keys(), key=lambda x: int(x))
 
         # Pour chaque ligne de métro
-        for code_ligne in lignes_triees:
-            stations = lignes[code_ligne]
+        for id_ligne in lignes_triees:
+            code_ligne = lignes[id_ligne]["code"]
+            stations = lignes[id_ligne]["stations"]
 
             if len(stations) < 2:
-                print(f"  AVERTISSEMENT: Ligne {code_ligne} a moins de 2 stations, ignorée.")
+                print(f"  AVERTISSEMENT: Ligne {code_ligne} (ID {id_ligne}) a moins de 2 stations, ignorée.")
                 continue
 
-            f.write(f"# Ligne {code_ligne} ({len(stations)} stations)\n")
+            f.write(f"# Ligne {code_ligne} (ID {id_ligne}) ({len(stations)} stations)\n")
 
             # Créer les connexions entre stations consécutives (bidirectionnelles)
             for i in range(len(stations) - 1):
@@ -117,10 +111,11 @@ def generer_connexions(fichier_metro="data/metro-paris.csv",
 
     # Statistiques par ligne
     print(f"\nDétails par ligne:")
-    for code_ligne in lignes_triees:
-        nb_stations = len(lignes[code_ligne])
+    for id_ligne in lignes_triees:
+        code_ligne = lignes[id_ligne]["code"]
+        nb_stations = len(lignes[id_ligne]["stations"])
         nb_connexions = (nb_stations - 1) * 2
-        print(f"  Ligne {code_ligne:3s}: {nb_stations:3d} stations → {nb_connexions:3d} connexions")
+        print(f"  Ligne {code_ligne:3s} (ID {id_ligne}): {nb_stations:3d} stations → {nb_connexions:3d} connexions")
 
     return connexions_total
 
