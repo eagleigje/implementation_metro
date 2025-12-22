@@ -11,6 +11,66 @@
 #include "gui_commun.h"
 
 /**
+ * Fonction qui projette une coordonnée géographique sur l'écran.
+ * Calcule les limites min/max à partir de la liste des stations,
+ * puis applique une transformation linéaire avec zoom et décalage.
+ * @param app : État global de l'application graphique.
+ * @param coord : Coordonnée géographique à projeter.
+ * @param largeur : Largeur de la fenêtre.
+ * @param hauteur : Hauteur de la fenêtre.
+ * @param x : Sortie de la position X en pixels.
+ * @param y : Sortie de la position Y en pixels.
+ */
+static void geo_vers_ecran(Etat_affichage *app, Une_coord coord, int largeur, int hauteur, int *x, int *y) {
+    if (app == NULL || app->liste_stations == NULL || x == NULL || y == NULL) {
+        return;
+    }
+
+    // Calcul des limites géographiques à partir de la liste des stations
+    Une_coord limite_no;
+    Une_coord limite_se;
+    limites_zone(app->liste_stations, &limite_no, &limite_se);
+
+    float lon_min = limite_no.lon;
+    float lon_max = limite_se.lon;
+    float lat_min = limite_se.lat;
+    float lat_max = limite_no.lat;
+
+    // Sécurité pour éviter les divisions par zéro
+    float largeur_geo = lon_max - lon_min;
+    float hauteur_geo = lat_max - lat_min;
+    if (largeur_geo == 0.0f || hauteur_geo == 0.0f) {
+        *x = largeur / 2;
+        *y = hauteur / 2;
+        return;
+    }
+
+    // Normalisation des coordonnées en [0,1]
+    float nx = (coord.lon - lon_min) / largeur_geo;
+    float ny = (lat_max - coord.lat) / hauteur_geo; // Inversion de Y pour l'écran
+
+    // Application de la transformation vers l'écran, avec marge
+    float marge = (float)app->marge_plan;
+    float largeur_util = (float)largeur - 2.0f * marge;
+    float hauteur_util = (float)hauteur - 2.0f * marge;
+    if (largeur_util <= 0.0f || hauteur_util <= 0.0f) {
+        *x = largeur / 2;
+        *y = hauteur / 2;
+        return;
+    }
+
+    float px = marge + nx * largeur_util;
+    float py = marge + ny * hauteur_util;
+
+    // Zoom et décalage
+    px = (px - largeur / 2.0f) * app->zoom + largeur / 2.0f + app->decalage_x;
+    py = (py - hauteur / 2.0f) * app->zoom + hauteur / 2.0f + app->decalage_y;
+
+    *x = (int)px;
+    *y = (int)py;
+}
+
+/**
  * Fonction qui dessine l'écran plan avec grille et panneau d'information.
  * @param app : État global de l'application graphique.
  * @param largeur : Largeur de la fenêtre.

@@ -41,7 +41,7 @@ int main(const int argc, char *argv[]) {
 
     printf("Note : SDL2 et SDL2_ttf doivent être installés pour l'interface graphique.\n");
 
-    if (gui_lancer(config) != 0) {
+    if (lancer_gui(config) != 0) {
         fprintf(stderr, "Erreur : l'interface graphique s'est terminée avec une erreur\n");
     }
 

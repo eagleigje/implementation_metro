@@ -28,13 +28,13 @@ void gui_menu_dessiner(Etat_affichage *app, int largeur, int hauteur) {
     SDL_Rect carte3 = {largeur / 2 - MENU_LARGEUR_CARTE / 2, hauteur / 2 + MENU_OFFSET_CARTE_3_Y, MENU_LARGEUR_CARTE, MENU_HAUTEUR_CARTE};
 
     // On dessine les cartes avec des couleurs différentes pour chaque option
-    Couleur c1 = COULEUR_CARTE_1;
+    Couleur c1 = COULEUR_BOUTON_MENU_1;
     SDL_SetRenderDrawColor(app->moteurRendu, c1.r, c1.g, c1.b, c1.a);
     SDL_RenderFillRect(app->moteurRendu, &carte1);
-    Couleur c2 = COULEUR_CARTE_2;
+    Couleur c2 = COULEUR_BOUTON_MENU_2;
     SDL_SetRenderDrawColor(app->moteurRendu, c2.r, c2.g, c2.b, c2.a);
     SDL_RenderFillRect(app->moteurRendu, &carte2);
-    Couleur c3 = COULEUR_CARTE_3;
+    Couleur c3 = COULEUR_BOUTON_MENU_3;
     SDL_SetRenderDrawColor(app->moteurRendu, c3.r, c3.g, c3.b, c3.a);
     SDL_RenderFillRect(app->moteurRendu, &carte3);
 

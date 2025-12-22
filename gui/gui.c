@@ -20,7 +20,7 @@
  * @param config : Configuration chargée (peut être NULL si non disponible).
  * @return : 0 si tout s'est bien passé, > 0 sinon.
  */
-int gui_lancer(const Une_config *config) {
+int lancer_gui(const Une_config *config) {
     // Initialisation du sous-système vidéo de SDL2
     if (SDL_Init(SDL_INIT_VIDEO) != 0) {
         fprintf(stderr, "Erreur SDL_Init: %s\n", SDL_GetError());
@@ -45,6 +45,7 @@ int gui_lancer(const Une_config *config) {
         .zoom = 1.0f,               // Zoom initial à 1:1
         .decalage_x = 0.0f,         // Pas de déplacement initial
         .decalage_y = 0.0f,
+        .marge_plan = PLAN_MARGE_PLAN,
         .dernier_clic_x = -1,       // Pas de clic enregistré (-1 = invalide)
         .dernier_clic_y = -1,
         .liste_stations = NULL,     // Données du métro non chargées
