@@ -4,7 +4,6 @@
  */
 
 #include <SDL2/SDL.h>
-#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -26,7 +25,7 @@ static void geo_vers_ecran(Etat_affichage *app, Une_coord coord, int largeur, in
  * @return : Station la plus proche ou NULL si aucune n'est à portée.
  */
 static Un_truc *trouver_station_proche(Etat_affichage *app, int largeur, int hauteur, int *px, int *py) {
-    if (app == NULL || app->liste_stations == NULL || px == NULL || py == NULL) {
+    if (app == NULL || app->liste_stations == NULL) {
         return NULL;
     }
 
@@ -113,7 +112,7 @@ static int couleur_depuis_hex(const char *texte, Couleur *couleur) {
         return 0;
     }
 
-    // On accepte les formats "#RRGGBB" ou "RRGGBB"
+    // On accepte les formats "#RRGGBB" ou "RRGGBB".
     const char *ptr = texte;
     if (texte[0] == '#') {
         ptr = texte + 1;
@@ -150,7 +149,7 @@ static int couleur_depuis_hex(const char *texte, Couleur *couleur) {
  * @param y : Sortie de la position Y en pixels.
  */
 static void geo_vers_ecran(Etat_affichage *app, Une_coord coord, int largeur, int hauteur, int *x, int *y) {
-    if (app == NULL || app->liste_stations == NULL || x == NULL || y == NULL) {
+    if (app == NULL || app->liste_stations == NULL) {
         return;
     }
 
@@ -173,7 +172,7 @@ static void geo_vers_ecran(Etat_affichage *app, Une_coord coord, int largeur, in
         return;
     }
 
-    // On normalise les coordonnées dans l'intervalle [0,1]
+    // On normalise les coordonnées dans l'intervalle [0,1].
     float nx = (coord.lon - lon_min) / largeur_geo;
     float ny = (lat_max - coord.lat) / hauteur_geo; // Inversion de Y pour l'écran
 
