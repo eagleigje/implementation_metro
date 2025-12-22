@@ -209,6 +209,7 @@ Un_elem *lire_connexions(char *nom_fichier, Une_ligne *liste_ligne, Un_nabr *abr
 
     // On parcourt toutes les lignes du fichier
     int ligne_num = 0;
+    int lignes_ignorees = 0;
     while (fgets(ligne, sizeof(ligne), fichier) != NULL) {
         ligne_num++;
         // On supprime le retour à la ligne
@@ -228,23 +229,19 @@ Un_elem *lire_connexions(char *nom_fichier, Une_ligne *liste_ligne, Un_nabr *abr
             // On insère en début de liste (pas besoin de tri pour les connexions).
             liste_con = inserer_deb_liste(liste_con, connexion);
         } else {
-            // On trace l'échec pour faciliter le débogage
-            if (err == CSV_ERR_FLOAT) {
-                fprintf(stderr, "Avertissement : ligne %d ignorée (valeur numérique invalide)\n", ligne_num);
-            } else if (err == CSV_ERR_TEXTE) {
-                fprintf(stderr, "Avertissement : ligne %d ignorée (champ texte invalide)\n", ligne_num);
-            } else if (err == CSV_ERR_ALLOC) {
+            // On trace uniquement les erreurs graves d'allocation
+            if (err == CSV_ERR_ALLOC) {
                 fprintf(stderr, "Avertissement : ligne %d ignorée (erreur d'allocation)\n", ligne_num);
-            } else if (err == CSV_ERR_REFERENCE) {
-                fprintf(stderr, "Avertissement : ligne %d ignorée (référence inconnue)\n", ligne_num);
             } else {
-                fprintf(stderr, "Avertissement: échec de création de la connexion ligne %d: %s\n",
-                        ligne_num, ligne);
+                lignes_ignorees++;
             }
         }
     }
 
     fclose(fichier);
+    if (lignes_ignorees > 0) {
+        fprintf(stderr, "Avertissement : %d ligne(s) de connexions ignorée(s) (valeurs invalides)\n", lignes_ignorees);
+    }
     return liste_con;
 }
 

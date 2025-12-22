@@ -180,6 +180,7 @@ Un_elem *lire_stations(char *nom_fichier) {
 
     // Pour chaque ligne trouvée dans le fichier
     int ligne_num = 0;
+    int lignes_ignorees = 0;
     while (fgets(ligne, sizeof(ligne), fichier) != NULL) {
         ligne_num++;
         trim(ligne);
@@ -193,7 +194,7 @@ Un_elem *lire_stations(char *nom_fichier) {
         if (!csv_champ_suivant(&lecteur)) continue;
         float lon = 0.0f;
         if (!csv_lire_flottant_valide(&lecteur, &lon)) {
-            fprintf(stderr, "Avertissement : ligne %d ignorée (longitude invalide)\n", ligne_num);
+            lignes_ignorees++;
             continue;
         }
 
@@ -201,7 +202,7 @@ Un_elem *lire_stations(char *nom_fichier) {
         if (!csv_champ_suivant(&lecteur)) continue;
         float lat = 0.0f;
         if (!csv_lire_flottant_valide(&lecteur, &lat)) {
-            fprintf(stderr, "Avertissement : ligne %d ignorée (latitude invalide)\n", ligne_num);
+            lignes_ignorees++;
             continue;
         }
 
@@ -229,6 +230,9 @@ Un_elem *lire_stations(char *nom_fichier) {
     }
 
     fclose(fichier);
+    if (lignes_ignorees > 0) {
+        fprintf(stderr, "Avertissement : %d ligne(s) de stations ignorée(s) (valeurs invalides)\n", lignes_ignorees);
+    }
     return liste;
 }
 

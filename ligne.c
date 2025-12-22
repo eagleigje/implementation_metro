@@ -125,6 +125,7 @@ Une_ligne *lire_lignes(char *nom_fichier) {
     Une_ligne *tmp = NULL;
     char ligne[CSV_MAX_LINE_LENGTH];
     int ligne_num = 0;
+    int lignes_ignorees = 0;
 
     // On lit toutes les lignes du fichier
     while (fgets(ligne, sizeof(ligne), fichier) != NULL) {
@@ -143,16 +144,11 @@ Une_ligne *lire_lignes(char *nom_fichier) {
         int err = CSV_OK;
         Une_ligne *nouvelle = creer_ligne(ligne, &err);
         if (nouvelle == NULL) {
-            // On trace l'échec et on continue
-            if (err == CSV_ERR_FLOAT) {
-                fprintf(stderr, "Avertissement : ligne %d ignorée (valeur numérique invalide)\n", ligne_num);
-            } else if (err == CSV_ERR_TEXTE) {
-                fprintf(stderr, "Avertissement : ligne %d ignorée (champ texte invalide)\n", ligne_num);
-            } else if (err == CSV_ERR_ALLOC) {
+            // On trace uniquement les erreurs graves d'allocation
+            if (err == CSV_ERR_ALLOC) {
                 fprintf(stderr, "Avertissement : ligne %d ignorée (erreur d'allocation)\n", ligne_num);
             } else {
-                fprintf(stderr, "Avertissement: échec de création de la ligne %d: %s\n",
-                        ligne_num, ligne);
+                lignes_ignorees++;
             }
             continue;
         }
@@ -169,6 +165,9 @@ Une_ligne *lire_lignes(char *nom_fichier) {
     }
 
     fclose(fichier);
+    if (lignes_ignorees > 0) {
+        fprintf(stderr, "Avertissement : %d ligne(s) de lignes ignorée(s) (valeurs invalides)\n", lignes_ignorees);
+    }
     return tete;
 }
 
