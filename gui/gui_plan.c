@@ -12,6 +12,95 @@
 #include "gui_plan.h"
 #include "gui_commun.h"
 
+// Déclaration pour l'utiliser avant sa définition
+static void geo_vers_ecran(Etat_affichage *app, Une_coord coord, int largeur, int hauteur, int *x, int *y);
+
+/**
+ * Fonction qui recherche la station la plus proche de la souris.
+ * @param app : État global de l'application graphique.
+ * @param largeur : Largeur de la fenêtre.
+ * @param hauteur : Hauteur de la fenêtre.
+ * @param px : Sortie de la position X de la station.
+ * @param py : Sortie de la position Y de la station.
+ * @return : Station la plus proche ou NULL si aucune n'est à portée.
+ */
+static Un_truc *trouver_station_proche(Etat_affichage *app, int largeur, int hauteur, int *px, int *py) {
+    if (app == NULL || app->liste_stations == NULL || px == NULL || py == NULL) {
+        return NULL;
+    }
+
+    int seuil = PLAN_DISTANCE_SURVOL;
+    int meilleur = seuil * seuil + 1;
+    Un_truc *station_proche = NULL;
+
+    for (Un_elem *elem = app->liste_stations; elem != NULL; elem = elem->suiv) {
+        if (elem->truc == NULL || elem->truc->type != STA) {
+            continue;
+        }
+
+        int sx = 0;
+        int sy = 0;
+        geo_vers_ecran(app, elem->truc->coord, largeur, hauteur, &sx, &sy);
+
+        int dx = app->souris_x - sx;
+        int dy = app->souris_y - sy;
+        int dist2 = dx * dx + dy * dy;
+        if (dist2 < meilleur) {
+            meilleur = dist2;
+            station_proche = elem->truc;
+            *px = sx;
+            *py = sy;
+        }
+    }
+
+    return station_proche;
+}
+
+/**
+ * Fonction qui dessine une bulle de texte près de la souris.
+ * @param app : État global de l'application graphique.
+ * @param texte : Texte à afficher.
+ * @param largeur : Largeur de la fenêtre.
+ * @param hauteur : Hauteur de la fenêtre.
+ */
+static void dessiner_bulle_texte(Etat_affichage *app, const char *texte, int largeur, int hauteur) {
+    if (app == NULL || texte == NULL || app->petite_police == NULL) {
+        return;
+    }
+
+    int largeur_texte = 0;
+    int hauteur_texte = 0;
+    if (TTF_SizeUTF8(app->petite_police, texte, &largeur_texte, &hauteur_texte) != 0) {
+        return;
+    }
+
+    int bx = app->souris_x + PLAN_BULLE_OFFSET_X;
+    int by = app->souris_y + PLAN_BULLE_OFFSET_Y;
+    int bw = largeur_texte + 2 * PLAN_BULLE_MARGE;
+    int bh = hauteur_texte + 2 * PLAN_BULLE_MARGE;
+
+    // On garde la bulle dans la fenêtre pour éviter les débordements
+    if (bx + bw > largeur) {
+        bx = largeur - bw - app->marge_plan;
+    }
+    if (by + bh > hauteur) {
+        by = hauteur - bh - app->marge_plan;
+    }
+    if (bx < 0) bx = 0;
+    if (by < 0) by = 0;
+
+    SDL_Rect bulle = {bx, by, bw, bh};
+    Couleur fond_bulle = COULEUR_PANNEAU_FOND;
+    SDL_SetRenderDrawColor(app->moteurRendu, fond_bulle.r, fond_bulle.g, fond_bulle.b, fond_bulle.a);
+    SDL_RenderFillRect(app->moteurRendu, &bulle);
+    Couleur bordure_bulle = COULEUR_PANNEAU_BORDURE;
+    SDL_SetRenderDrawColor(app->moteurRendu, bordure_bulle.r, bordure_bulle.g, bordure_bulle.b, bordure_bulle.a);
+    SDL_RenderDrawRect(app->moteurRendu, &bulle);
+
+    SDL_Color couleur_texte = COULEUR_SDL(COULEUR_TEXTE_INFO);
+    gui_rendu_texte(app, app->petite_police, texte, bx + PLAN_BULLE_MARGE, by + PLAN_BULLE_MARGE, couleur_texte);
+}
+
 /**
  * Fonction qui convertit une couleur hexadécimale (#RRGGBB) en Couleur.
  * @param texte : Chaîne hexadécimale (avec ou sans #).
@@ -207,6 +296,16 @@ void gui_dessiner_plan(Etat_affichage *app, int largeur, int hauteur) {
         Couleur couleur_curseur = COULEUR_CURSEUR;
         SDL_SetRenderDrawColor(app->moteurRendu, couleur_curseur.r, couleur_curseur.g, couleur_curseur.b, couleur_curseur.a);
         SDL_RenderFillRect(app->moteurRendu, &curseur);
+    }
+
+    // Si la souris survole une station, on affiche son nom près du curseur
+    if (app->souris_x >= 0 && app->souris_y >= 0) {
+        int sx = 0;
+        int sy = 0;
+        Un_truc *station = trouver_station_proche(app, largeur, hauteur, &sx, &sy);
+        if (station != NULL && station->data.sta.nom != NULL) {
+            dessiner_bulle_texte(app, station->data.sta.nom, largeur, hauteur);
+        }
     }
 }
 

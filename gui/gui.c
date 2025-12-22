@@ -46,6 +46,8 @@ int lancer_gui(const Une_config *config) {
         .decalage_x = 0.0f,         // Pas de déplacement initial
         .decalage_y = 0.0f,
         .marge_plan = PLAN_MARGE_PLAN,
+        .souris_x = -1,             // Position souris inconnue au départ
+        .souris_y = -1,
         .dernier_clic_x = -1,       // Pas de clic enregistré (-1 = invalide)
         .dernier_clic_y = -1,
         .liste_stations = NULL,     // Données du métro non chargées
@@ -165,6 +167,9 @@ int lancer_gui(const Une_config *config) {
                         gui_plan_gerer_clic(&app, event.button.x, event.button.y);
                     }
                 }
+            } else if (event.type == SDL_MOUSEMOTION) {
+                app.souris_x = event.motion.x;
+                app.souris_y = event.motion.y;
             }
         }
 

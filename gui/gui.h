@@ -83,6 +83,10 @@ typedef struct {
 #define PLAN_CURSEUR_TAILLE      8    // Taille du curseur de clic.
 #define PLAN_TAILLE_STATION      6    // Taille d'une station (carré).
 #define PLAN_EPAISSEUR_LIGNE     2    // Épaisseur des lignes de connexion (en pixels).
+#define PLAN_DISTANCE_SURVOL     8    // Distance maximale pour détecter une station sous la souris.
+#define PLAN_BULLE_MARGE         6    // Marge interne de la bulle de texte.
+#define PLAN_BULLE_OFFSET_X      12   // Décalage X de la bulle par rapport au curseur.
+#define PLAN_BULLE_OFFSET_Y      12   // Décalage Y de la bulle par rapport au curseur.
 
 // =============================================================================
 // CONSTANTES DE CONTRÔLE
@@ -149,6 +153,8 @@ typedef struct Etat_affichage {
     float decalage_x;               // Décalage horizontal de la caméra en pixels
     float decalage_y;               // Décalage vertical de la caméra en pixels
     int marge_plan;                 // Marge en pixels autour du plan projeté
+    int souris_x;                   // Position X de la souris (pixels)
+    int souris_y;                   // Position Y de la souris (pixels)
     int dernier_clic_x;             // Position X du dernier clic souris (-1 si aucun)
     int dernier_clic_y;             // Position Y du dernier clic souris (-1 si aucun)
     // Données du métro
