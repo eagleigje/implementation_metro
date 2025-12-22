@@ -42,13 +42,13 @@ Un_noeud *inserer_aqr(Un_noeud *aqr, Une_coord limite_no, Une_coord limite_se, U
 
     // Sinon, on calcule le centre de la zone actuelle
     Une_coord centre;
-    centre.lon = (limite_no.lon + limite_se.lon) / 2.0;
-    centre.lat = (limite_no.lat + limite_se.lat) / 2.0;
+    centre.lon = (limite_no.lon + limite_se.lon) / 2.0; // Milieu en longitude (coupe la zone en deux).
+    centre.lat = (limite_no.lat + limite_se.lat) / 2.0; // Milieu en latitude (coupe la zone en deux).
 
     // On détermine dans quel quadrant insérer le truc
-    // On compare donc les coordonnées du truc avec le centre
+    // On compare les coordonnées du truc avec le centre calculé
     if (truc->coord.lon < centre.lon) {
-        // Partie ouest (gauche)
+        // Partie ouest (gauche) : longitude plus petite que le centre
         if (truc->coord.lat >= centre.lat) {
             // Quadrant Nord-Ouest
             Une_coord nouvelle_limite_no = limite_no;
@@ -65,7 +65,7 @@ Un_noeud *inserer_aqr(Un_noeud *aqr, Une_coord limite_no, Une_coord limite_se, U
             aqr->so = inserer_aqr(aqr->so, nouvelle_limite_no, nouvelle_limite_se, truc);
         }
     } else {
-        // Partie est (droite)
+        // Partie est (droite) : longitude supérieure ou égale au centre
         if (truc->coord.lat >= centre.lat) {
             // Quadrant Nord-Est
             Une_coord nouvelle_limite_no;
@@ -270,7 +270,9 @@ Un_truc *chercher_aqr(Un_noeud *aqr, Une_coord coord) {
     }
 
     // On cherche maintenant dans le quadrant prioritaire déterminé.
+    // L'idée est que le plus proche a de fortes chances d'être dans ce quadrant.
     if (quadrant_proche != NULL) {
+        // Appel récursif pour descendre dans le sous-arbre le plus probable.
         Un_truc *candidat = chercher_aqr(quadrant_proche, coord);
         if (candidat != NULL) {
             float dist = distance_carree(coord, candidat->coord);
@@ -281,9 +283,11 @@ Un_truc *chercher_aqr(Un_noeud *aqr, Une_coord coord) {
         }
     }
 
-    // On cherche dans les autres quadrants si c'est nécessaire
+    // On cherche dans les autres quadrants pour vérifier qu'il n'y a pas mieux.
+    // Même si le point est dans un quadrant, un voisin peut être plus proche.
     for (int i = 0; i < nb_autres; i++) {
         if (quadrants_autres[i] != NULL) {
+            // Appel récursif pour vérifier les autres sous-arbres.
             Un_truc *candidat = chercher_aqr(quadrants_autres[i], coord);
             if (candidat != NULL) {
                 float dist = distance_carree(coord, candidat->coord);
