@@ -1,26 +1,29 @@
-# =========================================================================
+# ====================================================================================
 # Makefile pour le Projet Metro 2025
-# =========================================================================
+# ====================================================================================
 # Commandes disponibles :
-#   make             - Compile les deux exécutables (metro et tests).
-#   make all         - Compile les deux exécutables (metro et tests).
-#   make rebuild     - Nettoie et recompile tout depuis zéro (rebuild complet).
-#   make metro       - Compile uniquement l'application principale.
-#   make tests       - Compile uniquement le programme de tests.
-#   make run-tests   - Compile et exécute les tests.
-#   make test-memory - Compile et exécute les tests avec valgrind.
-#   make clean       - Supprime tous les fichiers objets et les exécutables.
-#   make docs        - Génère la documentation Doxygen.
-#   make clean-docs  - Supprime la documentation générée.
-# =========================================================================
+#   make                 	- Compile les deux exécutables (metro et tests).
+#   make all             	- Compile les deux exécutables (metro et tests).
+#   make rebuild         	- Nettoie et recompile tout depuis zéro (rebuild complet).
+#   make metro           	- Compile uniquement l'application principale.
+#   make tests           	- Compile uniquement le programme de tests.
+#   make run-tests       	- Compile et exécute les tests.
+#   make test-memory     	- Compile et exécute les tests avec valgrind.
+#   make test-memory-metro 	- Compile et exécute metro avec valgrind.
+#   make clean           	- Supprime tous les fichiers objets et les exécutables.
+#   make docs            	- Génère la documentation Doxygen.
+#   make clean-docs      	- Supprime la documentation générée.
+# ====================================================================================
 CC = gcc
 # On peut forcer la version de C ci-dessous en ajoutant -std=cXX où XX peut valoir 99, 17, 23, etc.
 # La version C la plus récente à ce jour est la version c23.
 CFLAGS = -Wall -Wextra -g -O3
-LDFLAGS = -lm
+LDFLAGS_METRO = -lm -lSDL2 -lSDL2_ttf
+LDFLAGS_TESTS = -lm
 
 # Fichiers objets communs
 COMMON_OBJ = truc.o liste.o config.o abr.o ligne.o connexion.o csv_utils.o aqrtopo.o outils.o dijkstra.o
+GUI_OBJ = gui/gui.o gui/gui_commun.o gui/gui_menu.o gui/gui_plan.o
 
 # Fichiers objets spécifiques
 MAIN_OBJ = main.o
@@ -43,7 +46,7 @@ rebuild: clean $(TARGET_METRO) $(TARGET_TESTS)
 
 # Nettoyage
 clean:
-	rm -f *.o tests_projet/*.o $(TARGET_METRO) $(TARGET_TESTS)
+	rm -f *.o tests_projet/*.o gui/*.o $(TARGET_METRO) $(TARGET_TESTS)
 
 # Dossier de documentation
 DOCS_DIR = doc/projet
@@ -68,12 +71,12 @@ docs:
 	$(CC) $(CFLAGS) -c $< -o $@
 
 # Règle pour créer l'exécutable metro
-$(TARGET_METRO): $(COMMON_OBJ) $(MAIN_OBJ)
-	$(CC) $(CFLAGS) $(COMMON_OBJ) $(MAIN_OBJ) -o $(TARGET_METRO) $(LDFLAGS)
+$(TARGET_METRO): $(COMMON_OBJ) $(GUI_OBJ) $(MAIN_OBJ)
+	$(CC) $(CFLAGS) $(COMMON_OBJ) $(GUI_OBJ) $(MAIN_OBJ) -o $(TARGET_METRO) $(LDFLAGS_METRO)
 
 # Règle pour créer l'exécutable tests
 $(TARGET_TESTS): $(COMMON_OBJ) $(TESTS_OBJ)
-	$(CC) $(CFLAGS) $(COMMON_OBJ) $(TESTS_OBJ) -o $(TARGET_TESTS) $(LDFLAGS)
+	$(CC) $(CFLAGS) $(COMMON_OBJ) $(TESTS_OBJ) -o $(TARGET_TESTS) $(LDFLAGS_TESTS)
 
 # Dépendances
 truc.o: truc.c truc.h coord.h station.h connexion.h
@@ -86,7 +89,11 @@ csv_utils.o: csv_utils.c csv_utils.h outils.h
 aqrtopo.o: aqrtopo.c aqrtopo.h truc.h liste.h
 outils.o: outils.c outils.h
 dijkstra.o: dijkstra.c dijkstra.h liste.h truc.h
-main.o: main.c config.h liste.h abr.h
+main.o: main.c config.h gui/gui.h
+gui/gui.o: gui/gui.c gui/gui.h gui/gui_commun.h gui/gui_menu.h gui/gui_plan.h config.h liste.h abr.h aqrtopo.h ligne.h connexion.h dijkstra.h
+gui/gui_commun.o: gui/gui_commun.c gui/gui_commun.h gui/gui.h
+gui/gui_menu.o: gui/gui_menu.c gui/gui_menu.h gui/gui.h gui/gui_commun.h
+gui/gui_plan.o: gui/gui_plan.c gui/gui_plan.h gui/gui.h gui/gui_commun.h
 tests.o: tests.c tests.h config.h liste.h abr.h
 tests_projet/test_csv_utils.o: tests_projet/test_csv_utils.c tests_projet/test_csv_utils.h csv_utils.h
 tests_projet/test_exercice1.o: tests_projet/test_exercice1.c tests_projet/test_exercice1.h liste.h truc.h
@@ -102,7 +109,8 @@ run-tests: $(TARGET_TESTS)
 	@echo "========================================="
 	@echo "Exécution des tests..."
 	@echo "========================================="
-	./$(TARGET_TESTS)
+	@echo "Note : stderr est redirigé vers stdout pour préserver l'ordre d'affichage."
+	./$(TARGET_TESTS) 2>&1
 
 # Cible pour exécuter les tests avec valgrind
 test-memory: $(TARGET_TESTS)
@@ -111,4 +119,12 @@ test-memory: $(TARGET_TESTS)
 	@echo "========================================="
 	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(TARGET_TESTS)
 
-.PHONY: all rebuild clean metro tests run-tests test-memory docs clean-docs
+# Cible pour exécuter le programme principal avec valgrind
+test-memory-metro: $(TARGET_METRO)
+	@echo "========================================="
+	@echo "Vérification mémoire du programme metro avec valgrind..."
+	@echo "========================================="
+	@echo "Note: Interagissez avec l'interface puis quittez proprement pour voir le rapport"
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(TARGET_METRO)
+
+.PHONY: all rebuild clean metro tests run-tests test-memory test-memory-metro docs clean-docs

@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['d_0',['d',['../struct__un__nabr.html#a6ee89c2001e63972d52c66f1f4e816cc',1,'_un_nabr']]],
-  ['data_1',['data',['../struct__un__truc.html#a85721356079ed3a598dafb39cf5d3cd2',1,'_un_truc']]]
+  ['b_0',['b',['../structCouleur.html#ab375b90dd6f90d23036ca32bcea2f22b',1,'Couleur']]]
 ];
