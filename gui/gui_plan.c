@@ -5,10 +5,44 @@
 
 #include <SDL2/SDL.h>
 #include <stdbool.h>
+#include <stdlib.h>
+#include <string.h>
 
 #include "gui.h"
 #include "gui_plan.h"
 #include "gui_commun.h"
+
+/**
+ * Fonction qui convertit une couleur hexadécimale (#RRGGBB) en Couleur.
+ * @param texte : Chaîne hexadécimale (avec ou sans #).
+ * @param couleur : Sortie de la couleur convertie.
+ * @return : 1 si la conversion est valide, 0 sinon.
+ */
+static int couleur_depuis_hex(const char *texte, Couleur *couleur) {
+    if (texte == NULL || couleur == NULL) {
+        return 0;
+    }
+
+    // On accepte les formats "#RRGGBB" ou "RRGGBB"
+    const char *ptr = (texte[0] == '#') ? texte + 1 : texte;
+    if (strlen(ptr) != 6) {
+        return 0;
+    }
+
+    // On convertit la chaîne hexadécimale en entier
+    char *fin = NULL;
+    long valeur = strtol(ptr, &fin, 16);
+    if (fin == NULL || *fin != '\0') {
+        return 0;
+    }
+
+    // On extrait les composantes RGB à partir de l'entier
+    couleur->r = (valeur >> 16) & 0xFF;
+    couleur->g = (valeur >> 8) & 0xFF;
+    couleur->b = valeur & 0xFF;
+    couleur->a = 255;
+    return 1;
+}
 
 /**
  * Fonction qui projette une coordonnée géographique sur l'écran.
@@ -26,7 +60,7 @@ static void geo_vers_ecran(Etat_affichage *app, Une_coord coord, int largeur, in
         return;
     }
 
-    // Calcul des limites géographiques à partir de la liste des stations
+    // On calcule les limites géographiques à partir de la liste des stations
     Une_coord limite_no;
     Une_coord limite_se;
     limites_zone(app->liste_stations, &limite_no, &limite_se);
@@ -36,7 +70,7 @@ static void geo_vers_ecran(Etat_affichage *app, Une_coord coord, int largeur, in
     float lat_min = limite_se.lat;
     float lat_max = limite_no.lat;
 
-    // Sécurité pour éviter les divisions par zéro
+    // On vérifie les dimensions pour éviter les divisions par zéro
     float largeur_geo = lon_max - lon_min;
     float hauteur_geo = lat_max - lat_min;
     if (largeur_geo == 0.0f || hauteur_geo == 0.0f) {
@@ -45,11 +79,11 @@ static void geo_vers_ecran(Etat_affichage *app, Une_coord coord, int largeur, in
         return;
     }
 
-    // Normalisation des coordonnées en [0,1]
+    // On normalise les coordonnées dans l'intervalle [0,1]
     float nx = (coord.lon - lon_min) / largeur_geo;
     float ny = (lat_max - coord.lat) / hauteur_geo; // Inversion de Y pour l'écran
 
-    // Application de la transformation vers l'écran, avec marge
+    // On applique la transformation vers l'écran en tenant compte de la marge
     float marge = (float)app->marge_plan;
     float largeur_util = (float)largeur - 2.0f * marge;
     float hauteur_util = (float)hauteur - 2.0f * marge;
@@ -59,10 +93,11 @@ static void geo_vers_ecran(Etat_affichage *app, Une_coord coord, int largeur, in
         return;
     }
 
+    // On positionne le point dans la zone utile
     float px = marge + nx * largeur_util;
     float py = marge + ny * hauteur_util;
 
-    // Zoom et décalage
+    // On applique le zoom et le décalage de l'affichage
     px = (px - largeur / 2.0f) * app->zoom + largeur / 2.0f + app->decalage_x;
     py = (py - hauteur / 2.0f) * app->zoom + hauteur / 2.0f + app->decalage_y;
 
@@ -90,6 +125,60 @@ void gui_plan_dessiner(Etat_affichage *app, int largeur, int hauteur) {
     }
     for (int y = 0; y < hauteur; y += PLAN_TAILLE_GRILLE) {
         SDL_RenderDrawLine(app->moteurRendu, 0, y, largeur, y);
+    }
+
+    // On dessine les connexions entre stations
+    if (app->liste_connexions != NULL) {
+        for (Un_elem *elem = app->liste_connexions; elem != NULL; elem = elem->suiv) {
+            if (elem->truc == NULL || elem->truc->type != CON) {
+                continue;
+            }
+
+            Un_truc *sta_dep = elem->truc->data.con.sta_dep;
+            Un_truc *sta_arr = elem->truc->data.con.sta_arr;
+            Une_ligne *ligne = elem->truc->data.con.ligne;
+            if (sta_dep == NULL || sta_arr == NULL || ligne == NULL || ligne->color == NULL) {
+                continue;
+            }
+
+            Couleur couleur_ligne;
+            if (!couleur_depuis_hex(ligne->color, &couleur_ligne)) {
+                couleur_ligne = COULEUR_GRILLE;
+            }
+
+            int x1 = 0;
+            int y1 = 0;
+            int x2 = 0;
+            int y2 = 0;
+            geo_vers_ecran(app, sta_dep->coord, largeur, hauteur, &x1, &y1);
+            geo_vers_ecran(app, sta_arr->coord, largeur, hauteur, &x2, &y2);
+
+            SDL_SetRenderDrawColor(app->moteurRendu, couleur_ligne.r, couleur_ligne.g, couleur_ligne.b, couleur_ligne.a);
+            // SDL ne gère pas l'épaisseur nativement, on superpose plusieurs lignes.
+            for (int offset = -PLAN_EPAISSEUR_LIGNE / 2; offset <= PLAN_EPAISSEUR_LIGNE / 2; offset++) {
+                SDL_RenderDrawLine(app->moteurRendu, x1, y1 + offset, x2, y2 + offset);
+            }
+        }
+    }
+
+    // On dessine toutes les stations sous forme de petits carrés
+    if (app->liste_stations != NULL) {
+        Couleur couleur_station = COULEUR_STATION;
+        SDL_SetRenderDrawColor(app->moteurRendu, couleur_station.r, couleur_station.g, couleur_station.b, couleur_station.a);
+
+        for (Un_elem *elem = app->liste_stations; elem != NULL; elem = elem->suiv) {
+            if (elem->truc == NULL || elem->truc->type != STA) {
+                continue;
+            }
+
+            int px = 0;
+            int py = 0;
+            geo_vers_ecran(app, elem->truc->coord, largeur, hauteur, &px, &py);
+
+            int demi_taille = PLAN_TAILLE_STATION / 2;
+            SDL_Rect station = {px - demi_taille, py - demi_taille, PLAN_TAILLE_STATION, PLAN_TAILLE_STATION};
+            SDL_RenderFillRect(app->moteurRendu, &station);
+        }
     }
 
     // On dessine le panneau d'information en haut à gauche
