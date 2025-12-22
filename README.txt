@@ -223,7 +223,12 @@ LOCALISATION DES DONNEES
     * Stations parisiennes : https://explore.data.gouv.fr/fr/datasets/6405b01aa7f6f0f5523c8653/?Commune%20nom__contains=Paris#/resources/5b645234-e6fd-4de8-889c-574a80531aca
     * Le répertoire "data" inclus une extraction de tous les métros Français (metro-france.csv), et une extraction des métros parisiens à partir de ce fichier (metro-paris.csv).
     * L'extraction "parisienne" a été réalisée en bash :
-        (head -1 metro-france.csv && grep \"Paris metro-france.csv) > metro-paris.csv
+        Pour cela, on récupère les IDs des lignes (première colonne) parisiennes, puis on cherche à nouveaux
+        les lignes en entier grace à ces IDs (en effet, les lignes ne commencent ou ne finissent pas toutes à Paris).
+        On conserve l'en-tête du fichier d'origine.
+        (head -1 data/metro-france.csv && \
+        grep -E -f <(grep '"Paris' data/metro-france.csv | cut -d',' -f1 | sort -u | sed 's/^/^/; s/$/,/') \
+        data/metro-france.csv) > data/metro-paris.csv
 
     * On peut maintenant, extraire les données des métros parisiens dans le format demandé dans le sujet :
     (séparateur "," puis tous les champs à partir du troisième, on dédoublonne, on supprime les " et enfin, on récupère les champs 2, 3 et 1)
@@ -246,7 +251,7 @@ LOCALISATION DES DONNEES
     * L'article : https://www.liberation.fr/checknews/2018/02/14/a-quelle-vitesse-roule-le-metro-parisien_1653099/ valide les vitesses moyennes calculées.
     * Globalement, on trouve que le temps moyen entre rame est :
         * En journée, l'intervalle de temps entre chaque rame est de deux à quatre minutes en semaine
-        * et de trois à cinq minutes le dimanche. 
+        * et de trois à cinq minutes le dimanche.
         * Après 20 heures, compter cinq à huit minutes d'attente.
         * Nous partons du principe que le temps moyen sera de cinq minutes.
     * Grâce à ces informations, nous pouvons remplir un fichier Excel que l'on trouve dans "data/informations_lignes_paris_collectées_sur_internet.xlsx"
