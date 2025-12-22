@@ -142,6 +142,8 @@ Le projet produit deux exécutables :
 1. Programme de TESTS (pour validation et développement) :
     ./tests
 
+   * Ces tests ont été réalisés par une IA afin de couvrir au maximum les différents cas possible.
+   
    Ce programme permet de :
    - Charger et valider les stations depuis le fichier CSV
    - Tester l'arbre binaire de recherche (recherche case-insensitive)
