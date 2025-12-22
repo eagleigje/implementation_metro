@@ -59,7 +59,7 @@ Le projet est organisé en plusieurs modules :
 6. Configuration :
    - config.h/config.c       : Système de configuration .ini
    - config.ini              : Fichier de configuration principal
-   - config_alt.ini          : Exemple de configuration alternative
+   - config_paris.ini        : Fichier de configuration pour le métro parisien
 
 7. Fichiers de données :
    - stations.csv : Fichier contenant les stations (longitude;latitude;nom), allégé pour les tests.
@@ -153,6 +153,9 @@ Le projet produit deux exécutables :
     ./tests config_alt.ini
     ./tests /chemin/vers/ma_config.ini
 
+   Pour tester le fichier de configuration du métro parisien :
+    ./tests config_paris.ini
+
 2. Application PRINCIPALE (interface graphique SDL2) :
     ./metro
 
@@ -162,6 +165,9 @@ Le projet produit deux exécutables :
    Pour utiliser un fichier de configuration différent :
     ./metro config_alt.ini
     ./metro /chemin/vers/ma_config.ini
+
+   Pour utiliser le fichier de configuration du métro parisien :
+    ./metro config_paris.ini
 
 TESTS ET VALIDATION
 -------------------
@@ -391,7 +397,7 @@ NOTES IMPORTANTES
 - L'algorithme de Dijkstra utilise les paramètres de configuration :
   * temps_correspondance : Pénalité (en minutes) ajoutée lors d'un changement de ligne
   * temps_arret : Temps (en minutes) ajouté à chaque station visitée
-  Ces paramètres peuvent être configurés via le fichier config.ini ou config_alt.ini.
+  Ces paramètres peuvent être configurés via le fichier config.ini ou config_paris.ini.
 
 WORKFLOW DE DEVELOPPEMENT RECOMMANDE
 -------------------------------------
