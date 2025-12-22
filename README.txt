@@ -54,7 +54,15 @@ Le projet est organisé en plusieurs modules :
    - Séparation par écran
    - Fonctions communes centralisées dans gui_commun
    - Chaque module est indépendant
-   - Prêt pour l'ajout de l'affichage des stations, lignes et chemins
+
+   Fonctionnalités GUI actuelles :
+   - Affichage des stations et des connexions (couleur de ligne respectée)
+   - Zoom (clavier +/-, molette) et déplacement (flèches, clic droit + glisser)
+   - Réinitialisation de la vue (touche R)
+   - Sélection de station au clic (mise en évidence + console)
+   - Mode chemin (départ/arrivée) + calcul Dijkstra et affichage du chemin
+   - Infobulles de station et de ligne au survol
+   - Encart récapitulatif du chemin (avec temps total estimé)
 
 6. Configuration :
    - config.h/config.c       : Système de configuration .ini
@@ -163,6 +171,13 @@ Le projet produit deux exécutables :
 
    Cette application est l'interface graphique de l'utilisateur.
    Elle nécessite SDL2 et SDL2_ttf installés (voir section Installation).
+
+   Contrôles principaux :
+   - MENU : 1=Afficher plan, 2=Plus court chemin, 3=Quitter
+   - PLAN : S=Sélection, P=Chemin, R=Réinitialiser, ESC=Menu, Q=Quitter
+   - Zoom : +/- ou molette souris
+   - Déplacement : flèches ou clic droit + glisser
+   - Sélection : clic gauche sur une station
 
    Pour utiliser un fichier de configuration différent :
     ./metro config_alt.ini
@@ -317,17 +332,19 @@ implémentées. Voici l'état d'avancement :
    - Menu principal avec 3 options (affichage plan, calcul chemin, quitter)
      * Support clavier (touches 1, 2, 3, Q)
      * Support souris (clic sur les cartes)
-   - Ecran plan avec grille de repérage et panneau d'information
+   - Ecran plan avec grille de repérage, panneau d'information et encart de chemin
    - Chargement des données du métro (stations, ABR, AQR, lignes, connexions)
-   - Gestion du zoom (+/-) et déplacement (flèches directionnelles)
+   - Gestion du zoom (+/-, molette) et déplacement (flèches, clic droit + glisser)
+   - Réinitialisation de la vue (touche R)
    - Détection des clics souris (curseur rouge)
+   - Affichage des stations et des connexions (couleur de ligne)
+   - Sélection de station au clic (mise en évidence + console)
+   - Mode chemin (départ/arrivée), Dijkstra et affichage du chemin
+   - Infobulles station/ligne au survol
    - Extraction des constantes (couleurs, dimensions) dans gui/gui.h
    A FAIRE :
-   - Affichage graphique des stations sur le plan
-   - Affichage graphique des lignes et connexions
-   - Sélection interactive de stations (avec ABR/AQR)
-   - Calcul et affichage du plus court chemin (intégration Dijkstra)
-   - Affichage des informations de chemin (temps total, correspondances)
+   - Optimiser la sélection avec AQR (performance)
+   - Affichage des correspondances détaillées
 
 CHOIX DE LA BIBLIOTHEQUE GRAPHIQUE
 -----------------------------------
