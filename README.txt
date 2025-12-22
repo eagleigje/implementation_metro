@@ -39,15 +39,29 @@ Le projet est organisé en plusieurs modules :
    - constantes.h            : Constantes globales du projet
 
 4. Programmes :
-   - main.c                  : Application principale (interface graphique à implémenter)
+   - main.c                  : Point d'entrée de l'application principale
    - tests.c/tests.h         : Programme de tests et validation
 
-5. Configuration :
+5. Interface graphique (exercice 7) :
+   Le répertoire gui/ contient l'implémentation de l'interface SDL2 :
+   - gui/gui.h               : Types, constantes, structure Etat_affichage, fonction publique
+   - gui/gui.c               : Boucle principale, initialisation/destruction SDL, dispatch des événements
+   - gui/gui_commun.h/c      : Fonctions communes (polices, rendu texte, aide)
+   - gui/gui_menu.h/c        : Ecran menu (dessin, gestion clavier/souris)
+   - gui/gui_plan.h/c        : Ecran plan (dessin, gestion clavier/souris, grille, panneau info)
+
+   Organisation modulaire pour faciliter la maintenance et l'évolution du code :
+   - Séparation par écran
+   - Fonctions communes centralisées dans gui_commun
+   - Chaque module est indépendant
+   - Prêt pour l'ajout de l'affichage des stations, lignes et chemins
+
+6. Configuration :
    - config.h/config.c       : Système de configuration .ini
    - config.ini              : Fichier de configuration principal
-   - config_alt.ini          : Exemple de configuration alternative
+   - config_paris.ini        : Fichier de configuration pour le métro parisien
 
-6. Fichiers de données :
+7. Fichiers de données :
    - stations.csv : Fichier contenant les stations (longitude;latitude;nom), allégé pour les tests.
    - stations_paris.csv : Fichier contenant toutes les stations parisiennes (cf. LOCALISATION DES DONNEES).
    - lignes.csv : Fichier contenant les lignes (code;vitesse;intervalle;couleur).
@@ -55,21 +69,40 @@ Le projet est organisé en plusieurs modules :
    - connexions.csv : Fichier contenant les connexions (test).
    - connexions_paris.csv : Fichier contenant toutes les connexions parisiennes (généré automatiquement).
 
-7. Programmes optionnels à installer :
+8. Programmes à installer :
+    - SDL2 (lib SDL2 + en-têtes) : Nécessaire pour compiler l'interface graphique.
+    - SDL2_ttf : Nécessaire pour afficher du texte (noms de stations, lignes,
+      panneaux d'information), car SDL2 ne fournit pas de rendu de texte nativement.
+
+    INSTALLATION SDL2 / SDL2_TTF (LINUX)
+    ------------------------------------
+    Ubuntu / Debian :
+        sudo apt update
+        sudo apt install libsdl2-dev libsdl2-ttf-dev
+
+    Arch Linux :
+        sudo pacman -S sdl2 sdl2_ttf
+
+9. Programmes optionnels à installer :
     - Doxygen : Afin de générer la documentation technique du projet.
     - Valgrind : Pour vérifier que le projet libère bien toute la mémoire à la sortie.
     - glibc-debug : Pour valgrind.
 
-8. Documentation :
+
+10. Documentation :
     - doc/projet-metro2025.pdf         : Le PDF du projet
     - doc/projet/html/index.html       : La documentation Doxygen du projet
     - README_GENERER_CONNEXIONS.txt    : Guide d'utilisation du script de génération des connexions
 
-9. Scripts utilitaires :
+11. Scripts utilitaires :
     - generer_connexions_paris.py      : Script Python pour générer connexions_paris.csv automatiquement
 
 COMPILATION
 -----------
+Prérequis (GUI) :
+    - SDL2 et SDL2_ttf doivent être installés pour compiler l'exécutable `metro`.
+    - Le programme `tests` ne dépend pas de SDL2.
+
 Pour compiler le projet (les deux exécutables : metro et tests), utilisez :
     make
     ou
@@ -84,8 +117,11 @@ Pour compiler uniquement le programme de tests :
 Pour compiler et exécuter les tests immédiatement :
     make run-tests
 
-Pour vérifier les fuites mémoire avec valgrind :
+Pour vérifier les fuites mémoire du programme de tests avec valgrind :
     make test-memory
+
+Pour vérifier les fuites mémoire du programme principal avec valgrind :
+    make test-memory-metro
 
 Pour nettoyer les fichiers objets et les exécutables :
     make clean
@@ -117,15 +153,21 @@ Le projet produit deux exécutables :
     ./tests config_alt.ini
     ./tests /chemin/vers/ma_config.ini
 
-2. Application PRINCIPALE (interface graphique à implémenter) :
+   Pour tester le fichier de configuration du métro parisien :
+    ./tests config_paris.ini
+
+2. Application PRINCIPALE (interface graphique SDL2) :
     ./metro
 
-   Cette application est en cours de développement.
-   Elle sera l'interface graphique finale pour l'utilisateur.
+   Cette application est l'interface graphique de l'utilisateur.
+   Elle nécessite SDL2 et SDL2_ttf installés (voir section Installation).
 
    Pour utiliser un fichier de configuration différent :
     ./metro config_alt.ini
     ./metro /chemin/vers/ma_config.ini
+
+   Pour utiliser le fichier de configuration du métro parisien :
+    ./metro config_paris.ini
 
 TESTS ET VALIDATION
 -------------------
@@ -236,7 +278,7 @@ implémentées. Voici l'état d'avancement :
    - chercher_ligne
 
 4. Exercice 4 : Gestion des connexions ........................................  FAIT
-   - inserer_deb_liste (implémentée dans liste.c)
+   - inserer_deb_liste (implémentée dans le fichier liste.c)
    - lire_connexions (calcul automatique des temps via formule de Haversine)
    - ecrire_connexions
    - Script Python pour générer connexions_paris.csv (voir README_GENERER_CONNEXIONS.txt)
@@ -254,15 +296,92 @@ implémentées. Voici l'état d'avancement :
    - dijkstra (avec gestion du temps de parcours, temps d'arrêt et pénalité de correspondance)
    - cherche_chemin (reconstitution du chemin optimal)
    - configurer_dijkstra (configuration des temps de correspondance et d'arrêt)
-   - Pensez à appeler configurer_dijkstra(config->temps_correspondance, config->temps_arret)
+   - Pensez à appeler la fonction configurer_dijkstra(config->temps_correspondance, config->temps_arret)
      après la lecture du fichier .ini et avant de lancer dijkstra() dans l'application.
 
-7. Exercice 7 : Interface graphique ........................................... A FAIRE
-   - Design de l'interface
-   - Affichage du plan
-   - Zoom et déplacement
-   - Sélection de stations
-   - Calcul et affichage du chemin
+7. Exercice 7 : Interface graphique ........................................... EN COURS
+   FAIT :
+   - Architecture de base (structure Etat_affichage, enum Ecran/Mode)
+   - Organisation modulaire du code GUI dans le répertoire gui/
+     * gui/gui.c : Boucle principale et dispatch des événements
+     * gui/gui_commun.c : Fonctions communes (polices, texte, aide)
+     * gui/gui_menu.c : Ecran menu (dessin, gestion clavier/souris)
+     * gui/gui_plan.c : Ecran plan (dessin, gestion clavier/souris)
+   - Menu principal avec 3 options (affichage plan, calcul chemin, quitter)
+     * Support clavier (touches 1, 2, 3, Q)
+     * Support souris (clic sur les cartes)
+   - Ecran plan avec grille de repérage et panneau d'information
+   - Chargement des données du métro (stations, ABR, AQR, lignes, connexions)
+   - Gestion du zoom (+/-) et déplacement (flèches directionnelles)
+   - Détection des clics souris (curseur rouge)
+   - Extraction des constantes (couleurs, dimensions) dans gui/gui.h
+   A FAIRE :
+   - Affichage graphique des stations sur le plan
+   - Affichage graphique des lignes et connexions
+   - Sélection interactive de stations (avec ABR/AQR)
+   - Calcul et affichage du plus court chemin (intégration Dijkstra)
+   - Affichage des informations de chemin (temps total, correspondances)
+
+CHOIX DE LA BIBLIOTHEQUE GRAPHIQUE
+-----------------------------------
+Pour l'exercice 7 (interface graphique), nous avons comparé trois bibliothèques majeures :
+
+1. GTK+ (GIMP Toolkit)
+   - Toolkit complet pour interfaces utilisateur (boutons, menus, fenêtres)
+   - Orienté vers des applications de bureau traditionnelles
+   - Nombreux widgets prédéfinis
+   - Courbe d'apprentissage importante
+   - Excellente intégration avec GNOME
+   - Liens :
+     * https://www.gtk.org/
+     * https://docs.gtk.org/gtk4/
+
+2. Qt
+   - Framework complet et multiplateforme (C++)
+   - Très riche en fonctionnalités (widgets, réseau, base de données, etc.)
+   - Designer graphique pour créer des interfaces (Qt Designer)
+   - Excellent pour applications professionnelles complexes
+   - Licence complexe (GPL/LGPL ou commerciale)
+   - Nécessite une installation volumineuse
+   - Liens :
+     * https://www.qt.io/
+     * https://doc.qt.io/
+
+3. SDL2 (Simple DirectMedia Layer 2)
+   - Bibliothèque multimédia bas niveau
+   - Contrôle direct du rendu graphique (pixel par pixel)
+   - Légère et rapide
+   - Pas de widgets prédéfinis (on dessine tout manuellement)
+   - Excellente pour jeux vidéo et visualisations personnalisées
+   - Licence permissive (zlib)
+   - Liens :
+     * https://www.libsdl.org/
+     * https://wiki.libsdl.org/SDL2/FrontPage
+
+CHOIX RETENU : SDL2
+
+Raisons du choix :
+- Notre projet nécessite un rendu graphique personnalisé (plan de métro, lignes, stations)
+- Pas besoin de widgets standards (boutons, menus déroulants, etc.)
+- Besoin de contrôle total sur l'affichage (zoom, déplacement, sélection graphique)
+- Simplicité d'installation et de compilation
+- Bibliothèque légère et performante pour le rendu 2D
+- Licence permissive adaptée à un projet pédagogique
+- Bonne documentation et nombreux tutoriels disponibles
+
+GTK+ et Qt seraient surdimensionnés pour nos besoins : nous n'avons pas besoin de
+widgets complexes, juste de dessiner des formes géométriques (stations, lignes) et
+gérer des événements souris/clavier. SDL2 offre exactement ce qu'il faut sans la
+complexité additionnelle d'un toolkit complet.
+
+INFORMATIONS SDL2
+-----------------
+- Tutos et documentation :
+    - https://www.meruvia.fr/index.php/fr/big-tuto-sdl-2
+    - https://devopssec.fr/article/cours-introduction-sdl-2
+    - https://wiki.libsdl.org/SDL2/Tutorials
+    - https://lazyfoo.net/tutorials/SDL/index.php
+    - https://wiki.libsdl.org/SDL2/FrontPage
 
 NOTES IMPORTANTES
 -----------------
@@ -278,9 +397,9 @@ NOTES IMPORTANTES
 - L'algorithme de Dijkstra utilise les paramètres de configuration :
   * temps_correspondance : Pénalité (en minutes) ajoutée lors d'un changement de ligne
   * temps_arret : Temps (en minutes) ajouté à chaque station visitée
-  Ces paramètres peuvent être configurés via le fichier config.ini ou config_alt.ini.
+  Ces paramètres peuvent être configurés via le fichier config.ini ou config_paris.ini.
 
-WORKFLOW DE DÉVELOPPEMENT RECOMMANDÉ
+WORKFLOW DE DEVELOPPEMENT RECOMMANDE
 -------------------------------------
 1. Développer une nouvelle fonctionnalité
 2. Ajouter des tests dans le fichier tests.c pour valider la fonctionnalité
