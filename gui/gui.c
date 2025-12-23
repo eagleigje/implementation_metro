@@ -241,8 +241,13 @@ int lancer_gui(const Une_config *config) {
     }
 
     // Libération de la mémoire des données du métro
-    // IMPORTANT: L'ordre de libération est très important.
+    // IMPORTANT : L'ordre de libération est très important.
     // On libère d'abord les connexions, puis les structures qui y font référence.
+    if (app.chemin_courant != NULL) {
+        // La liste du chemin contient uniquement des nœuds alloués, pas les trucs associés.
+        // Une recherche de chemin le plus court a été lancée, il faut libérer la mémoire associée.
+        detruire_liste(app.chemin_courant);
+    }
     if (app.liste_connexions != NULL) {
         detruire_liste_et_truc(app.liste_connexions);
     }
