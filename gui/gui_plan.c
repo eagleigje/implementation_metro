@@ -19,39 +19,56 @@ static int ecran_vers_geo(Etat_affichage *app, int x, int y, int largeur, int ha
 
 /**
  * Fonction qui calcule la distance au carré entre un point et un segment.
+ * Utilise la projection vectorielle pour déterminer le point le plus proche sur le segment.
+ *
  * @param px : Coordonnée X du point.
  * @param py : Coordonnée Y du point.
- * @param x1 : Coordonnée X du segment (point 1).
- * @param y1 : Coordonnée Y du segment (point 1).
- * @param x2 : Coordonnée X du segment (point 2).
- * @param y2 : Coordonnée Y du segment (point 2).
+ * @param x1 : Coordonnée X du début du segment.
+ * @param y1 : Coordonnée Y du début du segment.
+ * @param x2 : Coordonnée X de la fin du segment.
+ * @param y2 : Coordonnée Y de la fin du segment.
  * @return : Distance au carré entre le point et le segment.
  */
 static float distance_segment_carre(int px, int py, int x1, int y1, int x2, int y2) {
-    float vx = (float)(x2 - x1);
-    float vy = (float)(y2 - y1);
-    float wx = (float)(px - x1);
-    float wy = (float)(py - y1);
+    // Vecteur du segment : v = (x2-x1, y2-y1)
+    float vecteur_segment_x = (float)(x2 - x1);
+    float vecteur_segment_y = (float)(y2 - y1);
 
-    float c1 = vx * wx + vy * wy;
-    if (c1 <= 0.0f) {
+    // Vecteur du début du segment au point : w = (px - x1, py - y1)
+    float vecteur_point_x = (float)(px - x1);
+    float vecteur_point_y = (float)(py - y1);
+
+    // Produit scalaire w·v (projection du point sur la droite du segment)
+    float produit_scalaire = vecteur_segment_x * vecteur_point_x + vecteur_segment_y * vecteur_point_y;
+
+    // CAS 1 : La projection tombe avant le début du segment
+    // Si le produit scalaire est négatif ou nul, le point le plus proche est le début du segment
+    if (produit_scalaire <= 0.0f) {
         float dx = (float)(px - x1);
         float dy = (float)(py - y1);
-        return dx * dx + dy * dy;
+        return dx * dx + dy * dy;  // Distance au carré au point de départ
     }
 
-    float c2 = vx * vx + vy * vy;
-    if (c2 <= c1) {
+    // Norme au carré du vecteur segment : ||v||²
+    float norme_segment_carre = vecteur_segment_x * vecteur_segment_x + vecteur_segment_y * vecteur_segment_y;
+
+    // CAS 2 : La projection tombe après la fin du segment
+    // Si le produit scalaire est supérieur à ||v||², le point le plus proche est la fin du segment
+    if (norme_segment_carre <= produit_scalaire) {
         float dx = (float)(px - x2);
         float dy = (float)(py - y2);
-        return dx * dx + dy * dy;
+        return dx * dx + dy * dy;  // Distance au carré au point d'arrivée
     }
 
-    float b = c1 / c2;
-    float bx = (float)x1 + b * vx;
-    float by = (float)y1 + b * vy;
-    float dx = (float)px - bx;
-    float dy = (float)py - by;
+    // CAS 3 : La projection tombe sur le segment
+    // On calcule les coordonnées de la projection perpendiculaire
+    float parametre_projection = produit_scalaire / norme_segment_carre;
+    float projection_x = (float)x1 + parametre_projection * vecteur_segment_x;
+    float projection_y = (float)y1 + parametre_projection * vecteur_segment_y;
+
+    // Distance au carré à la projection perpendiculaire
+    float dx = (float)px - projection_x;
+    float dy = (float)py - projection_y;
     return dx * dx + dy * dy;
 }
 
