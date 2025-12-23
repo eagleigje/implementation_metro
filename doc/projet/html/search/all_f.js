@@ -12,7 +12,10 @@ var searchData=
   ['sta_5farr_9',['sta_arr',['../struct__une__connexion.html#a2d580ce6a0599cfdaab244e4965a3f11',1,'_une_connexion']]],
   ['sta_5fdep_10',['sta_dep',['../struct__une__connexion.html#ac5a9ab387e5c1f7a584965500d69afaf',1,'_une_connexion']]],
   ['station_2eh_11',['station.h',['../station_8h.html',1,'']]],
-  ['station_5fnom_5ftaille_5fmax_12',['STATION_NOM_TAILLE_MAX',['../constantes_8h.html#a3015c72f4a953a4bf58c60b8f4d24617',1,'constantes.h']]],
-  ['strdup_5fcustom_13',['strdup_custom',['../outils_8c.html#addf5ca59eb24563c0dd464dcc9f6dffb',1,'strdup_custom(const char *s):&#160;outils.c'],['../outils_8h.html#addf5ca59eb24563c0dd464dcc9f6dffb',1,'strdup_custom(const char *s):&#160;outils.c']]],
-  ['suiv_14',['suiv',['../struct__une__ligne.html#aa1cedb34c4c9c3a440c485f268cd78fc',1,'_une_ligne::suiv'],['../struct__un__elem.html#abbe21a3db010eb5884b57c95dda4a688',1,'_un_elem::suiv']]]
+  ['station_5farrivee_12',['station_arrivee',['../structEtat__affichage.html#a08d6e14181414d602576683c9990b0a0',1,'Etat_affichage']]],
+  ['station_5fdepart_13',['station_depart',['../structEtat__affichage.html#a61810f5699d7bef69e25dd131d4170b4',1,'Etat_affichage']]],
+  ['station_5fnom_5ftaille_5fmax_14',['STATION_NOM_TAILLE_MAX',['../constantes_8h.html#a3015c72f4a953a4bf58c60b8f4d24617',1,'constantes.h']]],
+  ['station_5fselectionnee_15',['station_selectionnee',['../structEtat__affichage.html#afa38ee269e40991a8dbc2d3788ed74d3',1,'Etat_affichage']]],
+  ['strdup_5fcustom_16',['strdup_custom',['../outils_8c.html#addf5ca59eb24563c0dd464dcc9f6dffb',1,'strdup_custom(const char *s):&#160;outils.c'],['../outils_8h.html#addf5ca59eb24563c0dd464dcc9f6dffb',1,'strdup_custom(const char *s):&#160;outils.c']]],
+  ['suiv_17',['suiv',['../struct__une__ligne.html#aa1cedb34c4c9c3a440c485f268cd78fc',1,'_une_ligne::suiv'],['../struct__un__elem.html#abbe21a3db010eb5884b57c95dda4a688',1,'_un_elem::suiv']]]
 ];

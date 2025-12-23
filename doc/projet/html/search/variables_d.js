@@ -10,5 +10,8 @@ var searchData=
   ['sta_7',['sta',['../union__data.html#afe40e52201896187c022071902406d41',1,'_data']]],
   ['sta_5farr_8',['sta_arr',['../struct__une__connexion.html#a2d580ce6a0599cfdaab244e4965a3f11',1,'_une_connexion']]],
   ['sta_5fdep_9',['sta_dep',['../struct__une__connexion.html#ac5a9ab387e5c1f7a584965500d69afaf',1,'_une_connexion']]],
-  ['suiv_10',['suiv',['../struct__une__ligne.html#aa1cedb34c4c9c3a440c485f268cd78fc',1,'_une_ligne::suiv'],['../struct__un__elem.html#abbe21a3db010eb5884b57c95dda4a688',1,'_un_elem::suiv']]]
+  ['station_5farrivee_10',['station_arrivee',['../structEtat__affichage.html#a08d6e14181414d602576683c9990b0a0',1,'Etat_affichage']]],
+  ['station_5fdepart_11',['station_depart',['../structEtat__affichage.html#a61810f5699d7bef69e25dd131d4170b4',1,'Etat_affichage']]],
+  ['station_5fselectionnee_12',['station_selectionnee',['../structEtat__affichage.html#afa38ee269e40991a8dbc2d3788ed74d3',1,'Etat_affichage']]],
+  ['suiv_13',['suiv',['../struct__une__ligne.html#aa1cedb34c4c9c3a440c485f268cd78fc',1,'_une_ligne::suiv'],['../struct__un__elem.html#abbe21a3db010eb5884b57c95dda4a688',1,'_un_elem::suiv']]]
 ];

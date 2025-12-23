@@ -2,6 +2,7 @@ var structEtat__affichage =
 [
     [ "abr_stations", "structEtat__affichage.html#a528050db75095c2e49bd4b60b46f8a62", null ],
     [ "aqr_topo", "structEtat__affichage.html#af1c9f6d65f69d78a8c071d55a40c4838", null ],
+    [ "chemin_courant", "structEtat__affichage.html#a8e47642dfecc43e93c57bc1fa12c2767", null ],
     [ "decalage_x", "structEtat__affichage.html#ab0e906de35e2861d3af26c20446af133", null ],
     [ "decalage_y", "structEtat__affichage.html#a418e5b56a1480b559fac076cc00ed75f", null ],
     [ "deplacement_actif", "structEtat__affichage.html#adcb656afbd9a9cbfb4b55b4b05ba9448", null ],
@@ -21,5 +22,8 @@ var structEtat__affichage =
     [ "souris_prec_y", "structEtat__affichage.html#af188bbe2f7ea793bc8c38d67af20d20c", null ],
     [ "souris_x", "structEtat__affichage.html#ad72c3b457edde039e7d148a9e0af917c", null ],
     [ "souris_y", "structEtat__affichage.html#a3ed8fd5f8ac9fbffdab81cdf13ce8a39", null ],
+    [ "station_arrivee", "structEtat__affichage.html#a08d6e14181414d602576683c9990b0a0", null ],
+    [ "station_depart", "structEtat__affichage.html#a61810f5699d7bef69e25dd131d4170b4", null ],
+    [ "station_selectionnee", "structEtat__affichage.html#afa38ee269e40991a8dbc2d3788ed74d3", null ],
     [ "zoom", "structEtat__affichage.html#a78760e71f6ceeecea963bd118a94909e", null ]
 ];
