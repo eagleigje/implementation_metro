@@ -132,6 +132,9 @@ Pour vérifier les fuites mémoire du programme de tests avec valgrind :
 Pour vérifier les fuites mémoire du programme principal avec valgrind :
     make test-memory-metro
 
+Pour vérifier les fuites mémoire du programme principal avec valgrind et la configuration du métro parisien :
+    make test-memory-metro-paris
+
 Pour nettoyer les fichiers objets et les exécutables :
     make clean
 
