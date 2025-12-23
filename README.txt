@@ -325,7 +325,7 @@ implémentées. Voici l'état d'avancement :
    - Pensez à appeler la fonction configurer_dijkstra(config->temps_correspondance, config->temps_arret)
      après la lecture du fichier .ini et avant de lancer dijkstra() dans l'application.
 
-7. Exercice 7 : Interface graphique ........................................... EN COURS
+7. Exercice 7 : Interface graphique ........................................... FAIT
    FAIT :
    - Architecture de base (structure Etat_affichage, enum Ecran/Mode)
    - Organisation modulaire du code GUI dans le répertoire gui/
@@ -341,14 +341,24 @@ implémentées. Voici l'état d'avancement :
    - Gestion du zoom (+/-, molette) et déplacement (flèches, clic droit + glisser)
    - Réinitialisation de la vue (touche R)
    - Détection des clics souris (curseur rouge)
-   - Affichage des stations et des connexions (couleur de ligne)
+   - Affichage des stations et des connexions (couleur de ligne avec validation)
    - Sélection de station au clic (mise en évidence + console)
+   - Optimisation de la sélection avec AQR (recherche O(log n) avec fallback linéaire)
    - Mode chemin (départ/arrivée), Dijkstra et affichage du chemin
-   - Infobulles station/ligne au survol
+   - Infobulles station/ligne au survol (détection de proximité point-segment)
+   - Encart récapitulatif du chemin (regroupement par ligne + temps total)
    - Extraction des constantes (couleurs, dimensions) dans gui/gui.h
+   - Validation des couleurs hexadécimales au chargement des lignes
+   - Documentation complète des algorithmes dans ALGORITHMES.txt
+
    A FAIRE :
-   - Optimiser la sélection avec AQR (performance)
-   - Affichage des correspondances détaillées
+   - Recherche textuelle de station (l'ABR est prêt, nécessite gestion SDL_TEXTINPUT)
+
+   AMELIORATIONS POSSIBLES :
+   - Affichage permanent des noms de stations importantes
+   - Légende des lignes avec correspondance couleur ↔ nom
+   - Centrage automatique de la vue sur le réseau au démarrage
+   - Cache des limites géographiques pour optimiser geo_vers_ecran()
 
 CHOIX DE LA BIBLIOTHEQUE GRAPHIQUE
 -----------------------------------
