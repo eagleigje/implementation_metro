@@ -94,6 +94,7 @@ $(function(){initNavTree('test__exercice2_8c.html','',''); });
 <div class="textblock"><code>#include &lt;stdio.h&gt;</code><br />
 <code>#include &lt;stdlib.h&gt;</code><br />
 <code>#include &lt;string.h&gt;</code><br />
+<code>#include &lt;strings.h&gt;</code><br />
 <code>#include &quot;<a class="el" href="test__exercice2_8h_source.html">test_exercice2.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="liste_8h_source.html">../liste.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="truc_8h_source.html">../truc.h</a>&quot;</code><br />
@@ -101,6 +102,7 @@ $(function(){initNavTree('test__exercice2_8c.html','',''); });
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Fonctions</h2></td></tr>
 <tr class="memitem:a890f076216bfc18e67702f758145853a" id="r_a890f076216bfc18e67702f758145853a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a890f076216bfc18e67702f758145853a">test_recherche_abr</a> (<a class="el" href="abr__type_8h.html#aa17d62fbbfd01281360dfabf4a12d807">Un_nabr</a> *abr_stations)</td></tr>
+<tr class="memitem:a18f096fe98917e7ec51ff3cc1544414e" id="r_a18f096fe98917e7ec51ff3cc1544414e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a18f096fe98917e7ec51ff3cc1544414e">test_recherche_prefixe_abr</a> (const char *test_label)</td></tr>
 <tr class="memitem:a14218b531b53dd71cd68c712231c820d" id="r_a14218b531b53dd71cd68c712231c820d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a14218b531b53dd71cd68c712231c820d">test_robustesse_abr</a> (const char *test_label)</td></tr>
 </table>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Documentation des fonctions</h2>
@@ -121,6 +123,29 @@ Fonctions</h2></td></tr>
 <p>Fonction de test de recherche de stations dans l'ABR. </p><dl class="params"><dt>Paramètres</dt><dd>
   <table class="params">
     <tr><td class="paramname">abr_stations</td><td>: L'ABR des stations. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a18f096fe98917e7ec51ff3cc1544414e" name="a18f096fe98917e7ec51ff3cc1544414e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a18f096fe98917e7ec51ff3cc1544414e">&#9670;&#160;</a></span>test_recherche_prefixe_abr()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void test_recherche_prefixe_abr </td>
+          <td>(</td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>test_label</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Fonction de test de recherche par préfixe dans l'ABR. </p><dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">test_label</td><td>: Le numéro/label du test à afficher. </td></tr>
   </table>
   </dd>
 </dl>
