@@ -350,9 +350,7 @@ implémentées. Voici l'état d'avancement :
    - Extraction des constantes (couleurs, dimensions) dans gui/gui.h
    - Validation des couleurs hexadécimales au chargement des lignes
    - Documentation complète des algorithmes dans ALGORITHMES.txt
-
-   A FAIRE :
-   - Recherche textuelle de station (l'ABR est prêt, nécessite gestion SDL_TEXTINPUT)
+   - Recherche textuelle de station (touche F, recherche incrémentale avec ABR, centrage automatique)
 
    AMELIORATIONS POSSIBLES :
    - Affichage permanent des noms de stations importantes
