@@ -73,6 +73,25 @@ static Une_ligne *creer_ligne(char *ligne_str, int *err) {
     char couleur[LINE_COLOR_SIZE];
     strcpy(couleur, couleur_ptr);
 
+    // Validation du format de la couleur (#RRGGBB attendu)
+    int couleur_valide = 1;
+    if (strlen(couleur) != 7 || couleur[0] != '#') {
+        couleur_valide = 0;
+    } else {
+        // Vérification que les 6 caractères après # sont bien hexadécimaux
+        for (int i = 1; i < 7; i++) {
+            char c = couleur[i];
+            if (!((c >= '0' && c <= '9') || (c >= 'A' && c <= 'F') || (c >= 'a' && c <= 'f'))) {
+                couleur_valide = 0;
+                break;
+            }
+        }
+    }
+    if (!couleur_valide) {
+        fprintf(stderr, "Avertissement: couleur invalide '%s' pour ligne %s (format attendu: #RRGGBB)\n",
+                couleur, code);
+    }
+
     // On peut créer la nouvelle ligne
     Une_ligne *nouvelle = (Une_ligne *)malloc(sizeof(Une_ligne));
     if (nouvelle == NULL) {
