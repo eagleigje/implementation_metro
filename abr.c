@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <strings.h>
+#include <string.h>
 
 #include "abr.h"
 #include "abr_type.h"
@@ -139,4 +140,35 @@ Un_truc *chercher_station(Un_nabr *abr, char *nom) {
         // On part sur la droite du nœud actuel.
         return chercher_station(abr->d, nom);
     }
+}
+
+/**
+ * Fonction qui recherche une station par préfixe dans l'ABR.
+ * Parcourt l'ABR en profondeur pour trouver la première station dont le nom commence par le préfixe.
+ * @param abr : L'arbre binaire de recherche.
+ * @param prefixe : Le préfixe que l'on recherche (insensible à la casse).
+ * @return : La première station trouvée, ou NULL si aucune.
+ */
+Un_truc *chercher_station_prefixe(Un_nabr *abr, const char *prefixe) {
+    if (abr == NULL || prefixe == NULL || strlen(prefixe) == 0) {
+        return NULL;
+    }
+
+    size_t len_prefixe = strlen(prefixe);
+
+    // Vérifier si le nœud courant correspond
+    if (abr->truc != NULL && abr->truc->type == STA && abr->truc->data.sta.nom != NULL) {
+        if (strncasecmp(abr->truc->data.sta.nom, prefixe, len_prefixe) == 0) {
+            return abr->truc;
+        }
+    }
+
+    // Chercher à gauche d'abord
+    Un_truc *resultat = chercher_station_prefixe(abr->g, prefixe);
+    if (resultat != NULL) {
+        return resultat;
+    }
+
+    // Chercher à droite si pas trouvé à gauche
+    return chercher_station_prefixe(abr->d, prefixe);
 }

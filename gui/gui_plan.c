@@ -12,10 +12,28 @@
 #include "gui_plan.h"
 #include "gui_commun.h"
 #include "../dijkstra.h"
+#include "../abr.h"
+#include "../ligne.h"
 
-// Déclaration pour l'utiliser avant sa définition
+// Déclaration pour utilisation avant définitions
 static void geo_vers_ecran(Etat_affichage *app, Une_coord coord, int largeur, int hauteur, int *x, int *y);
 static int ecran_vers_geo(Etat_affichage *app, int x, int y, int largeur, int hauteur, Une_coord *coord);
+
+/**
+ * Fonction publique qui actualise la recherche de station par préfixe.
+ * @param app : État global de l'application graphique.
+ */
+void gui_plan_actualiser_recherche(Etat_affichage *app) {
+    if (app == NULL || app->abr_stations == NULL) {
+        return;
+    }
+
+    if (strlen(app->recherche_texte) > 0) {
+        app->recherche_resultat = chercher_station_prefixe(app->abr_stations, app->recherche_texte);
+    } else {
+        app->recherche_resultat = NULL;
+    }
+}
 
 /**
  * Fonction qui calcule la distance au carré entre un point et un segment.
@@ -568,6 +586,71 @@ static int ecran_vers_geo(Etat_affichage *app, int x, int y, int largeur, int ha
 }
 
 /**
+ * Fonction qui centre la vue sur une station donnée.
+ * @param app : État global de l'application graphique.
+ * @param station : Station sur laquelle centrer la vue.
+ * @param largeur : Largeur de la fenêtre.
+ * @param hauteur : Hauteur de la fenêtre.
+ */
+static void centrer_sur_station(Etat_affichage *app, Un_truc *station, int largeur, int hauteur) {
+    if (station == NULL || station->type != STA) {
+        return;
+    }
+
+    // Réinitialiser les décalages pour calculer la position de base
+    app->decalage_x = 0.0f;
+    app->decalage_y = 0.0f;
+
+    int sx = 0;
+    int sy = 0;
+    geo_vers_ecran(app, station->coord, largeur, hauteur, &sx, &sy);
+
+    // Calculer le décalage pour placer la station au centre
+    app->decalage_x = (largeur / 2) - sx * app->zoom;
+    app->decalage_y = (hauteur / 2) - sy * app->zoom;
+}
+
+/**
+ * Fonction qui dessine le panneau de recherche de station.
+ * @param app : État global de l'application graphique.
+ */
+static void dessiner_panneau_recherche(Etat_affichage *app) {
+    if (!app->recherche_active) {
+        return;
+    }
+
+    // Dessiner le panneau de recherche
+    SDL_Rect panneau = {PLAN_RECHERCHE_X, PLAN_RECHERCHE_Y, PLAN_RECHERCHE_LARGEUR, PLAN_RECHERCHE_HAUTEUR};
+    Couleur fond = COULEUR_PANNEAU_FOND;
+    SDL_SetRenderDrawColor(app->moteurRendu, fond.r, fond.g, fond.b, fond.a);
+    SDL_RenderFillRect(app->moteurRendu, &panneau);
+    Couleur bordure = COULEUR_PANNEAU_BORDURE;
+    SDL_SetRenderDrawColor(app->moteurRendu, bordure.r, bordure.g, bordure.b, bordure.a);
+    SDL_RenderDrawRect(app->moteurRendu, &panneau);
+
+    SDL_Color couleur_texte = COULEUR_SDL(COULEUR_TEXTE_INFO);
+
+    // Afficher le label
+    gui_rendu_texte(app, app->petite_police, "Recherche (ESC pour annuler) :",
+                    panneau.x + PLAN_MARGE_TEXTE_X, panneau.y + PLAN_MARGE_TEXTE_Y_1, couleur_texte);
+
+    // Afficher le texte de recherche
+    char texte_affiche[PLAN_RECHERCHE_MAX_TEXTE + 30];  // Un peu plus grand pour ne pas couper.
+    if (strlen(app->recherche_texte) > 0) {
+        if (app->recherche_resultat != NULL) {
+            snprintf(texte_affiche, sizeof(texte_affiche), "%s → %s",
+                     app->recherche_texte, app->recherche_resultat->data.sta.nom);
+        } else {
+            snprintf(texte_affiche, sizeof(texte_affiche), "%s (aucune station)", app->recherche_texte);
+        }
+    } else {
+        snprintf(texte_affiche, sizeof(texte_affiche), "_");
+    }
+    gui_rendu_texte(app, app->petite_police, texte_affiche,
+                    panneau.x + PLAN_MARGE_TEXTE_X, panneau.y + PLAN_MARGE_TEXTE_Y_2, couleur_texte);
+}
+
+/**
  * Fonction qui dessine l'écran plan avec grille et panneau d'information.
  * @param app : État global de l'application graphique.
  * @param largeur : Largeur de la fenêtre.
@@ -720,7 +803,7 @@ void gui_dessiner_plan(Etat_affichage *app, int largeur, int hauteur) {
         gui_rendu_texte(app, app->petite_police, "Mode : PLUS COURT CHEMIN", panneau_info.x + PLAN_MARGE_TEXTE_X, panneau_info.y + PLAN_MARGE_TEXTE_Y_1, couleur_info);
     }
     // On affiche les raccourcis clavier
-    gui_rendu_texte(app, app->petite_police, "S/P mode  -  R réinitialiser  -  ESC menu  -  Q quitter", panneau_info.x + PLAN_MARGE_TEXTE_X, panneau_info.y + PLAN_MARGE_TEXTE_Y_2, couleur_info);
+    gui_rendu_texte(app, app->petite_police, "S/P mode  -  F rechercher  -  R réinit  -  ESC menu  -  Q quitter", panneau_info.x + PLAN_MARGE_TEXTE_X, panneau_info.y + PLAN_MARGE_TEXTE_Y_2, couleur_info);
 
     // Si l'utilisateur a cliqué, on affiche un curseur rouge à la position du clic
     if (app->dernier_clic_x >= 0 && app->dernier_clic_y >= 0) {
@@ -733,6 +816,9 @@ void gui_dessiner_plan(Etat_affichage *app, int largeur, int hauteur) {
 
     // On affiche un encart récapitulatif du chemin si disponible
     dessiner_encart_chemin(app, largeur, hauteur);
+
+    // On affiche le panneau de recherche si actif
+    dessiner_panneau_recherche(app);
 
     // Si la souris survole une station, on affiche son nom près du curseur
     if (app->souris_x >= 0 && app->souris_y >= 0) {
@@ -761,10 +847,57 @@ void gui_dessiner_plan(Etat_affichage *app, int largeur, int hauteur) {
  * @param running : Pointeur vers le flag d'exécution de la boucle principale.
  */
 void gui_plan_gerer_clavier(Etat_affichage *app, SDL_Keycode key, bool *running) {
-    // On est sur le plan : touches ESC, S, P, Q, +/-, flèches
+    // Si la recherche est active, on gère d'abord les touches spéciales
+    if (app->recherche_active) {
+        if (key == SDLK_ESCAPE) {
+            // Désactiver la recherche
+            app->recherche_active = 0;
+            app->recherche_texte[0] = '\0';
+            app->recherche_resultat = NULL;
+            SDL_StopTextInput();
+            return;
+        } else if (key == SDLK_BACKSPACE) {
+            // Effacer le dernier caractère
+            int len = strlen(app->recherche_texte);
+            if (len > 0) {
+                app->recherche_texte[len - 1] = '\0';
+                // Rechercher la nouvelle station (recherche par préfixe)
+                gui_plan_actualiser_recherche(app);
+            }
+            return;
+        } else if (key == SDLK_RETURN) {
+            // Valider la recherche et sélectionner la station trouvée
+            if (app->recherche_resultat != NULL) {
+                app->station_selectionnee = app->recherche_resultat;
+                printf("Station trouvée : %s\n", app->recherche_resultat->data.sta.nom);
+
+                // Centrer la vue sur la station trouvée
+                int largeur = 0;
+                int hauteur = 0;
+                SDL_GetWindowSize(app->fenetre, &largeur, &hauteur);
+                centrer_sur_station(app, app->recherche_resultat, largeur, hauteur);
+            }
+            app->recherche_active = 0;
+            app->recherche_texte[0] = '\0';
+            app->recherche_resultat = NULL;
+            SDL_StopTextInput();
+            return;
+        }
+        // En mode recherche, on ignore les autres touches
+        return;
+    }
+
+    // On est sur le plan : touches ESC, F, S, P, Q, +/-, flèches
     if (key == SDLK_ESCAPE) {
         app->ecran = ECRAN_MENU;
         gui_mettre_a_jour_titre(app);
+    } else if (key == SDLK_f) {
+        // Activer la recherche
+        app->recherche_active = 1;
+        app->recherche_ignorer_prochain = 1;  // Ignorer le 'f' qui sera capturé par SDL_TEXTINPUT
+        app->recherche_texte[0] = '\0';
+        app->recherche_resultat = NULL;
+        SDL_StartTextInput();
     } else if (key == SDLK_s) {
         app->mode = MODE_SELECTION;
         gui_mettre_a_jour_titre(app);

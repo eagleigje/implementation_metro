@@ -14,5 +14,6 @@ Un_nabr *inserer_abr(Un_nabr *abr, Un_nabr *n);
 Un_nabr *construire_abr(Un_elem *liste_sta);
 void detruire_abr(Un_nabr *abr);
 Un_truc *chercher_station(Un_nabr *abr, char *nom);
+Un_truc *chercher_station_prefixe(Un_nabr *abr, const char *prefixe);
 
 #endif

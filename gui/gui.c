@@ -4,7 +4,6 @@
  */
 
 #include <stdio.h>
-#include <stdbool.h>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 
@@ -14,6 +13,9 @@
 #include "gui_plan.h"
 #include "../connexion.h"
 #include "../dijkstra.h"
+#include "../liste.h"
+#include "../abr.h"
+#include "../ligne.h"
 
 /**
  * Fonction qui lance la fenêtre principale et la boucle d'événements SDL2.
@@ -57,6 +59,10 @@ int lancer_gui(const Une_config *config) {
         .station_depart = NULL,
         .station_arrivee = NULL,
         .chemin_courant = NULL,
+        .recherche_active = 0,      // Recherche inactive au départ
+        .recherche_ignorer_prochain = 0,
+        .recherche_texte = "",      // Texte de recherche vide
+        .recherche_resultat = NULL, // Aucun résultat de recherche
         .liste_stations = NULL,     // Données du métro non chargées
         .liste_connexions = NULL,
         .abr_stations = NULL,
@@ -203,6 +209,20 @@ int lancer_gui(const Une_config *config) {
                     app.zoom *= ZOOM_FACTEUR_AVANT;
                 } else if (event.wheel.y < 0) {
                     app.zoom *= ZOOM_FACTEUR_ARRIERE;
+                }
+            } else if (event.type == SDL_TEXTINPUT && app.ecran == ECRAN_PLAN && app.recherche_active) {
+                // Ignorer le premier événement (la touche F qui a activé la recherche)
+                if (app.recherche_ignorer_prochain) {
+                    app.recherche_ignorer_prochain = 0;
+                } else {
+                    // Ajouter le texte saisi à la recherche
+                    int len = strlen(app.recherche_texte);
+                    int input_len = strlen(event.text.text);
+                    if (len + input_len < PLAN_RECHERCHE_MAX_TEXTE - 1) {
+                        strcat(app.recherche_texte, event.text.text);
+                        // Rechercher la station au fur et à mesure de la saisie (recherche par préfixe)
+                        gui_plan_actualiser_recherche(&app);
+                    }
                 }
             }
         }

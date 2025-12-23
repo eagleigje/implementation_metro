@@ -32,7 +32,7 @@ void gui_afficher_aide(void) {
     printf("Contrôles:\n");
     printf("  MENU: 1=Afficher plan (sélection), 2=Plus court chemin, 3=Quitter\n");
     printf("        Ou cliquer sur les cartes avec la souris\n");
-    printf("  PLAN: S=Sélection, P=Plus court chemin, R=Réinitialiser, ESC=Menu, Q=Quitter\n");
+    printf("  PLAN: S=Sélection, P=Plus court chemin, F=Rechercher, R=Réinitialiser, ESC=Menu, Q=Quitter\n");
     printf("        Flèches=Déplacer, +/-=Zoom, Molette=Zoom, Clic=Sélection\n");
     printf("        Clic droit + glisser = Déplacement\n\n");
 }

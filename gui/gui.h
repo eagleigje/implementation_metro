@@ -8,10 +8,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 #include "../config.h"
-#include "../liste.h"
-#include "../abr.h"
 #include "../aqrtopo.h"
-#include "../ligne.h"
 
 // =============================================================================
 // TAILLES DE LA FENÊTRE
@@ -93,6 +90,11 @@ typedef struct {
 #define PLAN_BULLE_OFFSET_Y      12   // Décalage Y de la bulle par rapport au curseur.
 #define PLAN_ENCART_MARGE        8    // Marge interne de l'encart de chemin.
 #define PLAN_ENCART_ECART_LIGNE  4    // Espace vertical entre les lignes de l'encart.
+#define PLAN_RECHERCHE_X         430  // Position X du panneau de recherche.
+#define PLAN_RECHERCHE_Y         12   // Position Y du panneau de recherche.
+#define PLAN_RECHERCHE_LARGEUR   350  // Largeur du panneau de recherche.
+#define PLAN_RECHERCHE_HAUTEUR   60   // Hauteur du panneau de recherche.
+#define PLAN_RECHERCHE_MAX_TEXTE 64   // Taille maximale du texte de recherche.
 
 // =============================================================================
 // CONSTANTES DE CONTRÔLE
@@ -170,6 +172,11 @@ typedef struct Etat_affichage {
     Un_truc *station_depart;        // Station de départ (mode chemin)
     Un_truc *station_arrivee;       // Station d'arrivée (mode chemin)
     Un_elem *chemin_courant;        // Liste des connexions du chemin courant
+    // Recherche textuelle
+    int recherche_active;           // 1 si la recherche est active, 0 sinon
+    int recherche_ignorer_prochain; // 1 pour ignorer le prochain SDL_TEXTINPUT (évite capture du 'f')
+    char recherche_texte[PLAN_RECHERCHE_MAX_TEXTE];  // Texte de recherche actuel
+    Un_truc *recherche_resultat;    // Station trouvée par la recherche (NULL si aucune)
     // Données du métro
     Un_elem *liste_stations;        // Liste chaînée de toutes les stations
     Un_elem *liste_connexions;      // Liste chaînée de toutes les connexions
