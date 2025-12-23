@@ -10,6 +10,18 @@
 #include "gui/gui.h"
 
 /**
+ * Fonction qui affiche l'aide d'utilisation du programme.
+ */
+static void afficher_aide_metro(void) {
+    printf("Usage : ./metro [fichier.ini]\n");
+    printf("Options :\n");
+    printf("  -h, --help  Afficher cette aide et quitter\n");
+    printf("\nExemples :\n");
+    printf("  ./metro\n");
+    printf("  ./metro config_paris.ini\n");
+}
+
+/**
  * Fonction principale du projet.
  * @param argc : Le nombre d'arguments passés en paramètre.
  * @param argv : Les arguments de la ligne de commande.
@@ -19,10 +31,25 @@ int main(const int argc, char *argv[]) {
     // Nous utilisons un fichier de configuration par défaut.
     const char *fichier_config = "config.ini";
 
-    // Mais on peut aussi le passer en paramètre.
-    if (argc > 1) {
-        // S'il y a un paramètre, on s'attend à ce que le premier soit le path vers un fichier de configuration.
-        fichier_config = argv[1];
+    int config_definie = 0;
+
+    // Lecture minimale des arguments.
+    for (int i = 1; i < argc; i++) {
+        if (strcmp(argv[i], "-h") == 0 || strcmp(argv[i], "--help") == 0) {
+            afficher_aide_metro();
+            return 0;
+        } else if (argv[i][0] == '-') {
+            fprintf(stderr, "Erreur : option inconnue %s\n", argv[i]);
+            afficher_aide_metro();
+            return 1;
+        } else if (!config_definie) {
+            fichier_config = argv[i];
+            config_definie = 1;
+        } else {
+            fprintf(stderr, "Erreur : argument inattendu %s\n", argv[i]);
+            afficher_aide_metro();
+            return 1;
+        }
     }
 
     printf("=== PROJET METRO 2025 ===\n\n");

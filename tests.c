@@ -5,10 +5,22 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "tests.h"
 #include "liste.h"
 #include "abr.h"
+
+/**
+ * Fonction qui affiche l'aide d'utilisation du programme de tests.
+ */
+static void afficher_aide_tests(void) {
+    printf("Usage : ./tests [fichier.ini]\n");
+    printf("Options :\n");
+    printf("  -h, --help  Afficher cette aide et quitter\n");
+    printf("\nExemple :\n");
+    printf("  ./tests\n");
+}
 
 /**
  * Fonction principale des tests.
@@ -19,11 +31,25 @@
 int main(const int argc, char *argv[]) {
     // Nous utilisons un fichier de configuration par défaut.
     const char *fichier_config = "config.ini";
+    int config_definie = 0;
 
-    // Mais on peut aussi le passer en paramètre.
-    if (argc > 1) {
-        // S'il y a un paramètre, on s'attend à ce que le premier soit le path vers un fichier de configuration.
-        fichier_config = argv[1];
+    // Lecture minimale des arguments.
+    for (int i = 1; i < argc; i++) {
+        if (strcmp(argv[i], "-h") == 0 || strcmp(argv[i], "--help") == 0) {
+            afficher_aide_tests();
+            return 0;
+        } else if (argv[i][0] == '-') {
+            fprintf(stderr, "Erreur : option inconnue %s\n", argv[i]);
+            afficher_aide_tests();
+            return 1;
+        } else if (!config_definie) {
+            fichier_config = argv[i];
+            config_definie = 1;
+        } else {
+            fprintf(stderr, "Erreur : argument inattendu %s\n", argv[i]);
+            afficher_aide_tests();
+            return 1;
+        }
     }
 
     // Cyan gras (\033[1;36m) pour :
