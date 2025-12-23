@@ -49,7 +49,7 @@ static void detruire_ligne_simple(Une_ligne *ligne) {
 }
 
 /**
- * Fonction helper qui crée une station (truc de type STA) simple pour les tests.
+ * Fonction qui crée une station (truc de type STA) simple pour les tests.
  * La station est créée avec des coordonnées (0,0) et sans connexions.
  *
  * @param nom : Le nom de la station.
@@ -68,7 +68,7 @@ static Un_truc *creer_station_simple(const char *nom) {
 }
 
 /**
- * Fonction helper qui ajoute une connexion dirigée entre deux stations.
+ * Fonction qui ajoute une connexion dirigée entre deux stations.
  * La connexion est créée et automatiquement ajoutée au tableau tab_con de la station de départ.
  *
  * @param dep : La station de départ.

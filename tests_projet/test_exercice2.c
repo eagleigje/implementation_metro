@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <strings.h>
 
 #include "test_exercice2.h"
 #include "../liste.h"
@@ -44,6 +45,73 @@ void test_recherche_abr(Un_nabr *abr_stations) {
         }
     }
     printf("  Résultat: %d trouvées / %d recherches\n\n", nb_trouvees, nb_total);
+}
+
+/**
+ * Fonction qui crée une station simple pour les tests de préfixe.
+ * @param nom : Nom de la station à créer.
+ * @return : Le truc station créé, ou NULL en cas d'échec d'allocation.
+ */
+static Un_truc *creer_station_test(const char *nom) {
+    Une_coord coord = {0.0f, 0.0f};
+    Tdata data;
+    data.sta.nom = (char *)malloc(strlen(nom) + 1);
+    if (data.sta.nom == NULL) {
+        return NULL;
+    }
+    strcpy(data.sta.nom, nom);
+    data.sta.tab_con = NULL;
+    data.sta.nb_con = 0;
+    data.sta.con_pcc = NULL;
+    return creer_truc(coord, STA, data, 0.0);
+}
+
+/**
+ * Fonction de test de recherche par préfixe dans l'ABR.
+ * @param test_label : Le numéro/label du test à afficher.
+ */
+void test_recherche_prefixe_abr(const char *test_label) {
+    printf("\033[1;34m%s. Tests de recherche par préfixe dans l'ABR\033[0m\n", test_label);
+    int tests_ok = 0;
+    int tests_total = 0;
+
+    // Construction d'un petit ABR synthétique pour éviter la dépendance aux CSV.
+    Un_elem *liste = NULL;
+    Un_truc *s1 = creer_station_test("Porte A");
+    Un_truc *s2 = creer_station_test("Porte B");
+    Un_truc *s3 = creer_station_test("Gare C");
+    if (s1 != NULL) liste = inserer_deb_liste(liste, s1);
+    if (s2 != NULL) liste = inserer_deb_liste(liste, s2);
+    if (s3 != NULL) liste = inserer_deb_liste(liste, s3);
+
+    Un_nabr *abr = construire_abr(liste);
+
+    // Test X.1 : Préfixe trouvé
+    tests_total++;
+    const char *prefixe_ok = "Porte";
+    Un_truc *trouve = chercher_station_prefixe(abr, prefixe_ok);
+    if (trouve != NULL && strncasecmp(trouve->data.sta.nom, prefixe_ok, strlen(prefixe_ok)) == 0) {
+        printf("  %s.1 OK: préfixe \"%s\" trouvé (%s)\n", test_label, prefixe_ok, trouve->data.sta.nom);
+        tests_ok++;
+    } else {
+        printf("  %s.1 ERREUR: préfixe \"%s\" non trouvé\n", test_label, prefixe_ok);
+    }
+
+    // Test X.2 : Préfixe absent
+    tests_total++;
+    const char *prefixe_ko = "Zoo";
+    Un_truc *absent = chercher_station_prefixe(abr, prefixe_ko);
+    if (absent == NULL) {
+        printf("  %s.2 OK: préfixe \"%s\" absent\n", test_label, prefixe_ko);
+        tests_ok++;
+    } else {
+        printf("  %s.2 ERREUR: préfixe \"%s\" trouvé (%s)\n", test_label, prefixe_ko, absent->data.sta.nom);
+    }
+
+    printf("  Bilan: %d/%d tests réussis\n\n", tests_ok, tests_total);
+
+    detruire_abr(abr);
+    detruire_liste_et_truc(liste);
 }
 
 /**

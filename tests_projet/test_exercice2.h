@@ -9,6 +9,7 @@
 #include "../abr.h"
 
 void test_recherche_abr(Un_nabr *abr_stations);
+void test_recherche_prefixe_abr(const char *test_label);
 void test_robustesse_abr(const char *test_label);
 
 #endif
