@@ -94,10 +94,7 @@ $(function(){initNavTree('gui_8h.html','',''); });
 <div class="textblock"><code>#include &lt;SDL2/SDL.h&gt;</code><br />
 <code>#include &lt;SDL2/SDL_ttf.h&gt;</code><br />
 <code>#include &quot;<a class="el" href="config_8h_source.html">../config.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="liste_8h_source.html">../liste.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="abr_8h_source.html">../abr.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="aqrtopo_8h_source.html">../aqrtopo.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="ligne_8h_source.html">../ligne.h</a>&quot;</code><br />
 </div>
 <p><a href="gui_8h_source.html">Aller au code source de ce fichier.</a></p>
 <table class="memberdecls">
@@ -151,6 +148,11 @@ Macros</h2></td></tr>
 <tr class="memitem:ab20bb4687e342f35ac73fe18ce51a1e9" id="r_ab20bb4687e342f35ac73fe18ce51a1e9"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab20bb4687e342f35ac73fe18ce51a1e9">PLAN_BULLE_OFFSET_Y</a>&#160;&#160;&#160;12</td></tr>
 <tr class="memitem:a4472ec044321a27a3411bad599facac7" id="r_a4472ec044321a27a3411bad599facac7"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4472ec044321a27a3411bad599facac7">PLAN_ENCART_MARGE</a>&#160;&#160;&#160;8</td></tr>
 <tr class="memitem:a2111065bd4d3a6125b66c1da7a996101" id="r_a2111065bd4d3a6125b66c1da7a996101"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2111065bd4d3a6125b66c1da7a996101">PLAN_ENCART_ECART_LIGNE</a>&#160;&#160;&#160;4</td></tr>
+<tr class="memitem:af16b8e71d4efa8b77985961398778768" id="r_af16b8e71d4efa8b77985961398778768"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af16b8e71d4efa8b77985961398778768">PLAN_RECHERCHE_X</a>&#160;&#160;&#160;430</td></tr>
+<tr class="memitem:af391e85f2200b855be00287e9d257606" id="r_af391e85f2200b855be00287e9d257606"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af391e85f2200b855be00287e9d257606">PLAN_RECHERCHE_Y</a>&#160;&#160;&#160;12</td></tr>
+<tr class="memitem:ab416c69b106a295e17a6eb1f6f561b17" id="r_ab416c69b106a295e17a6eb1f6f561b17"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab416c69b106a295e17a6eb1f6f561b17">PLAN_RECHERCHE_LARGEUR</a>&#160;&#160;&#160;350</td></tr>
+<tr class="memitem:a39b103ffd933828d55f3cad6cb6a645c" id="r_a39b103ffd933828d55f3cad6cb6a645c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a39b103ffd933828d55f3cad6cb6a645c">PLAN_RECHERCHE_HAUTEUR</a>&#160;&#160;&#160;60</td></tr>
+<tr class="memitem:a6a884c4e1431cb447945eb0e7c45767a" id="r_a6a884c4e1431cb447945eb0e7c45767a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6a884c4e1431cb447945eb0e7c45767a">PLAN_RECHERCHE_MAX_TEXTE</a>&#160;&#160;&#160;64</td></tr>
 <tr class="memitem:a2d8bd8b8ad13a272d574458d6f8fa6ce" id="r_a2d8bd8b8ad13a272d574458d6f8fa6ce"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2d8bd8b8ad13a272d574458d6f8fa6ce">ZOOM_FACTEUR_AVANT</a>&#160;&#160;&#160;1.1f</td></tr>
 <tr class="memitem:a216338f26523db4856f5a9b29a1cdfe5" id="r_a216338f26523db4856f5a9b29a1cdfe5"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a216338f26523db4856f5a9b29a1cdfe5">ZOOM_FACTEUR_ARRIERE</a>&#160;&#160;&#160;0.9f</td></tr>
 <tr class="memitem:a464a2b8881cdb96b64be047b58c12fff" id="r_a464a2b8881cdb96b64be047b58c12fff"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a464a2b8881cdb96b64be047b58c12fff">DEPLACEMENT_PAS</a>&#160;&#160;&#160;10.0f</td></tr>
@@ -765,6 +767,76 @@ Fonctions</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">#define PLAN_PANNEAU_Y&#160;&#160;&#160;12</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a39b103ffd933828d55f3cad6cb6a645c" name="a39b103ffd933828d55f3cad6cb6a645c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a39b103ffd933828d55f3cad6cb6a645c">&#9670;&#160;</a></span>PLAN_RECHERCHE_HAUTEUR</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PLAN_RECHERCHE_HAUTEUR&#160;&#160;&#160;60</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab416c69b106a295e17a6eb1f6f561b17" name="ab416c69b106a295e17a6eb1f6f561b17"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab416c69b106a295e17a6eb1f6f561b17">&#9670;&#160;</a></span>PLAN_RECHERCHE_LARGEUR</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PLAN_RECHERCHE_LARGEUR&#160;&#160;&#160;350</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6a884c4e1431cb447945eb0e7c45767a" name="a6a884c4e1431cb447945eb0e7c45767a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6a884c4e1431cb447945eb0e7c45767a">&#9670;&#160;</a></span>PLAN_RECHERCHE_MAX_TEXTE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PLAN_RECHERCHE_MAX_TEXTE&#160;&#160;&#160;64</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af16b8e71d4efa8b77985961398778768" name="af16b8e71d4efa8b77985961398778768"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af16b8e71d4efa8b77985961398778768">&#9670;&#160;</a></span>PLAN_RECHERCHE_X</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PLAN_RECHERCHE_X&#160;&#160;&#160;430</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af391e85f2200b855be00287e9d257606" name="af391e85f2200b855be00287e9d257606"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af391e85f2200b855be00287e9d257606">&#9670;&#160;</a></span>PLAN_RECHERCHE_Y</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PLAN_RECHERCHE_Y&#160;&#160;&#160;12</td>
         </tr>
       </table>
 </div><div class="memdoc">

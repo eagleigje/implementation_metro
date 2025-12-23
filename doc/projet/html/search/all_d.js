@@ -19,8 +19,13 @@ var searchData=
   ['plan_5fpanneau_5flargeur_16',['PLAN_PANNEAU_LARGEUR',['../gui_8h.html#a5022d2adaadf38cd5c48f15dcb99972a',1,'gui.h']]],
   ['plan_5fpanneau_5fx_17',['PLAN_PANNEAU_X',['../gui_8h.html#a77097567d70af2b2aae27d77b74a3871',1,'gui.h']]],
   ['plan_5fpanneau_5fy_18',['PLAN_PANNEAU_Y',['../gui_8h.html#aca3b2b83ee45f320ec9fd98a90313915',1,'gui.h']]],
-  ['plan_5ftaille_5fgrille_19',['PLAN_TAILLE_GRILLE',['../gui_8h.html#aedb261259f448602a9b006d2bbc05098',1,'gui.h']]],
-  ['plan_5ftaille_5fstation_20',['PLAN_TAILLE_STATION',['../gui_8h.html#a3a66cdb0fcab602891e4d76964429bef',1,'gui.h']]],
-  ['plan_5ftaille_5fstation_5fsel_21',['PLAN_TAILLE_STATION_SEL',['../gui_8h.html#a45474b03a990f663a7eda364fe94f5e2',1,'gui.h']]],
-  ['ptr_5fcourant_22',['ptr_courant',['../struct__un__lecteur__csv.html#aa0c1f5bb52b3589d2ae1189613cc0523',1,'_un_lecteur_csv']]]
+  ['plan_5frecherche_5fhauteur_19',['PLAN_RECHERCHE_HAUTEUR',['../gui_8h.html#a39b103ffd933828d55f3cad6cb6a645c',1,'gui.h']]],
+  ['plan_5frecherche_5flargeur_20',['PLAN_RECHERCHE_LARGEUR',['../gui_8h.html#ab416c69b106a295e17a6eb1f6f561b17',1,'gui.h']]],
+  ['plan_5frecherche_5fmax_5ftexte_21',['PLAN_RECHERCHE_MAX_TEXTE',['../gui_8h.html#a6a884c4e1431cb447945eb0e7c45767a',1,'gui.h']]],
+  ['plan_5frecherche_5fx_22',['PLAN_RECHERCHE_X',['../gui_8h.html#af16b8e71d4efa8b77985961398778768',1,'gui.h']]],
+  ['plan_5frecherche_5fy_23',['PLAN_RECHERCHE_Y',['../gui_8h.html#af391e85f2200b855be00287e9d257606',1,'gui.h']]],
+  ['plan_5ftaille_5fgrille_24',['PLAN_TAILLE_GRILLE',['../gui_8h.html#aedb261259f448602a9b006d2bbc05098',1,'gui.h']]],
+  ['plan_5ftaille_5fstation_25',['PLAN_TAILLE_STATION',['../gui_8h.html#a3a66cdb0fcab602891e4d76964429bef',1,'gui.h']]],
+  ['plan_5ftaille_5fstation_5fsel_26',['PLAN_TAILLE_STATION_SEL',['../gui_8h.html#a45474b03a990f663a7eda364fe94f5e2',1,'gui.h']]],
+  ['ptr_5fcourant_27',['ptr_courant',['../struct__un__lecteur__csv.html#aa0c1f5bb52b3589d2ae1189613cc0523',1,'_un_lecteur_csv']]]
 ];

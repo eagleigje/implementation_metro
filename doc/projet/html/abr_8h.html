@@ -102,6 +102,7 @@ Fonctions</h2></td></tr>
 <tr class="memitem:a682cb93929dcdf28af63467a186a46f2" id="r_a682cb93929dcdf28af63467a186a46f2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="abr__type_8h.html#aa17d62fbbfd01281360dfabf4a12d807">Un_nabr</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a682cb93929dcdf28af63467a186a46f2">construire_abr</a> (<a class="el" href="connexion_8h.html#a8aa69637be17cc77724f2ca722d62d65">Un_elem</a> *liste_sta)</td></tr>
 <tr class="memitem:ab60af9d797dca2275450ef03c4956147" id="r_ab60af9d797dca2275450ef03c4956147"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab60af9d797dca2275450ef03c4956147">detruire_abr</a> (<a class="el" href="abr__type_8h.html#aa17d62fbbfd01281360dfabf4a12d807">Un_nabr</a> *abr)</td></tr>
 <tr class="memitem:a8ff5c2153f735eb74507e508f364d153" id="r_a8ff5c2153f735eb74507e508f364d153"><td class="memItemLeft" align="right" valign="top"><a class="el" href="truc_8h.html#a47fb6f622df44e8cab9f13327205e650">Un_truc</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8ff5c2153f735eb74507e508f364d153">chercher_station</a> (<a class="el" href="abr__type_8h.html#aa17d62fbbfd01281360dfabf4a12d807">Un_nabr</a> *abr, char *nom)</td></tr>
+<tr class="memitem:aa66e6435f8529dc1f7655f79ab54e24d" id="r_aa66e6435f8529dc1f7655f79ab54e24d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="truc_8h.html#a47fb6f622df44e8cab9f13327205e650">Un_truc</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa66e6435f8529dc1f7655f79ab54e24d">chercher_station_prefixe</a> (<a class="el" href="abr__type_8h.html#aa17d62fbbfd01281360dfabf4a12d807">Un_nabr</a> *abr, const char *prefixe)</td></tr>
 </table>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Documentation des fonctions</h2>
 <a id="a8ff5c2153f735eb74507e508f364d153" name="a8ff5c2153f735eb74507e508f364d153"></a>
@@ -130,6 +131,35 @@ Fonctions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Renvoie</dt><dd>: Le truc correspond à la recherche ou NULL si non trouvé. </dd></dl>
+
+</div>
+</div>
+<a id="aa66e6435f8529dc1f7655f79ab54e24d" name="aa66e6435f8529dc1f7655f79ab54e24d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa66e6435f8529dc1f7655f79ab54e24d">&#9670;&#160;</a></span>chercher_station_prefixe()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="truc_8h.html#a47fb6f622df44e8cab9f13327205e650">Un_truc</a> * chercher_station_prefixe </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="abr__type_8h.html#aa17d62fbbfd01281360dfabf4a12d807">Un_nabr</a> *</td>          <td class="paramname"><span class="paramname"><em>abr</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>prefixe</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Fonction qui recherche une station par préfixe dans l'ABR. Parcourt l'ABR en profondeur pour trouver la première station dont le nom commence par le préfixe. </p><dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">abr</td><td>: L'arbre binaire de recherche. </td></tr>
+    <tr><td class="paramname">prefixe</td><td>: Le préfixe que l'on recherche (insensible à la casse). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>: La première station trouvée, ou NULL si aucune. </dd></dl>
 
 </div>
 </div>
