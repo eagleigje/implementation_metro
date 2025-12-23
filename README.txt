@@ -98,6 +98,7 @@ Le projet est organisé en plusieurs modules :
 
 
 10. Documentation :
+    - ALGORITHMES.txt                  : Documentation détaillée des algorithmes principaux (Dijkstra, AQR, ABR, Haversine)
     - doc/projet-metro2025.pdf         : Le PDF du projet
     - doc/projet/html/index.html       : La documentation Doxygen du projet
     - README_GENERER_CONNEXIONS.txt    : Guide d'utilisation du script de génération des connexions

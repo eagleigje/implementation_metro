@@ -1,0 +1,579 @@
+========================================
+  ALGORITHMES DU PROJET METRO 2025
+========================================
+
+Ce document détaille les principaux algorithmes utilisés dans le projet,
+leur fonctionnement, et les raisons de leur utilisation.
+
+
+========================================
+1. ALGORITHME DE DIJKSTRA
+========================================
+
+FICHIERS CONCERNÉS
+------------------
+- dijkstra.h / dijkstra.c
+- Utilisé dans : gui/gui_plan.c (lignes 830-840)
+
+POURQUOI CET ALGORITHME ?
+-------------------------
+L'algorithme de Dijkstra est utilisé pour calculer le plus court chemin entre deux stations
+du réseau de métro. Dans notre contexte :
+
+- Il permet de trouver le trajet optimal entre une station de départ et une station d'arrivée
+- Il prend en compte plusieurs facteurs de coût :
+  * Le temps de parcours entre deux stations (user_val de chaque connexion)
+  * Le temps d'arrêt à chaque station (configurable via config.ini)
+  * Le temps de correspondance lors d'un changement de ligne (pénalité supplémentaire)
+
+- Il garantit de trouver le chemin optimal (temps minimal) si un chemin existe
+- Il calcule simultanément les chemins optimaux vers TOUTES les stations depuis le départ
+  (ce qui permet d'afficher plusieurs trajets sans recalculer)
+
+COMMENT FONCTIONNE-T-IL ?
+-------------------------
+L'algorithme suit ces étapes :
+
+1. INITIALISATION (fonction initialiser_stations)
+   - Toutes les stations reçoivent une distance infinie (FLT_MAX)
+   - Sauf la station de départ qui reçoit une distance de 0.0
+   - Le champ con_pcc (connexion du plus court chemin) est mis à NULL
+
+2. CONSTRUCTION DE LA FILE DE PRIORITÉ (fonction construire_file)
+   - On crée une liste triée par distance croissante (user_val)
+   - Au départ, la station de départ est en tête (distance 0)
+   - Toutes les autres suivent (distance infinie)
+
+3. BOUCLE PRINCIPALE (fonction dijkstra)
+   Tant que la file n'est pas vide :
+
+   a) On extrait la station U avec la plus petite distance (tête de file)
+      - Cette station est maintenant "visitée" avec sa distance définitive
+
+   b) Pour chaque connexion sortante de U :
+      - On récupère la station V (destination de la connexion)
+      - On calcule le COÛT de cette connexion :
+        * cout = temps_parcours + TEMPS_ARRET
+        * Si changement de ligne : cout += TEMPS_CORRESPONDANCE
+
+      c) On calcule la distance alternative pour atteindre V via U :
+         alt = distance(U) + cout
+
+      d) Si alt < distance(V) actuelle :
+         - On met à jour distance(V) = alt
+         - On mémorise la connexion empruntée dans V.con_pcc
+         - On retire V de la file (sa distance a changé)
+         - On réinsère V dans la file triée à sa nouvelle position
+
+4. Reconstruction du chemin (fonction cherche_chemin)
+   - On part de la station d'arrivée
+   - On remonte les connexions via le champ con_pcc de chaque station
+   - On insère en début de liste pour obtenir le chemin dans le bon ordre
+   - On s'arrête quand on atteint une station sans con_pcc (la station de départ)
+
+COMPLEXITÉ
+----------
+- Temps : O((V + E) log V) avec notre implémentation (liste triée)
+  * V = nombre de stations
+  * E = nombre de connexions
+  * Les opérations d'insertion/extraction dans la file triée coûtent O(log V)
+
+- Espace : O(V) pour stocker la file et les distances
+
+EXEMPLE D'EXÉCUTION
+-------------------
+Trajet de "Châtelet" à "Gare de Lyon" :
+
+1. Initialisation :
+   - Châtelet : distance = 0.0
+   - Toutes les autres : distance = +∞
+
+2. Première itération :
+   - On extrait Châtelet (distance 0.0)
+   - On examine ses connexions (Hôtel de Ville, Palais Royal, etc.)
+   - On met à jour leurs distances : 2.5 min, 3.0 min, etc.
+
+3. Itérations suivantes :
+   - On extrait la station avec la plus petite distance
+   - On relaxe ses voisins
+   - On continue jusqu'à avoir visité toutes les stations atteignables
+
+4. Résultat final :
+   - Gare de Lyon : distance = 5.2 min (par exemple)
+   - con_pcc pointe vers la connexion depuis "Hôtel de Ville"
+   - On remonte pour obtenir : Châtelet → Hôtel de Ville → Gare de Lyon
+
+
+========================================
+2. ARBRE QUATERNAIRE (AQR)
+========================================
+
+FICHIERS CONCERNÉS
+------------------
+- aqrtopo.h / aqrtopo.c / aqrtopo_type.h
+- Utilisé dans : gui/gui_plan.c
+
+POURQUOI CET ALGORITHME ?
+-------------------------
+L'arbre quaternaire est une structure de données spatiale utilisée pour :
+
+- Rechercher efficacement la station la plus proche d'une position géographique
+- Optimiser la sélection de station au clic de souris dans l'interface graphique
+- Éviter de parcourir toutes les stations (recherche linéaire O(n))
+- Permettre des recherches par zone rectangulaire (chercher_zone)
+
+SANS AQR : Pour trouver la station la plus proche de la souris, il faudrait :
+  - Calculer la distance entre la souris et toutes les stations (300+ calculs)
+  - Complexité : O(n) à chaque mouvement/clic de souris
+
+AVEC AQR : On exploite la structure spatiale pour éliminer rapidement les zones éloignées :
+  - Complexité : O(log n) en moyenne (comme un arbre binaire, mais en 2D)
+  - Gain de performance très significatif sur de grands réseaux
+
+COMMENT FONCTIONNE-T-IL ?
+-------------------------
+L'AQR divise récursivement l'espace géographique en quatre quadrants :
+
+                    Nord
+                     ↑
+          NO (Nord-Ouest) | NE (Nord-Est)
+    Ouest ←---------------+---------------→ Est
+          SO (Sud-Ouest)  | SE (Sud-Est)
+                     ↓
+                    Sud
+
+1. Insertion (fonction inserer_aqr)
+   - Si l'arbre est vide, on crée un nouveau nœud avec la station
+   - Sinon, on calcule le CENTRE de la zone actuelle :
+     * centre.lon = (limite_no.lon + limite_se.lon) / 2
+     * centre.lat = (limite_no.lat + limite_se.lat) / 2
+
+   - On compare les coordonnées de la station avec le centre :
+     * Si lon < centre.lon ET lat >= centre.lat → quadrant NO
+     * Si lon < centre.lon ET lat < centre.lat → quadrant SO
+     * Si lon >= centre.lon ET lat >= centre.lat → quadrant NE
+     * Si lon >= centre.lon ET lat < centre.lat → quadrant SE
+
+   - On insère récursivement dans le sous-arbre correspondant
+
+2. Construction (fonction construire_aqr)
+   - On calcule les limites globales de la zone (min/max lat/lon)
+   - On calcule un seuil de distance minimal pour éviter les collisions :
+     * seuil = diagonale_zone / 10000
+     * Pour Paris (~10km × 10km) → seuil ≈ 1.5 mètre
+
+   - Pour chaque station :
+     * On vérifie si une station trop proche existe déjà
+     * Si oui, on décale légèrement la station (évite subdivision infinie)
+     * On insère la station dans l'arbre
+
+3. Recherche du plus proche (fonction chercher_aqr)
+   C'est l'opération clé pour la sélection de station.
+
+   a) Le nœud courant est un candidat potentiel
+      - On calcule sa distance au point recherché
+
+   b) On détermine le quadrant prioritaire :
+      - Celui qui contient le point recherché
+      - Exemple : si le point est dans le quadrant NE, on explore NE en priorité
+
+   c) On cherche récursivement dans le quadrant prioritaire
+      - Si on trouve mieux, on met à jour le meilleur candidat
+
+   d) On cherche dans les trois autres quadrants
+      - Car un voisin peut être plus proche (cas des stations en bordure)
+      - Exemple : si on cherche près de la frontière NO/NE, la station la plus
+        proche peut être dans NE même si le point est dans NO
+
+   e) On retourne le meilleur candidat trouvé
+
+4. Recherche par zone (fonction chercher_zone)
+   - Permet de trouver toutes les stations dans un rectangle
+   - Exploite la structure pour éliminer les branches hors zone
+   - Utilisé potentiellement pour le zoom ou l'affichage sélectif
+
+COMPLEXITÉ
+----------
+- Construction : O(n log n) en moyenne
+  * n insertions à O(log n) chacune
+  * Peut dégrader vers O(n²) si toutes les stations sont alignées
+
+- Recherche du plus proche : O(log n) en moyenne
+  * On élimine ~75% des stations à chaque niveau (3 quadrants sur 4)
+  * Peut dégrader vers O(n) dans le pire cas (arbre déséquilibré)
+
+- Espace : O(n) pour stocker les nœuds de l'arbre
+
+EXEMPLE D'UTILISATION
+---------------------
+Clic de souris à la position (2.347, 48.859) :
+
+1. On convertit la position écran en coordonnées géographiques (ecran_vers_geo)
+
+2. On appelle chercher_aqr(aqr_topo, coord_souris)
+
+3. L'arbre explore :
+   - Racine (centre de Paris) : distance = 2.5 km
+   - Descente dans le quadrant NE (la souris est au nord-est du centre)
+   - Sous-nœud NE : distance = 0.8 km (meilleur candidat)
+   - Exploration des 3 autres quadrants du niveau racine
+   - Aucun ne donne mieux que 0.8 km
+   - Résultat : station "Belleville" à 0.8 km
+
+4. On vérifie que la distance écran est < PLAN_DISTANCE_SELECTION (10 pixels)
+
+5. Si oui, on sélectionne la station, sinon on déselectionne
+
+OPTIMISATION DANS LE PROJET
+---------------------------
+Dans gui_plan.c, on utilise l'AQR s'il est disponible :
+
+```c
+if (app->aqr_topo != NULL) {
+    // Recherche optimisée O(log n)
+    Une_coord coord_ref;
+    if (ecran_vers_geo(app, x_ref, y_ref, largeur, hauteur, &coord_ref)) {
+        Un_truc *candidat = chercher_aqr(app->aqr_topo, coord_ref);
+        // Vérification de la distance...
+    }
+} else {
+    // Fallback : recherche linéaire O(n)
+    for (Un_elem *elem = app->liste_stations; elem != NULL; elem = elem->suiv) {
+        // Parcours de toutes les stations...
+    }
+}
+```
+
+Résultat : Sur un réseau de 300 stations :
+- SANS AQR : 300 calculs de distance à chaque clic
+- AVEC AQR : ~8 calculs en moyenne (log₄(300) ≈ 4 niveaux × 2 vérifications)
+
+
+========================================
+3. ARBRE BINAIRE DE RECHERCHE (ABR)
+========================================
+
+FICHIERS CONCERNÉS
+------------------
+- abr.h / abr.c / abr_type.h
+- Utilisé dans : connexion.c, gui.c
+
+POURQUOI CET ALGORITHME ?
+-------------------------
+L'ABR est utilisé pour rechercher efficacement une station par son nom :
+
+- Lors du chargement des connexions, on doit retrouver les stations de départ/arrivée
+  par leur nom (fichier connexions.csv contient des noms, pas des pointeurs)
+- La recherche est insensible à la casse (Paris = paris = PARIS)
+- Alternative à la recherche linéaire qui serait trop lente (O(n) par recherche)
+
+SANS ABR : Pour charger 5000 connexions avec 300 stations :
+  - 5000 × 2 recherches (départ + arrivée) = 10000 recherches
+  - Chaque recherche parcourt ~150 stations en moyenne
+  - Total : 1,5 million de comparaisons de chaînes
+
+AVEC ABR : Même scénario :
+  - 10000 recherches à O(log n) chacune
+  - Chaque recherche fait ~8 comparaisons (log₂(300) ≈ 8)
+  - Total : 80000 comparaisons
+  - Gain : 18× plus rapide.
+
+COMMENT FONCTIONNE-T-IL ?
+-------------------------
+Un ABR est un arbre binaire où chaque nœud a au plus deux fils (gauche et droit), avec :
+  - Tous les nœuds du sous-arbre gauche ont des clés inférieures
+  - Tous les nœuds du sous-arbre DROIT ont des clés supérieures ou égales
+
+1. Structure (abr_type.h)
+   ```c
+   typedef struct Un_nabr {
+       Un_truc *truc;      // Pointeur vers la station
+       struct Un_nabr *g;  // Fils gauche (noms inférieurs)
+       struct Un_nabr *d;  // Fils droit (noms supérieurs)
+   } Un_nabr;
+   ```
+
+2. Insertion (fonction inserer_abr)
+   - On compare le nom de la station à insérer avec le nœud courant
+   - Comparaison avec strcasecmp (insensible à la casse) :
+     * < 0 : le nom est inférieur → on insère à gauche
+     * >= 0 : le nom est supérieur ou égal → on insère à droite
+   - Récursif jusqu'à trouver une position vide (NULL)
+
+3. Construction (fonction construire_abr)
+   - On parcourt la liste de stations
+   - Pour chaque station, on crée un nœud et on l'insère dans l'ABR
+   - L'ordre d'insertion détermine la forme de l'arbre
+
+4. Recherche (fonction chercher_station)
+   ```c
+   int cmp = strcasecmp(nom, abr->truc->data.sta.nom);
+   if (cmp == 0) {
+       return abr->truc;  // Trouvé !
+   } else if (cmp < 0) {
+       return chercher_station(abr->g, nom);  // Chercher à gauche
+   } else {
+       return chercher_station(abr->d, nom);  // Chercher à droite
+   }
+   ```
+
+   - On compare le nom recherché avec le nœud courant
+   - Si égal → trouvé !
+   - Si inférieur → chercher à gauche
+   - Si supérieur → chercher à droite
+   - Récursif jusqu'à trouver ou atteindre NULL (pas trouvé)
+
+COMPLEXITÉ
+----------
+- Construction : O(n log n) en moyenne
+  * n insertions à O(log n) chacune
+  * Peut dégrader vers O(n²) si la liste est déjà triée (arbre dégénéré en liste)
+
+- Recherche : O(log n) en moyenne
+  * On élimine ~50% des nœuds à chaque niveau
+  * Peut dégrader vers O(n) si l'arbre est déséquilibré
+
+- Espace : O(n) pour stocker les nœuds
+
+EXEMPLE D'EXÉCUTION
+-------------------
+Recherche de "gare de lyon" (insensible à la casse) :
+
+ABR construit à partir de : [Châtelet, Bastille, Gare de Lyon, Opéra, Belleville]
+
+                    Châtelet
+                   /        \
+            Bastille          Opéra
+                  \          /
+              Belleville  Gare de Lyon
+
+1. Comparaison avec "Châtelet" (racine)
+   - strcasecmp("gare de lyon", "Châtelet") > 0 → aller à DROITE
+
+2. Comparaison avec "Opéra"
+   - strcasecmp("gare de lyon", "Opéra") < 0 → aller à GAUCHE
+
+3. Comparaison avec "Gare de Lyon"
+   - strcasecmp("gare de lyon", "Gare de Lyon") == 0 → TROUVÉ !
+
+3 comparaisons au lieu de 5 en recherche linéaire (gain de 40%)
+
+INSENSIBILITÉ À LA CASSE
+-------------------------
+La fonction strcasecmp (strings.h) compare deux chaînes sans tenir compte de la casse :
+  - "Paris" == "paris" == "PARIS" == "PaRiS"
+  - Important pour l'expérience utilisateur (saisie flexible)
+  - Utilisé à la fois pour l'insertion et la recherche
+
+
+========================================
+4. FORMULE DE HAVERSINE
+========================================
+
+FICHIERS CONCERNÉS
+------------------
+- connexion.c (fonction calculer_distance)
+- Utilisé dans : connexion.c pour calcul automatique des temps
+
+POURQUOI CETTE FORMULE ?
+------------------------
+La formule de Haversine calcule la distance entre deux points sur une sphère
+(ici la Terre) à partir de leurs coordonnées géographiques (latitude, longitude).
+
+POURQUOI PAS LA DISTANCE EUCLIDIENNE ?
+- La Terre est sphérique (approximation suffisante pour un réseau de métro)
+- La distance euclidienne (√(Δx² + Δy²)) suppose un plan plat
+- Pour de courtes distances (~10 km comme Paris), l'erreur serait faible (~1%)
+- Mais pour être rigoureux et extensible à d'autres villes, on utilise Haversine
+
+UTILISATION DANS LE PROJET :
+- Si le fichier connexions.csv contient un temps de parcours (4ème colonne), on l'utilise
+- Sinon (temps = 0.0), on le calcule automatiquement :
+  1. Distance géographique réelle avec Haversine (en km)
+  2. Temps = (distance / vitesse_ligne) × 60 (conversion en minutes)
+
+COMMENT FONCTIONNE-T-ELLE ?
+---------------------------
+La formule de Haversine exploite la trigonométrie sphérique :
+
+1. Conversion en radians
+   - Les latitudes et longitudes sont en degrés décimaux
+   - Les fonctions trigonométriques (sin, cos) nécessitent des radians
+   - Conversion : radians = degrés × π / 180
+
+2. Calcul des différences
+   - Δlat = lat₂ - lat₁ (écart de latitude)
+   - Δlon = lon₂ - lon₁ (écart de longitude)
+
+3. Formule de Haversine
+   ```
+   a = sin²(Δlat/2) + cos(lat₁) × cos(lat₂) × sin²(Δlon/2)
+   c = 2 × atan2(√a, √(1-a))
+   distance = R × c
+   ```
+
+   Où :
+   - R = 6371 km (rayon moyen de la Terre)
+   - a = carré du demi-angle sous-tendu par les deux points
+   - c = angle au centre de la Terre (en radians)
+   - distance = arc de cercle sur la surface terrestre
+
+EXPLICATION "INTUITIVE"
+-----------------------
+Imaginons deux stations A et B sur la surface de la Terre :
+
+1. On calcule "l'angle" entre elles vu depuis le centre de la Terre
+2. Plus elles sont éloignées, plus l'angle est grand
+3. La distance est l'arc de cercle sur la surface = rayon × angle
+4. La formule de Haversine calcule cet angle de manière stable numériquement
+
+EXEMPLE D'UTILISATION
+---------------------
+Calculer la distance entre Châtelet et Gare de Lyon :
+
+Données :
+- Châtelet : (2.347, 48.857) → lon₁, lat₁
+- Gare de Lyon : (2.373, 48.844) → lon₂, lat₂
+
+Calcul :
+1. Conversion en radians :
+   - lat₁_rad = 48.857 × π/180 = 0.8529 rad
+   - lat₂_rad = 48.844 × π/180 = 0.8527 rad
+   - Δlat = (48.844 - 48.857) × π/180 = -0.0002 rad
+   - Δlon = (2.373 - 2.347) × π/180 = 0.0005 rad
+
+2. Formule :
+   - a = sin²(-0.0001) + cos(0.8529) × cos(0.8527) × sin²(0.00025)
+   - a ≈ 0.00000001 + 0.6561 × 0.6562 × 0.00000006 ≈ 0.00000003
+   - c = 2 × atan2(√0.00000003, √0.99999997) ≈ 0.0003 rad
+   - distance = 6371 × 0.0003 ≈ 1.9 km
+
+3. Temps de parcours (vitesse ligne 1 = 35 km/h) :
+   - temps = (1.9 / 35) × 60 ≈ 3.3 minutes
+
+COMPLEXITÉ
+----------
+- Temps : O(1) - nombre fixe d'opérations trigonométriques
+- Espace : O(1) - quelques variables locales
+
+PRÉCISION ET LIMITES
+--------------------
+- Précision : ~0.5% d'erreur (suffisant pour un métro)
+- Hypothèses :
+  * La Terre est une sphère parfaite (en réalité légèrement aplatie)
+  * On mesure la distance à vol d'oiseau (pas le trajet réel des rails)
+  * On ignore l'altitude (négligeable pour un métro)
+
+- Pour des distances < 100 km (cas d'un métro), Haversine est largement suffisant
+- Pour des distances > 1000 km, il faudrait utiliser Vincenty (ellipsoïde)
+
+
+========================================
+5. COMPARAISON DES ALGORITHMES
+========================================
+
+RÉSUMÉ DES COMPLEXITÉS
+-----------------------
++----------------+------------------+------------------+------------------+
+| Algorithme     | Construction     | Recherche/Usage  | Espace           |
++----------------+------------------+------------------+------------------+
+| Dijkstra       | -                | O((V+E) log V)   | O(V)             |
+| AQR            | O(n log n)       | O(log n)         | O(n)             |
+| ABR            | O(n log n)       | O(log n)         | O(n)             |
+| Haversine      | -                | O(1)             | O(1)             |
++----------------+------------------+------------------+------------------+
+
+CHOIX ALGORITHMIQUES DU PROJET
+-------------------------------
+1. DIJKSTRA pour le plus court chemin
+   - Optimal pour les graphes à poids positifs (temps de parcours)
+   - Alternative : A* (plus rapide avec heuristique, mais plus complexe)
+   - Alternative : Bellman-Ford (supporte poids négatifs, mais plus lent)
+
+2. AQR pour la recherche spatiale
+   - Optimal pour des données géographiques 2D
+   - Alternative : k-d tree (plus général, mais moins intuitif pour 2D)
+   - Alternative : R-tree (plus efficace pour rectangles, mais plus complexe)
+
+3. ABR pour la recherche par nom
+   - Simple et efficace pour des données textuelles
+   - Alternative : Table de hachage (O(1) mais collision possible, ordre perdu)
+   - Alternative : ABR équilibré (AVL, Rouge-Noir) pour garantir O(log n)
+
+4. HAVERSINE pour les distances géographiques
+   - Standard pour géolocalisation courte distance
+   - Alternative : Distance euclidienne (plus simple, moins précise)
+   - Alternative : Vincenty (plus précise, mais overkill pour un métro)
+
+
+========================================
+6. OPTIMISATIONS POSSIBLES
+========================================
+
+DIJKSTRA
+--------
+1. File de priorité avec "tas" binaire (heap)
+   - Actuel : liste triée → O(n) pour insertion
+   - Avec heap : O(log n) pour insertion
+   - Gain : amélioration significative sur grands réseaux
+
+2. A* avec heuristique de distance
+   - Utiliser la distance à vol d'oiseau comme heuristique
+   - Explore moins de nœuds que Dijkstra
+   - Optimal si heuristique admissible (ne surestime jamais)
+
+AQR
+---
+1. Seuil adaptatif par densité
+   - Actuel : seuil fixe basé sur la diagonale
+   - Amélioration : ajuster selon la densité locale de stations
+   - Évite subdivision excessive dans zones denses
+
+2. Rééquilibrage périodique
+   - Si insertions/suppressions fréquentes
+   - Reconstruire l'arbre pour maintenir l'équilibre
+
+ABR
+---
+1. Arbre équilibré (AVL ou Rouge-Noir)
+   - Actuel : ABR simple → peut dégrader en O(n) si données triées
+   - AVL/RN : garantit O(log n) dans tous les cas
+   - Coût : complexité d'implémentation accrue
+
+2. Arbre B ou B+
+   - Pour très grand nombre de stations (> 10000)
+   - Meilleure localité mémoire (cache-friendly)
+
+HAVERSINE
+---------
+Déjà optimal pour l'usage (O(1) par calcul).
+Pas d'optimisation significative possible sans changer de modèle.
+
+
+========================================
+7. RÉFÉRENCES ET RESSOURCES
+========================================
+
+DIJKSTRA
+--------
+- Article original : "A note on two problems in connexion with graphs" (1959)
+- Wikipedia : https://fr.wikipedia.org/wiki/Algorithme_de_Dijkstra
+- Visualisation : https://www.cs.usfca.edu/~galles/visualization/Dijkstra.html
+
+ARBRE QUATERNAIRE
+-----------------
+- Wikipedia : https://fr.wikipedia.org/wiki/Quadtree
+- Cours : https://www.labri.fr/perso/nrougier/teaching/numpy/numpy.html
+- Applications : compression d'images, jeux vidéo, SIG
+
+ARBRE BINAIRE DE RECHERCHE
+---------------------------
+- Cours classique de structures de données
+- Wikipedia : https://fr.wikipedia.org/wiki/Arbre_binaire_de_recherche
+- Visualisation : https://www.cs.usfca.edu/~galles/visualization/BST.html
+
+FORMULE DE HAVERSINE
+--------------------
+- Article : https://fr.wikipedia.org/wiki/Formule_de_haversine
+- Explication détaillée : https://www.movable-type.co.uk/scripts/latlong.html
+- Applications : GPS, géolocalisation, cartographie
