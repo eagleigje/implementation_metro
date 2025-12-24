@@ -86,7 +86,7 @@ int lancer_gui(const Une_config *config) {
         return 1;
     }
 
-    // Création du moteur de rendu accéléré avec vsync
+    // Création du moteur de rendu
     app.moteurRendu = SDL_CreateRenderer(app.fenetre, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
     if (app.moteurRendu == NULL) {
         fprintf(stderr, "Erreur SDL_CreateRenderer: %s\n", SDL_GetError());
@@ -240,6 +240,7 @@ int lancer_gui(const Une_config *config) {
         SDL_RenderPresent(app.moteurRendu);
     }
 
+    // Ici, on quitte l'applicaton.
     // Libération de la mémoire des données du métro
     // IMPORTANT : L'ordre de libération est très important.
     // On libère d'abord les connexions, puis les structures qui y font référence.
