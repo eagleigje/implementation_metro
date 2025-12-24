@@ -56,16 +56,16 @@ NOTES TECHNIQUES
 
 2. Pour chaque paire de stations consécutives, il crée deux connexions :
    - Station A → Station B (sens 1)
-   - Station B → Station A (sens 2)
+   - Station B → Station A (sens 2).
 
 3. Les temps de parcours sont mis à 0.0 pour être calculés automatiquement
    par la fonction lire_connexions() basée sur :
    - La distance géographique (formule de Haversine)
-   - La vitesse de la ligne (depuis lignes_paris.csv)
+   - La vitesse de la ligne (depuis lignes_paris.csv).
 
 4. Les noms de stations sont conservés tels quels depuis le fichier source
    - Aucune modification des noms officiels
-   - Les parenthèses font partie intégrante du nom (ex: "Saint-Paul (Le Marais)")
+   - Les parenthèses font partie intégrante du nom (ex : "Saint-Paul (Le Marais)")
 
 DÉPENDANCES
 -----------
