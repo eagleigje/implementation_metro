@@ -87,6 +87,12 @@ static Un_truc *creer_connexion(char *ligne_str, Une_ligne *liste_ligne, Un_nabr
     }
     char code_ligne[LINE_MAX_CODE_SIZE];
     strcpy(code_ligne, code_ptr);
+    if (code_ligne[0] == '\0') {
+        if (err != NULL) {
+            *err = CSV_ERR_CODE_LIGNE;
+        }
+        return NULL;
+    }
 
     // On lit le nom de la station de départ
     if (!csv_champ_suivant(&lecteur)) {
@@ -104,6 +110,12 @@ static Un_truc *creer_connexion(char *ligne_str, Une_ligne *liste_ligne, Un_nabr
     }
     char nom_dep[STATION_NOM_TAILLE_MAX];
     strcpy(nom_dep, nom_dep_ptr);
+    if (nom_dep[0] == '\0') {
+        if (err != NULL) {
+            *err = CSV_ERR_STATION_DEP;
+        }
+        return NULL;
+    }
 
     // On lit le nom de la station d'arrivée
     if (!csv_champ_suivant(&lecteur)) {
@@ -121,6 +133,12 @@ static Un_truc *creer_connexion(char *ligne_str, Une_ligne *liste_ligne, Un_nabr
     }
     char nom_arr[STATION_NOM_TAILLE_MAX];
     strcpy(nom_arr, nom_arr_ptr);
+    if (nom_arr[0] == '\0') {
+        if (err != NULL) {
+            *err = CSV_ERR_STATION_ARR;
+        }
+        return NULL;
+    }
 
     // On lit le temps de parcours
     if (!csv_champ_suivant(&lecteur)) {
@@ -282,6 +300,7 @@ Un_elem *lire_connexions(char *nom_fichier, Une_ligne *liste_ligne, Un_nabr *abr
     fclose(fichier);
     if (lignes_ignorees > 0) {
         fprintf(stderr, "Avertissement : %d ligne(s) de connexions ignorée(s) (valeurs invalides)\n", lignes_ignorees);
+        fprintf(stderr, "Avertissement : voir les détails ci-dessus.\n");
     }
     return liste_con;
 }

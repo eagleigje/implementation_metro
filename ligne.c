@@ -45,6 +45,12 @@ static Une_ligne *creer_ligne(char *ligne_str, int *err) {
     }
     char code[LINE_MAX_CODE_SIZE];
     strcpy(code, code_ptr);  // On doit copier les champs textes, sinon ils sont écrasés par les suivants.
+    if (code[0] == '\0') {
+        if (err != NULL) {
+            *err = CSV_ERR_CODE_LIGNE;
+        }
+        return NULL;
+    }
 
     // La vitesse de la ligne
     if (!csv_champ_suivant(&lecteur)) {
@@ -92,6 +98,12 @@ static Une_ligne *creer_ligne(char *ligne_str, int *err) {
     }
     char couleur[LINE_COLOR_SIZE];
     strcpy(couleur, couleur_ptr);
+    if (couleur[0] == '\0') {
+        if (err != NULL) {
+            *err = CSV_ERR_COULEUR;
+        }
+        return NULL;
+    }
 
     // Validation du format de la couleur (#RRGGBB attendu)
     int couleur_valide = 1;
@@ -218,6 +230,7 @@ Une_ligne *lire_lignes(char *nom_fichier) {
     fclose(fichier);
     if (lignes_ignorees > 0) {
         fprintf(stderr, "Avertissement : %d ligne(s) de lignes ignorée(s) (valeurs invalides)\n", lignes_ignorees);
+        fprintf(stderr, "Avertissement : voir les détails ci-dessus.\n");
     }
     return tete;
 }
