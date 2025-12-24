@@ -6,8 +6,6 @@
 #ifndef CSV_UTILS_H
 #define CSV_UTILS_H
 
-#include <stddef.h>
-
 #define CSV_TAMPON_TAILLE 512
 
 // Codes d'erreur renvoyés lors de la lecture d'un CSV
