@@ -19,6 +19,7 @@ Un arbre binaire de recherche est un arbre binaire dans lequel tout nœud a une 
 STRUCTURE DU PROJET
 -------------------
 Le projet est organisé en plusieurs modules :
+** La documentation technique au format Doxygen se trouve dans doc/projet/html/index.html **
 
 1. Structures de données de base :
    - coord.h       : Coordonnées géographiques (latitude/longitude)
@@ -105,6 +106,7 @@ Le projet est organisé en plusieurs modules :
     - doc/projet/html/index.html       : La documentation Doxygen du projet
     - README_GENERER_CONNEXIONS.txt    : Guide d'utilisation du script de génération des connexions
     - MODE_EMPLOI_GUI.txt              : Mode d'emploi de l'interface graphique (menus, clavier, souris)
+    - fonts/README_FONTS.txt           : Gestion de la police utilisée par le GUI.
 
 11. Scripts utilitaires :
     - generer_connexions_paris.py      : Script Python pour générer connexions_paris.csv automatiquement
