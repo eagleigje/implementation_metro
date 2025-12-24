@@ -7,7 +7,6 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 
-#include "gui.h"
 #include "gui_commun.h"
 
 /**
@@ -15,13 +14,13 @@
  * @param app : État global de l'application graphique.
  */
 void gui_mettre_a_jour_titre(Etat_affichage *app) {
-    // On détermine le texte à afficher selon l'écran et le mode actifs
+    // On détermine le texte à afficher selon l'écran et le mode actif.
     const char *ecran = (app->ecran == ECRAN_MENU) ? "MENU" : "PLAN";
     const char *mode = (app->mode == MODE_SELECTION) ? "SÉLECTION" : "CHEMIN";
     char titre[128];
 
     // On construit le titre et on l'affiche dans la barre de fenêtre
-    snprintf(titre, sizeof(titre), "PROJET METRO 2025 - %s (mode=%s)", ecran, mode);
+    snprintf(titre, sizeof(titre), "%s - %s (mode=%s)", TITRE_GUI,ecran, mode);
     SDL_SetWindowTitle(app->fenetre, titre);
 }
 
@@ -38,16 +37,19 @@ void gui_afficher_aide(void) {
 }
 
 /**
- * Fonction qui charge une police TrueType à partir de chemins connus.
+ * Fonction qui charge une police TrueType (TTF) à partir de chemins connus du système d'exploitation.
+ * Une police locale dans le dossier fonts/ est utilisée en dernier recours.
  * @param taille : Taille en points de la police à charger.
  * @return : Un pointeur vers la police chargée, ou NULL si aucune n'est disponible.
  */
 TTF_Font *gui_charger_police(int taille) {
-    // Liste des chemins système connus où chercher la police DejaVu Sans
+    // Liste des chemins connus où chercher une police disponible.
+    // Le dernier chemin correspond à une police locale fournie avec le projet.
     const char *chemins[] = {
         "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
         "/usr/share/fonts/TTF/DejaVuSans.ttf",
         "/usr/share/fonts/dejavu/DejaVuSans.ttf",
+        "./fonts/DejaVuSans.ttf",
         NULL
     };
 
@@ -55,11 +57,12 @@ TTF_Font *gui_charger_police(int taille) {
     for (int i = 0; chemins[i] != NULL; i++) {
         TTF_Font *police = TTF_OpenFont(chemins[i], taille);
         if (police != NULL) {
+            printf("Police de taille %d chargée depuis : %s\n", taille, chemins[i]);
             return police;
         }
     }
 
-    // Aucune police trouvée
+    // Aucune police trouvée, dans ce cas les textes ne seront pas affichés.
     return NULL;
 }
 
