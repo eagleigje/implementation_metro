@@ -1,0 +1,98 @@
+========================================
+ MODE D'EMPLOI - INTERFACE GRAPHIQUE SDL2
+========================================
+
+OBJECTIF
+--------
+Ce document explique comment utiliser l'interface graphique du projet Métro.
+Il décrit les écrans disponibles, les actions possibles à la souris,
+les raccourcis clavier et les modes de fonctionnement.
+
+LANCEMENT
+---------
+Lancez le programme principal avec :
+    ./metro
+
+Vous pouvez préciser un fichier de configuration :
+    ./metro config_paris.ini
+
+ÉCRAN MENU
+----------
+L'écran d'accueil propose trois cartes de menu.
+
+Actions possibles :
+- Souris : clic gauche sur une carte.
+- Clavier :
+  - 1 : Afficher le plan (mode Sélection)
+  - 2 : Plus court chemin (mode Chemin)
+  - 3 ou Q : Quitter
+
+ÉCRAN PLAN (GÉNÉRAL)
+--------------------
+L'écran plan affiche les stations et les connexions.
+La fenêtre est redimensionnable (avec une taille minimale).
+
+Raccourcis clavier :
+- S : passer en mode Sélection
+- P : passer en mode Chemin
+- F : activer la recherche par nom (préfixe)
+- R : réinitialiser la vue (zoom et décalage)
+- ESC : revenir au menu
+- Q : quitter l'application
+- + / - (ou pavé numérique) : zoom avant / arrière
+- Flèches : déplacer le plan (panoramique)
+
+Souris :
+- Clic gauche : sélectionner une station (ou choisir un départ/arrivée en mode Chemin)
+- Clic droit + glisser : déplacer le plan
+- Molette : zoom avant / arrière
+- Survol : affiche une bulle de texte (station ou ligne) près du curseur
+
+MODE SÉLECTION
+--------------
+Objectif : sélectionner une station unique.
+
+Actions :
+- Clic gauche sur une station : la station est mise en évidence.
+- La sélection est affichée en console.
+
+MODE CHEMIN (PLUS COURT CHEMIN)
+-------------------------------
+Objectif : calculer le plus court chemin entre deux stations.
+
+Étapes :
+1. Clic gauche sur la station de départ.
+2. Clic gauche sur la station d'arrivée.
+3. Le chemin est calculé et affiché sur le plan.
+
+Résultat :
+- Le chemin apparaît sur le plan, avec un encart récapitulatif.
+- Le détail du chemin est aussi affiché en console.
+
+Remarque :
+- Si vous choisissez un nouveau départ, l'ancien chemin est effacé.
+
+RECHERCHE PAR NOM (PRÉFIXE)
+---------------------------
+Objectif : trouver rapidement une station par son nom.
+
+Utilisation :
+- Appuyez sur F pour activer la recherche.
+- Tapez les premières lettres du nom (recherche par préfixe).
+- Entrée : valider et centrer la vue sur la station trouvée.
+- Échap : annuler la recherche.
+- Retour arrière : supprimer un caractère.
+
+Si aucune station ne correspond, le panneau indique "aucune station".
+
+AFFICHAGE DES INFORMATIONS
+--------------------------
+- Une bulle près de la souris affiche le nom de la station survolée.
+- Si aucune station n'est proche, le nom de la ligne la plus proche est affiché.
+- Un panneau fixe rappelle les raccourcis principaux.
+
+REMARQUES
+---------
+- Le zoom et le déplacement n'altèrent pas les données : ils modifient
+  uniquement l'affichage.
+- Le programme utilise SDL2 et SDL2_ttf pour l'affichage et le texte.

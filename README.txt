@@ -102,6 +102,7 @@ Le projet est organisé en plusieurs modules :
     - doc/projet-metro2025.pdf         : Le PDF du projet
     - doc/projet/html/index.html       : La documentation Doxygen du projet
     - README_GENERER_CONNEXIONS.txt    : Guide d'utilisation du script de génération des connexions
+    - MODE_EMPLOI_GUI.txt              : Mode d'emploi de l'interface graphique (menus, clavier, souris)
 
 11. Scripts utilitaires :
     - generer_connexions_paris.py      : Script Python pour générer connexions_paris.csv automatiquement
@@ -175,6 +176,9 @@ Le projet produit deux exécutables :
 
    Cette application est l'interface graphique de l'utilisateur.
    Elle nécessite SDL2 et SDL2_ttf installés (voir section Installation).
+
+   Pour un guide détaillé de l'interface graphique (menus, raccourcis, souris),
+   voir MODE_EMPLOI_GUI.txt.
 
    Contrôles principaux :
    - MENU : 1=Afficher plan, 2=Plus court chemin, 3=Quitter
