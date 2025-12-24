@@ -240,7 +240,7 @@ int lancer_gui(const Une_config *config) {
         SDL_RenderPresent(app.moteurRendu);
     }
 
-    // Ici, on quitte l'applicaton.
+    // Si on arrive ici, c'est que l'utilisateur a quitté l'applicaton.
     // Libération de la mémoire des données du métro
     // IMPORTANT : L'ordre de libération est très important.
     // On libère d'abord les connexions, puis les structures qui y font référence.
