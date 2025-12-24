@@ -124,11 +124,11 @@ L'arbre quaternaire est une structure de données spatiale utilisée pour :
 
 SANS AQR : Pour trouver la station la plus proche de la souris, il faudrait :
   - Calculer la distance entre la souris et toutes les stations (300+ calculs)
-  - Complexité : O(n) à chaque mouvement/clic de souris
+  - Complexité : O(n) à chaque mouvement/clic de souris.
 
 AVEC AQR : On exploite la structure spatiale pour éliminer rapidement les zones éloignées :
   - Complexité : O(log n) en moyenne (comme un arbre binaire, mais en 2D)
-  - Gain de performance très significatif sur de grands réseaux
+  - Gain de performance très significatif sur de grands réseaux.
 
 COMMENT FONCTIONNE-T-IL ?
 -------------------------
@@ -175,7 +175,7 @@ L'AQR divise récursivement l'espace géographique en quatre quadrants :
 
    b) On détermine le quadrant prioritaire :
       - Celui qui contient le point recherché
-      - Exemple : si le point est dans le quadrant NE, on explore NE en priorité
+      - Exemple : si le point est dans le quadrant NE, on explore "NE" en priorité
 
    c) On cherche récursivement dans le quadrant prioritaire
       - Si on trouve mieux, on met à jour le meilleur candidat
@@ -218,11 +218,11 @@ Clic de souris à la position (2.347, 48.859) :
    - Sous-nœud NE : distance = 0.8 km (meilleur candidat)
    - Exploration des 3 autres quadrants du niveau racine
    - Aucun ne donne mieux que 0.8 km
-   - Résultat : station "Belleville" à 0.8 km
+   - Résultat : station "Belleville" à 0.8 km.
 
 4. On vérifie que la distance écran est < PLAN_DISTANCE_SELECTION (10 pixels)
 
-5. Si oui, on sélectionne la station, sinon on déselectionne
+5. Si oui, on sélectionne la station, sinon on supprime la sélection.
 
 OPTIMISATION DANS LE PROJET
 ---------------------------
@@ -270,7 +270,7 @@ L'ABR est utilisé pour rechercher efficacement une station par son nom :
 SANS ABR : Pour charger 5000 connexions avec 300 stations :
   - 5000 × 2 recherches (départ + arrivée) = 10000 recherches
   - Chaque recherche parcourt ~150 stations en moyenne
-  - Total : 1,5 million de comparaisons de chaînes
+  - Total : 1,5 million de comparaisons de chaînes.
 
 AVEC ABR : Même scénario :
   - 10000 recherches à O(log n) chacune
@@ -527,7 +527,7 @@ AQR
 1. Seuil adaptatif par densité
    - Actuel : seuil fixe basé sur la diagonale
    - Amélioration : ajuster selon la densité locale de stations
-   - Évite subdivision excessive dans zones denses
+   - Évite la subdivision excessive dans des zones denses
 
 2. Rééquilibrage périodique
    - Si insertions/suppressions fréquentes
@@ -542,7 +542,7 @@ ABR
 
 2. Arbre B ou B+
    - Pour très grand nombre de stations (> 10000)
-   - Meilleure localité mémoire (cache-friendly)
+   - Meilleure localité mémoire
 
 HAVERSINE
 ---------
@@ -569,7 +569,7 @@ ARBRE QUATERNAIRE
 ARBRE BINAIRE DE RECHERCHE
 ---------------------------
 - Cours classique de structures de données
-- Wikipedia : https://fr.wikipedia.org/wiki/Arbre_binaire_de_recherche
+- Wikipédia : https://fr.wikipedia.org/wiki/Arbre_binaire_de_recherche
 - Visualisation : https://www.cs.usfca.edu/~galles/visualization/BST.html
 
 FORMULE DE HAVERSINE
