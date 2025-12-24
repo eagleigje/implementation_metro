@@ -177,7 +177,7 @@ Une_ligne *lire_lignes(char *nom_fichier) {
             tete = nouvelle;
             tmp = tete;
         } else {
-            // Sinon on l'ajoute à la fin
+            // Sinon, on l'ajoute à la fin
             tmp->suiv = nouvelle;
             tmp = nouvelle;
         }
