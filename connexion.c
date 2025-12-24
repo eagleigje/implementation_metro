@@ -179,7 +179,7 @@ static Un_truc *creer_connexion(char *ligne_str, Une_ligne *liste_ligne, Un_nabr
         fprintf(stderr, "Erreur: échec d'allocation pour tab_con\n");
         sta_dep->data.sta.nb_con--;  // On annule l'incrémentation
         detruire_truc(connexion);    // On libère la connexion créée
-        // Note: tab_con n'a pas été modifié, il reste intact
+        // tab_con n'a pas été modifié, il reste intact
         return NULL;
     }
     // On met à jour le pointeur seulement si realloc a réussi
