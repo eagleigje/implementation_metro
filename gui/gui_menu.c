@@ -4,20 +4,18 @@
  */
 
 #include <SDL2/SDL.h>
-#include <stdbool.h>
 
-#include "gui.h"
 #include "gui_menu.h"
 #include "gui_commun.h"
 
 /**
- * Fonction qui dessine l'écran menu principal.
+ * Fonction qui dessine l'écran du menu principal.
  * @param app : État global de l'application graphique.
  * @param largeur : Largeur de la fenêtre.
  * @param hauteur : Hauteur de la fenêtre.
  */
 void gui_menu_dessiner(Etat_affichage *app, int largeur, int hauteur) {
-    // On efface l'écran avec la couleur de fond (bleu-gris foncé).
+    // On efface l'écran avec la couleur de fond.
     Couleur fond = COULEUR_FOND_MENU;
     SDL_SetRenderDrawColor(app->moteurRendu, fond.r, fond.g, fond.b, fond.a);
     SDL_RenderClear(app->moteurRendu);
@@ -47,7 +45,7 @@ void gui_menu_dessiner(Etat_affichage *app, int largeur, int hauteur) {
 
     // On affiche les textes du menu
     SDL_Color couleur_texte = COULEUR_SDL(COULEUR_TEXTE_MENU);
-    gui_rendu_texte(app, app->grande_police, "PROJET METRO 2025", largeur / 2 - 150, hauteur / 2 + MENU_OFFSET_TITRE_Y, couleur_texte);
+    gui_rendu_texte(app, app->grande_police, TITRE_GUI, largeur / 2 - 150, hauteur / 2 + MENU_OFFSET_TITRE_Y, couleur_texte);
     gui_rendu_texte(app, app->petite_police, "1 - Afficher plan (sélection)", carte1.x + MENU_MARGE_TEXTE_X, carte1.y + MENU_MARGE_TEXTE_Y, couleur_texte);
     gui_rendu_texte(app, app->petite_police, "2 - Plus court chemin", carte2.x + MENU_MARGE_TEXTE_X, carte2.y + MENU_MARGE_TEXTE_Y, couleur_texte);
     gui_rendu_texte(app, app->petite_police, "3 - Quitter", carte3.x + MENU_MARGE_TEXTE_X, carte3.y + MENU_MARGE_TEXTE_Y, couleur_texte);
@@ -57,7 +55,7 @@ void gui_menu_dessiner(Etat_affichage *app, int largeur, int hauteur) {
  * Fonction qui gère les événements clavier dans le menu.
  * @param app : État global de l'application graphique.
  * @param key : Code de la touche pressée.
- * @param running : Pointeur vers le flag d'exécution de la boucle principale.
+ * @param running : Pointeur vers le drapeau d'exécution de la boucle principale.
  */
 void gui_menu_gerer_clavier(Etat_affichage *app, SDL_Keycode key, bool *running) {
     // On est dans le menu : on accepte les touches 1, 2, 3 ou Q.
@@ -86,7 +84,7 @@ void gui_menu_gerer_clic(Etat_affichage *app, int x, int y, bool *running) {
     int width, height;
     SDL_GetWindowSize(app->fenetre, &width, &height);
 
-    // On recalcule les positions des cartes (comme dans gui_menu_dessiner)
+    // On recalcule les positions des cartes (comme dans gui_menu_dessiner).
     SDL_Rect carte1 = {width / 2 - MENU_LARGEUR_CARTE / 2, height / 2 + MENU_OFFSET_CARTE_1_Y, MENU_LARGEUR_CARTE, MENU_HAUTEUR_CARTE};
     SDL_Rect carte2 = {width / 2 - MENU_LARGEUR_CARTE / 2, height / 2 + MENU_OFFSET_CARTE_2_Y, MENU_LARGEUR_CARTE, MENU_HAUTEUR_CARTE};
     SDL_Rect carte3 = {width / 2 - MENU_LARGEUR_CARTE / 2, height / 2 + MENU_OFFSET_CARTE_3_Y, MENU_LARGEUR_CARTE, MENU_HAUTEUR_CARTE};
