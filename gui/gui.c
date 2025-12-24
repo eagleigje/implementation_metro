@@ -72,7 +72,7 @@ int lancer_gui(const Une_config *config) {
 
     // Création de la fenêtre principale, centrée à l'écran
     app.fenetre = SDL_CreateWindow(
-        "PROJET METRO 2025",
+        TITRE_GUI,
         SDL_WINDOWPOS_CENTERED,
         SDL_WINDOWPOS_CENTERED,
         GUI_LARGEUR_MIN,

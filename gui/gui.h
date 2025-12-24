@@ -11,13 +11,15 @@
 #include "../aqrtopo.h"
 
 // =============================================================================
-// TAILLES DE LA FENÊTRE
+// FENÊTRE PRINCIPALE
 // =============================================================================
 
 enum {
     GUI_LARGEUR_MIN = 1000,  // Largeur minimale de la fenêtre.
     GUI_HAUTEUR_MIN = 700    // Hauteur minimale de la fenêtre.
 };
+
+#define TITRE_GUI   "PROJET METRO 2025"
 
 // =============================================================================
 // STRUCTURE COULEUR
