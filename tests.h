@@ -8,6 +8,9 @@
 
 #include "config.h"
 
+// Répertoire racine des données de tests.
+#define TESTS_DATA_DIR "tests_data"
+
 // On doit inclure tous les modules de tests
 #include "tests_projet/test_csv_utils.h"
 #include "tests_projet/test_exercice1.h"

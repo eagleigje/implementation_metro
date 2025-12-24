@@ -10,6 +10,7 @@
 #include "../liste.h"
 #include "../abr.h"
 #include "../connexion.h"
+#include "../tests.h"
 
 /**
  * Fonction de test de lecture et d'affichage des connexions (Exercice 4).
@@ -111,7 +112,9 @@ void test_connexions(Une_config *config, const char *test_label) {
     // Test X.6 : Lecture d'un fichier connexions avec erreurs de champs
     printf("  Test %s.6: Lecture fichier connexions invalide (erreurs attendues)\n", test_label);
     tests_total++;
-    Un_elem *connexions_invalides = lire_connexions("test_data/connexions_invalides.csv", lignes, abr_stations);
+    char chemin_invalides[256];
+    snprintf(chemin_invalides, sizeof(chemin_invalides), "%s/connexions_invalides.csv", TESTS_DATA_DIR);
+    Un_elem *connexions_invalides = lire_connexions(chemin_invalides, lignes, abr_stations);
     if (connexions_invalides != NULL) {
         int nb_valides = 0;
         Un_elem *tmp_invalides = connexions_invalides;

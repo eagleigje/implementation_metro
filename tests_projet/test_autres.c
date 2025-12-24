@@ -9,6 +9,7 @@
 #include "../config.h"
 #include "../liste.h"
 #include "../abr.h"
+#include "../tests.h"
 
 /**
  * Fonction de tests de gestion des configurations invalides.
@@ -65,7 +66,9 @@ void test_csv_malformes(const char *test_label) {
     // Test X.2: Fichier CSV vide
     printf("  Test %s.2: Fichier CSV vide\n", test_label);
     tests_total++;
-    Un_elem *liste_vide = lire_stations("test_data/stations_vide.csv");
+    char chemin_vide[256];
+    snprintf(chemin_vide, sizeof(chemin_vide), "%s/stations_vide.csv", TESTS_DATA_DIR);
+    Un_elem *liste_vide = lire_stations(chemin_vide);
     if (liste_vide == NULL) {
         printf("    OK: fichier vide retourne NULL\n");
         tests_ok++;
@@ -87,7 +90,9 @@ void test_csv_malformes(const char *test_label) {
     // Test X.3 : Fichier CSV avec lignes malformées
     printf("  Test %s.3: Fichier CSV avec lignes malformées\n", test_label);
     tests_total++;
-    Un_elem *liste_malformee = lire_stations("test_data/stations_malformees.csv");
+    char chemin_malformee[256];
+    snprintf(chemin_malformee, sizeof(chemin_malformee), "%s/stations_malformees.csv", TESTS_DATA_DIR);
+    Un_elem *liste_malformee = lire_stations(chemin_malformee);
     if (liste_malformee != NULL) {
         int nb_stations = 0;
         Un_elem *temp = liste_malformee;

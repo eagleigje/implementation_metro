@@ -8,6 +8,7 @@
 
 #include "test_exercice3.h"
 #include "../ligne.h"
+#include "../tests.h"
 
 /**
  * Fonction de test pour la lecture et la gestion des lignes de métro (Exercice 3).
@@ -113,7 +114,9 @@ void test_lignes(Une_config *config, const char *test_label) {
     // Test X.7 : Lecture d'un fichier lignes avec erreurs de champs
     printf("  Test %s.7: Lecture fichier lignes invalide (erreurs attendues)\n", test_label);
     tests_total++;
-    Une_ligne *lignes_invalides = lire_lignes("test_data/lignes_invalides.csv");
+    char chemin_invalides[256];
+    snprintf(chemin_invalides, sizeof(chemin_invalides), "%s/lignes_invalides.csv", TESTS_DATA_DIR);
+    Une_ligne *lignes_invalides = lire_lignes(chemin_invalides);
     if (lignes_invalides != NULL) {
         int nb_valides = 0;
         Une_ligne *tmp_invalides = lignes_invalides;
