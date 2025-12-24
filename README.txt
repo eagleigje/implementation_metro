@@ -81,6 +81,8 @@ Le projet est organisé en plusieurs modules :
     - SDL2 (lib SDL2 + en-têtes) : Nécessaire pour compiler l'interface graphique.
     - SDL2_ttf : Nécessaire pour afficher du texte (noms de stations, lignes,
       panneaux d'information), car SDL2 ne fournit pas de rendu de texte nativement.
+    - Police locale (optionnel) : si aucune police système n'est trouvée, le programme
+      charge en dernier recours fonts/DejaVuSans.ttf (voir fonts/README_FONTS.txt).
 
     INSTALLATION SDL2 / SDL2_TTF (LINUX)
     ------------------------------------
