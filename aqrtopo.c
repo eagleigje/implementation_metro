@@ -8,10 +8,55 @@
 #include <math.h>
 
 #include "aqrtopo.h"
+#include "liste.h"
 
-// Prototypes des fonctions locales
-float distance_carree(Une_coord coord1, Une_coord coord2);
-float calculer_seuil_aqr(Une_coord limite_no, Une_coord limite_se);
+/**
+ * Fonction qui calcule la distance au carré entre deux coordonnées.
+ * On utilise le carré pour éviter le calcul trop lent de la racine carrée,
+ * car on ne compare que des distances relatives.
+ *
+ * @param coord1 : Première coordonnée.
+ * @param coord2 : Deuxième coordonnée.
+ * @return : La distance au carré entre les deux points.
+ */
+float distance_carree(Une_coord coord1, Une_coord coord2) {
+    float delta_lon = coord2.lon - coord1.lon;
+    float delta_lat = coord2.lat - coord1.lat;
+    return delta_lon * delta_lon + delta_lat * delta_lat;
+}
+
+/**
+ * Fonction qui calcule un seuil de distance minimal de l'arbre quaternaire.
+ * Le seuil est calculé automatiquement en fonction de la taille de la zone :
+ * il correspond à environ 1/10000ème de la diagonale de la zone.
+ *
+ * Ce seuil permet d'éviter d'insérer deux trucs aux coordonnées trop proches,
+ * ce qui causerait une subdivision infinie de l'arbre.
+ *
+ * @param limite_no : Coin Nord-Ouest de la zone.
+ * @param limite_se : Coin Sud-Est de la zone.
+ * @return : Le seuil de distance calculé (en degrés).
+ */
+float calculer_seuil_aqr(Une_coord limite_no, Une_coord limite_se) {
+    // Seuil minimal : 0.00001° ≈ 1.1 mètre à Paris (évite division par zéro si la zone est nulle)
+    const float SEUIL_MINIMAL = 0.00001f;
+
+    // Calculer la diagonale de la zone
+    float delta_lon = limite_se.lon - limite_no.lon;
+    float delta_lat = limite_no.lat - limite_se.lat;
+    float diagonale = sqrtf(delta_lon * delta_lon + delta_lat * delta_lat);
+
+    // Le seuil est 1/10000ème de la diagonale
+    // Pour Paris (~10km × 10km), cela donne environ 0.000014° ≈ 1.5 mètre.
+    float seuil = diagonale / 10000.0f;
+
+    // On s'assure qu'on a au moins le seuil minimal (cas où tous les points sont identiques).
+    if (seuil < SEUIL_MINIMAL) {
+        seuil = SEUIL_MINIMAL;
+    }
+
+    return seuil;
+}
 
 /**
  * Fonction qui insère un truc dans un arbre quaternaire de manière récursive.
@@ -87,39 +132,6 @@ Un_noeud *inserer_aqr(Un_noeud *aqr, Une_coord limite_no, Une_coord limite_se, U
 }
 
 /**
- * Fonction qui calcule un seuil de distance minimal de l'arbre quaternaire.
- * Le seuil est calculé automatiquement en fonction de la taille de la zone :
- * il correspond à environ 1/10000ème de la diagonale de la zone.
- *
- * Ce seuil permet d'éviter d'insérer deux trucs aux coordonnées trop proches,
- * ce qui causerait une subdivision infinie de l'arbre.
- *
- * @param limite_no : Coin Nord-Ouest de la zone.
- * @param limite_se : Coin Sud-Est de la zone.
- * @return : Le seuil de distance calculé (en degrés).
- */
-float calculer_seuil_aqr(Une_coord limite_no, Une_coord limite_se) {
-    // Seuil minimal : 0.00001° ≈ 1.1 mètre à Paris (évite division par zéro si la zone est nulle)
-    const float SEUIL_MINIMAL = 0.00001f;
-
-    // Calculer la diagonale de la zone
-    float delta_lon = limite_se.lon - limite_no.lon;
-    float delta_lat = limite_no.lat - limite_se.lat;
-    float diagonale = sqrtf(delta_lon * delta_lon + delta_lat * delta_lat);
-
-    // Le seuil est 1/10000ème de la diagonale
-    // Pour Paris (~10km × 10km), cela donne environ 0.000014° ≈ 1.5 mètre.
-    float seuil = diagonale / 10000.0f;
-
-    // On s'assure qu'on a au moins le seuil minimal (cas où tous les points sont identiques).
-    if (seuil < SEUIL_MINIMAL) {
-        seuil = SEUIL_MINIMAL;
-    }
-
-    return seuil;
-}
-
-/**
  * Fonction qui construit un arbre quaternaire à partir d'une liste de trucs.
  *
  * Cette fonction peut modifier les coordonnées des trucs si deux trucs se trouvent à
@@ -190,21 +202,6 @@ void detruire_aqr(Un_noeud *aqr) {
 
     // Et on libère le nœud courant
     free(aqr);
-}
-
-/**
- * Fonction qui calcule la distance au carré entre deux coordonnées.
- * On utilise le carré pour éviter le calcul trop lent de la racine carrée,
- * car on ne compare que des distances relatives.
- *
- * @param coord1 : Première coordonnée.
- * @param coord2 : Deuxième coordonnée.
- * @return : La distance au carré entre les deux points.
- */
-float distance_carree(Une_coord coord1, Une_coord coord2) {
-    float delta_lon = coord2.lon - coord1.lon;
-    float delta_lat = coord2.lat - coord1.lat;
-    return delta_lon * delta_lon + delta_lat * delta_lat;
 }
 
 /**

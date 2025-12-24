@@ -7,11 +7,10 @@
 #define AQRTOPO_H
 
 #include "truc.h"
-#include "liste.h"
 
 /**
  * Définition d'un nœud d'un arbre quaternaire.
- * Un nœud de cet arbre peut avoir entre 0 et 4 fils suivant la répartition des objets dans les 4 partitions que ce
+ * Un nœud de cet arbre peut avoir entre 0 et 4 fils suivant la répartition des objets dans les quatre partitions que ce
  * sous-arbre contient.
  */
 typedef struct _un_noeud {
