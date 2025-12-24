@@ -48,8 +48,8 @@ Le projet est organisé en plusieurs modules :
    - gui/gui.h               : Types, constantes, structure Etat_affichage, fonction publique
    - gui/gui.c               : Boucle principale, initialisation/destruction SDL, dispatch des événements
    - gui/gui_commun.h/c      : Fonctions communes (polices, rendu texte, aide)
-   - gui/gui_menu.h/c        : Ecran menu (dessin, gestion clavier/souris)
-   - gui/gui_plan.h/c        : Ecran plan (dessin, gestion clavier/souris, grille, panneau info)
+   - gui/gui_menu.h/c        : Écran menu (dessin, gestion clavier/souris)
+   - gui/gui_plan.h/c        : Écran plan (dessin, gestion clavier/souris, grille, panneau info)
 
    Organisation modulaire pour faciliter la maintenance et l'évolution du code :
    - Séparation par écran
@@ -159,7 +159,7 @@ Le projet produit deux exécutables :
 1. Programme de TESTS (pour validation et développement) :
     ./tests
 
-   * Ces tests ont été réalisés par une IA afin de couvrir au maximum les différents cas possible.
+   * Ces tests ont été réalisés par une IA afin de couvrir au maximum les différents cas possibles.
 
    Ce programme permet de :
    - Charger et valider les stations depuis le fichier CSV
@@ -341,12 +341,12 @@ implémentées. Voici l'état d'avancement :
    - Organisation modulaire du code GUI dans le répertoire gui/
      * gui/gui.c : Boucle principale et dispatch des événements
      * gui/gui_commun.c : Fonctions communes (polices, texte, aide)
-     * gui/gui_menu.c : Ecran menu (dessin, gestion clavier/souris)
-     * gui/gui_plan.c : Ecran plan (dessin, gestion clavier/souris)
+     * gui/gui_menu.c : Écran menu (dessin, gestion clavier/souris)
+     * gui/gui_plan.c : Écran plan (dessin, gestion clavier/souris)
    - Menu principal avec 3 options (affichage plan, calcul chemin, quitter)
      * Support clavier (touches 1, 2, 3, Q)
      * Support souris (clic sur les cartes)
-   - Ecran plan avec grille de repérage, panneau d'information et encart de chemin
+   - Écran plan avec grille de repérage, panneau d'information et encart de chemin
    - Chargement des données du métro (stations, ABR, AQR, lignes, connexions)
    - Gestion du zoom (+/-, molette) et déplacement (flèches, clic droit + glisser)
    - Réinitialisation de la vue (touche R)
