@@ -191,25 +191,43 @@ Un_elem *lire_stations(char *nom_fichier) {
         csv_init_lecteur(&lecteur, ligne, CSV_SEPARATOR);
 
         // On lit la longitude
-        if (!csv_champ_suivant(&lecteur)) continue;
+        if (!csv_champ_suivant(&lecteur)) {
+            fprintf(stderr, "Avertissement : ligne %d ignorée (longitude manquante)\n", ligne_num);
+            lignes_ignorees++;
+            continue;
+        }
         float lon = 0.0f;
         if (!csv_lire_flottant_valide(&lecteur, &lon)) {
+            fprintf(stderr, "Avertissement : ligne %d ignorée (longitude invalide)\n", ligne_num);
             lignes_ignorees++;
             continue;
         }
 
         // La latitude
-        if (!csv_champ_suivant(&lecteur)) continue;
+        if (!csv_champ_suivant(&lecteur)) {
+            fprintf(stderr, "Avertissement : ligne %d ignorée (latitude manquante)\n", ligne_num);
+            lignes_ignorees++;
+            continue;
+        }
         float lat = 0.0f;
         if (!csv_lire_flottant_valide(&lecteur, &lat)) {
+            fprintf(stderr, "Avertissement : ligne %d ignorée (latitude invalide)\n", ligne_num);
             lignes_ignorees++;
             continue;
         }
 
         // On récupère le nom de la station
-        if (!csv_champ_suivant(&lecteur)) continue;
+        if (!csv_champ_suivant(&lecteur)) {
+            fprintf(stderr, "Avertissement : ligne %d ignorée (nom manquant)\n", ligne_num);
+            lignes_ignorees++;
+            continue;
+        }
         char *nom_ptr = csv_lire_texte(&lecteur, STATION_NOM_TAILLE_MAX);
-        if (nom_ptr == NULL) continue;  // Champ trop grand, on ignore cette ligne
+        if (nom_ptr == NULL) {
+            fprintf(stderr, "Avertissement : ligne %d ignorée (nom trop long)\n", ligne_num);
+            lignes_ignorees++;
+            continue;  // Champ trop grand, on ignore cette ligne
+        }
         char nom[STATION_NOM_TAILLE_MAX];
         strcpy(nom, nom_ptr);
 

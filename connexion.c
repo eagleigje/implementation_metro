@@ -72,11 +72,16 @@ static Un_truc *creer_connexion(char *ligne_str, Une_ligne *liste_ligne, Un_nabr
 
     // Les champs sont extraits un à un de la ligne en cours du CSV lu.
     // On lit le code de la ligne
-    if (!csv_champ_suivant(&lecteur)) return NULL;
+    if (!csv_champ_suivant(&lecteur)) {
+        if (err != NULL) {
+            *err = CSV_ERR_CODE_LIGNE;
+        }
+        return NULL;
+    }
     char *code_ptr = csv_lire_texte(&lecteur, LINE_MAX_CODE_SIZE);
     if (code_ptr == NULL) {
         if (err != NULL) {
-            *err = CSV_ERR_TEXTE;
+            *err = CSV_ERR_CODE_LIGNE;
         }
         return NULL;  // Champ trop grand
     }
@@ -84,11 +89,16 @@ static Un_truc *creer_connexion(char *ligne_str, Une_ligne *liste_ligne, Un_nabr
     strcpy(code_ligne, code_ptr);
 
     // On lit le nom de la station de départ
-    if (!csv_champ_suivant(&lecteur)) return NULL;
+    if (!csv_champ_suivant(&lecteur)) {
+        if (err != NULL) {
+            *err = CSV_ERR_STATION_DEP;
+        }
+        return NULL;
+    }
     char *nom_dep_ptr = csv_lire_texte(&lecteur, STATION_NOM_TAILLE_MAX);
     if (nom_dep_ptr == NULL) {
         if (err != NULL) {
-            *err = CSV_ERR_TEXTE;
+            *err = CSV_ERR_STATION_DEP;
         }
         return NULL;  // Champ trop grand
     }
@@ -96,11 +106,16 @@ static Un_truc *creer_connexion(char *ligne_str, Une_ligne *liste_ligne, Un_nabr
     strcpy(nom_dep, nom_dep_ptr);
 
     // On lit le nom de la station d'arrivée
-    if (!csv_champ_suivant(&lecteur)) return NULL;
+    if (!csv_champ_suivant(&lecteur)) {
+        if (err != NULL) {
+            *err = CSV_ERR_STATION_ARR;
+        }
+        return NULL;
+    }
     char *nom_arr_ptr = csv_lire_texte(&lecteur, STATION_NOM_TAILLE_MAX);
     if (nom_arr_ptr == NULL) {
         if (err != NULL) {
-            *err = CSV_ERR_TEXTE;
+            *err = CSV_ERR_STATION_ARR;
         }
         return NULL;  // Champ trop grand
     }
@@ -108,11 +123,16 @@ static Un_truc *creer_connexion(char *ligne_str, Une_ligne *liste_ligne, Un_nabr
     strcpy(nom_arr, nom_arr_ptr);
 
     // On lit le temps de parcours
-    if (!csv_champ_suivant(&lecteur)) return NULL;
+    if (!csv_champ_suivant(&lecteur)) {
+        if (err != NULL) {
+            *err = CSV_ERR_TEMPS;
+        }
+        return NULL;
+    }
     float temps = 0.0f;
     if (!csv_lire_flottant_valide(&lecteur, &temps)) {
         if (err != NULL) {
-            *err = CSV_ERR_FLOAT;
+            *err = CSV_ERR_TEMPS;
         }
         return NULL;
     }
@@ -121,7 +141,7 @@ static Un_truc *creer_connexion(char *ligne_str, Une_ligne *liste_ligne, Un_nabr
     Une_ligne *ligne = chercher_ligne(liste_ligne, code_ligne);
     if (ligne == NULL) {
         if (err != NULL) {
-            *err = CSV_ERR_REFERENCE;
+            *err = CSV_ERR_LIGNE_INCONNUE;
         }
         return NULL;
     }
@@ -130,7 +150,7 @@ static Un_truc *creer_connexion(char *ligne_str, Une_ligne *liste_ligne, Un_nabr
     Un_truc *sta_dep = chercher_station(abr_sta, nom_dep);
     if (sta_dep == NULL) {
         if (err != NULL) {
-            *err = CSV_ERR_REFERENCE;
+            *err = CSV_ERR_STATION_DEP_INCONNUE;
         }
         return NULL;
     }
@@ -138,7 +158,7 @@ static Un_truc *creer_connexion(char *ligne_str, Une_ligne *liste_ligne, Un_nabr
     Un_truc *sta_arr = chercher_station(abr_sta, nom_arr);
     if (sta_arr == NULL) {
         if (err != NULL) {
-            *err = CSV_ERR_REFERENCE;
+            *err = CSV_ERR_STATION_ARR_INCONNUE;
         }
         return NULL;
     }
@@ -229,10 +249,31 @@ Un_elem *lire_connexions(char *nom_fichier, Une_ligne *liste_ligne, Un_nabr *abr
             // On insère en début de liste (pas besoin de tri pour les connexions).
             liste_con = inserer_deb_liste(liste_con, connexion);
         } else {
-            // On trace uniquement les erreurs graves d'allocation
             if (err == CSV_ERR_ALLOC) {
                 fprintf(stderr, "Avertissement : ligne %d ignorée (erreur d'allocation)\n", ligne_num);
+            } else if (err == CSV_ERR_CODE_LIGNE) {
+                fprintf(stderr, "Avertissement : ligne %d ignorée (code de ligne manquant ou invalide)\n", ligne_num);
+                lignes_ignorees++;
+            } else if (err == CSV_ERR_STATION_DEP) {
+                fprintf(stderr, "Avertissement : ligne %d ignorée (station de départ manquante ou invalide)\n", ligne_num);
+                lignes_ignorees++;
+            } else if (err == CSV_ERR_STATION_ARR) {
+                fprintf(stderr, "Avertissement : ligne %d ignorée (station d'arrivée manquante ou invalide)\n", ligne_num);
+                lignes_ignorees++;
+            } else if (err == CSV_ERR_TEMPS) {
+                fprintf(stderr, "Avertissement : ligne %d ignorée (temps de parcours manquant ou invalide)\n", ligne_num);
+                lignes_ignorees++;
+            } else if (err == CSV_ERR_LIGNE_INCONNUE) {
+                fprintf(stderr, "Avertissement : ligne %d ignorée (ligne inconnue)\n", ligne_num);
+                lignes_ignorees++;
+            } else if (err == CSV_ERR_STATION_DEP_INCONNUE) {
+                fprintf(stderr, "Avertissement : ligne %d ignorée (station de départ inconnue)\n", ligne_num);
+                lignes_ignorees++;
+            } else if (err == CSV_ERR_STATION_ARR_INCONNUE) {
+                fprintf(stderr, "Avertissement : ligne %d ignorée (station d'arrivée inconnue)\n", ligne_num);
+                lignes_ignorees++;
             } else {
+                fprintf(stderr, "Avertissement : ligne %d ignorée (données invalides)\n", ligne_num);
                 lignes_ignorees++;
             }
         }

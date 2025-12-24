@@ -30,11 +30,16 @@ static Une_ligne *creer_ligne(char *ligne_str, int *err) {
 
     // On lit les champs un à un.
     // Lecture du code de la ligne
-    if (!csv_champ_suivant(&lecteur)) return NULL;
+    if (!csv_champ_suivant(&lecteur)) {
+        if (err != NULL) {
+            *err = CSV_ERR_CODE_LIGNE;
+        }
+        return NULL;
+    }
     char *code_ptr = csv_lire_texte(&lecteur, LINE_MAX_CODE_SIZE);
     if (code_ptr == NULL) {
         if (err != NULL) {
-            *err = CSV_ERR_TEXTE;
+            *err = CSV_ERR_CODE_LIGNE;
         }
         return NULL;  // Champ trop grand
     }
@@ -42,31 +47,46 @@ static Une_ligne *creer_ligne(char *ligne_str, int *err) {
     strcpy(code, code_ptr);  // On doit copier les champs textes, sinon ils sont écrasés par les suivants.
 
     // La vitesse de la ligne
-    if (!csv_champ_suivant(&lecteur)) return NULL;
+    if (!csv_champ_suivant(&lecteur)) {
+        if (err != NULL) {
+            *err = CSV_ERR_VITESSE;
+        }
+        return NULL;
+    }
     float vitesse = 0.0f;
     if (!csv_lire_flottant_valide(&lecteur, &vitesse)) {
         if (err != NULL) {
-            *err = CSV_ERR_FLOAT;
+            *err = CSV_ERR_VITESSE;
         }
         return NULL;
     }
 
     // L'intervalle entre deux rames sur la ligne.
-    if (!csv_champ_suivant(&lecteur)) return NULL;
+    if (!csv_champ_suivant(&lecteur)) {
+        if (err != NULL) {
+            *err = CSV_ERR_INTERVALLE;
+        }
+        return NULL;
+    }
     float intervalle = 0.0f;
     if (!csv_lire_flottant_valide(&lecteur, &intervalle)) {
         if (err != NULL) {
-            *err = CSV_ERR_FLOAT;
+            *err = CSV_ERR_INTERVALLE;
         }
         return NULL;
     }
 
     // La couleur de ligne.
-    if (!csv_champ_suivant(&lecteur)) return NULL;
+    if (!csv_champ_suivant(&lecteur)) {
+        if (err != NULL) {
+            *err = CSV_ERR_COULEUR;
+        }
+        return NULL;
+    }
     char *couleur_ptr = csv_lire_texte(&lecteur, LINE_COLOR_SIZE);
     if (couleur_ptr == NULL) {
         if (err != NULL) {
-            *err = CSV_ERR_TEXTE;
+            *err = CSV_ERR_COULEUR;
         }
         return NULL;  // Champ trop grand
     }
@@ -163,10 +183,22 @@ Une_ligne *lire_lignes(char *nom_fichier) {
         int err = CSV_OK;
         Une_ligne *nouvelle = creer_ligne(ligne, &err);
         if (nouvelle == NULL) {
-            // On trace uniquement les erreurs graves d'allocation
             if (err == CSV_ERR_ALLOC) {
                 fprintf(stderr, "Avertissement : ligne %d ignorée (erreur d'allocation)\n", ligne_num);
+            } else if (err == CSV_ERR_CODE_LIGNE) {
+                fprintf(stderr, "Avertissement : ligne %d ignorée (code de ligne manquant ou invalide)\n", ligne_num);
+                lignes_ignorees++;
+            } else if (err == CSV_ERR_VITESSE) {
+                fprintf(stderr, "Avertissement : ligne %d ignorée (vitesse manquante ou invalide)\n", ligne_num);
+                lignes_ignorees++;
+            } else if (err == CSV_ERR_INTERVALLE) {
+                fprintf(stderr, "Avertissement : ligne %d ignorée (intervalle manquant ou invalide)\n", ligne_num);
+                lignes_ignorees++;
+            } else if (err == CSV_ERR_COULEUR) {
+                fprintf(stderr, "Avertissement : ligne %d ignorée (couleur manquante ou invalide)\n", ligne_num);
+                lignes_ignorees++;
             } else {
+                fprintf(stderr, "Avertissement : ligne %d ignorée (données invalides)\n", ligne_num);
                 lignes_ignorees++;
             }
             continue;
