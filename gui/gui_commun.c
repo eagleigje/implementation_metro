@@ -81,16 +81,16 @@ void gui_rendu_texte(Etat_affichage *app, TTF_Font *police, const char *texte, i
         return;
     }
 
-    // On génère une surface avec le texte rendu en UTF-8 avec antialiasing.
+    // On génère une surface avec le texte rendu en UTF-8.
     SDL_Surface *surface = TTF_RenderUTF8_Blended(police, texte, couleur);
     if (surface == NULL) {
         return;
     }
 
-    // On convertit la surface en texture pour l'affichage GPU
+    // On convertit la surface en texture pour l'affichage.
     SDL_Texture *texture = SDL_CreateTextureFromSurface(app->moteurRendu, surface);
     if (texture != NULL) {
-        // On définit la zone de destination avec la taille de la surface
+        // On définit la zone de destination avec la taille de la surface.
         SDL_Rect dest = {x, y, surface->w, surface->h};
         SDL_RenderCopy(app->moteurRendu, texture, NULL, &dest);
         SDL_DestroyTexture(texture);
