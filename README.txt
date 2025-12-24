@@ -251,7 +251,7 @@ LOCALISATION DES DONNEES
     * Le répertoire "data" inclus une extraction de tous les métros Français (metro-france.csv), et une extraction des métros parisiens à partir de ce fichier (metro-paris.csv).
     * L'extraction "parisienne" a été réalisée en bash :
         Pour cela, on récupère les IDs des lignes (première colonne) parisiennes, puis on cherche à nouveaux
-        les lignes en entier grace à ces IDs (en effet, les lignes ne commencent ou ne finissent pas toutes à Paris).
+        les lignes en entier grâce à ces IDs (en effet, les lignes ne commencent ou ne finissent pas toutes à Paris).
         On conserve l'en-tête du fichier d'origine.
         (head -1 data/metro-france.csv && \
         grep -E -f <(grep '"Paris' data/metro-france.csv | cut -d',' -f1 | sort -u | sed 's/^/^/; s/$/,/') \
@@ -360,13 +360,13 @@ implémentées. Voici l'état d'avancement :
    - Documentation complète des algorithmes dans ALGORITHMES.txt
    - Recherche textuelle de station (touche F, recherche incrémentale avec ABR, centrage automatique)
 
-   AMELIORATIONS POSSIBLES :
+   AMÉLIORATIONS POSSIBLES :
    - Affichage permanent des noms de stations importantes
    - Légende des lignes avec correspondance couleur ↔ nom
    - Centrage automatique de la vue sur le réseau au démarrage
    - Cache des limites géographiques pour optimiser geo_vers_ecran()
 
-CHOIX DE LA BIBLIOTHEQUE GRAPHIQUE
+CHOIX DE LA BIBLIOTHÈQUE GRAPHIQUE
 -----------------------------------
 Pour l'exercice 7 (interface graphique), nous avons comparé trois bibliothèques majeures :
 
@@ -444,7 +444,7 @@ NOTES IMPORTANTES
   * temps_arret : Temps (en minutes) ajouté à chaque station visitée
   Ces paramètres peuvent être configurés via le fichier config.ini ou config_paris.ini.
 
-WORKFLOW DE DEVELOPPEMENT RECOMMANDE
+WORKFLOW DE DÉVELOPPEMENT RECOMMANDE
 -------------------------------------
 1. Développer une nouvelle fonctionnalité
 2. Ajouter des tests dans le fichier tests.c pour valider la fonctionnalité
