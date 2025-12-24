@@ -212,6 +212,8 @@ Dans le répertoire test_data, on trouve des fichiers mal formés pour les tests
     * test_data/config_invalide.ini
     * test_data/stations_malformees.csv
     * test_data/stations_vide.csv
+    * test_data/lignes_invalides.csv
+    * test_data/connexions_invalides.csv
 
 FICHIERS CSV
 ------------
