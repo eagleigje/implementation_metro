@@ -50,7 +50,7 @@ Une_config *lire_config(const char *nom_fichier) {
         if (ligne_trim[0] == '\0' || ligne_trim[0] == '#' || ligne_trim[0] == ';') {
             continue;
         }
-        // On ignore les sections [section] car celle ne sont là que pour aider à remplir le fichier de configuration.
+        // On ignore les sections [section] car elles ne sont là que pour aider à remplir le fichier de configuration.
         if (ligne_trim[0] == '[') {
             continue;
         }
