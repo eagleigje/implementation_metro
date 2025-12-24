@@ -208,12 +208,12 @@ Pour ajouter de nouveaux tests :
 3. Appeler la fonction dans le `main()` de `tests.c`
 4. Suivre le même style de rapport (compteur tests_ok/tests_total)
 
-Dans le répertoire test_data, on trouve des fichiers mal formés pour les tests.
-    * test_data/config_invalide.ini
-    * test_data/stations_malformees.csv
-    * test_data/stations_vide.csv
-    * test_data/lignes_invalides.csv
-    * test_data/connexions_invalides.csv
+Dans le répertoire tests_data, on trouve des fichiers mal formés pour les tests.
+    * tests_data/config_invalide.ini
+    * tests_data/stations_malformees.csv
+    * tests_data/stations_vide.csv
+    * tests_data/lignes_invalides.csv
+    * tests_data/connexions_invalides.csv
 
 FICHIERS CSV
 ------------
