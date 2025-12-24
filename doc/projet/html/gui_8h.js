@@ -54,6 +54,7 @@ var gui_8h =
     [ "PLAN_TAILLE_STATION_SEL", "gui_8h.html#a45474b03a990f663a7eda364fe94f5e2", null ],
     [ "TAILLE_GRANDE_POLICE", "gui_8h.html#a0521e91809c477eaabe97b79fcf3e547", null ],
     [ "TAILLE_PETITE_POLICE", "gui_8h.html#ace3091653ac99b028578cfc1148dab68", null ],
+    [ "TITRE_GUI", "gui_8h.html#a05a5a823d8be0da0dd9a3af8eb364c9b", null ],
     [ "ZOOM_FACTEUR_ARRIERE", "gui_8h.html#a216338f26523db4856f5a9b29a1cdfe5", null ],
     [ "ZOOM_FACTEUR_AVANT", "gui_8h.html#a2d8bd8b8ad13a272d574458d6f8fa6ce", null ],
     [ "Etat_affichage", "gui_8h.html#a57510dfa60ffd1aa7fbbc4d5334f7313", null ],

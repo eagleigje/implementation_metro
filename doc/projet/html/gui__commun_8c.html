@@ -94,7 +94,6 @@ $(function(){initNavTree('gui__commun_8c.html','',''); });
 <div class="textblock"><code>#include &lt;stdio.h&gt;</code><br />
 <code>#include &lt;SDL2/SDL.h&gt;</code><br />
 <code>#include &lt;SDL2/SDL_ttf.h&gt;</code><br />
-<code>#include &quot;<a class="el" href="gui_8h_source.html">gui.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="gui__commun_8h_source.html">gui_commun.h</a>&quot;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
@@ -137,7 +136,7 @@ Fonctions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Fonction qui charge une police TrueType à partir de chemins connus. </p><dl class="params"><dt>Paramètres</dt><dd>
+<p>Fonction qui charge une police TrueType (TTF) à partir de chemins connus du système d'exploitation. Une police locale dans le dossier fonts/ est utilisée en dernier recours. </p><dl class="params"><dt>Paramètres</dt><dd>
   <table class="params">
     <tr><td class="paramname">taille</td><td>: Taille en points de la police à charger. </td></tr>
   </table>

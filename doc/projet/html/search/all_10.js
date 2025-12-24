@@ -38,10 +38,11 @@ var searchData=
   ['test_5frobustesse_5fabr_35',['test_robustesse_abr',['../test__exercice2_8c.html#a14218b531b53dd71cd68c712231c820d',1,'test_robustesse_abr(const char *test_label):&#160;test_exercice2.c'],['../test__exercice2_8h.html#a14218b531b53dd71cd68c712231c820d',1,'test_robustesse_abr(const char *test_label):&#160;test_exercice2.c']]],
   ['tests_2ec_36',['tests.c',['../tests_8c.html',1,'']]],
   ['tests_2eh_37',['tests.h',['../tests_8h.html',1,'']]],
-  ['trim_38',['trim',['../outils_8c.html#a92488df83476d9d8729fd04197bc35f1',1,'trim(char *str):&#160;outils.c'],['../outils_8h.html#a92488df83476d9d8729fd04197bc35f1',1,'trim(char *str):&#160;outils.c']]],
-  ['truc_39',['truc',['../struct__un__nabr.html#a2eda9970d52c5600d7680813d4fba9e1',1,'_un_nabr::truc'],['../struct__un__noeud.html#ae0ebf5bacf6c2455cda5082ae9b397cd',1,'_un_noeud::truc'],['../struct__un__elem.html#a56c9b0eb5772289fdbc69a9a641031cf',1,'_un_elem::truc']]],
-  ['truc_2ec_40',['truc.c',['../truc_8c.html',1,'']]],
-  ['truc_2eh_41',['truc.h',['../truc_8h.html',1,'']]],
-  ['ttype_42',['Ttype',['../truc_8h.html#aa8f1f67f5cd6ab9218a612d871193148',1,'truc.h']]],
-  ['type_43',['type',['../struct__un__truc.html#a9b70dad0f8ebea8d7ab1bd7582dc1812',1,'_un_truc']]]
+  ['titre_5fgui_38',['TITRE_GUI',['../gui_8h.html#a05a5a823d8be0da0dd9a3af8eb364c9b',1,'gui.h']]],
+  ['trim_39',['trim',['../outils_8c.html#a92488df83476d9d8729fd04197bc35f1',1,'trim(char *str):&#160;outils.c'],['../outils_8h.html#a92488df83476d9d8729fd04197bc35f1',1,'trim(char *str):&#160;outils.c']]],
+  ['truc_40',['truc',['../struct__un__nabr.html#a2eda9970d52c5600d7680813d4fba9e1',1,'_un_nabr::truc'],['../struct__un__noeud.html#ae0ebf5bacf6c2455cda5082ae9b397cd',1,'_un_noeud::truc'],['../struct__un__elem.html#a56c9b0eb5772289fdbc69a9a641031cf',1,'_un_elem::truc']]],
+  ['truc_2ec_41',['truc.c',['../truc_8c.html',1,'']]],
+  ['truc_2eh_42',['truc.h',['../truc_8h.html',1,'']]],
+  ['ttype_43',['Ttype',['../truc_8h.html#aa8f1f67f5cd6ab9218a612d871193148',1,'truc.h']]],
+  ['type_44',['type',['../struct__un__truc.html#a9b70dad0f8ebea8d7ab1bd7582dc1812',1,'_un_truc']]]
 ];

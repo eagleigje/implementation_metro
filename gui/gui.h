@@ -153,38 +153,38 @@ typedef enum {
  * Regroupe les ressources SDL, les paramètres d'affichage et les données du métro.
  */
 typedef struct Etat_affichage {
-    SDL_Window *fenetre;            // Fenêtre principale de l'application
-    SDL_Renderer *moteurRendu;      // Moteur de rendu SDL pour dessiner à l'écran
-    TTF_Font *petite_police;        // Police de petite taille pour les textes secondaires
-    TTF_Font *grande_police;        // Police de grande taille pour les titres
-    Ecran ecran;                    // Écran actuellement affiché (menu ou plan)
-    Mode mode;                      // Mode d'interaction actif (sélection ou chemin)
-    float zoom;                     // Facteur de zoom appliqué au plan (1.0 = échelle normale)
-    float decalage_x;               // Décalage horizontal de l'affichage en pixels
-    float decalage_y;               // Décalage vertical de l'affichage en pixels
-    int marge_plan;                 // Marge en pixels autour du plan projeté
-    int souris_x;                   // Position X de la souris (pixels)
-    int souris_y;                   // Position Y de la souris (pixels)
-    int souris_prec_x;              // Position X précédente de la souris (pixels)
-    int souris_prec_y;              // Position Y précédente de la souris (pixels)
-    int deplacement_actif;          // 1 si déplacement à la souris actif, 0 sinon
-    int dernier_clic_x;             // Position X du dernier clic souris (-1 si aucun)
-    int dernier_clic_y;             // Position Y du dernier clic souris (-1 si aucun)
-    Un_truc *station_selectionnee;  // Station sélectionnée par clic (NULL si aucune)
-    Un_truc *station_depart;        // Station de départ (mode chemin)
-    Un_truc *station_arrivee;       // Station d'arrivée (mode chemin)
-    Un_elem *chemin_courant;        // Liste des connexions du chemin courant
+    SDL_Window *fenetre;            ///<  Fenêtre principale de l'application
+    SDL_Renderer *moteurRendu;      ///<  Moteur de rendu SDL pour dessiner à l'écran
+    TTF_Font *petite_police;        ///<  Police de petite taille pour les textes secondaires
+    TTF_Font *grande_police;        ///<  Police de grande taille pour les titres
+    Ecran ecran;                    ///<  Écran actuellement affiché (menu ou plan)
+    Mode mode;                      ///<  Mode d'interaction actif (sélection ou chemin)
+    float zoom;                     ///<  Facteur de zoom appliqué au plan (1.0 = échelle normale)
+    float decalage_x;               ///<  Décalage horizontal de l'affichage en pixels
+    float decalage_y;               ///<  Décalage vertical de l'affichage en pixels
+    int marge_plan;                 ///<  Marge en pixels autour du plan projeté
+    int souris_x;                   ///<  Position X de la souris (pixels)
+    int souris_y;                   ///<  Position Y de la souris (pixels)
+    int souris_prec_x;              ///<  Position X précédente de la souris (pixels)
+    int souris_prec_y;              ///<  Position Y précédente de la souris (pixels)
+    int deplacement_actif;          ///<  1 si déplacement à la souris actif, 0 sinon
+    int dernier_clic_x;             ///<  Position X du dernier clic souris (-1 si aucun)
+    int dernier_clic_y;             ///<  Position Y du dernier clic souris (-1 si aucun)
+    Un_truc *station_selectionnee;  ///<  Station sélectionnée par clic (NULL si aucune)
+    Un_truc *station_depart;        ///<  Station de départ (mode chemin)
+    Un_truc *station_arrivee;       ///<  Station d'arrivée (mode chemin)
+    Un_elem *chemin_courant;        ///<  Liste des connexions du chemin courant
     // Recherche textuelle
-    int recherche_active;           // 1 si la recherche est active, 0 sinon
-    int recherche_ignorer_prochain; // 1 pour ignorer le prochain SDL_TEXTINPUT (évite capture du 'f')
-    char recherche_texte[PLAN_RECHERCHE_MAX_TEXTE];  // Texte de recherche actuel
-    Un_truc *recherche_resultat;    // Station trouvée par la recherche (NULL si aucune)
+    int recherche_active;           ///<  1 si la recherche est active, 0 sinon
+    int recherche_ignorer_prochain; ///<  1 pour ignorer le prochain SDL_TEXTINPUT (évite capture du 'f')
+    char recherche_texte[PLAN_RECHERCHE_MAX_TEXTE];  ///<  Texte de recherche actuel
+    Un_truc *recherche_resultat;    ///<  Station trouvée par la recherche (NULL si aucune)
     // Données du métro
-    Un_elem *liste_stations;        // Liste chaînée de toutes les stations
-    Un_elem *liste_connexions;      // Liste chaînée de toutes les connexions
-    Un_nabr *abr_stations;          // Arbre binaire de recherche pour recherche rapide par nom
-    Une_ligne *lignes;              // Liste des lignes de métro
-    Un_noeud *aqr_topo;             // Arbre quaternaire pour recherche spatiale des stations
+    Un_elem *liste_stations;        ///<  Liste chaînée de toutes les stations
+    Un_elem *liste_connexions;      ///<  Liste chaînée de toutes les connexions
+    Un_nabr *abr_stations;          ///<  Arbre binaire de recherche pour recherche rapide par nom
+    Une_ligne *lignes;              ///<  Liste des lignes de métro
+    Un_noeud *aqr_topo;             ///<  Arbre quaternaire pour recherche spatiale des stations
 } Etat_affichage;
 
 // =============================================================================

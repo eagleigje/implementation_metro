@@ -95,7 +95,6 @@ $(function(){initNavTree('gui__plan_8c.html','',''); });
 <code>#include &lt;stdio.h&gt;</code><br />
 <code>#include &lt;stdlib.h&gt;</code><br />
 <code>#include &lt;string.h&gt;</code><br />
-<code>#include &quot;<a class="el" href="gui_8h_source.html">gui.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="gui__plan_8h_source.html">gui_plan.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="gui__commun_8h_source.html">gui_commun.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="dijkstra_8h_source.html">../dijkstra.h</a>&quot;</code><br />
@@ -133,7 +132,7 @@ Fonctions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Fonction qui dessine l'écran plan avec grille et panneau d'information. </p><dl class="params"><dt>Paramètres</dt><dd>
+<p>Fonction qui dessine l'écran plan avec grille et panneau d'information. L'ordre de rendu est important pour garder les éléments lisibles : fond -&gt; grille -&gt; connexions -&gt; stations -&gt; surbrillances -&gt; panneaux. </p><dl class="params"><dt>Paramètres</dt><dd>
   <table class="params">
     <tr><td class="paramname">app</td><td>: État global de l'application graphique. </td></tr>
     <tr><td class="paramname">largeur</td><td>: Largeur de la fenêtre. </td></tr>
@@ -158,7 +157,7 @@ Fonctions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Fonction publique qui actualise la recherche de station par préfixe. </p><dl class="params"><dt>Paramètres</dt><dd>
+<p>Fonction qui actualise la recherche de station par préfixe. </p><dl class="params"><dt>Paramètres</dt><dd>
   <table class="params">
     <tr><td class="paramname">app</td><td>: État global de l'application graphique. </td></tr>
   </table>
@@ -190,11 +189,11 @@ Fonctions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Fonction qui gère les événements clavier sur le plan. </p><dl class="params"><dt>Paramètres</dt><dd>
+<p>Fonction qui gère les événements clavier sur le plan. Priorité à la recherche quand elle est active, sinon gestion des raccourcis du plan. </p><dl class="params"><dt>Paramètres</dt><dd>
   <table class="params">
     <tr><td class="paramname">app</td><td>: État global de l'application graphique. </td></tr>
     <tr><td class="paramname">key</td><td>: Code de la touche pressée. </td></tr>
-    <tr><td class="paramname">running</td><td>: Pointeur vers le flag d'exécution de la boucle principale. </td></tr>
+    <tr><td class="paramname">running</td><td>: Pointeur vers le drapeau d'exécution de la boucle principale. </td></tr>
   </table>
   </dd>
 </dl>
@@ -224,7 +223,8 @@ Fonctions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Fonction qui gère les clics souris sur le plan. </p><dl class="params"><dt>Paramètres</dt><dd>
+<p>Fonction qui gère les clics souris sur le plan. La station la plus proche est sélectionnée, puis utilisée comme départ/arrivée si l'on est en mode chemin.</p>
+<dl class="params"><dt>Paramètres</dt><dd>
   <table class="params">
     <tr><td class="paramname">app</td><td>: État global de l'application graphique. </td></tr>
     <tr><td class="paramname">x</td><td>: Position X du clic. </td></tr>
