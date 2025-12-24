@@ -1,0 +1,8 @@
+M1;Chatelet;Gare de Lyon;2.2
+;Chatelet;Gare de Lyon;2.2
+M1;;Gare de Lyon;2.2
+M1;Chatelet;;2.2
+M1;Chatelet;Gare de Lyon;abc
+M99;Chatelet;Gare de Lyon;2.2
+M1;Inconnue;Gare de Lyon;2.2
+M1;Chatelet;Inconnue;2.2

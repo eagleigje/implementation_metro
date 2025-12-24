@@ -108,6 +108,28 @@ void test_connexions(Une_config *config, const char *test_label) {
         printf("    ÉCHEC: impossible de tester (pas de connexions)\n");
     }
 
+    // Test X.6 : Lecture d'un fichier connexions avec erreurs de champs
+    printf("  Test %s.6: Lecture fichier connexions invalide (erreurs attendues)\n", test_label);
+    tests_total++;
+    Un_elem *connexions_invalides = lire_connexions("test_data/connexions_invalides.csv", lignes, abr_stations);
+    if (connexions_invalides != NULL) {
+        int nb_valides = 0;
+        Un_elem *tmp_invalides = connexions_invalides;
+        while (tmp_invalides != NULL) {
+            nb_valides++;
+            tmp_invalides = tmp_invalides->suiv;
+        }
+        if (nb_valides == 1) {
+            printf("    OK: 1 connexion valide chargée (avertissements attendus)\n");
+            tests_ok++;
+        } else {
+            printf("    ÉCHEC: %d connexion(s) valides (attendu: 1)\n", nb_valides);
+        }
+        detruire_liste_et_truc(connexions_invalides);
+    } else {
+        printf("    ÉCHEC: aucune connexion valide chargée\n");
+    }
+
     // Et on libère la mémoire
     if (connexions != NULL) {
         detruire_liste_et_truc(connexions);

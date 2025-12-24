@@ -110,6 +110,28 @@ void test_lignes(Une_config *config, const char *test_label) {
         detruire_lignes(lignes_invalide);
     }
 
+    // Test X.7 : Lecture d'un fichier lignes avec erreurs de champs
+    printf("  Test %s.7: Lecture fichier lignes invalide (erreurs attendues)\n", test_label);
+    tests_total++;
+    Une_ligne *lignes_invalides = lire_lignes("test_data/lignes_invalides.csv");
+    if (lignes_invalides != NULL) {
+        int nb_valides = 0;
+        Une_ligne *tmp_invalides = lignes_invalides;
+        while (tmp_invalides != NULL) {
+            nb_valides++;
+            tmp_invalides = tmp_invalides->suiv;
+        }
+        if (nb_valides == 1) {
+            printf("    OK: 1 ligne valide chargée (avertissements attendus)\n");
+            tests_ok++;
+        } else {
+            printf("    ERREUR: %d ligne(s) valides (attendu: 1)\n", nb_valides);
+        }
+        detruire_lignes(lignes_invalides);
+    } else {
+        printf("    ERREUR: aucune ligne valide chargée\n");
+    }
+
     // Et on libère la mémoire
     if (lignes != NULL) {
         detruire_lignes(lignes);
