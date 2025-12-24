@@ -19,6 +19,6 @@ INSTRUCTIONS
 REMARQUE
 --------
 - Ce mécanisme évite un écran sans texte si les polices système sont absentes.
-- Nous fournissons par défaut la police DejaVuSans.ttf car elle est libre et bien adaptée au projet :
+- Le dépôt inclut fonts/DejaVuSans.ttf (licence libre), utilisée par défaut si aucune police système n'est trouvée :
     https://en.wikipedia.org/wiki/DejaVu_fonts
     https://dejavu-fonts.github.io/
