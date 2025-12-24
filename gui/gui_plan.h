@@ -6,9 +6,7 @@
 #define GUI_PLAN_H
 
 #include <SDL2/SDL.h>
-
-// Déclaration de la structure d'état
-typedef struct Etat_affichage Etat_affichage;
+#include "gui.h"
 
 void gui_dessiner_plan(Etat_affichage *app, int largeur, int hauteur);
 void gui_plan_gerer_clavier(Etat_affichage *app, SDL_Keycode key, bool *running);
