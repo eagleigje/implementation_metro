@@ -27,7 +27,7 @@ var files_dup =
     [ "outils.h", "outils_8h.html", "outils_8h" ],
     [ "station.h", "station_8h.html", "station_8h" ],
     [ "tests.c", "tests_8c.html", "tests_8c" ],
-    [ "tests.h", "tests_8h.html", null ],
+    [ "tests.h", "tests_8h.html", "tests_8h" ],
     [ "truc.c", "truc_8c.html", "truc_8c" ],
     [ "truc.h", "truc_8h.html", "truc_8h" ]
 ];
