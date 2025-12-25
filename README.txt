@@ -22,7 +22,7 @@ DOCUMENTATION COMPLÈTE
 ----------------------
 Toute la documentation se trouve dans le répertoire doc/ :
 
-doc/README_PROJET.txt
+doc/DOCUMENTATION_COMPLETE.txt
     Documentation complète du projet :
     - Structure des fichiers et modules
     - Instructions de compilation détaillées
