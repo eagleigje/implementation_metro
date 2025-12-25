@@ -13,8 +13,8 @@ utilise le fichier suivant en dernier recours :
 INSTRUCTIONS
 ------------
 1. Téléchargez une police TrueType (TTF), par exemple DejaVu Sans.
-2. Copiez le fichier ici et renommez-le en "DejaVuSans.ttf".
-3. Ou bien, ajoutez cette nouvelle police dans la liste de la fonction gui_charger_police dans gui/gui_commun.c
+2. Copiez le fichier doc/ et renommez-le en "DejaVuSans.ttf".
+3. Ou mieux, ajoutez cette nouvelle police dans la liste de la fonction gui_charger_police dans gui/gui_commun.c
 
 REMARQUE
 --------
