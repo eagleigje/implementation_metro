@@ -179,7 +179,7 @@ Le Makefile propose deux modes de compilation :
    - Optimisation O0 (désactivée, pour faciliter le débogage avec gdb)
    - Symboles de débogage (-g)
    - Utilisé par : make debug-tests, make debug-metro, make debug-memory*
-   - De mode est recommandé pour :
+   - Ce mode est recommandé pour :
         - Déboguer avec gdb (step-by-step, inspection de variables)
         - Utiliser valgrind avec gdb (vgdb)
 
