@@ -360,6 +360,7 @@ implémentées. Voici l'état d'avancement :
    - Légende des lignes avec correspondance couleur ↔ nom
    - Centrage automatique de la vue sur le réseau au démarrage
    - Cache des limites géographiques pour optimiser geo_vers_ecran()
+   - Optimisation de chercher_station_prefixe() pour descendre intelligemment dans l'ABR (O(log n) au lieu de O(n))
 
 CHOIX DE LA BIBLIOTHÈQUE GRAPHIQUE
 -----------------------------------
