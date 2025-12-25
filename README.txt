@@ -102,10 +102,11 @@ Le projet est organisé en plusieurs modules :
 
 10. Documentation :
     - ALGORITHMES.txt                  : Documentation détaillée des algorithmes principaux (Dijkstra, AQR, ABR, Haversine)
-    - doc/projet-metro2025.pdf         : Le PDF du projet
-    - doc/projet/html/index.html       : La documentation Doxygen du projet
+    - README_DONNEES.txt               : Extraction des données sources depuis les sites officiels pour récupérer les informations du métro Parisien
     - README_GENERER_CONNEXIONS.txt    : Guide d'utilisation du script de génération des connexions
     - MODE_EMPLOI_GUI.txt              : Mode d'emploi de l'interface graphique (menus, clavier, souris)
+    - doc/projet-metro2025.pdf         : L'énoncé du projet.
+    - doc/projet/html/index.html       : La documentation Doxygen du projet
     - fonts/README_FONTS.txt           : Gestion de la police utilisée par le GUI.
 
 11. Scripts utilitaires :
@@ -277,48 +278,9 @@ FICHIERS CSV
 
     Voir README_GENERER_CONNEXIONS.txt pour plus de détails sur la génération automatique.
 
-LOCALISATION DES DONNEES
-------------------------
-** Stations **
-    * Stations parisiennes : https://explore.data.gouv.fr/fr/datasets/6405b01aa7f6f0f5523c8653/?Commune%20nom__contains=Paris#/resources/5b645234-e6fd-4de8-889c-574a80531aca
-    * Le répertoire "data" inclus une extraction de tous les métros Français (metro-france.csv), et une extraction des métros parisiens à partir de ce fichier (metro-paris.csv).
-    * L'extraction "parisienne" a été réalisée en bash :
-        Pour cela, on récupère les IDs des lignes (première colonne) parisiennes, puis on cherche à nouveaux
-        les lignes en entier grâce à ces IDs (en effet, les lignes ne commencent ou ne finissent pas toutes à Paris).
-        On conserve l'en-tête du fichier d'origine.
-        (head -1 data/metro-france.csv && \
-        grep -E -f <(grep '"Paris' data/metro-france.csv | cut -d',' -f1 | sort -u | sed 's/^/^/; s/$/,/') \
-        data/metro-france.csv) > data/metro-paris.csv
-
-    * On peut maintenant, extraire les données des métros parisiens dans le format demandé dans le sujet :
-    (séparateur "," puis tous les champs à partir du troisième, on dédoublonne, on supprime les " et enfin, on récupère les champs 2, 3 et 1)
-        cut -d "," -f3- < data/metro-paris.csv | sort | uniq | sed "s/\"//g" | awk -F "," '{print($2";"$3";"$1)}' > stations_paris.csv
-
-** Informations lignes **
-    * Informations concernant les lignes parisiennes : https://data.iledefrance-mobilites.fr/explore/dataset/referentiel-des-lignes/table/?disjunctive.transportsubmode&disjunctive.operatorname&disjunctive.networkname&disjunctive.transportmode&refine.transportmode=metro&sort=name_line&refine.status=active
-    * Le répertoire "data" inclus une extraction des lignes du métro parisien dans le fichier "referentiel-des-lignes-paris.csv".
-    * On trouve dans ce fichier, les noms et couleurs officiels des lignes. On peut donc s'en servir pour générer le fichier "lignes.csv" du sujet.
-        * Pour extraire le nom de la ligne et sa couleur :
-            * On récupère toutes les lignes en sautant la première (noms des champs).
-            * On extrait les champs 2 et 11
-            * On trie sur la colonne nom (format humain "sort -h")
-            * Et enfin, on extrait le champ couleur en lui ajoutant un # devant afin d'être dans le bon format.
-                tail -n+2 referentiel-des-lignes-paris.csv | cut -d ";" -f 2,11 | sort -h | sed "s/\(.*\);\(.*\)/\#\2/g"
-    * On peut aussi trouver des informations officielles sur le site https://www.itineraire-metro.fr, cela va nous aider à remplir les données, notamment l'attente moyenne entre deux rames, mais à la main.
-        * Exemple ligne 1 : https://www.itineraire-metro.fr/ligne-1.html
-    * On peut encore trouver des informations sur les lignes sur Wikipédia, avec le temps de parcours, la distance, et le nombre de stations. On peut donc en déterminer les vitesses moyennes.
-        * Exemple ligne 2 : https://fr.wikipedia.org/wiki/Ligne_2_du_m%C3%A9tro_de_Paris
-    * L'article : https://www.liberation.fr/checknews/2018/02/14/a-quelle-vitesse-roule-le-metro-parisien_1653099/ valide les vitesses moyennes calculées.
-    * Globalement, on trouve que le temps moyen entre rame est :
-        * En journée, l'intervalle de temps entre chaque rame est de deux à quatre minutes en semaine
-        * et de trois à cinq minutes le dimanche.
-        * Après 20 heures, compter cinq à huit minutes d'attente.
-        * Nous partons du principe que le temps moyen sera de cinq minutes.
-    * Grâce à ces informations, nous pouvons remplir un fichier Excel que l'on trouve dans "data/informations_lignes_paris_collectées_sur_internet.xlsx"
-    * Enfin, on peut extraire ces informations dans un fichier CSV "data/informations_lignes_paris_collectées_sur_internet.csv"
-    * Ce fichier va nous servir de base afin de créer les données manquantes :
-        * On extrait les champs 1 (nom), 5 et suivants pour créer le fichier des lignes de paris :
-            tail -n+2 data/informations_lignes_paris_collectées_sur_internet.csv | cut -d ";" -f1,5- > lignes_paris.csv
+    Pour savoir comment les fichiers stations_paris.csv et lignes_paris.csv ont été extraits
+    depuis les sources officielles (commandes bash, sites web) :
+        Voir README_DONNEES.txt
 
 EXERCICES A COMPLETER
 ----------------------
