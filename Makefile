@@ -11,6 +11,10 @@
 #   make test-memory     			- Compile et exécute les tests avec valgrind.
 #   make test-memory-metro 			- Compile et exécute metro avec valgrind.
 #   make test-memory-metro-paris 	- Compile et exécute metro avec valgrind, en utilisant la configuration de Paris.
+#   make debug-tests     			- Compile les tests en mode debug (O0, pour gdb).
+#   make debug-metro     			- Compile metro en mode debug (O0, pour gdb).
+#   make debug-memory-tests 			- Compile et exécute les tests avec valgrind+gdb (vgdb).
+#   make debug-memory-metro 			- Compile et exécute metro avec valgrind+gdb (vgdb).
 #   make clean           			- Supprime tous les fichiers objets et les exécutables.
 #   make docs            			- Génère la documentation Doxygen.
 #   make clean-docs      			- Supprime la documentation générée.
@@ -19,6 +23,7 @@ CC = gcc
 # On peut forcer la version de C ci-dessous en ajoutant -std=cXX où XX peut valoir 99, 17, 23, etc.
 # La version C la plus récente à ce jour est la version c23.
 CFLAGS = -Wall -Wextra -g -O3
+CFLAGS_DEBUG = -Wall -Wextra -g -O0
 LDFLAGS_METRO = -lm -lSDL2 -lSDL2_ttf
 LDFLAGS_TESTS = -lm
 
@@ -136,4 +141,31 @@ test-memory-metro-paris: $(TARGET_METRO)
 	@echo "Note: Interagissez avec l'interface puis quittez proprement pour voir le rapport"
 	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(TARGET_METRO) config_paris.ini
 
-.PHONY: all rebuild clean metro tests run-tests test-memory test-memory-metro test-memory-metro-paris docs clean-docs
+# Cible pour compiler les tests en mode debug (O0 pour gdb)
+debug-tests: clean
+	$(MAKE) $(TARGET_TESTS) CFLAGS="$(CFLAGS_DEBUG)"
+	@echo "Tests compilés en mode debug (O0) pour gdb"
+
+# Cible pour compiler metro en mode debug (O0 pour gdb)
+debug-metro: clean
+	$(MAKE) $(TARGET_METRO) CFLAGS="$(CFLAGS_DEBUG)"
+	@echo "Metro compilé en mode debug (O0) pour gdb"
+
+# Cible pour exécuter les tests avec valgrind+gdb (vgdb)
+debug-memory-tests: debug-tests
+	@echo "========================================="
+	@echo "Vérification mémoire avec valgrind+gdb (vgdb)..."
+	@echo "========================================="
+	@echo "Pour attacher gdb : dans un autre terminal, tapez 'gdb $(TARGET_TESTS)' puis 'target remote | vgdb'"
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --vgdb=yes --vgdb-error=0 ./$(TARGET_TESTS)
+
+# Cible pour exécuter metro avec valgrind+gdb (vgdb)
+debug-memory-metro: debug-metro
+	@echo "========================================="
+	@echo "Vérification mémoire du programme metro avec valgrind+gdb (vgdb)..."
+	@echo "========================================="
+	@echo "Pour attacher gdb : dans un autre terminal, tapez 'gdb $(TARGET_METRO)' puis 'target remote | vgdb'"
+	@echo "Note: Interagissez avec l'interface puis quittez proprement pour voir le rapport"
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --vgdb=yes --vgdb-error=0 ./$(TARGET_METRO)
+
+.PHONY: all rebuild clean metro tests run-tests test-memory test-memory-metro test-memory-metro-paris debug-tests debug-metro debug-memory-tests debug-memory-metro docs clean-docs

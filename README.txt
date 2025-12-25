@@ -140,6 +140,20 @@ Pour vérifier les fuites mémoire du programme principal avec valgrind :
 Pour vérifier les fuites mémoire du programme principal avec valgrind et la configuration du métro parisien :
     make test-memory-metro-paris
 
+Pour compiler les tests en mode debug (optimisation O0, pour gdb) :
+    make debug-tests
+
+Pour compiler metro en mode debug (optimisation O0, pour gdb) :
+    make debug-metro
+
+Pour exécuter les tests avec valgrind+gdb (vgdb) :
+    make debug-memory-tests
+    (Pour attacher gdb : dans un autre terminal, tapez 'gdb tests' puis 'target remote | vgdb')
+
+Pour exécuter metro avec valgrind+gdb (vgdb) :
+    make debug-memory-metro
+    (Pour attacher gdb : dans un autre terminal, tapez 'gdb metro' puis 'target remote | vgdb')
+
 Pour nettoyer les fichiers objets et les exécutables :
     make clean
 
@@ -151,6 +165,23 @@ Pour générer la documentation (Doxygen doit être installé sur le PC) :
 
 Pour nettoyer la documentation :
     make clean-docs
+
+MODES DE COMPILATION
+--------------------
+Le Makefile propose deux modes de compilation :
+
+1. Mode NORMAL (par défaut) :
+   - Optimisation O3 (performance maximale)
+   - Symboles de débogage (-g) pour valgrind
+   - Utilisé par : make, make metro, make tests, make test-memory*
+
+2. Mode DEBUG :
+   - Optimisation O0 (désactivée, pour faciliter le débogage avec gdb)
+   - Symboles de débogage (-g)
+   - Utilisé par : make debug-tests, make debug-metro, make debug-memory*
+   - De mode est recommandé pour :
+        - Déboguer avec gdb (step-by-step, inspection de variables)
+        - Utiliser valgrind avec gdb (vgdb)
 
 EXECUTION
 ---------
