@@ -83,7 +83,7 @@ Le projet est organisé en plusieurs modules :
     - SDL2_ttf : Nécessaire pour afficher du texte (noms de stations, lignes,
       panneaux d'information), car SDL2 ne fournit pas de rendu de texte nativement.
     - Police locale (optionnel) : si aucune police système n'est trouvée, le programme
-      charge en dernier recours fonts/DejaVuSans.ttf (voir fonts/README_FONTS.txt).
+      charge en dernier recours fonts/DejaVuSans.ttf (voir doc/README_FONTS.txt).
 
     INSTALLATION SDL2 / SDL2_TTF (LINUX)
     ------------------------------------
@@ -101,13 +101,13 @@ Le projet est organisé en plusieurs modules :
 
 
 10. Documentation :
-    - ALGORITHMES.txt                  : Documentation détaillée des algorithmes principaux (Dijkstra, AQR, ABR, Haversine)
-    - README_DONNEES.txt               : Extraction des données sources depuis les sites officiels pour récupérer les informations du métro Parisien
-    - README_GENERER_CONNEXIONS.txt    : Guide d'utilisation du script de génération des connexions
-    - MODE_EMPLOI_GUI.txt              : Mode d'emploi de l'interface graphique (menus, clavier, souris)
-    - doc/projet-metro2025.pdf         : L'énoncé du projet.
-    - doc/projet/html/index.html       : La documentation Doxygen du projet
-    - fonts/README_FONTS.txt           : Gestion de la police utilisée par le GUI.
+    - doc/ALGORITHMES.txt                  : Documentation détaillée des algorithmes principaux (Dijkstra, AQR, ABR, Haversine)
+    - doc/README_DONNEES.txt               : Extraction des données sources depuis les sites officiels pour récupérer les informations du métro Parisien
+    - doc/README_GENERER_CONNEXIONS.txt    : Guide d'utilisation du script de génération des connexions
+    - doc/MODE_EMPLOI_GUI.txt              : Mode d'emploi de l'interface graphique (menus, clavier, souris)
+    - doc/README_FONTS.txt                 : Gestion de la police utilisée par le GUI
+    - doc/projet-metro2025.pdf             : L'énoncé du projet
+    - doc/projet/html/index.html           : La documentation Doxygen du projet
 
 11. Scripts utilitaires :
     - generer_connexions_paris.py      : Script Python pour générer connexions_paris.csv automatiquement
@@ -214,7 +214,7 @@ Le projet produit deux exécutables :
    Elle nécessite SDL2 et SDL2_ttf installés (voir section Installation).
 
    Pour un guide détaillé de l'interface graphique (menus, raccourcis, souris),
-   voir MODE_EMPLOI_GUI.txt.
+   voir doc/MODE_EMPLOI_GUI.txt.
 
    Contrôles principaux :
    - MENU : 1=Afficher plan, 2=Plus court chemin, 3=Quitter
@@ -276,11 +276,11 @@ FICHIERS CSV
     Pour générer automatiquement le fichier connexions_paris.csv depuis les données réelles :
         python3 generer_connexions_paris.py
 
-    Voir README_GENERER_CONNEXIONS.txt pour plus de détails sur la génération automatique.
+    Voir doc/README_GENERER_CONNEXIONS.txt pour plus de détails sur la génération automatique.
 
     Pour savoir comment les fichiers stations_paris.csv et lignes_paris.csv ont été extraits
     depuis les sources officielles (commandes bash, sites web) :
-        Voir README_DONNEES.txt
+        Voir doc/README_DONNEES.txt
 
 EXERCICES A COMPLETER
 ----------------------
@@ -310,7 +310,7 @@ implémentées. Voici l'état d'avancement :
    - inserer_deb_liste (implémentée dans le fichier liste.c)
    - lire_connexions (calcul automatique des temps via formule de Haversine)
    - ecrire_connexions
-   - Script Python pour générer connexions_paris.csv (voir README_GENERER_CONNEXIONS.txt)
+   - Script Python pour générer connexions_paris.csv (voir doc/README_GENERER_CONNEXIONS.txt)
 
 5. Exercice 5 : Arbres quaternaires pour la topologie .........................  FAIT
    - inserer_aqr (insertion récursive dans les 4 quadrants)
@@ -352,7 +352,7 @@ implémentées. Voici l'état d'avancement :
    - Encart récapitulatif du chemin (regroupement par ligne + temps total)
    - Extraction des constantes (couleurs, dimensions) dans gui/gui.h
    - Validation des couleurs hexadécimales au chargement des lignes
-   - Documentation complète des algorithmes dans ALGORITHMES.txt
+   - Documentation complète des algorithmes dans doc/ALGORITHMES.txt
    - Recherche textuelle de station (touche F, recherche incrémentale avec ABR, centrage automatique)
 
    AMÉLIORATIONS POSSIBLES :

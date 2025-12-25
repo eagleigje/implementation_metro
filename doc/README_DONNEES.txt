@@ -117,7 +117,7 @@ data/metro-paris.csv en utilisant le script Python :
     python3 generer_connexions_paris.py
 
 Pour plus de détails sur la génération des connexions, voir :
-    README_GENERER_CONNEXIONS.txt
+    doc/README_GENERER_CONNEXIONS.txt
 
 
 ========================================

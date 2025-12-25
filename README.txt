@@ -56,7 +56,7 @@ doc/README_GENERER_CONNEXIONS.txt
     - Utilisation du script
     - Format de sortie
 
-fonts/README_FONTS.txt
+doc/README_FONTS.txt
     Gestion de la police TrueType utilisée par le GUI.
 
 doc/projet-metro2025.pdf
