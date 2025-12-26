@@ -92,7 +92,7 @@ Le projet est organisé en plusieurs modules :
         sudo apt install libsdl2-dev libsdl2-ttf-dev
 
     Arch Linux :
-        sudo pacman -S sdl2 sdl2_ttf
+        sudo pacman -S sdl2-compat sdl2_ttf
 
 9. Programmes optionnels à installer :
     - Doxygen : Afin de générer la documentation technique du projet.

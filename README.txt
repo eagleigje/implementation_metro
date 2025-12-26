@@ -8,7 +8,7 @@ INSTALLATION RAPIDE
 -------------------
 Prérequis :
     sudo apt install libsdl2-dev libsdl2-ttf-dev    # Ubuntu/Debian
-    sudo pacman -S sdl2 sdl2_ttf                    # Arch Linux
+    sudo pacman -S sdl2-compat sdl2_ttf             # Arch Linux
 
 Compilation :
     make
