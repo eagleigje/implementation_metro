@@ -448,4 +448,4 @@ WORKFLOW DE DÉVELOPPEMENT RECOMMANDE
 4. Exécuter les tests : ./tests
 5. Vérifier les fuites mémoire : "valgrind --leak-check=full ./tests"
 6. Intégrer la fonctionnalité dans le fichier main.c si nécessaire
-7. Mettre à jour ce README.txt
+7. Mettre à jour les différents documents .txt.
