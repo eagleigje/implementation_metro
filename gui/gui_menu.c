@@ -57,7 +57,7 @@ void gui_menu_dessiner(Etat_affichage *app, int largeur, int hauteur) {
  * @param key : Code de la touche pressée.
  * @param running : Pointeur vers le drapeau d'exécution de la boucle principale.
  */
-void gui_menu_gerer_clavier(Etat_affichage *app, SDL_Keycode key, bool *running) {
+void gui_menu_gerer_clavier(Etat_affichage *app, SDL_Keycode key, int *running) {
     // On est dans le menu : on accepte les touches 1, 2, 3 ou Q.
     if (key == SDLK_1) {
         app->ecran = ECRAN_PLAN;
@@ -68,7 +68,7 @@ void gui_menu_gerer_clavier(Etat_affichage *app, SDL_Keycode key, bool *running)
         app->mode = MODE_CHEMIN;
         gui_mettre_a_jour_titre(app);
     } else if (key == SDLK_3 || key == SDLK_q) {
-        *running = false;
+        *running = 0;
     }
 }
 
@@ -79,7 +79,7 @@ void gui_menu_gerer_clavier(Etat_affichage *app, SDL_Keycode key, bool *running)
  * @param y : Position Y du clic.
  * @param running : Pointeur vers le flag d'exécution de la boucle principale.
  */
-void gui_menu_gerer_clic(Etat_affichage *app, int x, int y, bool *running) {
+void gui_menu_gerer_clic(Etat_affichage *app, int x, int y, int *running) {
     // On récupère la taille de la fenêtre pour recalculer les positions des cartes
     int width, height;
     SDL_GetWindowSize(app->fenetre, &width, &height);
@@ -103,6 +103,6 @@ void gui_menu_gerer_clic(Etat_affichage *app, int x, int y, bool *running) {
         gui_mettre_a_jour_titre(app);
     } else if (SDL_PointInRect(&point, &carte3)) {
         // Clic sur carte 3 : Quitter
-        *running = false;
+        *running = 0;
     }
 }

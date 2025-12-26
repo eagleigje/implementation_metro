@@ -10,7 +10,7 @@
 #include "gui.h"
 
 void gui_menu_dessiner(Etat_affichage *app, int largeur, int hauteur);
-void gui_menu_gerer_clavier(Etat_affichage *app, SDL_Keycode key, bool *running);
-void gui_menu_gerer_clic(Etat_affichage *app, int x, int y, bool *running);
+void gui_menu_gerer_clavier(Etat_affichage *app, SDL_Keycode key, int *running);
+void gui_menu_gerer_clic(Etat_affichage *app, int x, int y, int *running);
 
 #endif

@@ -160,14 +160,14 @@ int lancer_gui(const Une_config *config) {
     gui_afficher_aide();
 
     // Boucle principale de l'application
-    bool running = true;
+    int running = 1;
     while (running) {
         SDL_Event event;
         // On traite tous les événements en attente (clavier, souris, fermeture, etc.)
         while (SDL_PollEvent(&event)) {
             if (event.type == SDL_QUIT) {
                 // L'utilisateur a fermé la fenêtre
-                running = false;
+                running = 0;
             } else if (event.type == SDL_KEYDOWN) {
                 SDL_Keycode key = event.key.keysym.sym;
                 // Dispatch des événements clavier vers les modules appropriés

@@ -3,10 +3,10 @@
  * Implémentation de l'écran plan de l'interface graphique SDL2.
  */
 
-#include <SDL2/SDL.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <SDL2/SDL.h>
 
 #include "gui_plan.h"
 #include "gui_commun.h"
@@ -903,7 +903,7 @@ void gui_dessiner_plan(Etat_affichage *app, int largeur, int hauteur) {
  * @param key : Code de la touche pressée.
  * @param running : Pointeur vers le drapeau d'exécution de la boucle principale.
  */
-void gui_plan_gerer_clavier(Etat_affichage *app, SDL_Keycode key, bool *running) {
+void gui_plan_gerer_clavier(Etat_affichage *app, SDL_Keycode key, int *running) {
     // Si la recherche est active, on gère d'abord les touches spéciales
     if (app->recherche_active) {
         if (key == SDLK_ESCAPE) {
@@ -966,7 +966,7 @@ void gui_plan_gerer_clavier(Etat_affichage *app, SDL_Keycode key, bool *running)
         app->decalage_x = 0.0f;
         app->decalage_y = 0.0f;
     } else if (key == SDLK_q) {
-        *running = false;
+        *running = 0;
     } else if (key == SDLK_PLUS || key == SDLK_KP_PLUS) {
         app->zoom *= ZOOM_FACTEUR_AVANT;  // Zoom avant
     } else if (key == SDLK_MINUS || key == SDLK_KP_MINUS) {
