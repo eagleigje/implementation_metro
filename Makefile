@@ -20,8 +20,9 @@
 #   make clean-docs      			- Supprime la documentation générée.
 # ===================================================================================================================
 CC = gcc
-# On peut forcer la version de C ci-dessous en ajoutant -std=cXX où XX peut valoir 99, 17, 23, etc.
+# On peut forcer la version de C ci-dessous en ajoutant -std=XXX où XX peut valoir c99, c17, c23, gnu99, etc.
 # La version C la plus récente à ce jour est la version c23.
+# Attention, nous utilisons M_PI, et cela n'est supporté qu'à partir de gnu99 (et pas c99).
 CFLAGS = -Wall -Wextra -g -O3
 CFLAGS_DEBUG = -Wall -Wextra -g -O0
 LDFLAGS_METRO = -lm -lSDL2 -lSDL2_ttf
