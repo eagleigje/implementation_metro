@@ -72,8 +72,3 @@ DÉPENDANCES
 
 Python 3 (version 3.6 minimum)
 Module csv (inclus dans la bibliothèque standard)
-
-AUTEUR
-------
-
-Généré pour le Projet Metro 2025
