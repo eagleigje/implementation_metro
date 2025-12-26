@@ -15,12 +15,24 @@
  */
 void gui_mettre_a_jour_titre(Etat_affichage *app) {
     // On détermine le texte à afficher selon l'écran et le mode actif.
-    const char *ecran = (app->ecran == ECRAN_MENU) ? "MENU" : "PLAN";
-    const char *mode = (app->mode == MODE_SELECTION) ? "SÉLECTION" : "CHEMIN";
+    const char *ecran;
+    if (app->ecran == ECRAN_MENU) {
+        ecran = "MENU";
+    } else {
+        ecran = "PLAN";
+    }
+
+    const char *mode;
+    if (app->mode == MODE_SELECTION) {
+        mode = "SÉLECTION";
+    } else {
+        mode = "CHEMIN";
+    }
+
     char titre[128];
 
     // On construit le titre et on l'affiche dans la barre de fenêtre
-    snprintf(titre, sizeof(titre), "%s - %s (mode=%s)", TITRE_GUI,ecran, mode);
+    snprintf(titre, sizeof(titre), "%s - %s (mode=%s)", TITRE_GUI, ecran, mode);
     SDL_SetWindowTitle(app->fenetre, titre);
 }
 
