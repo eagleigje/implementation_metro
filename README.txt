@@ -6,7 +6,11 @@ Plan interactif d'un réseau de transport en commun avec interface SDL2.
 
 INSTALLATION RAPIDE
 -------------------
-Prérequis :
+Outils de compilation :
+    sudo apt update && sudo apt install make gcc    # Ubuntu/Debian
+    sudo pacman -Syu base-devel                     # Arch Linux
+
+Bibliothèques SDL2 :
     sudo apt install libsdl2-dev libsdl2-ttf-dev    # Ubuntu/Debian
     sudo pacman -S sdl2-compat sdl2_ttf             # Arch Linux
 
@@ -17,6 +21,12 @@ Exécution :
     ./metro                 # Interface graphique
     ./metro config_paris.ini # Métro parisien complet
     ./tests                 # Programme de tests
+
+COMPATIBILITÉ TESTÉE
+--------------------
+Ce projet a été testé avec succès sur :
+- Arch Linux / KDE / X11 et Wayland
+- Ubuntu 25.10 LTS / GNOME / Wayland
 
 DOCUMENTATION COMPLÈTE
 ----------------------

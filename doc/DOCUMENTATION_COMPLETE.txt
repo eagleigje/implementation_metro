@@ -85,6 +85,19 @@ Le projet est organisé en plusieurs modules :
     - Police locale (optionnel) : si aucune police système n'est trouvée, le programme
       charge en dernier recours fonts/DejaVuSans.ttf (voir doc/README_FONTS.txt).
 
+    INSTALLATION DES OUTILS DE COMPILATION (LINUX)
+    -----------------------------------------------
+    Avant de compiler le projet, vous devez installer les outils de compilation de base.
+
+    Ubuntu / Debian :
+        sudo apt update
+        sudo apt install make gcc
+
+    Arch Linux :
+        sudo pacman -Syu base-devel
+
+    Le paquet base-devel sur Arch inclut make, gcc, et d'autres outils nécessaires.
+
     INSTALLATION SDL2 / SDL2_TTF (LINUX)
     ------------------------------------
     Ubuntu / Debian :
@@ -93,6 +106,17 @@ Le projet est organisé en plusieurs modules :
 
     Arch Linux :
         sudo pacman -S sdl2-compat sdl2_ttf
+
+    COMPATIBILITÉ ET TESTS
+    ----------------------
+    Le projet a été testé et validé sur les configurations suivantes :
+    - Arch Linux avec KDE Plasma (X11 et Wayland)
+    - Ubuntu 25.10 LTS avec GNOME (Wayland)
+
+    SDL2 est multiplateforme et devrait fonctionner sur :
+    - Linux (X11, Wayland)
+    - Windows (MinGW, MSVC)
+    - macOS
 
 9. Programmes optionnels à installer :
     - Doxygen : Afin de générer la documentation technique du projet.
