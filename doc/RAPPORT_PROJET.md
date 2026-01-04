@@ -249,12 +249,12 @@ Valider la construction et la recherche spatiale avec l'AQR pour optimiser la s�
 
 **Données :**
 
-- 302 stations parisiennes
+- 316 stations parisiennes
 - Zone géographique : Paris intra-muros (~10km × 10km)
 
 **Résultat :** OK
 ```
-Construction AQR : 302 stations insérées
+Construction AQR : 316 stations insérées
 Seuil de collision : 0.00015 degrés (~1.5 mètres)
 Profondeur maximale de l'arbre : 8 niveaux
 ```
@@ -483,9 +483,9 @@ Valider l'affichage graphique complet et les interactions utilisateur. Ces tests
 **Résultat :** OK
 
 - Chemin affiché en rouge épais
-- Encart récapitulatif affiché (haut-droite)
+- Encart récapitulatif affiché (bas-droite)
 - Détail : lignes utilisées, temps total
-- Console : chemin complet avec toutes les stations
+- Console : chemin avec les segments regroupés par ligne (pour ne pas lister toutes les stations parcourues)
 
 **Exemple d'encart :**
 ```

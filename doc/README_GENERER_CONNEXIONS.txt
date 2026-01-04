@@ -37,7 +37,7 @@ RÉSULTATS
 ---------
 
 Pour le métro parisien complet (16 lignes) :
-    → 632 connexions bidirectionnelles
+    → 766 connexions
     → 16 lignes de métro (1, 2, 3, 3bis, 4, 5, 6, 7, 7bis, 8, 9, 10, 11, 12, 13, 14)
     → Temps de parcours = 0.0 (calculé automatiquement par le programme)
 
