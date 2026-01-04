@@ -93,6 +93,7 @@ Mode debug (pour gdb) :
 Documentation :
     make docs               # Génère la doc Doxygen
     make clean-docs         # Supprime la doc générée
+    make rapport-projet     # Génère le rapport de projet (PDF)
 
 Nettoyage :
     make clean              # Supprime .o et exécutables

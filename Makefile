@@ -18,6 +18,7 @@
 #   make clean           			- Supprime tous les fichiers objets et les exécutables.
 #   make docs            			- Génère la documentation Doxygen.
 #   make clean-docs      			- Supprime la documentation générée.
+#   make rapport-projet  			- Génère le rapport de projet en PDF (doc/RAPPORT_PROJET.pdf).
 # ===================================================================================================================
 CC = gcc
 # On peut forcer la version de C ci-dessous en ajoutant -std=XXX où XX peut valoir c99, c17, c23, gnu99, etc.
@@ -57,9 +58,13 @@ clean:
 
 # Dossier de documentation
 DOCS_DIR = doc/projet
+RAPPORT_PROJET_MD = doc/RAPPORT_PROJET.md
+RAPPORT_PROJET_PDF = doc/RAPPORT_PROJET.pdf
+
 # Nettoyage de la documentation
 clean-docs:
 	rm -rf $(DOCS_DIR)
+	rm -f $(RAPPORT_PROJET_PDF)
 	@echo "Documentation supprimée!"
 
 # Génération de la documentation Doxygen
@@ -72,6 +77,12 @@ docs:
 	doxygen Doxyfile
 	@echo "Documentation générée dans $(DOCS_DIR)/html/"
 	@echo "Ouvrez $(DOCS_DIR)/html/index.html dans un navigateur"
+
+# Génération du rapport de projet (PDF)
+rapport-projet:
+	@echo "Génération du rapport de projet PDF..."
+	pandoc $(RAPPORT_PROJET_MD) --toc --toc-depth=2 --pdf-engine=xelatex --highlight-style=tango -V lang=fr -V geometry:margin=2cm -o $(RAPPORT_PROJET_PDF)
+	@echo "Rapport généré : $(RAPPORT_PROJET_PDF)"
 
 # Règle pour compiler les fichiers .c en .o
 %.o: %.c
@@ -169,4 +180,4 @@ debug-memory-metro: debug-metro
 	@echo "Note: Interagissez avec l'interface puis quittez proprement pour voir le rapport"
 	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --vgdb=yes --vgdb-error=0 ./$(TARGET_METRO)
 
-.PHONY: all rebuild clean metro tests run-tests test-memory test-memory-metro test-memory-metro-paris debug-tests debug-metro debug-memory-tests debug-memory-metro docs clean-docs
+.PHONY: all rebuild clean metro tests run-tests test-memory test-memory-metro test-memory-metro-paris debug-tests debug-metro debug-memory-tests debug-memory-metro docs clean-docs rapport-projet
