@@ -1,5 +1,9 @@
 ========================================
         PROJET METRO 2025
+
+    Développé par :
+        Damien LE STRAT
+        Clovis GAUTIER
 ========================================
 
 Plan interactif d'un réseau de transport en commun avec interface SDL2.

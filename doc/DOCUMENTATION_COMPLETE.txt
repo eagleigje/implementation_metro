@@ -1,5 +1,9 @@
 ========================================
         PROJET METRO 2025
+
+    Développé par :
+        Damien LE STRAT
+        Clovis GAUTIER
 ========================================
 
 DESCRIPTION GENERALE
