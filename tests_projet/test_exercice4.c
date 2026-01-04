@@ -56,7 +56,13 @@ void test_connexions(Une_config *config, const char *test_label) {
     if (connexions == NULL) {
         printf("    ÉCHEC: fichier non trouvé ou vide\n");
     } else {
-        printf("    OK: fichier lu avec succès\n");
+        int nb_connexions = 0;
+        Un_elem *temp = connexions;
+        while (temp != NULL) {
+            nb_connexions++;
+            temp = temp->suiv;
+        }
+        printf("    %d Connexions chargées avec succès\n", nb_connexions);
         tests_ok++;
     }
 

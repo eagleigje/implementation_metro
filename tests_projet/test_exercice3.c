@@ -32,7 +32,7 @@ void test_lignes(Une_config *config, const char *test_label) {
             nb_lignes++;
             temp = temp->suiv;
         }
-        printf("    OK: %d lignes chargées\n", nb_lignes);
+        printf("    %d Lignes chargées avec succès\n", nb_lignes);
         tests_ok++;
     } else {
         printf("    ERREUR: impossible de charger les lignes\n");

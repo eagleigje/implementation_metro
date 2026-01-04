@@ -86,7 +86,7 @@ int main(const int argc, char *argv[]) {
         nb_stations++;
         temp = temp->suiv;
     }
-    printf("Stations chargées avec succès! (%d stations)\n\n", nb_stations);
+    printf("%d Stations chargées avec succès\n\n", nb_stations);
     sections_total++;
 
     // Test 3 : Affichage des stations.
