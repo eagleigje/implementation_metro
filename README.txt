@@ -22,7 +22,7 @@ Outils documentation (optionnel) :
     sudo apt install doxygen                        # Ubuntu/Debian
     sudo pacman -S   doxygen                        # Arch Linux
     sudo apt install pandoc texlive-xetex           # Ubuntu/Debian
-    sudo pacman -S pandoc texlive-binextra          # Arch Linux
+    sudo pacman -S pandoc texlive	            # Arch Linux
 
 Compilation :
     make
