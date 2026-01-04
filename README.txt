@@ -18,6 +18,12 @@ Bibliothèques SDL2 :
     sudo apt install libsdl2-dev libsdl2-ttf-dev    # Ubuntu/Debian
     sudo pacman -S sdl2-compat sdl2_ttf             # Arch Linux
 
+Outils documentation (optionnel) :
+    sudo apt install doxygen                        # Ubuntu/Debian
+    sudo pacman -S   doxygen                        # Arch Linux
+    sudo apt install pandoc texlive-xetex           # Ubuntu/Debian
+    sudo pacman -S pandoc texlive-binextra          # Arch Linux
+
 Compilation :
     make
 
@@ -30,7 +36,7 @@ COMPATIBILITÉ TESTÉE
 --------------------
 Ce projet a été testé avec succès sur :
 - Arch Linux / KDE / X11 et Wayland
-- Ubuntu 25.10 LTS / GNOME / Wayland
+- Ubuntu 25.10 / GNOME / Wayland
 
 DOCUMENTATION COMPLÈTE
 ----------------------

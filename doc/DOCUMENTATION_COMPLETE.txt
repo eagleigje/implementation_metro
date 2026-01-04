@@ -115,7 +115,7 @@ Le projet est organisé en plusieurs modules :
     ----------------------
     Le projet a été testé et validé sur les configurations suivantes :
     - Arch Linux avec KDE Plasma (X11 et Wayland)
-    - Ubuntu 25.10 LTS avec GNOME (Wayland)
+    - Ubuntu 25.10 avec GNOME (Wayland)
 
     SDL2 est multiplateforme et devrait fonctionner sur :
     - Linux (X11, Wayland)
@@ -124,13 +124,14 @@ Le projet est organisé en plusieurs modules :
 
 9. Programmes optionnels à installer :
     - Doxygen : Afin de générer la documentation technique du projet.
+    - Pandoc : Afin de générer le rapport du projet au format PDF.
     - Valgrind : Pour vérifier que le projet libère bien toute la mémoire à la sortie.
     - glibc-debug : Pour valgrind.
 
 
 10. Documentation :
     - doc/ALGORITHMES.txt                  : Documentation détaillée des algorithmes principaux (Dijkstra, AQR, ABR, Haversine)
-    - doc/README_DONNEES.txt               : Extraction des données sources depuis les sites officiels pour récupérer les informations du métro Parisien
+    - doc/README_DONNEES.txt               : Extraction des données sources depuis les sites officiels pour récupérer les informations du métro parisien
     - doc/README_GENERER_CONNEXIONS.txt    : Guide d'utilisation du script de génération des connexions
     - doc/MODE_EMPLOI_GUI.txt              : Mode d'emploi de l'interface graphique (menus, clavier, souris)
     - doc/README_FONTS.txt                 : Gestion de la police utilisée par le GUI

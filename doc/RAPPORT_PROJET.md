@@ -43,7 +43,7 @@ Le projet a été testé et validé sur les configurations suivantes :
 |--------------|---------|---------------|---------------------|----------|
 | Config 1 | Arch Linux | KDE Plasma | X11 | OK |
 | Config 2 | Arch Linux | KDE Plasma | Wayland | OK |
-| Config 3 | Ubuntu 25.10 LTS | GNOME | Wayland | OK |
+| Config 3 | Ubuntu 25.10 | GNOME | Wayland | OK |
 
 **Outils utilisés :**
 
@@ -149,11 +149,11 @@ La validation hexadécimale des couleurs (ajoutée dans `ligne.c:76-93`) détect
 
 ---
 
-**Test 1.3 : Fichiers vides**
+**Test 1.3 : Fichiers inexistants**
 
 ```bash
-# Test avec fichier vide
-./tests tests_data/config_vide.ini
+# Test avec fichier inexistant
+./tests inexistant.ini
 ```
 
 **Résultat attendu :**
@@ -163,8 +163,8 @@ La validation hexadécimale des couleurs (ajoutée dans `ligne.c:76-93`) détect
 
 **Résultat obtenu :** OK
 ```
-Chargement de la configuration depuis tests_data/config_vide.ini...
-Erreur: impossible d'ouvrir le fichier de configuration tests_data/config_vide.ini
+Chargement de la configuration depuis inexistant.ini...
+Erreur: impossible d'ouvrir le fichier de configuration inexistant.ini
 Erreur fatale: impossible de charger la configuration
 ```
 
@@ -594,11 +594,11 @@ Valider la recherche de station par nom avec complétion automatique.
 
 ---
 
-### Test 7.3 : Ubuntu 25.10 LTS / GNOME / Wayland
+### Test 7.3 : Ubuntu 25.10 / GNOME / Wayland
 
 **Configuration :**
 
-- Système : Ubuntu 25.10 LTS
+- Système : Ubuntu 25.10
 - DE : GNOME 47
 - Serveur graphique : Wayland (par défaut)
 

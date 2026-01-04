@@ -73,10 +73,10 @@ L'algorithme suit ces étapes :
 
 COMPLEXITÉ
 ----------
-- Temps : O((V + E) log V) avec notre implémentation (liste triée)
+- Temps : O(V² + E) dans le pire cas avec la liste triée
   * V = nombre de stations
   * E = nombre de connexions
-  * Les opérations d'insertion/extraction dans la file triée coûtent O(log V)
+  * L'insertion et l'extraction dans la file triée coûtent O(V)
 
 - Espace : O(V) pour stocker la file et les distances
 
